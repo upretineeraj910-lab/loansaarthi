@@ -10,7 +10,8 @@ export async function POST(request: Request): Promise<NextResponse<ILoginRespons
   try {
     // Connect to MongoDB
     await connectToDatabase();
-console.log("mongodb connected")
+    console.log("mongodb connected");
+
     // Get request body
     const body: ILoginInput = await request.json();
     const { email, password } = body;
@@ -25,7 +26,7 @@ console.log("mongodb connected")
 
     // Find user
     const user = await User.findOne({ email: email.toLowerCase() });
-        console.log('👤 User found:', user ? 'Yes' : 'No'); // Log add karo
+    console.log('👤 User found:', user ? 'Yes' : 'No');
 
     if (!user) {
       return NextResponse.json(
@@ -34,17 +35,9 @@ console.log("mongodb connected")
       );
     }
 
-    // Check if user is active
-    // if (!user.isActive) {
-    //   return NextResponse.json(
-    //     { error: 'Account is deactivated' },
-    //     { status: 401 }
-    //   );
-    // }
-
     // Verify password
     const isValidPassword = await bcrypt.compare(password, user.password);
-        console.log('🔑 Password valid:', isValidPassword); // Log add karo
+    console.log('🔑 Password valid:', isValidPassword);
 
     if (!isValidPassword) {
       return NextResponse.json(
@@ -64,11 +57,8 @@ console.log("mongodb connected")
       { expiresIn: '7d' }
     );
 
-    console.log(token);
-    
-
-    // Return success response
-    return NextResponse.json({
+    // Return success response with Cookie set
+    const response = NextResponse.json({
       token,
       user: {
         id: user._id.toString(),
@@ -77,6 +67,17 @@ console.log("mongodb connected")
         role: user.role,
       },
     });
+
+    // Middleware ke liye Cookie set kar do
+    response.cookies.set('token', token, {
+      httpOnly: false,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60, // 7 days
+      path: '/',
+    });
+
+    return response;
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(

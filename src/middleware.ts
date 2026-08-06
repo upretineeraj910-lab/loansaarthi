@@ -1,14 +1,15 @@
 // middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import jwt from 'jsonwebtoken';
+import { jwtVerify } from 'jose';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const token = request.cookies.get('token')?.value || request.headers.get('Authorization')?.split(' ')[1];
+  const pathname = request.nextUrl.pathname.toLowerCase();
 
-  // Protected routes
+  // Protected routes check
   const protectedPaths = ['/dashboard', '/profile', '/borrower-form'];
-  const isProtectedPath = protectedPaths.some(path => request.nextUrl.pathname.startsWith(path));
+  const isProtectedPath = protectedPaths.some((path) => pathname.startsWith(path));
 
   if (isProtectedPath) {
     if (!token) {
@@ -16,23 +17,26 @@ export function middleware(request: NextRequest) {
     }
 
     try {
-      jwt.verify(token, process.env.JWT_SECRET as string);
+      // jose package Edge runtime par perfectly chalta hai
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+      await jwtVerify(token, secret);
       return NextResponse.next();
     } catch (error) {
+      console.error('Middleware JWT Error:', error);
       return NextResponse.redirect(new URL('/login', request.url));
     }
   }
 
-  // Redirect to dashboard if already logged in
+  // Auth routes check (Login / Register)
   const authPaths = ['/login', '/register'];
-  const isAuthPath = authPaths.some(path => request.nextUrl.pathname.startsWith(path));
+  const isAuthPath = authPaths.some((path) => pathname.startsWith(path));
 
   if (isAuthPath && token) {
     try {
-      jwt.verify(token, process.env.JWT_SECRET as string);
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+      await jwtVerify(token, secret);
       return NextResponse.redirect(new URL('/dashboard', request.url));
     } catch (error) {
-      // Token invalid, allow access to auth pages
       return NextResponse.next();
     }
   }
@@ -41,5 +45,12 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/profile/:path*', '/login', '/register', '/borrower-form/:path*'],
+  matcher: [
+    '/dashboard/:path*',
+    '/profile/:path*',
+    '/login',
+    '/Login',
+    '/register',
+    '/borrower-form/:path*',
+  ],
 };

@@ -62,3 +62,24 @@ export interface IFormErrors {
   confirmPassword?: string;
   submit?: string;
 }
+
+
+// 6 aug
+
+
+export interface IFormSubmissionInput {
+  applicantName: string;
+  applicantEmail: string;
+  message: string;
+  referrerId: string;
+}
+
+export interface IFormSubmission {
+  _id?: string;
+  applicantName: string;
+  applicantEmail: string;
+  message: string;
+  referrerId: string;
+  referrerName: string;
+  createdAt?: Date;
+}

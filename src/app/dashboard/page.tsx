@@ -1,61 +1,54 @@
-// app/dashboard/page.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 
-export default function DashboardPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+export default function ShareButton() {
+  const [shareUrl, setShareUrl] = useState('');
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    // Get user from localStorage
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
-    
-    if (!token) {
-      router.push('/login');
-      return;
+    // LocalStorage se logged-in user ki details nikalna
+    const userString = localStorage.getItem('user');
+    if (userString) {
+      try {
+        const user = JSON.parse(userString);
+        if (user?.id) {
+          const origin = window.location.origin;
+          setShareUrl(`${origin}/shared-form?ref=${user.id}`);
+        }
+      } catch (err) {
+        console.error('Error parsing user data:', err);
+      }
     }
+  }, []);
 
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, [router]);
-
-  if (!user) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  }
+  const handleCopy = async () => {
+    if (!shareUrl) return;
+    await navigator.clipboard.writeText(shareUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow p-6">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
-            Welcome, {user.name}! 🎉
-          </h1>
-          <p className="text-gray-600 mb-4">
-            You have successfully logged in to Loan Saarthi.
-          </p>
-          
-          <div className="border-t pt-4 mt-4">
-            <h2 className="text-lg font-semibold mb-2">Your Profile</h2>
-            <p><strong>Email:</strong> {user.email}</p>
-            <p><strong>Role:</strong> {user.role}</p>
-            <p><strong>ID:</strong> {user.id}</p>
-          </div>
-
-          <button
-            onClick={() => {
-              localStorage.removeItem('token');
-              localStorage.removeItem('user');
-              router.push('/login');
-            }}
-            className="mt-6 bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition"
-          >
-            Logout
-          </button>
-        </div>
+    <div className="p-4 bg-white rounded-lg shadow-md border border-gray-200">
+      <h3 className="text-lg font-semibold mb-2">Share Form with Others</h3>
+      <p className="text-sm text-gray-600 mb-4">
+        Share this unique link. Anyone who fills the form will see your name as referrer.
+      </p>
+      <div className="flex items-center gap-2">
+        <input
+          type="text"
+          readOnly
+          value={shareUrl || 'Loading link...'}
+          className="flex-1 p-2 text-sm border rounded bg-gray-50 outline-none"
+        />
+        <button
+          onClick={handleCopy}
+          disabled={!shareUrl}
+          className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition"
+        >
+          {copied ? 'Copied! ✓' : 'Copy Share Link'}
+        </button>
       </div>
     </div>
   );
