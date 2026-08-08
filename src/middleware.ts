@@ -48,7 +48,6 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/profile/:path*',
-    '/login',
     '/Login',
     '/register',
     '/borrower-form/:path*',
