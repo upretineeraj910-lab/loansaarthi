@@ -1,9 +1,8 @@
-// middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { jwtVerify } from 'jose';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const token = request.cookies.get('token')?.value || request.headers.get('Authorization')?.split(' ')[1];
   const pathname = request.nextUrl.pathname.toLowerCase();
 
@@ -17,12 +16,11 @@ export async function middleware(request: NextRequest) {
     }
 
     try {
-      // jose package Edge runtime par perfectly chalta hai
       const secret = new TextEncoder().encode(process.env.JWT_SECRET);
       await jwtVerify(token, secret);
       return NextResponse.next();
     } catch (error) {
-      console.error('Middleware JWT Error:', error);
+      console.error('Proxy JWT Error:', error);
       return NextResponse.redirect(new URL('/login', request.url));
     }
   }
@@ -48,7 +46,7 @@ export const config = {
   matcher: [
     '/dashboard/:path*',
     '/profile/:path*',
-    '/Login',
+    '/login',
     '/register',
     '/borrower-form/:path*',
   ],
