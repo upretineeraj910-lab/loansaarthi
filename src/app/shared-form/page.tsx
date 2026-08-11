@@ -515,6 +515,7 @@ function SharedFormContent() {
                   type="date"
                   required
                   value={formData.dateOfBirth}
+                  // max={18}
                   onChange={(e) =>
                     updateField(
                       'dateOfBirth',

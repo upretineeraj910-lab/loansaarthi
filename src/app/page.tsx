@@ -383,7 +383,7 @@ export default function Home() {
       <section id="home" className="container hero-section">
         <div className="hero-grid">
           <Reveal>
-            <Eyebrow>Gurugram · Loan Advisory</Eyebrow>
+            <Eyebrow>Delhi · Loan Advisory</Eyebrow>
             <h1 className="hero-title">
               Your loan,<br />entered and approved.
             </h1>
