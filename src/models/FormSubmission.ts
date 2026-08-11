@@ -19,6 +19,9 @@ export interface IFormSubmissionDocument extends Document {
   mobile: string;
   dateOfBirth: string;
   gender: string;
+  fatherName: string;
+  motherName: string;
+  educationDetails: string;
 
   // KYC
   panNumber: string;
@@ -29,21 +32,32 @@ export interface IFormSubmissionDocument extends Document {
   city: string;
   state: string;
   pincode: string;
+  residenceOwnership: string;
+  yearsAtResidence: string;
+  permanentAddress: string;
+  paContactNumber: string;
 
   // Loan Details
   loanType: string;
   loanAmount: number;
   loanPurpose: string;
+  tenure: string;
   existingLoan: boolean;
   existingEmi?: number;
 
   // Employment
   employmentType: 'salaried' | 'self-employed';
 
-  // Salaried
-  companyName?: string;
-  designation?: string;
-  workExperience?: string;
+  // Common Employment Fields
+  companyName: string;
+  officeAddress: string;
+  officeContact: string;
+  officialEmail: string;
+  personalEmail: string;
+  yearsAtJob: string;
+  designation: string;
+  previousOrganisation: string;
+  totalJobExp: string;
   monthlyIncome?: number;
 
   // Self Employed
@@ -52,6 +66,22 @@ export interface IFormSubmissionDocument extends Document {
   businessVintage?: string;
   annualIncome?: number;
   businessAddress?: string;
+
+  // References
+  references: {
+    ref1: {
+      name: string;
+      address: string;
+      contact: string;
+      relation: string;
+    };
+    ref2: {
+      name: string;
+      address: string;
+      contact: string;
+      relation: string;
+    };
+  };
 
   // Documents
   documents: {
@@ -139,6 +169,24 @@ const FormSubmissionSchema = new Schema<IFormSubmissionDocument>(
       required: [true, 'Gender is required'],
     },
 
+    fatherName: {
+      type: String,
+      required: [true, "Father's name is required"],
+      trim: true,
+    },
+
+    motherName: {
+      type: String,
+      required: [true, "Mother's name is required"],
+      trim: true,
+    },
+
+    educationDetails: {
+      type: String,
+      required: [true, 'Education details are required'],
+      trim: true,
+    },
+
     // KYC
     panNumber: {
       type: String,
@@ -178,6 +226,30 @@ const FormSubmissionSchema = new Schema<IFormSubmissionDocument>(
       trim: true,
     },
 
+    residenceOwnership: {
+      type: String,
+      required: [true, 'Residence ownership is required'],
+      trim: true,
+    },
+
+    yearsAtResidence: {
+      type: String,
+      required: [true, 'Years at residence is required'],
+      trim: true,
+    },
+
+    permanentAddress: {
+      type: String,
+      required: [true, 'Permanent address is required'],
+      trim: true,
+    },
+
+    paContactNumber: {
+      type: String,
+      required: [true, 'PA contact number is required'],
+      trim: true,
+    },
+
     // Loan Details
     loanType: {
       type: String,
@@ -193,6 +265,12 @@ const FormSubmissionSchema = new Schema<IFormSubmissionDocument>(
     loanPurpose: {
       type: String,
       required: [true, 'Loan purpose is required'],
+      trim: true,
+    },
+
+    tenure: {
+      type: String,
+      required: [true, 'Tenure is required'],
       trim: true,
     },
 
@@ -213,19 +291,60 @@ const FormSubmissionSchema = new Schema<IFormSubmissionDocument>(
       required: [true, 'Employment type is required'],
     },
 
-    // Salaried
+    // Common Employment Fields
     companyName: {
       type: String,
+      required: [true, 'Company name is required'],
+      trim: true,
+    },
+
+    officeAddress: {
+      type: String,
+      required: [true, 'Office address is required'],
+      trim: true,
+    },
+
+    officeContact: {
+      type: String,
+      required: [true, 'Office contact is required'],
+      trim: true,
+    },
+
+    officialEmail: {
+      type: String,
+      required: [true, 'Official email is required'],
+      lowercase: true,
+      trim: true,
+    },
+
+    personalEmail: {
+      type: String,
+      required: [true, 'Personal email is required'],
+      lowercase: true,
+      trim: true,
+    },
+
+    yearsAtJob: {
+      type: String,
+      required: [true, 'Years at job is required'],
       trim: true,
     },
 
     designation: {
       type: String,
+      required: [true, 'Designation is required'],
       trim: true,
     },
 
-    workExperience: {
+    previousOrganisation: {
       type: String,
+      required: [true, 'Previous organisation is required'],
+      trim: true,
+    },
+
+    totalJobExp: {
+      type: String,
+      required: [true, 'Total job experience is required'],
       trim: true,
     },
 
@@ -258,6 +377,54 @@ const FormSubmissionSchema = new Schema<IFormSubmissionDocument>(
     businessAddress: {
       type: String,
       trim: true,
+    },
+
+    // References
+    references: {
+      ref1: {
+        name: {
+          type: String,
+          required: [true, 'Reference 1 name is required'],
+          trim: true,
+        },
+        address: {
+          type: String,
+          required: [true, 'Reference 1 address is required'],
+          trim: true,
+        },
+        contact: {
+          type: String,
+          required: [true, 'Reference 1 contact is required'],
+          trim: true,
+        },
+        relation: {
+          type: String,
+          required: [true, 'Reference 1 relation is required'],
+          trim: true,
+        },
+      },
+      ref2: {
+        name: {
+          type: String,
+          required: [true, 'Reference 2 name is required'],
+          trim: true,
+        },
+        address: {
+          type: String,
+          required: [true, 'Reference 2 address is required'],
+          trim: true,
+        },
+        contact: {
+          type: String,
+          required: [true, 'Reference 2 contact is required'],
+          trim: true,
+        },
+        relation: {
+          type: String,
+          required: [true, 'Reference 2 relation is required'],
+          trim: true,
+        },
+      },
     },
 
     // Documents

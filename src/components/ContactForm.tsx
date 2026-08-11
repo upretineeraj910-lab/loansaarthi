@@ -15,7 +15,9 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -30,21 +32,22 @@ export default function ContactForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const newErrors: Record<string, string> = {};
     if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
     if (!formData.service) newErrors.service = "Please select a service";
     if (!formData.message.trim()) newErrors.message = "Message is required";
-    
+    if (!formData.phone.trim()) newErrors.phone = "phone number is required";
+
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    
+
     console.log("Form submitted:", formData);
     alert("Thank you for your message! We'll get back to you soon.");
-    
+
     setFormData({
       fullName: "",
       email: "",
@@ -98,6 +101,9 @@ export default function ContactForm() {
             value={formData.phone}
             onChange={handleChange}
           />
+          {errors.phone && (
+              <p className="contact-form-error">{errors.phone}</p>
+            )}
         </div>
 
         <div>

@@ -1,7 +1,7 @@
 import ContactForm from "@/components/ContactForm";
 import ContactInfo from "@/components/ContactInfo";
 import Map from "@/components/Map";
-import "./Contact.css"; // Import contact-specific CSS
+import "./Contact.css"; 
 
 export const metadata = {
   title: "Contact Us | LoanSaarthi",
