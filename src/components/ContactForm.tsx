@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import "../app/Contact_Us/Contact.css"; // Import contact-specific CSS
+import "../app/Contact_Us/Contact.css";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -13,6 +13,9 @@ export default function ContactForm() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(false);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -21,45 +24,76 @@ export default function ContactForm() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
-      });
-    }
+    setErrors((prev) => {
+      const newErrors = { ...prev };
+      delete newErrors[name];
+      return newErrors;
+    });
+    setSuccessMsg("");
+    setErrorMsg("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validation
     const newErrors: Record<string, string> = {};
     if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
     if (!formData.service) newErrors.service = "Please select a service";
     if (!formData.message.trim()) newErrors.message = "Message is required";
-    if (!formData.phone.trim()) newErrors.phone = "phone number is required";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    console.log("Form submitted:", formData);
-    alert("Thank you for your message! We'll get back to you soon.");
+    setLoading(true);
 
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      service: "",
-      message: "",
-    });
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit');
+      }
+
+      setSuccessMsg('Thank you! We\'ll get back to you soon.');
+      
+      // Reset form
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      });
+
+    } catch (error: any) {
+      setErrorMsg(error.message || 'Something went wrong. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="contact-form-wrapper">
       <h2 className="contact-form-title">Send us a Message</h2>
+
+      {successMsg && (
+        <div className="contact-form-status success">{successMsg}</div>
+      )}
+      {errorMsg && (
+        <div className="contact-form-status error">{errorMsg}</div>
+      )}
 
       <form onSubmit={handleSubmit} className="contact-form" noValidate>
         <div className="contact-form-grid">
@@ -94,16 +128,17 @@ export default function ContactForm() {
 
         <div>
           <input
-            type="number"
+            type="tel"
             name="phone"
-            className="contact-form-input"
+            className={`contact-form-input ${errors.phone ? "error" : ""}`}
             placeholder="Phone Number"
             value={formData.phone}
             onChange={handleChange}
+            maxLength={10}
           />
           {errors.phone && (
-              <p className="contact-form-error">{errors.phone}</p>
-            )}
+            <p className="contact-form-error">{errors.phone}</p>
+          )}
         </div>
 
         <div>
@@ -141,8 +176,12 @@ export default function ContactForm() {
           )}
         </div>
 
-        <button type="submit" className="contact-form-submit">
-          Send Message
+        <button 
+          type="submit" 
+          className="contact-form-submit"
+          disabled={loading}
+        >
+          {loading ? 'Sending...' : 'Send Message'}
         </button>
       </form>
     </div>
