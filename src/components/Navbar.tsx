@@ -36,6 +36,7 @@ export default function Navbar() {
           <Link href="/Blog">Blog</Link>
           <Link href="/Career">Career</Link>
           <Link href="/Contact_Us">Contact Us</Link>
+          <Link href="/dashboard">Dashboard</Link>
         </div>
 
         {/* Hamburger Button */}

@@ -397,7 +397,7 @@ export default function Home() {
                 Check your EMI
               </a>
               <a href="#contact" className="btn-secondary">
-                Get a free consultation <ArrowRight size={15} />
+                Get a free video & audio consultation <ArrowRight size={15} />
               </a>
             </div>
             <div className="hero-stats">

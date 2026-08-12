@@ -77,3 +77,21 @@ export async function uploadToGoogleCloud(
     throw error;
   }
 }
+
+
+export async function getSignedUrl(storagePath: string) {
+  try {
+    const cloudFile = bucket.file(storagePath);
+
+    const [url] = await cloudFile.getSignedUrl({
+      version: 'v4',
+      action: 'read',
+      expires: Date.now() + 5 * 60 * 1000,
+    });
+
+    return url;
+  } catch (error) {
+    console.error('❌ SIGNED URL ERROR:', error);
+    throw error;
+  }
+}
