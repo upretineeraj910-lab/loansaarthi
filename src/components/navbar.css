@@ -207,6 +207,10 @@
   color:white
 }
 
+.logout-btn{
+  color: white;
+}
+
 /* =========================================================
    RESPONSIVE BREAKPOINTS (Fixing Screenshot Issues)
    ========================================================= */

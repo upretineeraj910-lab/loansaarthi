@@ -41,7 +41,8 @@ export default function LoginPage() {
         // Store token and user data
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        router.push('/dashboard');
+        // router.push('/dashboard');
+        window.location.href = '/dashboard'
       } else {
         setError(data.error || 'Login failed');
       }

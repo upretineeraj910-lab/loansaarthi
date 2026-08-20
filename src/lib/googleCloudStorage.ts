@@ -39,10 +39,10 @@ export async function uploadToGoogleCloud(
 
   const filePath = `${folder}/${Date.now()}-${safeFileName}`;
 
-  console.log('📤 Upload starting:', fileName);
-  console.log('📦 Bucket:', bucketName);
-  console.log('📁 Path:', filePath);
-  console.log('📦 Buffer size:', buffer.length);
+  // console.log('📤 Upload starting:', fileName);
+  // console.log('📦 Bucket:', bucketName);
+  // console.log('📁 Path:', filePath);
+  // console.log('📦 Buffer size:', buffer.length);
 
   try {
     const cloudFile = bucket.file(filePath);
@@ -58,8 +58,8 @@ export async function uploadToGoogleCloud(
       },
     });
 
-    console.log('✅ Google Cloud upload successful:', filePath);
-    console.log('After save()');
+    // console.log(' Google Cloud upload successful:', filePath);
+    // console.log('After save()');
 
     return {
       fileName,

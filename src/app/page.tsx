@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import HeroVerificationCard from "../components/HeroVerificationCard";
 import {
   Phone,
   MessageCircle,
@@ -385,10 +386,10 @@ export default function Home() {
           <Reveal>
             <Eyebrow>Delhi · Loan Advisory</Eyebrow>
             <h1 className="hero-title">
-              Your loan,<br />entered and approved.
+              Get Loans at Lowest Interest Rates –<br />Compare 30+ Banks & NBFCs.
             </h1>
             <p className="hero-text">
-              We compare offers across 20+ banks and NBFCs, prepare your file,
+              We compare offers across 30+ banks and NBFCs, prepare your file,
               and follow it through to disbursement — so the only thing you
               sign is the sanction letter.
             </p>
@@ -397,7 +398,7 @@ export default function Home() {
                 Check your EMI
               </a>
               <a href="#contact" className="btn-secondary">
-                Get a free video & audio consultation <ArrowRight size={15} />
+                Free Consultation<ArrowRight size={15} />
               </a>
             </div>
             <div className="hero-stats">
@@ -410,13 +411,13 @@ export default function Home() {
                 <div className="stat-label">avg. sanction</div>
               </div>
               <div>
-                <div className="stat-number">20+</div>
+                <div className="stat-number">30+</div>
                 <div className="stat-label">partner lenders</div>
               </div>
             </div>
           </Reveal>
 
-          <Reveal delay={150}>
+          {/* <Reveal delay={150}>
             <div className="hero-card-wrapper">
               <div style={{ position: "absolute", top: "-1.25rem", right: "-0.75rem", zIndex: 10 }}>
                 <Stamp>Est. 2020</Stamp>
@@ -441,7 +442,25 @@ export default function Home() {
                 ))}
               </div>
             </div>
-          </Reveal>
+          </Reveal> */}
+
+          <Reveal delay={150}>
+  <div className="hero-card-wrapper">
+    <div
+      style={{
+        position: "absolute",
+        top: "-1.25rem",
+        right: "-0.75rem",
+        zIndex: 10,
+      }}
+    >
+      <Stamp>Instant Verify</Stamp>
+    </div>
+
+    {/* Naya TS verification widget */}
+    <HeroVerificationCard />
+  </div>
+</Reveal>
         </div>
       </section>
 
