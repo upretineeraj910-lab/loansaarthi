@@ -1,0 +1,307 @@
+/* ==========================================
+   CSS Variables (Theme Support)
+   ========================================== */
+:root {
+  --hvc-bg: #ffffff;
+  --hvc-border: #e2e8f0;
+  --hvc-shadow: rgba(0, 0, 0, 0.08);
+  --hvc-header-bg: #f8fafc;
+  --hvc-title: #0f172a;
+  --hvc-badge: #64748b;
+  --hvc-desc: #475569;
+  --hvc-input-bg: #ffffff;
+  --hvc-input-border: #cbd5e1;
+  --hvc-input-text: #0f172a;
+  --hvc-input-focus: #2563eb;
+  --hvc-prefix-bg: #f1f5f9;
+  --hvc-btn-bg: #2563eb;
+  --hvc-btn-text: #ffffff;
+  --hvc-btn-hover: #1d4ed8;
+  --hvc-link-color: #2563eb;
+  --hvc-error-bg: #fef2f2;
+  --hvc-error-border: #fecaca;
+  --hvc-error-text: #b91c1c;
+  --hvc-success: #16a34a;
+}
+
+/* Dark Mode - System Preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hvc-bg: #141e1a;
+    --hvc-border: #22362e;
+    --hvc-shadow: rgba(0, 0, 0, 0.4);
+    --hvc-header-bg: #0f172a;
+    --hvc-title: #f8fafc;
+    --hvc-badge: #94a3b8;
+    --hvc-desc: #94a3b8;
+    --hvc-input-bg: #0d1411;
+    --hvc-input-border: #22362e;
+    --hvc-input-text: #f8fafc;
+    --hvc-input-focus: #38bdf8;
+    --hvc-prefix-bg: #1e2d27;
+    --hvc-btn-bg: #38bdf8;
+    --hvc-btn-text: #0f172a;
+    --hvc-btn-hover: #7dd3fc;
+    --hvc-link-color: #38bdf8;
+    --hvc-error-bg: #450a0a;
+    --hvc-error-border: #7f1d1d;
+    --hvc-error-text: #fca5a5;
+    --hvc-success: #4ade80;
+  }
+}
+
+/* Dark Mode - Manual Class Toggle */
+[data-theme="dark"],
+.dark {
+  --hvc-bg: #141e1a;
+  --hvc-border: #22362e;
+  --hvc-shadow: rgba(0, 0, 0, 0.4);
+  --hvc-header-bg: #0d1411;
+  --hvc-title: #f8fafc;
+  --hvc-badge: #94a3b8;
+  --hvc-desc: #94a3b8;
+  --hvc-input-bg: #0b0f19;
+  --hvc-input-border: #22362e;
+  --hvc-input-text: #f8fafc;
+  --hvc-input-focus: #38bdf8;
+  --hvc-prefix-bg: #1e2d27;
+  --hvc-btn-bg: #38bdf8;
+  --hvc-btn-text: #0f172a;
+  --hvc-btn-hover: #7dd3fc;
+  --hvc-link-color: #38bdf8;
+  --hvc-error-bg: #450a0a;
+  --hvc-error-border: #7f1d1d;
+  --hvc-error-text: #fca5a5;
+  --hvc-success: #4ade80;
+}
+
+/* ==========================================
+   Hero Card Container
+   ========================================== */
+.hero-card {
+  width: 100%;
+  max-width: 440px;
+  min-height: 380px;
+  margin: 0 auto;
+  background-color: var(--hvc-bg);
+  border: 1px solid var(--hvc-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px var(--hvc-shadow);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Header */
+.hero-card-header {
+  padding: 1rem 1.25rem;
+  background-color: var(--hvc-header-bg);
+  border-bottom: 1px solid var(--hvc-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--hvc-title);
+}
+
+.hero-step-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--hvc-badge);
+}
+
+/* Card Body */
+.hero-card-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Error Banner */
+.hero-error-banner {
+  font-size: 0.8rem;
+  color: var(--hvc-error-text);
+  background-color: var(--hvc-error-bg);
+  border: 1px solid var(--hvc-error-border);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+/* Forms & Inputs */
+.hero-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hero-form-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--hvc-desc);
+}
+
+.hero-phone-group {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.hero-phone-prefix {
+  padding: 10px 14px;
+  background-color: var(--hvc-prefix-bg);
+  border: 1px solid var(--hvc-input-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--hvc-input-text);
+  display: flex;
+  align-items: center;
+}
+
+.hero-input {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: var(--hvc-input-bg);
+  border: 1px solid var(--hvc-input-border);
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: var(--hvc-input-text);
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.hero-input:focus {
+  border-color: var(--hvc-input-focus);
+}
+
+.hero-otp-input {
+  font-size: 1.25rem;
+  letter-spacing: 8px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.hero-select-row {
+  display: flex;
+  gap: 8px;
+}
+
+.hero-select {
+  flex: 1;
+  padding: 10px 8px;
+  background-color: var(--hvc-input-bg);
+  border: 1px solid var(--hvc-input-border);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: var(--hvc-input-text);
+  outline: none;
+  cursor: pointer;
+}
+
+.hero-select:focus {
+  border-color: var(--hvc-input-focus);
+}
+
+/* Buttons */
+.hero-submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--hvc-btn-bg);
+  color: var(--hvc-btn-text);
+  border: none;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: background-color 0.2s ease, opacity 0.2s ease;
+}
+
+.hero-submit-btn:hover:not(:disabled) {
+  background-color: var(--hvc-btn-hover);
+}
+
+.hero-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.hero-link-btn {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  color: var(--hvc-link-color);
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: 4px;
+}
+
+.hero-trust-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: var(--hvc-desc);
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* Success View */
+.hero-success-state {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.hero-success-icon {
+  color: var(--hvc-success);
+  margin-bottom: 0.75rem;
+}
+
+.hero-success-state h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.15rem;
+  color: var(--hvc-title);
+}
+
+.hero-success-state p {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--hvc-desc);
+}
+
+/* ==========================================
+   Mobile Responsive
+   ========================================== */
+@media (max-width: 480px) {
+  .hero-card {
+    max-width: 100%;
+    border-radius: 10px;
+  }
+
+  .hero-card-body {
+    padding: 1.1rem;
+  }
+
+  .hero-select-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
