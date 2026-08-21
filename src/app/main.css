@@ -361,11 +361,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-@media (min-width: 640px) {
-  .hero-title {
-    font-size: 3.75rem;
-  }
-}
 
 .hero-title .highlight {
   color: var(--brand-green);

@@ -210,7 +210,7 @@ export default function HeroVerificationCard() {
               />
             </div>
             <button type="submit" disabled={loading} className="btn-primary" style={{ width: "100%", justifyContent: "center", marginTop: "4px" }}>
-              {loading ? "Sending OTP..." : <>Get Verification Code <ArrowRight size={15} /></>}
+              {loading ? "Sending OTP..." : <>Get Verification Code </>}
             </button>
             <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "11px", opacity: 0.65, marginTop: "4px" }}>
               <ShieldCheck size={14} /> Soft enquiry · No impact on credit score
@@ -284,7 +284,7 @@ export default function HeroVerificationCard() {
               </select>
             </div>
             <button type="submit" disabled={loading} className="btn-primary" style={{ width: "100%", justifyContent: "center", marginTop: "6px" }}>
-              {loading ? "Saving..." : <>Submit Details <ArrowRight size={14} /></>}
+              {loading ? "Saving..." : <>Submit Details</>}
             </button>
           </form>
         )}

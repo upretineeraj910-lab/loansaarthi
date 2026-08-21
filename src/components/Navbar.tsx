@@ -55,13 +55,13 @@ export default function Navbar() {
         <div className="nav-links">
           <Link href="/#home">Home</Link>
           <Link href="/#Loan">Loans</Link>
-          <Link href="/Credit_card">Credit Cards</Link>
+          {/* <Link href="/Credit_card">Credit Cards</Link> */}
           <Link href="/#calculator">EMI Calculator</Link>
-          <Link href="/Blog">Blog</Link>
-          <Link href="/Career">Career</Link>
+          {/* <Link href="/Blog">Blog</Link> */}
+          {/* <Link href="/Career">Career</Link> */}
           <Link href="/Contact_Us">Contact Us</Link>
           
-          {isLoggedIn ? (
+          {/* {isLoggedIn ? (
             <>
               <Link href="/dashboard">Dashboard</Link>
               <button onClick={handleLogout} className="nav-auth-btn logout-btn">
@@ -72,7 +72,7 @@ export default function Navbar() {
             <Link href="/login" className="nav-auth-btn login-btn">
               Login
             </Link>
-          )}
+          )} */}
         </div>
 
         {/* Hamburger Button */}
@@ -107,13 +107,13 @@ export default function Navbar() {
         <div className="mobile-menu-links">
           <Link href="/" onClick={closeMenu}>Home</Link>
           <Link href="/#Loan" onClick={closeMenu}>Loans</Link>
-          <Link href="/Credit_card" onClick={closeMenu}>Credit Cards</Link>
+          {/* <Link href="/Credit_card" onClick={closeMenu}>Credit Cards</Link> */}
           <Link href="/#calculator" onClick={closeMenu}>EMI Calculator</Link>
-          <Link href="/Blog" onClick={closeMenu}>Blog</Link>
-          <Link href="/Career" onClick={closeMenu}>Career</Link>
+          {/* <Link href="/Blog" onClick={closeMenu}>Blog</Link> */}
+          {/* <Link href="/Career" onClick={closeMenu}>Career</Link> */}
           <Link href="/Contact_Us" onClick={closeMenu}>Contact Us</Link>
 
-          {isLoggedIn ? (
+          {/* {isLoggedIn ? (
             <>
               <Link href="/dashboard" onClick={closeMenu}>Dashboard</Link>
               <button onClick={handleLogout} className="mobile-auth-btn logout-btn">
@@ -124,7 +124,7 @@ export default function Navbar() {
             <Link href="/login" onClick={closeMenu} className="mobile-auth-btn login-btn">
               Login
             </Link>
-          )}
+          )} */}
         </div>
       </div>
     </>
