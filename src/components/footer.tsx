@@ -85,16 +85,16 @@ export default function Footer() {
           <h3>Our Services</h3>
           <ul>
             <li>
-              <Link href="/loan">Personal Loan</Link>
+              <Link href="/loanpage/personal-loan">Personal Loan</Link>
             </li>
             <li>
-              <Link href="/loan">Business Loan</Link>
+              <Link href="/loanpage/business-loan">Business Loan</Link>
             </li>
             <li>
-              <Link href="/loan">Home Loan</Link>
+              <Link href="/loanpage/home-loan">Home Loan</Link>
             </li>
             <li>
-              <Link href="/loan">Education Loan</Link>
+              <Link href="/loanpage/education-loan">Education Loan</Link>
             </li>
           </ul>
         </div>

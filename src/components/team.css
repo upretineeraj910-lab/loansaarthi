@@ -45,6 +45,7 @@
    ========================================== */
 .expert-team {
   width: 100%;
+  height: auto;
   padding: 80px 20px;
   background-color: var(--team-bg);
   overflow: hidden;

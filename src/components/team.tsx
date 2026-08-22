@@ -13,41 +13,41 @@ type Expert = {
 
 const expertTeam: Expert[] = [
   {
-    name: "Rajiv Sharma",
+    name: "Ganesh Jyala",
     title: "CEO & Founder",
-    image: "/team/gamesh-ceo.png",
-    alt: "Rajiv Sharma CEO and Founder",
+    image: "/team/ganesh-ceo.png",
+    alt: "Ganesh Jyala CEO and Founder",
   },
   {
-    name: "Priya Mehta",
+    name: "Meenakshi Bisht",
     title: "Loan Advisor",
-    image: "/team/member2.jpg",
-    alt: "Priya Mehta Loan Advisor",
+    image: "/team/meenakshi-bhist.png",
+    alt: "Meenakshi-bisht Loan Advisor",
   },
   {
-    name: "Amit Verma",
+    name: "priyanka",
     title: "Financial Consultant",
-    image: "/team/member3.jpg",
-    alt: "Amit Verma Financial Consultant",
+    image: "/team/priyanka.png",
+    alt: "priyanka Financial Consultant",
   },
   {
-    name: "Neha Kapoor",
+    name: "rambha",
     title: "Senior Loan Specialist",
-    image: "/team/member4.jpg",
-    alt: "Neha Kapoor Senior Loan Specialist",
+    image: "/team/rambha.png",
+    alt: " rambha Senior Loan Specialist",
   },
   {
-    name: "Vikas Singh",
+    name: " ranjeet",
     title: "Relationship Manager",
-    image: "/team/member5.jpg",
-    alt: "Vikas Singh Relationship Manager",
+    image: "/team/ranjeet-j.png",
+    alt: " ranjeet Relationship Manager",
   },
-  {
-    name: "Ananya Gupta",
-    title: "Financial Advisor",
-    image: "/team/member6.jpg",
-    alt: "Ananya Gupta Financial Advisor",
-  },
+  // {
+  //   name: "Ananya Gupta",
+  //   title: "Financial Advisor",
+  //   image: "/team/member6.jpg",
+  //   alt: "Ananya Gupta Financial Advisor",
+  // },
 ];
 
 const Team = () => {
@@ -138,14 +138,25 @@ const Team = () => {
               >
                 <div className="expert-card-inner">
                   <div className="expert-image-wrapper">
-                    <Image
+                    {/* <Image
                       src={expert.image}
                       alt={expert.alt}
                       width={400}
                       height={320}
                       className="expert-image"
                       priority={index < 3}
-                    />
+                    /> */}
+
+                    <div className="expert-image-wrapper">
+                      <Image
+                        src={expert.image}
+                        alt={expert.alt}
+                        fill
+                        className="expert-image"
+                        priority={index < 3}
+                        sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
+                      />
+                    </div>
                   </div>
 
                   <div className="expert-info">
