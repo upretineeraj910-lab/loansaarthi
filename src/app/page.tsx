@@ -350,7 +350,7 @@ export default function Home() {
         <Reveal>
           <Eyebrow>What we arrange</Eyebrow>
           <h2 className="section-header">
-            Six lines in the ledger, one for every need.
+            Our Instant Loan Application Process
           </h2>
         </Reveal>
         <div className="loan-grid">
@@ -370,7 +370,13 @@ export default function Home() {
                     aria-hidden="true"
                   />
                 </div>
-                <p className="loan-desc">{l.desc}</p>
+                
+                {/* Fixed line: Ab strong tags bold render honge */}
+                <p 
+                  className="loan-desc" 
+                  dangerouslySetInnerHTML={{ __html: l.desc }} 
+                />
+
                 <LedgerRow
                   label={<span className="loan-rate-label">Rate</span>}
                   value={l.rate}

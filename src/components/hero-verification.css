@@ -86,7 +86,7 @@
   background-color: var(--hvc-bg);
   border: 1px solid var(--hvc-border);
   border-radius: 12px;
-  box-shadow: 0 10px 30px var(--hvc-shadow);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   position: relative;

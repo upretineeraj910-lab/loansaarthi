@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import "./team.css";
 
@@ -16,38 +16,32 @@ const expertTeam: Expert[] = [
     name: "Ganesh Jyala",
     title: "CEO & Founder",
     image: "/team/ganesh-ceo.png",
-    alt: "Ganesh Jyala CEO and Founder",
+    alt: "Ganesh Jyala - CEO and Founder",
   },
   {
     name: "Meenakshi Bisht",
     title: "Loan Advisor",
     image: "/team/meenakshi-bhist.png",
-    alt: "Meenakshi-bisht Loan Advisor",
+    alt: "Meenakshi Bisht - Loan Advisor",
   },
   {
-    name: "priyanka",
+    name: "Priyanka",
     title: "Financial Consultant",
     image: "/team/priyanka.png",
-    alt: "priyanka Financial Consultant",
+    alt: "Priyanka - Financial Consultant",
   },
   {
-    name: "rambha",
+    name: "Rambha",
     title: "Senior Loan Specialist",
     image: "/team/rambha.png",
-    alt: " rambha Senior Loan Specialist",
+    alt: "Rambha - Senior Loan Specialist",
   },
   {
-    name: " ranjeet",
+    name: "Ranjeet",
     title: "Relationship Manager",
     image: "/team/ranjeet-j.png",
-    alt: " ranjeet Relationship Manager",
+    alt: "Ranjeet - Relationship Manager",
   },
-  // {
-  //   name: "Ananya Gupta",
-  //   title: "Financial Advisor",
-  //   image: "/team/member6.jpg",
-  //   alt: "Ananya Gupta Financial Advisor",
-  // },
 ];
 
 const Team = () => {
@@ -55,27 +49,24 @@ const Team = () => {
   const [transition, setTransition] = useState(true);
   const [visibleCards, setVisibleCards] = useState(3);
 
-  // Screen size ke hisab se cards count auto-detect
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 650) {
-        setVisibleCards(1); // Mobile: 1 card
+        setVisibleCards(1);
       } else if (window.innerWidth <= 900) {
-        setVisibleCards(2); // Tablet: 2 cards
+        setVisibleCards(2);
       } else {
-        setVisibleCards(3); // Desktop: 3 cards
+        setVisibleCards(3);
       }
     };
 
-    handleResize(); // Initial check
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Infinite loop ke liye duplicate items
   const sliderItems = [...expertTeam, ...expertTeam.slice(0, 3)];
 
-  // Auto Slider Timer
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => prev + 1);
@@ -84,7 +75,6 @@ const Team = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Infinite Reset jab cards end par pahuche
   const handleTransitionEnd = () => {
     if (currentIndex >= expertTeam.length) {
       setTransition(false);
@@ -103,7 +93,6 @@ const Team = () => {
     }
   }, [transition]);
 
-  // Card width percentage calculation
   const cardWidthPercent = 100 / visibleCards;
 
   return (
@@ -127,45 +116,48 @@ const Team = () => {
               transition: transition ? "transform 0.55s ease-in-out" : "none",
             }}
           >
-            {sliderItems.map((expert, index) => (
-              <div
-                className="expert-card"
-                key={`${expert.name}-${index}`}
-                style={{
-                  flex: `0 0 ${cardWidthPercent}%`,
-                  maxWidth: `${cardWidthPercent}%`,
-                }}
-              >
-                <div className="expert-card-inner">
-                  <div className="expert-image-wrapper">
-                    {/* <Image
-                      src={expert.image}
-                      alt={expert.alt}
-                      width={400}
-                      height={320}
-                      className="expert-image"
-                      priority={index < 3}
-                    /> */}
+            {sliderItems.map((expert, index) => {
+              const isClone = index >= expertTeam.length;
 
+              return (
+                <div
+                  className="expert-card"
+                  key={`${expert.name}-${index}`}
+                  aria-hidden={isClone}
+                  style={{
+                    flex: `0 0 ${cardWidthPercent}%`,
+                    maxWidth: `${cardWidthPercent}%`,
+                  }}
+                >
+                  <div className="expert-card-inner">
                     <div className="expert-image-wrapper">
                       <Image
                         src={expert.image}
-                        alt={expert.alt}
+                        alt={isClone ? "" : expert.alt}
                         fill
                         className="expert-image"
                         priority={index < 3}
                         sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
                       />
                     </div>
-                  </div>
 
-                  <div className="expert-info">
-                    <h3>{expert.name}</h3>
-                    <p>{expert.title}</p>
+                    <div className="expert-info">
+                      {isClone ? (
+                        <div className="expert-info-clone" aria-hidden="true">
+                          <span className="clone-title">{expert.name}</span>
+                          <span className="clone-subtitle">{expert.title}</span>
+                        </div>
+                      ) : (
+                        <>
+                          <h3>{expert.name}</h3>
+                          <p>{expert.title}</p>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
