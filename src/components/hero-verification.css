@@ -1,48 +1,48 @@
 /* ==========================================
-   CSS Variables (Theme Support)
+   CSS Variables (Theme Support - Matched with LoanSaarthi)
    ========================================== */
 :root {
   --hvc-bg: #ffffff;
   --hvc-border: #e2e8f0;
-  --hvc-shadow: rgba(0, 0, 0, 0.08);
-  --hvc-header-bg: #f8fafc;
-  --hvc-title: #0f172a;
-  --hvc-badge: #64748b;
-  --hvc-desc: #475569;
+  --hvc-shadow: rgba(0, 0, 0, 0.06);
+  --hvc-header-bg: #fbfbfb;
+  --hvc-title: #111827;
+  --hvc-badge: #6fae45;
+  --hvc-desc: #4b5563;
   --hvc-input-bg: #ffffff;
-  --hvc-input-border: #cbd5e1;
-  --hvc-input-text: #0f172a;
-  --hvc-input-focus: #2563eb;
-  --hvc-prefix-bg: #f1f5f9;
-  --hvc-btn-bg: #2563eb;
+  --hvc-input-border: #d1d5db;
+  --hvc-input-text: #111827;
+  --hvc-input-focus: #6fae45;
+  --hvc-prefix-bg: #f9fafb;
+  --hvc-btn-bg: #6fae45;
+  --hvc-btn-hover: #5d9639;
   --hvc-btn-text: #ffffff;
-  --hvc-btn-hover: #1d4ed8;
-  --hvc-link-color: #2563eb;
+  --hvc-link-color: #6fae45;
   --hvc-error-bg: #fef2f2;
   --hvc-error-border: #fecaca;
-  --hvc-error-text: #b91c1c;
-  --hvc-success: #16a34a;
+  --hvc-error-text: #dc2626;
+  --hvc-success: #6fae45;
 }
 
-/* Dark Mode - System Preference */
+/* Dark Mode - System Preference & Manual */
 @media (prefers-color-scheme: dark) {
   :root {
-    --hvc-bg: #141e1a;
-    --hvc-border: #22362e;
+    --hvc-bg: #111827;
+    --hvc-border: #1f2937;
     --hvc-shadow: rgba(0, 0, 0, 0.4);
-    --hvc-header-bg: #0f172a;
-    --hvc-title: #f8fafc;
-    --hvc-badge: #94a3b8;
-    --hvc-desc: #94a3b8;
-    --hvc-input-bg: #0d1411;
-    --hvc-input-border: #22362e;
-    --hvc-input-text: #f8fafc;
-    --hvc-input-focus: #38bdf8;
-    --hvc-prefix-bg: #1e2d27;
-    --hvc-btn-bg: #38bdf8;
-    --hvc-btn-text: #0f172a;
-    --hvc-btn-hover: #7dd3fc;
-    --hvc-link-color: #38bdf8;
+    --hvc-header-bg: #0b0f17;
+    --hvc-title: #f9fafb;
+    --hvc-badge: #86efac;
+    --hvc-desc: #9ca3af;
+    --hvc-input-bg: #0b0f17;
+    --hvc-input-border: #374151;
+    --hvc-input-text: #f9fafb;
+    --hvc-input-focus: #6fae45;
+    --hvc-prefix-bg: #1f2937;
+    --hvc-btn-bg: #6fae45;
+    --hvc-btn-hover: #5d9639;
+    --hvc-btn-text: #ffffff;
+    --hvc-link-color: #86efac;
     --hvc-error-bg: #450a0a;
     --hvc-error-border: #7f1d1d;
     --hvc-error-text: #fca5a5;
@@ -50,25 +50,24 @@
   }
 }
 
-/* Dark Mode - Manual Class Toggle */
 [data-theme="dark"],
 .dark {
-  --hvc-bg: #141e1a;
-  --hvc-border: #22362e;
+  --hvc-bg: #111827;
+  --hvc-border: #1f2937;
   --hvc-shadow: rgba(0, 0, 0, 0.4);
-  --hvc-header-bg: #0d1411;
-  --hvc-title: #f8fafc;
-  --hvc-badge: #94a3b8;
-  --hvc-desc: #94a3b8;
-  --hvc-input-bg: #0b0f19;
-  --hvc-input-border: #22362e;
-  --hvc-input-text: #f8fafc;
-  --hvc-input-focus: #38bdf8;
-  --hvc-prefix-bg: #1e2d27;
-  --hvc-btn-bg: #38bdf8;
-  --hvc-btn-text: #0f172a;
-  --hvc-btn-hover: #7dd3fc;
-  --hvc-link-color: #38bdf8;
+  --hvc-header-bg: #0b0f17;
+  --hvc-title: #f9fafb;
+  --hvc-badge: #86efac;
+  --hvc-desc: #9ca3af;
+  --hvc-input-bg: #0b0f17;
+  --hvc-input-border: #374151;
+  --hvc-input-text: #f9fafb;
+  --hvc-input-focus: #6fae45;
+  --hvc-prefix-bg: #1f2937;
+  --hvc-btn-bg: #6fae45;
+  --hvc-btn-hover: #5d9639;
+  --hvc-btn-text: #ffffff;
+  --hvc-link-color: #86efac;
   --hvc-error-bg: #450a0a;
   --hvc-error-border: #7f1d1d;
   --hvc-error-text: #fca5a5;
@@ -86,18 +85,18 @@
   background-color: var(--hvc-bg);
   border: 1px solid var(--hvc-border);
   border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 10px 30px var(--hvc-shadow), 0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 /* Header */
 .hero-card-header {
-  padding: 1rem 1.25rem;
+  padding: 1.1rem 1.4rem;
   background-color: var(--hvc-header-bg);
   border-bottom: 1px solid var(--hvc-border);
   display: flex;
@@ -106,15 +105,17 @@
 }
 
 .hero-card-title {
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--hvc-title);
 }
 
 .hero-step-badge {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.06em;
   color: var(--hvc-badge);
 }
 
@@ -129,7 +130,7 @@
 
 /* Error Banner */
 .hero-error-banner {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--hvc-error-text);
   background-color: var(--hvc-error-bg);
   border: 1px solid var(--hvc-error-border);
@@ -142,12 +143,12 @@
 .hero-form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .hero-form-desc {
-  margin: 0;
-  font-size: 0.85rem;
+  margin: 0 0 4px 0;
+  font-size: 0.9rem;
   line-height: 1.5;
   color: var(--hvc-desc);
 }
@@ -159,11 +160,11 @@
 }
 
 .hero-phone-prefix {
-  padding: 10px 14px;
+  padding: 11px 14px;
   background-color: var(--hvc-prefix-bg);
   border: 1px solid var(--hvc-input-border);
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-weight: 600;
   color: var(--hvc-input-text);
   display: flex;
@@ -172,23 +173,24 @@
 
 .hero-input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 11px 14px;
   background-color: var(--hvc-input-bg);
   border: 1px solid var(--hvc-input-border);
   border-radius: 6px;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   color: var(--hvc-input-text);
   box-sizing: border-box;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero-input:focus {
   border-color: var(--hvc-input-focus);
+  box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
 }
 
 .hero-otp-input {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   letter-spacing: 8px;
   text-align: center;
   font-weight: 700;
@@ -201,51 +203,54 @@
 
 .hero-select {
   flex: 1;
-  padding: 10px 8px;
+  padding: 11px 10px;
   background-color: var(--hvc-input-bg);
   border: 1px solid var(--hvc-input-border);
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   color: var(--hvc-input-text);
   outline: none;
   cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero-select:focus {
   border-color: var(--hvc-input-focus);
+  box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
 }
 
-/* Buttons */
+/* Primary Button */
 .hero-submit-btn {
   width: 100%;
-  padding: 12px;
+  padding: 12px 18px;
   background-color: var(--hvc-btn-bg);
   color: var(--hvc-btn-text);
-  border: none;
+  border: 1px solid transparent;
   border-radius: 6px;
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
-  transition: background-color 0.2s ease, opacity 0.2s ease;
+  gap: 8px;
+  transition: all 0.2s ease;
 }
 
 .hero-submit-btn:hover:not(:disabled) {
   background-color: var(--hvc-btn-hover);
+  transform: translateY(-1px);
 }
 
 .hero-submit-btn:disabled {
-  opacity: 0.65;
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
 .hero-link-btn {
   background: none;
   border: none;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--hvc-link-color);
   cursor: pointer;
   text-decoration: underline;
@@ -257,16 +262,16 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: var(--hvc-desc);
-  opacity: 0.85;
-  margin-top: 2px;
+  opacity: 0.9;
+  margin-top: 4px;
 }
 
 /* Success View */
 .hero-success-state {
   text-align: center;
-  padding: 1rem 0;
+  padding: 1.2rem 0;
 }
 
 .hero-success-icon {
@@ -282,7 +287,7 @@
 
 .hero-success-state p {
   margin: 0;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   line-height: 1.5;
   color: var(--hvc-desc);
 }
@@ -297,7 +302,7 @@
   }
 
   .hero-card-body {
-    padding: 1.1rem;
+    padding: 1.2rem;
   }
 
   .hero-select-row {
