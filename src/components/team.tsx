@@ -67,13 +67,34 @@ const Team = () => {
 
   const sliderItems = [...expertTeam, ...expertTeam.slice(0, 3)];
 
+  // Auto-play logic (Resets if user clicks next/prev because currentIndex changes)
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => prev + 1);
+      nextSlide();
     }, 2500);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [currentIndex]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => prev + 1);
+  };
+
+  const prevSlide = () => {
+    if (currentIndex === 0) {
+      // Seamlessly jump to the end clone before sliding back
+      setTransition(false);
+      setCurrentIndex(expertTeam.length);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setTransition(true);
+          setCurrentIndex(expertTeam.length - 1);
+        });
+      });
+    } else {
+      setCurrentIndex((prev) => prev - 1);
+    }
+  };
 
   const handleTransitionEnd = () => {
     if (currentIndex >= expertTeam.length) {
@@ -107,57 +128,64 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="expert-slider">
-          <div
-            className="expert-track"
-            onTransitionEnd={handleTransitionEnd}
-            style={{
-              transform: `translateX(-${currentIndex * cardWidthPercent}%)`,
-              transition: transition ? "transform 0.55s ease-in-out" : "none",
-            }}
-          >
-            {sliderItems.map((expert, index) => {
-              const isClone = index >= expertTeam.length;
+        <div className="expert-slider-wrapper">
+          {/* Navigation Buttons */}
+          <button className="slider-btn prev-btn" onClick={prevSlide} aria-label="Previous">
+            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+            </svg>
+          </button>
 
-              return (
-                <div
-                  className="expert-card"
-                  key={`${expert.name}-${index}`}
-                  aria-hidden={isClone}
-                  style={{
-                    flex: `0 0 ${cardWidthPercent}%`,
-                    maxWidth: `${cardWidthPercent}%`,
-                  }}
-                >
-                  <div className="expert-card-inner">
-                    <div className="expert-image-wrapper">
-                      <Image
-                        src={expert.image}
-                        alt={isClone ? "" : expert.alt}
-                        fill
-                        className="expert-image"
-                        priority={index < 3}
-                        sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
-                      />
-                    </div>
+          <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next">
+            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+            </svg>
+          </button>
 
-                    <div className="expert-info">
-                      {isClone ? (
-                        <div className="expert-info-clone" aria-hidden="true">
-                          <span className="clone-title">{expert.name}</span>
-                          <span className="clone-subtitle">{expert.title}</span>
-                        </div>
-                      ) : (
-                        <>
-                          <h3>{expert.name}</h3>
-                          <p>{expert.title}</p>
-                        </>
-                      )}
+          <div className="expert-slider">
+            <div
+              className="expert-track"
+              onTransitionEnd={handleTransitionEnd}
+              style={{
+                transform: `translateX(-${currentIndex * cardWidthPercent}%)`,
+                transition: transition ? "transform 0.55s ease-in-out" : "none",
+              }}
+            >
+              {sliderItems.map((expert, index) => {
+                const isClone = index >= expertTeam.length;
+
+                return (
+                  <div
+                    className="expert-card"
+                    key={`${expert.name}-${index}`}
+                    aria-hidden={isClone}
+                    style={{
+                      flex: `0 0 ${cardWidthPercent}%`,
+                      maxWidth: `${cardWidthPercent}%`,
+                    }}
+                  >
+                    <div className="expert-card-inner">
+                      <div className="expert-image-wrapper">
+                        <Image
+                          src={expert.image}
+                          alt={isClone ? "" : expert.alt}
+                          fill
+                          className="expert-image"
+                          priority={index < 3}
+                          sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
+                        />
+                      </div>
+
+                      {/* ✅ FIX: Structure is same for both original and clone */}
+                      <div className="expert-info">
+                        <h3>{expert.name}</h3>
+                        <p>{expert.title}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
