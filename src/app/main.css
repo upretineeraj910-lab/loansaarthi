@@ -390,10 +390,12 @@ body {
 }
 
 .hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  /* grid-template-columns: repeat(3, 1fr); */
   gap: 1rem;
+  justify-content: space-between;
   max-width: 28rem;
+  align-items: flex-start;
   padding-top: 1.5rem;
   border-top: 2px solid var(--brand-green);
 }
@@ -623,7 +625,7 @@ body {
 }
 
 .loan-rate-label {
-  font-size: 0.75rem;
+  font-size: 1 rem;
   color: var(--brand-green);
   font-weight: 600;
 }
@@ -939,10 +941,11 @@ body {
   letter-spacing: 0.18em;
   margin-bottom: 2rem;
   text-align: center;
-  color: var(--color-text-light);
+  /* color: var(--color-text-light); */
+  color: white;
   font-family: var(--font-primary);
-  font-weight: 600;
-  opacity: 0.7;
+  font-weight: 800;
+  /* opacity: 0.7; */
 }
 
 .bank-tags {

@@ -157,11 +157,11 @@ export default function Home() {
                 />
 
                 <LedgerRow
-                  label={<span className="loan-rate-label">Rate</span>}
+                  label={<span className="loan-rate-label">Rate </span>}
                   value={l.rate}
                 />
                 <LedgerRow
-                  label={<span className="loan-rate-label">Amount</span>}
+                  label={<span className="loan-rate-label">Amount </span>}
                   value={l.range}
                 />
               </Link>
