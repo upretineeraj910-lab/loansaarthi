@@ -28,7 +28,7 @@ export default function BusinessLoanPage() {
           <div className="lp-hero-side">
             <h3>Apply for Business Loan</h3>
             <p>Collateral-free working capital funding.</p>
-            <Link href="/#home" className="lp-cta-btn">Check Eligibility <ArrowRight size={15} /></Link>
+            <Link href="/#loan-eligibility-form" className="lp-cta-btn">Check Eligibility <ArrowRight size={15} /></Link>
             <span style={{ fontSize: "11px", color: "var(--lp-desc)", marginTop: "8px" }}><ShieldCheck size={13} /> GST based evaluation</span>
           </div>
         </div>

@@ -158,7 +158,7 @@ export default function HeroVerificationCard() {
   };
 
   return (
-    <div className="hero-card ledger-lines">
+    <div id="loan-eligibility-form" className="hero-card ledger-lines">
       <div id="global-recaptcha-container"></div>
 
       <div className="hero-card-header">
@@ -192,6 +192,7 @@ export default function HeroVerificationCard() {
                 onChange={(e) => setPhone(e.target.value)}
                 className="hero-input"
                 required
+                autoFocus
               />
             </div>
             <button type="submit" disabled={loading} className="hero-submit-btn">
@@ -282,6 +283,7 @@ export default function HeroVerificationCard() {
                 <option value="Business Loan">Business Loan</option>
                 <option value="Personal Loan">Personal Loan</option>
                 <option value="LAP">Loan Against Property</option>
+                <option value="Balance Transfer">Balance Transfer</option>
               </select>
             </div>
             <button type="submit" disabled={loading} className="hero-submit-btn">

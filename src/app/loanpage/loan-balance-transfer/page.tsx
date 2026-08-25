@@ -28,7 +28,7 @@ export default function LoanBalanceTransferPage() {
           <div className="lp-hero-side">
             <h3>Apply for Balance Transfer</h3>
             <p>Reduce existing EMIs & claim Top-up funds.</p>
-            <Link href="/#calculator" className="lp-cta-btn">Check Eligibility <ArrowRight size={15} /></Link>
+            <Link href="/#loan-eligibility-form" className="lp-cta-btn">Check Eligibility <ArrowRight size={15} /></Link>
             <span style={{ fontSize: "11px", color: "var(--lp-desc)", marginTop: "8px" }}><ShieldCheck size={13} /> Complete bank paperwork handled</span>
           </div>
         </div>

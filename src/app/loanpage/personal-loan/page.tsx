@@ -28,7 +28,7 @@ export default function PersonalLoanPage() {
           <div className="lp-hero-side">
             <h3>Apply for Personal Loan</h3>
             <p>Disbursal in 24 hours with digital KYC.</p>
-            <Link href="/#calculator" className="lp-cta-btn">Check Eligibility <ArrowRight size={15} /></Link>
+            <Link href="/#loan-eligibility-form" className="lp-cta-btn">Check Eligibility <ArrowRight size={15} /></Link>
             <span style={{ fontSize: "11px", color: "var(--lp-desc)", marginTop: "8px" }}><ShieldCheck size={13} /> 100% paperless process</span>
           </div>
         </div>
