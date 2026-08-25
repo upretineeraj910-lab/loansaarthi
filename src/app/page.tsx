@@ -16,6 +16,7 @@ import { WHY, STEPS, BANKS, FAQS } from "@/components/content";
 
 import "./main.css";
 import GoogleReviews from "@/components/GoogleReviews";
+import Image from "next/image";
 
 export default function Home() {
   const structuredData = {
@@ -116,16 +117,24 @@ export default function Home() {
       >
         <div className="container">
           <div className="bank-partners-label">Who we work with</div>
-          <div className="bank-tags">
+          <div className="bank-tags flex flex-wrap items-center justify-center gap-6">
             {BANKS.map((b) => (
-              <span key={b} className="bank-tag">
-                {b}
-              </span>
+              <div
+                key={b.name}
+                className="bank-logo-wrapper relative h-12 w-32 flex items-center justify-center p-2 bg-white/5 rounded-lg"
+              >
+                <Image
+                  src={b.logo}
+                  alt={b.name}
+                  width={120}
+                  height={40}
+                  className="object-contain max-h-8 w-auto filter brightness-90 hover:brightness-100 transition-all"
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
-
       {/* ---------------- LOAN TYPES ---------------- */}
       <section id="Loan" className="container section-spacing">
         <Reveal>
@@ -137,34 +146,32 @@ export default function Home() {
         <div className="loan-grid">
           {LOAN_TYPES.map((l, i) => (
             <Reveal key={l.name} delay={i * 60}>
-              <Link
-                href={l.href}
-                className="loan-item"
-                suppressHydrationWarning
-              >
+              <Link href={l.href} className="loan-item" suppressHydrationWarning>
                 <div className="loan-header">
-                  <span className="loan-number">{l.n}</span>
+                  <span className="loan-number-badge">{l.n}</span>
                   <h3 className="loan-name">{l.name}</h3>
-                  <ArrowRight
-                    size={15}
-                    className="loan-arrow"
-                    aria-hidden="true"
-                  />
+                  {/* <div className="loan-arrow-wrapper">
+                    <ArrowRight size={16} className="loan-arrow" aria-hidden="true" />
+                  </div> */}
                 </div>
-                
-                <p 
-                  className="loan-desc" 
-                  dangerouslySetInnerHTML={{ __html: l.desc }} 
+
+                <p
+                  className="loan-desc"
+                  dangerouslySetInnerHTML={{ __html: l.desc }}
                 />
 
-                <LedgerRow
-                  label={<span className="loan-rate-label">Rate </span>}
-                  value={l.rate}
-                />
-                <LedgerRow
-                  label={<span className="loan-rate-label">Amount </span>}
-                  value={l.range}
-                />
+                {/* Premium Data Footer instead of normal LedgerRow */}
+                <div className="loan-stats-footer">
+                  <div className="stat-box">
+                    <span className="stat-label">Interest Rate</span>
+                    <span className="stat-value">{l.rate}</span>
+                  </div>
+                  <div className="stat-divider"></div>
+                  <div className="stat-box">
+                    <span className="stat-label">Max Amount</span>
+                    <span className="stat-value">{l.range}</span>
+                  </div>
+                </div>
               </Link>
             </Reveal>
           ))}
@@ -228,7 +235,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- TESTIMONIALS ---------------- */}
-      <GoogleReviews/>
+      <GoogleReviews />
 
       {/* ---------------- FAQ ---------------- */}
       <section id="faq" className="faq-section">
@@ -251,6 +258,7 @@ export default function Home() {
         <a href="https://wa.me/917669486600" className="mobile-cta-whatsapp">
           <MessageCircle size={15} aria-hidden="true" /> WhatsApp
         </a>
+        <button><a href="http://" target="_blank" rel="noopener noreferrer"></a></button>
       </div>
     </main>
   );

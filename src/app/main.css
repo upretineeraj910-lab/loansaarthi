@@ -1,7 +1,11 @@
+/* =========================================================
+   CLEANED & OPTIMIZED CSS - REDUCED WHITE SPACE
+========================================================= */
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Georgia&display=swap");
 
 :root {
-  /* ----- Loan Saarthi Brand Colors ----- */
+  /* ----- Brand Colors ----- */
   --brand-green: #6fae45;
   --brand-green-light: #eaf4e4;
   --brand-black: #202020;
@@ -16,38 +20,29 @@
   --color-paper-line: rgba(32, 32, 32, 0.1);
   --color-brass: #6fae45;
   --color-brass-deep: #5d9a39;
-  --color-emerald: #6fae45;
   --color-stamp: #a13d2c;
   --color-charcoal: #2a2720;
-  --color-ink-light: #3a3a3a;
-  --color-ink-lighter: #2a2a2a;
   --color-text-muted: #6a6a6a;
   --color-text-light: #b0b0b0;
 
   /* ----- Typography ----- */
-  --font-primary:
-    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
-    sans-serif;
+  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Arial, sans-serif;
   --font-serif: Georgia, "Times New Roman", serif;
-  --font-mono: "Courier New", monospace;
 
   /* ----- Spacing ----- */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
-  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-20: 5rem;
 }
 
 /* =========================================================
    RESET & BASE
 ========================================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -57,7 +52,6 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -68,14 +62,10 @@ body {
   line-height: 1.6;
 }
 
-.font-display {
-  font-family: var(--font-serif);
-  font-optical-sizing: auto;
-}
-
 /* =========================================================
    UTILITY CLASSES
 ========================================================= */
+
 .container {
   max-width: 72rem;
   margin: 0 auto;
@@ -91,12 +81,11 @@ body {
 .text-center {
   text-align: center;
 }
-.text-balance {
-  text-wrap: balance;
-}
+
 .text-green {
   color: var(--brand-green);
 }
+
 .text-white {
   color: var(--brand-white);
 }
@@ -104,56 +93,51 @@ body {
 .bg-white {
   background-color: var(--brand-white);
 }
+
 .bg-soft {
   background-color: var(--color-paper);
 }
+
 .bg-green {
   background-color: var(--brand-green);
 }
+
 .bg-green-light {
   background-color: var(--brand-green-light);
 }
+
 .bg-dark {
   background-color: var(--brand-black);
 }
 
-.mt-1 {
-  margin-top: var(--space-1);
+.bg-ink {
+  background-color: var(--color-ink);
 }
-.mt-2 {
-  margin-top: var(--space-2);
+
+.bg-paper-dark {
+  background-color: var(--color-paper-dark);
 }
-.mt-3 {
-  margin-top: var(--space-3);
-}
+
 .mt-4 {
   margin-top: var(--space-4);
 }
+
 .mt-6 {
   margin-top: var(--space-6);
 }
+
 .mt-8 {
   margin-top: var(--space-8);
 }
-.mt-10 {
-  margin-top: var(--space-10);
-}
 
-.mb-1 {
-  margin-bottom: var(--space-1);
-}
-.mb-2 {
-  margin-bottom: var(--space-2);
-}
-.mb-3 {
-  margin-bottom: var(--space-3);
-}
 .mb-4 {
   margin-bottom: var(--space-4);
 }
+
 .mb-6 {
   margin-bottom: var(--space-6);
 }
+
 .mb-8 {
   margin-bottom: var(--space-8);
 }
@@ -161,12 +145,11 @@ body {
 /* =========================================================
    REVEAL ANIMATION
 ========================================================= */
+
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .reveal.visible {
@@ -177,12 +160,15 @@ body {
 .reveal.delay-1 {
   transition-delay: 60ms;
 }
+
 .reveal.delay-2 {
   transition-delay: 80ms;
 }
+
 .reveal.delay-3 {
   transition-delay: 100ms;
 }
+
 .reveal.delay-4 {
   transition-delay: 150ms;
 }
@@ -197,52 +183,35 @@ body {
 /* =========================================================
    EYEBROW
 ========================================================= */
+
 .eyebrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
+  padding: 0.4rem 1rem 0.4rem 0.75rem;
+  border-radius: 50px;
+  background: var(--brand-green-light);
+  border: 1px solid rgba(111, 174, 69, 0.2);
 }
 
 .eyebrow-line {
-  height: 2px;
-  width: 2rem;
-  background-color: var(--brand-green);
+  display: none;
 }
 
 .eyebrow-text {
-  font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--brand-green);
   font-family: var(--font-primary);
 }
 
 /* =========================================================
-   STAMP
-========================================================= */
-.stamp {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid var(--color-stamp);
-  border-radius: 9999px;
-  padding: 0.5rem 1rem;
-  font-size: 0.6875rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 700;
-  color: var(--color-stamp);
-  font-family: var(--font-primary);
-  opacity: 0.9;
-  transform: rotate(-8deg);
-  user-select: none;
-}
-
-/* =========================================================
    BUTTONS
 ========================================================= */
+
 .btn-primary {
   padding: 0.875rem 1.75rem;
   border-radius: 0.5rem;
@@ -284,35 +253,22 @@ body {
   border-color: var(--brand-black);
 }
 
-.btn-outline {
-  padding: 0.875rem 1.75rem;
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--brand-green);
-  background: transparent;
-  border: 2px solid var(--brand-green);
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.25s ease;
-  font-family: var(--font-primary);
-}
-
-.btn-outline:hover {
-  background: var(--brand-green);
-  color: var(--brand-white);
-  transform: translateY(-2px);
-}
-
 /* =========================================================
    HERO SECTION
 ========================================================= */
+
 .hero-section {
-  padding-top: 3.5rem;
-  padding-bottom: 4rem;
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
   position: relative;
   overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .hero-section {
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
 }
 
 .hero-section::before {
@@ -331,16 +287,9 @@ body {
   pointer-events: none;
 }
 
-@media (min-width: 640px) {
-  .hero-section {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
-}
-
 .hero-grid {
   display: grid;
-  gap: 3.5rem;
+  gap: 2rem;
   align-items: center;
   position: relative;
   z-index: 1;
@@ -358,9 +307,8 @@ body {
   line-height: 1.05;
   font-weight: 700;
   color: var(--color-ink);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
-
 
 .hero-title .highlight {
   color: var(--brand-green);
@@ -368,9 +316,9 @@ body {
 
 .hero-text {
   font-size: 1rem;
-  line-height: 1.75;
+  line-height: 1.7;
   color: var(--color-charcoal);
-  margin-bottom: 2rem;
+  margin-bottom: 1.1rem;
   max-width: 28rem;
   font-weight: 400;
 }
@@ -386,17 +334,13 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .hero-stats {
   display: flex;
-  /* grid-template-columns: repeat(3, 1fr); */
-  gap: 1rem;
-  justify-content: space-between;
-  max-width: 28rem;
-  align-items: flex-start;
-  padding-top: 1.5rem;
+  gap: 1.5rem;
+  padding-top: 0.75rem;
   border-top: 2px solid var(--brand-green);
 }
 
@@ -416,6 +360,7 @@ body {
 /* =========================================================
    HERO CARD
 ========================================================= */
+
 .hero-card-wrapper {
   position: relative;
 }
@@ -423,7 +368,7 @@ body {
 .hero-card {
   border: 1px solid var(--color-paper-line);
   border-radius: 0.75rem;
-  padding: 1.75rem 2.25rem;
+  padding: 1.5rem 2rem;
   background-color: var(--brand-white);
   box-shadow: 0 4px 12px rgba(32, 32, 32, 0.06);
   transition: box-shadow 0.3s ease;
@@ -433,90 +378,33 @@ body {
   box-shadow: 0 8px 30px rgba(32, 32, 32, 0.1);
 }
 
-.hero-card-header {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  margin-bottom: 1.25rem;
-  color: var(--brand-green);
-  font-family: var(--font-primary);
-  font-weight: 600;
-}
-
-.ledger-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--color-paper-line);
-}
-
-.ledger-item:last-child {
-  border-bottom: none;
-}
-
-.ledger-item-name {
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--color-charcoal);
-}
-
-.ledger-item-amount {
-  font-size: 0.875rem;
-  font-weight: 600;
-  font-family: var(--font-primary);
-  color: var(--color-ink);
-}
-
-.ledger-item-check {
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 0.75rem;
-}
-
-.ledger-item-check.done {
-  background-color: var(--brand-green);
-}
-
-.ledger-item-check.pending {
-  background-color: var(--color-paper-line);
-}
-
-.check-icon {
-  color: white;
-  width: 0.75rem;
-  height: 0.75rem;
-}
-
 /* =========================================================
    SECTION SPACING
 ========================================================= */
+
 .section-spacing {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 @media (min-width: 640px) {
   .section-spacing {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: 2.75rem;
+    padding-bottom: 2.75rem;
   }
 }
 
 /* =========================================================
    SECTION HEADERS
 ========================================================= */
+
 .section-header {
   font-family: var(--font-serif);
   font-size: 1.875rem;
   font-weight: 700;
   color: var(--color-ink);
   max-width: 32rem;
+  margin-bottom: 0.6rem;
 }
 
 @media (min-width: 640px) {
@@ -529,19 +417,13 @@ body {
   color: var(--brand-green);
 }
 
-.section-header-sm {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-ink);
-}
-
 .section-subheader {
   font-size: 1rem;
   color: var(--color-text-muted);
   max-width: 32rem;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.65;
+  margin-bottom: 0.5rem;
 }
 
 @media (min-width: 640px) {
@@ -553,10 +435,11 @@ body {
 /* =========================================================
    LOAN TYPES GRID
 ========================================================= */
+
 .loan-grid {
   display: grid;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
+  gap: 1.25rem;
+  margin-top: 1rem;
 }
 
 @media (min-width: 640px) {
@@ -567,7 +450,7 @@ body {
 
 .loan-item {
   display: block;
-  padding: 1.5rem;
+  padding: 1.25rem;
   border-radius: 0.75rem;
   border: 1px solid var(--color-paper-line);
   background: var(--brand-white);
@@ -619,13 +502,13 @@ body {
   font-size: 0.875rem;
   line-height: 1.625;
   color: var(--color-charcoal);
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   max-width: 28rem;
   font-weight: 400;
 }
 
 .loan-rate-label {
-  font-size: 1 rem;
+  font-size: 1rem;
   color: var(--brand-green);
   font-weight: 600;
 }
@@ -633,14 +516,11 @@ body {
 /* =========================================================
    WHY SECTION
 ========================================================= */
-.bg-paper-dark {
-  background-color: var(--color-paper-dark);
-}
 
 .why-grid {
   display: grid;
-  gap: 2.5rem;
-  margin-top: 2.5rem;
+  gap: 1.25rem;
+  margin-top: 1rem;
 }
 
 @media (min-width: 640px) {
@@ -656,7 +536,7 @@ body {
 }
 
 .why-item {
-  padding: 1.5rem;
+  padding: 1.25rem;
   background: var(--brand-white);
   border-radius: 0.75rem;
   border: 1px solid var(--color-paper-line);
@@ -674,7 +554,7 @@ body {
   width: 1.375rem;
   height: 1.375rem;
   color: var(--brand-green);
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .why-title {
@@ -682,7 +562,7 @@ body {
   font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-ink);
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.375rem;
 }
 
 .why-text {
@@ -695,11 +575,12 @@ body {
 /* =========================================================
    PROCESS
 ========================================================= */
+
 .process-grid {
-  display: grid;
-  gap: 2rem;
+  display: flex;
+  gap: 1.25rem;
   position: relative;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
 }
 
 @media (min-width: 640px) {
@@ -708,26 +589,9 @@ body {
   }
 }
 
-.process-line {
-  display: none;
-}
-
-@media (min-width: 640px) {
-  .process-line {
-    display: block;
-    position: absolute;
-    top: 1.25rem;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: var(--brand-green);
-    opacity: 0.3;
-  }
-}
-
 .process-step {
   position: relative;
-  padding: 1.5rem;
+  padding: 1.25rem;
   background: var(--brand-white);
   border-radius: 0.75rem;
   border: 1px solid var(--color-paper-line);
@@ -754,7 +618,7 @@ body {
   font-family: var(--font-primary);
   position: relative;
   z-index: 10;
-  margin-bottom: 1rem;
+  margin-bottom: 0.6rem;
 }
 
 .process-title {
@@ -775,20 +639,21 @@ body {
 /* =========================================================
    CALCULATOR
 ========================================================= */
+
 .calculator-wrapper {
   border: 1px solid var(--color-paper-line);
   border-radius: 0.75rem;
-  padding: 1.5rem;
+  padding: 1.25rem;
   background-color: var(--brand-white);
   display: grid;
-  gap: 2.5rem;
+  gap: 1.5rem;
   box-shadow: 0 4px 12px rgba(32, 32, 32, 0.06);
-  margin-top: 2.5rem;
+  margin-top: 1rem;
 }
 
 @media (min-width: 768px) {
   .calculator-wrapper {
-    padding: 2.5rem;
+    padding: 1.75rem;
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -796,7 +661,7 @@ body {
 .calc-slider-group {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 1rem;
 }
 
 .calc-slider-header {
@@ -832,18 +697,9 @@ body {
   box-shadow: 0 2px 8px rgba(111, 174, 69, 0.3);
 }
 
-.calc-slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--brand-green);
-  cursor: pointer;
-  border: none;
-}
-
 .calc-divider {
   border-top: 1px solid var(--color-paper-line);
-  padding-top: 2rem;
+  padding-top: 1.25rem;
 }
 
 @media (min-width: 768px) {
@@ -851,7 +707,7 @@ body {
     border-top: none;
     border-left: 1px solid var(--color-paper-line);
     padding-top: 0;
-    padding-left: 2.5rem;
+    padding-left: 1.75rem;
   }
 }
 
@@ -870,7 +726,7 @@ body {
   font-weight: 700;
   color: var(--color-ink);
   font-family: var(--font-primary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 @media (min-width: 640px) {
@@ -901,84 +757,75 @@ body {
   display: flex;
   justify-content: space-between;
   font-size: 0.75rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   color: var(--color-charcoal);
   font-weight: 400;
-}
-
-.btn-get-rate {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0.875rem 1.75rem;
-  border-radius: 0.5rem;
-  color: var(--brand-white);
-  background-color: var(--brand-green);
-  text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(111, 174, 69, 0.25);
-}
-
-.btn-get-rate:hover {
-  transform: translateY(-2px);
-  background-color: #5d9a39;
-  box-shadow: 0 6px 20px rgba(111, 174, 69, 0.3);
 }
 
 /* =========================================================
    BANK PARTNERS
 ========================================================= */
-.bg-ink {
-  background-color: var(--color-ink);
-}
 
 .bank-partners-label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  margin-bottom: 2rem;
   text-align: center;
-  /* color: var(--color-text-light); */
-  color: white;
-  font-family: var(--font-primary);
-  font-weight: 800;
-  /* opacity: 0.7; */
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #e8e8e8;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .bank-tags {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
   gap: 0.75rem;
 }
 
-.bank-tag {
-  padding: 0.5rem 1.25rem;
-  border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.875rem;
-  color: var(--color-paper-light);
-  font-weight: 400;
-  transition: all 0.2s ease;
+.bank-logo-wrapper {
+  background: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  min-width: 140px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.bank-tag:hover {
-  background: var(--brand-green);
-  border-color: var(--brand-green);
-  color: var(--brand-white);
-  transform: translateY(-2px);
+.bank-logo-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.bank-logo-img {
+  max-height: 28px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .bank-logo-wrapper {
+    min-width: 110px;
+    height: 50px;
+    padding: 0.5rem 0.75rem;
+  }
 }
 
 /* =========================================================
    TESTIMONIALS
 ========================================================= */
+
 .testimonial-grid {
   display: grid;
-  gap: 1.5rem;
-  margin-top: 2.5rem;
+  gap: 1.25rem;
+  margin-top: 1rem;
 }
 
 @media (min-width: 640px) {
@@ -989,7 +836,7 @@ body {
 
 .testimonial-card {
   height: 100%;
-  padding: 1.5rem;
+  padding: 1.25rem;
   border-radius: 0.75rem;
   border: 1px solid var(--color-paper-line);
   background-color: var(--brand-white);
@@ -1009,41 +856,21 @@ body {
   font-size: 1rem;
   line-height: 1.625;
   color: var(--color-ink);
-  margin-bottom: 1.25rem;
-}
-
-.testimonial-name {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-ink);
-}
-
-.testimonial-tag {
-  font-size: 0.75rem;
-  margin-top: 0.125rem;
-  color: var(--brand-green);
-  font-family: var(--font-primary);
-  font-weight: 500;
+  margin-bottom: 0.75rem;
 }
 
 /* =========================================================
    FAQ
 ========================================================= */
+
 .faq-section {
   padding-top: 2rem;
   padding-bottom: 2rem;
   background-color: var(--color-paper-dark);
 }
 
-/* @media (min-width: 640px) {
-  .faq-section {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-} */
-
 .faq-container {
-  max-width: 48rem;
+  max-width: 56rem;
   margin: 0 auto;
   padding: 0 1.25rem;
 }
@@ -1058,7 +885,7 @@ body {
   border-bottom: 1px solid var(--color-paper-line);
   background: var(--brand-white);
   border-radius: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.375rem;
   overflow: hidden;
   transition: all 0.2s ease;
 }
@@ -1073,7 +900,7 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.25rem 1.5rem;
+  padding: 0.9rem 1.25rem;
   text-align: left;
   background: none;
   border: none;
@@ -1110,7 +937,7 @@ body {
 }
 
 .faq-answer-text {
-  padding: 0 1.5rem 1.25rem 1.5rem;
+  padding: 0 1.25rem 0.9rem;
   font-size: 0.875rem;
   line-height: 1.625;
   color: var(--color-charcoal);
@@ -1120,19 +947,16 @@ body {
 /* =========================================================
    CONTACT / FOOTER
 ========================================================= */
-.bg-ink-dark {
-  background-color: var(--color-ink);
-}
 
 .contact-section {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
 }
 
 @media (min-width: 640px) {
   .contact-section {
-    padding-top: 7rem;
-    padding-bottom: 7rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 }
 
@@ -1141,7 +965,7 @@ body {
   font-size: 1.875rem;
   font-weight: 700;
   color: var(--brand-white);
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.6rem;
 }
 
 @media (min-width: 640px) {
@@ -1153,7 +977,7 @@ body {
 .contact-text {
   font-size: 1rem;
   color: var(--color-text-light);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.25rem;
   font-weight: 400;
   opacity: 0.8;
 }
@@ -1171,6 +995,7 @@ body {
   justify-content: center;
   gap: 1rem;
 }
+
 @media (max-width: 768px) {
   .contact-actions {
     display: none !important;
@@ -1220,8 +1045,8 @@ body {
 }
 
 .footer-divider {
-  margin-top: 5rem;
-  padding-top: 2rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   flex-direction: column;
@@ -1238,26 +1063,10 @@ body {
   }
 }
 
-.footer-links {
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.footer-links a {
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.footer-links a:hover {
-  color: var(--brand-green);
-}
-
 /* =========================================================
    MOBILE STICKY CTA
 ========================================================= */
+
 .mobile-cta {
   display: flex;
   position: fixed;
@@ -1303,7 +1112,6 @@ body {
   padding: 0.875rem 0;
   font-size: 0.875rem;
   font-weight: 600;
-  /* color: var(--brand-white); */
   background-color: var(--color-ink);
   text-decoration: none;
   transition: all 0.2s ease;
@@ -1316,6 +1124,7 @@ body {
 /* =========================================================
    FOCUS STYLES
 ========================================================= */
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
@@ -1324,8 +1133,9 @@ input:focus-visible {
 }
 
 /* =========================================================
-   RESPONSIVE — ADDITIONAL FIXES
+   RESPONSIVE FIXES
 ========================================================= */
+
 @media (max-width: 480px) {
   .hero-title {
     font-size: 2rem;
@@ -1344,23 +1154,20 @@ input:focus-visible {
   }
 
   .hero-stats {
-    grid-template-columns: 1fr;
+    flex-direction: column;
     gap: 0.5rem;
   }
 
-  .bank-tags {
-    gap: 0.5rem;
-  }
-
-  .bank-tag {
-    font-size: 0.75rem;
-    padding: 0.375rem 0.875rem;
+  .section-spacing {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
   }
 }
 
 /* =========================================================
    DARK MODE SUPPORT
 ========================================================= */
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-ink: #e8e8e8;
@@ -1371,8 +1178,6 @@ input:focus-visible {
     --color-charcoal: #b0b0b0;
     --color-text-muted: #8a8a8a;
     --brand-white: #242424;
-    --color-ink-light: #3a3a3a;
-    --color-ink-lighter: #2a2a2a;
   }
 
   body {
@@ -1387,48 +1192,25 @@ input:focus-visible {
     );
   }
 
-  .hero-card {
-    background: #242424;
-  }
-
-  .loan-item {
-    background: #242424;
-  }
-
-  .why-item {
-    background: #242424;
-  }
-
-  .process-step {
-    background: #242424;
-  }
-
-  .calculator-wrapper {
-    background: #242424;
-  }
-
-  .testimonial-card {
-    background: #242424;
-  }
-
-  .faq-item {
-    background: #242424;
-  }
-
+  .hero-card,
+  .loan-item,
+  .why-item,
+  .process-step,
+  .calculator-wrapper,
+  .testimonial-card,
+  .faq-item,
   .mobile-cta {
     background: #242424;
   }
 
-  .bg-paper-dark {
-    background-color: #1a1a1a;
-  }
-
+  .bg-paper-dark,
   .bg-ink {
     background-color: #1a1a1a;
   }
 
-  .bg-ink-dark {
-    background-color: #0d0d0d;
+  .bank-logo-wrapper {
+    background: #242424;
+    border-color: rgba(255, 255, 255, 0.06);
   }
 
   .btn-primary {
@@ -1439,57 +1221,18 @@ input:focus-visible {
     box-shadow: 0 6px 20px rgba(111, 174, 69, 0.2);
   }
 
-  .bank-tag {
-    border-color: rgba(255, 255, 255, 0.06);
-  }
-
-  .bank-tag:hover {
-    background: var(--brand-green);
-    border-color: var(--brand-green);
-  }
-
-  .btn-whatsapp {
-    border-color: rgba(255, 255, 255, 0.06);
-    color: var(--brand-green-light);
-  }
-
-  .btn-whatsapp:hover {
-    border-color: var(--brand-green);
-    background: var(--brand-green);
-  }
-
   .mobile-cta-whatsapp {
     background: #242424;
   }
 
-  .mobile-cta-whatsapp:hover {
-    background: #2a2a2a;
-  }
-
-  .mobile-cta-call {
-    background: var(--brand-green);
-  }
-
-  .mobile-cta-call:hover {
-    background: #5d9a39;
-  }
-
-  .bank-tag {
-    color: var(--color-ink);
-  }
-
-  .contact-title {
-    color: var(--color-ink);
-  }
-  
+  .contact-title,
   .bank-partners-label {
     color: var(--color-ink);
   }
 }
 
-
 /* =========================================================
-   FAQ DESKTOP HEADING + QUESTION FIX
+   FAQ DESKTOP HEADING FIX
 ========================================================= */
 
 @media (min-width: 769px) {
@@ -1509,7 +1252,6 @@ input:focus-visible {
   }
 }
 
-/* Keep mobile exactly as it is */
 @media (max-width: 768px) {
   .faq-section .section-header {
     text-align: center;
@@ -1519,262 +1261,142 @@ input:focus-visible {
 
 
 /* =========================================================
-   WHITESPACE REDUCTION - FINAL OVERRIDES
+   LOAN TYPES GRID (PREMIUM UI UPDATE)
 ========================================================= */
 
-/* CONTAINER */
-.container {
-  max-width: 72rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-
-/* HERO SECTION */
-.hero-section {
-  padding-top: 2.25rem;
-  padding-bottom: 2.5rem;
-}
-
-@media (min-width: 640px) {
-  .hero-section {
-    padding-top: 3.5rem;
-    padding-bottom: 3.5rem;
-  }
-}
-
-.hero-grid {
-  gap: 2.5rem;
-}
-
-.hero-title {
-  margin-bottom: 1rem;
-}
-
-.hero-text {
-  margin-bottom: 1.5rem;
-}
-
-.hero-actions {
-  margin-bottom: 1.75rem;
-}
-
-.hero-stats {
-  padding-top: 1rem;
-}
-
-
-/* GENERAL SECTIONS */
-.section-spacing {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-@media (min-width: 640px) {
-  .section-spacing {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-}
-
-
-/* SECTION HEADERS */
-.section-header {
-  margin-bottom: 0.75rem;
-}
-
-.section-subheader {
-  margin-bottom: 0.5rem;
-}
-
-
-/* LOAN TYPES */
 .loan-grid {
-  gap: 1.25rem;
-  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 640px) {
+  .loan-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .loan-item {
-  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--brand-white);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.01);
+  height: 100%;
+}
+
+.loan-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 30px -5px rgba(0, 0, 0, 0.05), 0 10px 15px -5px rgba(0, 0, 0, 0.02);
+  border-color: rgba(111, 174, 69, 0.3); /* subtle green border on hover */
+}
+
+.loan-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.loan-number-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--brand-green);
+  background-color: var(--brand-green-light);
+  padding: 0.35rem 0.65rem;
+  border-radius: 9999px;
+  font-family: var(--font-primary);
+  letter-spacing: 0.05em;
+}
+
+.loan-name {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.loan-arrow-wrapper {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--color-paper);
+  transition: all 0.3s ease;
+}
+
+.loan-arrow {
+  color: var(--color-text-muted);
+  transition: all 0.3s ease;
+}
+
+.loan-item:hover .loan-arrow-wrapper {
+  background-color: var(--brand-green);
+}
+
+.loan-item:hover .loan-arrow {
+  color: var(--brand-white);
+  transform: translateX(2px) scale(1.1);
 }
 
 .loan-desc {
-  margin-bottom: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin-bottom: 1.75rem;
+  font-weight: 400;
+  flex-grow: 1; /* Pushes the footer to the bottom */
 }
 
-
-/* WHY SECTION */
-.why-grid {
-  gap: 1.25rem;
-  margin-top: 1.5rem;
+/* Toning down the bold text to look more professional */
+.loan-desc strong {
+  color: var(--color-ink);
+  font-weight: 600;
 }
 
-.why-item {
-  padding: 1.25rem;
+/* Premium Stats Footer */
+.loan-stats-footer {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-paper-light);
+  border-radius: 0.75rem;
+  padding: 1.15rem;
+  margin-top: auto;
+  border: 1px solid var(--color-paper-line);
 }
 
-.why-icon {
-  margin-bottom: 0.75rem;
+.stat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-.why-title {
-  margin-bottom: 0.375rem;
+.stat-divider {
+  width: 1px;
+  height: 2.5rem;
+  background-color: var(--color-paper-line);
+  margin: 0 1.25rem;
 }
 
-
-/* PROCESS */
-.process-grid {
-  gap: 1.25rem;
-  margin-top: 1.5rem;
+.stat-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  font-weight: 600;
 }
 
-.process-step {
-  padding: 1.25rem;
-}
-
-.process-number {
-  margin-bottom: 0.75rem;
-}
-
-
-/* CALCULATOR */
-.calculator-wrapper {
-  gap: 2rem;
-  margin-top: 1.5rem;
-  padding: 1.25rem;
-}
-
-@media (min-width: 768px) {
-  .calculator-wrapper {
-    padding: 2rem;
-  }
-}
-
-.calc-slider-group {
-  gap: 1.25rem;
-}
-
-.calc-emi-value {
-  margin-bottom: 1rem;
-}
-
-.calc-divider {
-  padding-top: 1.5rem;
-}
-
-
-/* BANK PARTNERS */
-.bank-partners-label {
-  margin-bottom: 1.25rem;
-}
-
-.bank-tags {
-  gap: 0.5rem;
-}
-
-
-/* TESTIMONIALS */
-.testimonial-grid {
-  gap: 1.25rem;
-  margin-top: 1.5rem;
-}
-
-.testimonial-card {
-  padding: 1.25rem;
-}
-
-.testimonial-quote {
-  margin-bottom: 1rem;
-}
-
-
-/* FAQ */
-.faq-section {
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
-}
-
-.faq-container {
-  max-width: 56rem;
-}
-
-.faq-item {
-  margin-bottom: 0.375rem;
-}
-
-.faq-button {
-  padding: 1rem 1.25rem;
-}
-
-.faq-answer-text {
-  padding: 0 1.25rem 1rem;
-}
-
-
-/* CONTACT */
-.contact-section {
-  padding-top: 3.5rem;
-  padding-bottom: 3.5rem;
-}
-
-@media (min-width: 640px) {
-  .contact-section {
-    padding-top: 4.5rem;
-    padding-bottom: 4.5rem;
-  }
-}
-
-.contact-title {
-  margin-bottom: 0.75rem;
-}
-
-.contact-text {
-  margin-bottom: 1.5rem;
-}
-
-
-/* FOOTER */
-.footer-divider {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-}
-
-
-/* MOBILE */
-@media (max-width: 480px) {
-
-  .hero-section {
-    padding-top: 1.75rem;
-    padding-bottom: 2rem;
-  }
-
-  .hero-grid {
-    gap: 2rem;
-  }
-
-  .section-spacing {
-    padding-top: 2.5rem;
-    padding-bottom: 2.5rem;
-  }
-
-  .loan-grid,
-  .why-grid,
-  .process-grid,
-  .testimonial-grid {
-    margin-top: 1.25rem;
-  }
-
-  .calculator-wrapper {
-    margin-top: 1.25rem;
-  }
-
-  .faq-section {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  .contact-section {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-  }
+.stat-value {
+  font-size: 1.05rem;
+  color: var(--brand-green);
+  font-weight: 700;
+  font-family: var(--font-primary);
 }

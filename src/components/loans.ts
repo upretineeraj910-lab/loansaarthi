@@ -5,6 +5,8 @@ export type LoanType = {
   rate: string;
   range: string;
   href: string;
+  icon: string;
+  features: string[];
 };
 
 export const LOAN_TYPES: LoanType[] = [
@@ -15,6 +17,8 @@ export const LOAN_TYPES: LoanType[] = [
     rate: "from 8.35%",
     range: "up to ₹5 Cr",
     href: "/loanpage/home-loan",
+    icon: "🏠",
+    features: ["Flexible EMI", "Minimal Docs", "Quick Disbursal"],
   },
   {
     n: "02",
@@ -23,6 +27,8 @@ export const LOAN_TYPES: LoanType[] = [
     rate: "from 8.95%",
     range: "up to ₹3 Cr",
     href: "/loanpage/loan-against-property",
+    icon: "🏢",
+    features: ["High Value", "Minimal Docs", "Quick Disbursal"],
   },
   {
     n: "03",
@@ -31,6 +37,8 @@ export const LOAN_TYPES: LoanType[] = [
     rate: "from 10.50%",
     range: "up to ₹1 Cr",
     href: "/loanpage/business-loan",
+    icon: "💼",
+    features: ["GST Based", "Fast Approval", "Flexible EMI"],
   },
   {
     n: "04",
@@ -39,6 +47,8 @@ export const LOAN_TYPES: LoanType[] = [
     rate: "from 9.99%",
     range: "up to ₹25 L",
     href: "/loanpage/personal-loan",
+    icon: "👤",
+    features: ["Instant Sanction", "Soft CIBIL Check", "Quick Disbursal"],
   },
   {
     n: "05",
@@ -47,6 +57,8 @@ export const LOAN_TYPES: LoanType[] = [
     rate: "from 8.15%",
     range: "up to ₹75 L",
     href: "/loanpage/education-loan",
+    icon: "🎓",
+    features: ["Moratorium", "Minimal Docs", "Quick Disbursal"],
   },
   {
     n: "06",
@@ -55,5 +67,7 @@ export const LOAN_TYPES: LoanType[] = [
     rate: "from 8.25%",
     range: "any amount",
     href: "/loanpage/loan-balance-transfer",
+    icon: "🔄",
+    features: ["Lower Rate", "Save EMI", "Minimal Docs"],
   },
 ];

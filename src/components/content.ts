@@ -59,19 +59,19 @@ export const STEPS: Step[] = [
   },
 ];
 
-export const BANKS: string[] = [
-  "HDFC Bank",
-  "ICICI Bank",
-  "Axis Bank",
-  "Axis Finance",
-  "IDFC FIRST Bank",
-  "Bajaj Finserv",
-  "Kotak Mahindra Bank",
-  "Tata Capital",
-  "Aditya Birla Capital",
-  "Piramal Finance",
-  "L&T Finance",
-];
+// export const BANKS: string[] = [
+//   "HDFC Bank",
+//   "ICICI Bank",
+//   "Axis Bank",
+//   "Axis Finance",
+//   "IDFC FIRST Bank",
+//   "Bajaj Finserv",
+//   "Kotak Mahindra Bank",
+//   "Tata Capital",
+//   "Aditya Birla Capital",
+//   "Piramal Finance",
+//   "L&T Finance",
+// ];
 
 export type Testimonial = {
   quote: string;
@@ -124,3 +124,18 @@ export const FAQS: Faq[] = [
     a: "It’s quick and easy! You can apply directly through our website by filling out a simple form, and our team will guide you through the rest of the steps."
   }
 ]
+
+
+
+export const BANKS = [
+  { name: "HDFC Bank", logo: "/banks/HDFC Bank.svg" },
+  { name: "ICICI Bank", logo: "/banks/ICICI Bank.svg" },
+  { name: "Axis Bank", logo: "/banks/Axis Bank.svg" },
+  { name: "IDFC FIRST Bank", logo: "/banks/IDFC FIRST BANK.svg" },
+  { name: "Bajaj Finserv", logo: "/banks/Bajaj Finserv.png" },
+  { name: "Kotak Mahindra Bank", logo: "/banks/KOTAK.svg" },
+  { name: "Tata Capital", logo: "/banks/TATA CAPITAL.jpeg" },
+  { name: "Aditya Birla Capital", logo: "/banks/ADITYA BIRLA.svg" }, // Apne file extension ke hisaab se check kar lein
+  { name: "Piramal Finance", logo: "/banks/PIRAMAL FINANCE.svg" },
+  { name: "L&T Finance", logo: "/banks/L&T.png" },
+];
