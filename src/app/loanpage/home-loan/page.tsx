@@ -9,7 +9,6 @@ export default function HomeLoanPage() {
       <div className="lp-container">
         <div className="lp-hero">
           <div className="lp-hero-main">
-            <span className="lp-tag">LOAN PRODUCT 01</span>
             <h1>Home Loan</h1>
             <p className="lp-desc-txt">
               State Bank of India (SBI) and Bank of Baroda offer the lowest home loan rates, starting from 8.35% p.a. With a CIBIL score of 750+, you get a repayment tenure of up to 30 years and financing of up to 90% of the property value. Women co-applicants receive an additional 0.05% rate concession.

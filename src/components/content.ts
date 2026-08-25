@@ -79,26 +79,7 @@ export type Testimonial = {
   tag: string;
 };
 
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    quote:
-      "They found us a rate 0.4% lower than what our own bank offered, and handled every follow-up call so we didn't have to.",
-    name: "Ritu & Sanjay Malhotra",
-    tag: "Home Loan, ₹62 L",
-  },
-  {
-    quote:
-      "I run a small workshop and don't have time to sit in bank branches. They took the file end to end and called me only when a signature was needed.",
-    name: "Deepak Verma",
-    tag: "Business Loan, ₹18 L",
-  },
-  {
-    quote:
-      "Transparent about what we'd qualify for from day one — no surprises when the sanction letter arrived.",
-    name: "Ayesha Khan",
-    tag: "Personal Loan, ₹6 L",
-  },
-];
+
 
 export type Faq = {
   q: string;

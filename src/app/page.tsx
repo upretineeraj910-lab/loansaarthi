@@ -12,9 +12,10 @@ import EmiCalculator from "@/components/loan/LoanEmiCalculator";
 import Faq from "@/components/Faq";
 
 import { LOAN_TYPES } from "@/components/loans";
-import { WHY, STEPS, BANKS, TESTIMONIALS, FAQS } from "@/components/content";
+import { WHY, STEPS, BANKS, FAQS } from "@/components/content";
 
 import "./main.css";
+import GoogleReviews from "@/components/GoogleReviews";
 
 export default function Home() {
   const structuredData = {
@@ -227,22 +228,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- TESTIMONIALS ---------------- */}
-      <section className="container section-spacing">
-        <Reveal>
-          <Eyebrow>From the ledger margin</Eyebrow>
-        </Reveal>
-        <div className="testimonial-grid">
-          {TESTIMONIALS.map((t, i) => (
-            <Reveal key={t.name} delay={i * 100}>
-              <div className="testimonial-card">
-                <p className="testimonial-quote">"{t.quote}"</p>
-                <div className="testimonial-name">{t.name}</div>
-                <div className="testimonial-tag">{t.tag}</div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </section>
+      <GoogleReviews/>
 
       {/* ---------------- FAQ ---------------- */}
       <section id="faq" className="faq-section">
