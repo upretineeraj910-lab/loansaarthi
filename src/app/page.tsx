@@ -201,25 +201,27 @@ export default function Home() {
 
       {/* ---------------- PROCESS ---------------- */}
       <section id="process" className="container section-spacing">
-        <Reveal>
-          <Eyebrow>How it works</Eyebrow>
-          <h2 className="section-header">
-            Four entries from first call to funds in hand.
-          </h2>
-        </Reveal>
-        <div className="process-grid">
-          <div className="process-line" />
-          {STEPS.map((s, i) => (
-            <Reveal key={s.label} delay={i * 100}>
-              <div className="process-step">
-                <div className="process-number">{i + 1}</div>
-                <h3 className="process-title">{s.label}</h3>
-                <p className="process-detail">{s.detail}</p>
-              </div>
-            </Reveal>
-          ))}
+  <Reveal>
+    <Eyebrow>How it works</Eyebrow>
+    <h2 className="section-header">
+      Four entries from first call to funds in hand.
+    </h2>
+  </Reveal>
+
+  <div className="process-grid">
+    <div className="process-line" />
+
+    {STEPS.map((s, i) => (
+      <Reveal key={s.label} delay={i * 100}>
+        <div className="process-step">
+          <div className="process-number">{i + 1}</div>
+          <h3 className="process-title">{s.label}</h3>
+          <p className="process-detail">{s.detail}</p>
         </div>
-      </section>
+      </Reveal>
+    ))}
+  </div>
+</section>
 
       {/* ---------------- CALCULATOR ---------------- */}
       <section id="calculator" className="container section-spacing">
