@@ -136,47 +136,46 @@ export default function Home() {
         </div>
       </section>
       {/* ---------------- LOAN TYPES ---------------- */}
-      <section id="Loan" className="container section-spacing">
-        <Reveal>
-          <Eyebrow>What we arrange</Eyebrow>
-          <h2 className="section-header">
-            Compare & Apply from Available Loan Categories
-          </h2>
-        </Reveal>
-        <div className="loan-grid">
-          {LOAN_TYPES.map((l, i) => (
-            <Reveal key={l.name} delay={i * 60}>
-              <Link href={l.href} className="loan-item" suppressHydrationWarning>
-                <div className="loan-header">
-                  <span className="loan-number-badge">{l.n}</span>
-                  <h3 className="loan-name">{l.name}</h3>
-                  {/* <div className="loan-arrow-wrapper">
-                    <ArrowRight size={16} className="loan-arrow" aria-hidden="true" />
-                  </div> */}
-                </div>
+      <div className="loan-grid">
+  {LOAN_TYPES.map((l, i) => (
+    <Reveal key={l.name} delay={i * 60}>
+      <Link href={l.href} className="loan-item" suppressHydrationWarning>
+        <div className="loan-header">
+          {/* Number ki jagah Icon use kiya hai */}
+          <div className="loan-icon-badge">
+            <span aria-hidden="true">{l.icon}</span>
+          </div>
+          <h3 className="loan-name">{l.name}</h3>
+        </div>
 
-                <p
-                  className="loan-desc"
-                  dangerouslySetInnerHTML={{ __html: l.desc }}
-                />
+        {/* Short & Clean Description */}
+        <p className="loan-desc">{l.desc}</p>
 
-                {/* Premium Data Footer instead of normal LedgerRow */}
-                <div className="loan-stats-footer">
-                  <div className="stat-box">
-                    <span className="stat-label">Interest Rate</span>
-                    <span className="stat-value">{l.rate}</span>
-                  </div>
-                  <div className="stat-divider"></div>
-                  <div className="stat-box">
-                    <span className="stat-label">Max Amount</span>
-                    <span className="stat-value">{l.range}</span>
-                  </div>
-                </div>
-              </Link>
-            </Reveal>
+        {/* Naye Feature Pills (Scannability ke liye) */}
+        <div className="loan-features">
+          {l.features.map((feat, idx) => (
+            <span key={idx} className="feature-pill">
+              {feat}
+            </span>
           ))}
         </div>
-      </section>
+
+        {/* Seamless Stats Footer */}
+        <div className="loan-stats-footer">
+          <div className="stat-box">
+            <span className="stat-label">Interest Rate</span>
+            <span className="stat-value">{l.rate}</span>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat-box">
+            <span className="stat-label">Max Amount</span>
+            <span className="stat-value">{l.range}</span>
+          </div>
+        </div>
+      </Link>
+    </Reveal>
+  ))}
+</div>
 
       {/* ---------------- WHY ---------------- */}
       <section className="bg-paper-dark section-spacing">

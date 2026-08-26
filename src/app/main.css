@@ -278,11 +278,9 @@ body {
   right: -10%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(
-    circle,
-    rgba(111, 174, 69, 0.05) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(111, 174, 69, 0.05) 0%,
+      transparent 70%);
   border-radius: 50%;
   pointer-events: none;
 }
@@ -439,12 +437,12 @@ body {
 .loan-grid {
   display: grid;
   gap: 1.5rem;
-  margin-top: 2rem;
+  margin: 2rem;
 }
 
 @media (min-width: 640px) {
   .loan-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -658,7 +656,7 @@ body {
   z-index: 0;
 }
 
-.process-grid > .reveal {
+.process-grid>.reveal {
   width: 100%;
   min-width: 0;
   position: relative;
@@ -742,7 +740,7 @@ body {
     display: none;
   }
 
-  .process-grid > .reveal {
+  .process-grid>.reveal {
     display: block;
     width: 100%;
     min-width: 0;
@@ -1295,7 +1293,7 @@ input:focus-visible {
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
-    align-items:center ;
+    align-items: center;
     justify-content: space-evenly;
   }
 
@@ -1326,11 +1324,9 @@ input:focus-visible {
   }
 
   .hero-section::before {
-    background: radial-gradient(
-      circle,
-      rgba(111, 174, 69, 0.08) 0%,
-      transparent 70%
-    );
+    background: radial-gradient(circle,
+        rgba(111, 174, 69, 0.08) 0%,
+        transparent 70%);
   }
 
   .hero-card,
@@ -1396,5 +1392,112 @@ input:focus-visible {
 @media (max-width: 768px) {
   .faq-section .section-header {
     text-align: center;
+  }
+}
+
+
+
+/* --- PREMIUM CARD DESIGN --- */
+.loan-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  /* Padding thodi adjust ki hai */
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--brand-white);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  /* Soft shadow */
+  height: 100%;
+  overflow: hidden;
+  /* Footer ko border ke andar rakhne ke liye zaroori */
+}
+
+.loan-item:hover {
+  transform: translateY(-5px);
+  /* Smooth Lift */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+  /* Premium hover shadow */
+  border-color: rgba(111, 174, 69, 0.4);
+}
+
+.loan-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Naya Icon Badge */
+.loan-icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  font-size: 1.25rem;
+  background-color: var(--brand-green-light);
+  border-radius: 0.6rem;
+  /* Soft square modern lagta hai */
+  color: var(--brand-green);
+}
+
+/* Description Text Limit */
+.loan-desc {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+  font-weight: 400;
+  /* Max 2 line dikhega, zyada hua to '...' aayega */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Feature Pills Styling */
+.loan-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
+  /* Pushes footer to the bottom */
+}
+
+.feature-pill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--brand-green);
+  background-color: rgba(111, 174, 69, 0.08);
+  padding: 0.3rem 0.6rem;
+  border-radius: 9999px;
+  letter-spacing: 0.02em;
+}
+
+/* --- SEAMLESS FOOTER --- */
+.loan-stats-footer {
+  display: flex;
+  align-items: center;
+  background-color: #f8fafc;
+  /* Very light grey/blue */
+  margin: 0 -1.5rem -1.5rem -1.5rem;
+  /* Pulls footer to edge of card */
+  padding: 1.2rem 1.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Dark Mode fix for seamless footer */
+@media (prefers-color-scheme: dark) {
+  .loan-stats-footer {
+    background-color: #1f1f1f;
+    border-top-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .feature-pill {
+    background-color: rgba(111, 174, 69, 0.15);
   }
 }
