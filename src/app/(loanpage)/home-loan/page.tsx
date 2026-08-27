@@ -7,8 +7,13 @@ import Image from "next/image";
 import { ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator"; // your existing component
 import "../loan-page.css";
+import { useEffect } from "react";
 
 export default function HomeLoanPage() {
+    useEffect(()=>{
+      document.title = "Home Loan"
+    })
+  
   return (
     <main className="lp-page">
       <div className="lp-container">
@@ -25,7 +30,7 @@ export default function HomeLoanPage() {
               <span style={{ color: 'var(--lp-title)', fontWeight: '600' }}>Home Loan</span>
             </div>
 
-            <h1>Home Loan</h1>
+            <h1>Home Loan Just at 8.2% Per year</h1>
             <h2 style={{ fontSize: '20px', color: 'var(--lp-desc)', marginBottom: '16px', fontWeight: '500' }}>
               Low Interest. Higher Possibilities.
             </h2>

@@ -7,8 +7,13 @@ import Image from "next/image";
 import { ArrowRight, ShieldCheck, CheckCircle2 } from "lucide-react";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
 import "../loan-page.css";
+import { useEffect } from "react";
+
 
 export default function PersonalLoanPage() {
+   useEffect(()=>{
+      document.title = "Personal Loan"
+    })
   return (
     <main className="lp-page">
       <div className="lp-container">

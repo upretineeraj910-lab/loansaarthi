@@ -1,9 +1,16 @@
+"use client"
+
 import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
 import "../loan-page.css";
+import { useEffect } from "react";
+
 
 export default function EducationLoanPage() {
+   useEffect(()=>{
+      document.title = "Education loan"
+    })
   return (
     <main className="lp-page">
       <div className="lp-container">
