@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "./navbar.css";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,8 +47,12 @@ export default function Navbar() {
         {/* Logo */}
         <div className="logo">
           <Link href="/">
-            <span className="logo-icon">₹</span>
-            <span className="logo-text">Loan<span>Saarthi</span></span>
+            {/* <span className="logo-icon">₹</span>
+            <span className="logo-text">Loan<span>Saarthi</span></span> */}
+            <Image src="/image-removebg-preview.png"
+            alt="loansaarthi_logo"
+            width={120} height={150}/>
+
           </Link>
         </div>
 
