@@ -84,7 +84,7 @@ export default function HeroVerificationCard() {
       setConfirmationResult(confirmation);
       setStep(2);
     } catch (err: unknown) {
-      console.error("OTP Error:", err);
+      console.error("number verification Error:", err);
       if (window.recaptchaVerifier) {
         try {
           window.recaptchaVerifier.clear();

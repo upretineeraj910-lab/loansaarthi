@@ -1,0 +1,319 @@
+.loan-types-section {
+  width: 100%;
+  padding: 35px 0 75px;
+  background: #071017;
+  overflow: hidden;
+}
+
+.loan-types-container {
+  width: min(1120px, calc(100% - 80px));
+  margin: 0 auto;
+}
+
+
+/* ==============================
+   GROUP
+============================== */
+
+.loan-type-group {
+  width: 100%;
+  margin-bottom: 48px;
+}
+
+.loan-type-group:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ==============================
+   HEADING
+============================== */
+
+.loan-type-heading {
+  margin: 0 0 28px;
+
+  text-align: center;
+
+  font-size: 21px;
+  line-height: 1.3;
+  font-weight: 800;
+
+  color: #ffffff;
+}
+
+
+/* ==============================
+   GRID
+============================== */
+
+.loan-type-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.salaried-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.business-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+
+/* ==============================
+   CARD
+============================== */
+
+.loan-type-card {
+  min-height: 196px;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px 22px 24px;
+
+  overflow: hidden;
+
+  border-radius: 8px;
+
+  background: linear-gradient(
+    135deg,
+    #b9ffc8 0%,
+    #edfff0 50%,
+    #e0ffe6 100%
+  );
+
+  text-decoration: none;
+
+  text-align: center;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.loan-type-card:hover {
+  transform: translateY(-5px);
+
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ==============================
+   TOP LEFT GREEN SHAPE
+============================== */
+
+.loan-card-top-shape {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 60px;
+  height: 118px;
+
+  background: #00c92b;
+
+  border-bottom-right-radius: 55px;
+}
+
+
+/* ==============================
+   DOTS
+============================== */
+
+.loan-card-dots {
+  position: absolute;
+
+  top: 13px;
+  left: 10px;
+
+  font-size: 11px;
+  line-height: 8px;
+  letter-spacing: 1px;
+
+  color: rgba(255, 255, 255, 0.3);
+
+  text-align: left;
+}
+
+
+/* ==============================
+   BOTTOM RIGHT SHAPE
+============================== */
+
+.loan-card-bottom-shape {
+  position: absolute;
+
+  right: 0;
+  bottom: 0;
+
+  width: 48px;
+  height: 48px;
+
+  background: #00c92b;
+
+  clip-path: polygon(
+    100% 0,
+    100% 100%,
+    0 100%
+  );
+}
+
+
+/* ==============================
+   ICON
+============================== */
+
+.loan-type-icon {
+  position: relative;
+  z-index: 2;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 7px;
+}
+
+.loan-type-icon img {
+  width: 52px;
+  height: 52px;
+
+  object-fit: contain;
+}
+
+
+/* ==============================
+   TITLE
+============================== */
+
+.loan-type-card h3 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0 0 8px;
+
+  font-size: 17px;
+  line-height: 1.35;
+  font-weight: 800;
+
+  color: #111111;
+}
+
+
+/* ==============================
+   DESCRIPTION
+============================== */
+
+.loan-type-card p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 260px;
+
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.65;
+  font-weight: 500;
+
+  color: #666666;
+}
+
+
+/* ==============================
+   LIGHT MODE
+============================== */
+
+[data-theme="light"] .loan-types-section {
+  background: #f7faf8;
+}
+
+[data-theme="light"] .loan-type-heading {
+  color: #151b18;
+}
+
+
+/* ==============================
+   DARK MODE
+============================== */
+
+[data-theme="dark"] .loan-types-section {
+  background: #071017;
+}
+
+[data-theme="dark"] .loan-type-heading {
+  color: #ffffff;
+}
+
+
+/* ==============================
+   TABLET
+============================== */
+
+@media (max-width: 950px) {
+
+  .loan-types-container {
+    width: min(720px, calc(100% - 50px));
+  }
+
+  .salaried-grid,
+  .business-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 600px) {
+
+  .loan-types-section {
+    padding: 30px 0 55px;
+  }
+
+  .loan-types-container {
+    width: calc(100% - 32px);
+  }
+
+  .loan-type-group {
+    margin-bottom: 40px;
+  }
+
+  .loan-type-heading {
+    margin-bottom: 20px;
+
+    font-size: 19px;
+  }
+
+  .salaried-grid,
+  .business-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .loan-type-card {
+    min-height: 190px;
+
+    padding: 32px 22px 25px;
+  }
+
+  .loan-type-card h3 {
+    font-size: 17px;
+  }
+
+  .loan-type-card p {
+    max-width: 290px;
+  }
+
+}

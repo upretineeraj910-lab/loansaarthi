@@ -1,0 +1,280 @@
+/* =========================================
+   WHY CHOOSE US SECTION
+========================================= */
+
+.why-choose-section {
+  width: 100%;
+  padding: 70px 0;
+  background: #071017;
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.why-choose-container {
+  width: min(1120px, calc(100% - 80px));
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  gap: 40px;
+}
+
+
+/* =========================================
+   LEFT CONTENT
+========================================= */
+
+.why-choose-content {
+  max-width: 560px;
+}
+
+.why-choose-label {
+  display: block;
+
+  margin-bottom: 12px;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  color: #ffffff;
+}
+
+.why-choose-content h2 {
+  margin: 0;
+
+  font-size: clamp(32px, 3vw, 44px);
+  line-height: 1.25;
+  font-weight: 800;
+
+  color: #82c341;
+}
+
+.why-choose-description {
+  max-width: 500px;
+
+  margin: 22px 0 42px;
+
+  font-size: 14px;
+  line-height: 1.7;
+  font-weight: 500;
+
+  color: #e4e8eb;
+}
+
+
+/* =========================================
+   FEATURES
+========================================= */
+
+.why-feature {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 22px;
+
+  margin-bottom: 27px;
+}
+
+.why-feature-icon {
+  flex: 0 0 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.why-feature-icon img {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+}
+
+.why-feature-content {
+  padding-top: 1px;
+}
+
+.why-feature-content h3 {
+  margin: 0 0 7px;
+
+  font-size: 19px;
+  line-height: 1.3;
+  font-weight: 800;
+
+  color: #82c341;
+}
+
+.why-feature-content p {
+  max-width: 390px;
+
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.65;
+  font-weight: 500;
+
+  color: #cbd2d6;
+}
+
+
+/* =========================================
+   RIGHT IMAGE
+========================================= */
+
+.why-choose-image {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+}
+
+.why-choose-image img {
+  width: 100%;
+  max-width: 650px;
+  height: auto;
+
+  object-fit: contain;
+}
+
+
+/* =========================================
+   LIGHT MODE
+========================================= */
+
+[data-theme="light"] .why-choose-section {
+  background: #f7faf8;
+  color: #151b18;
+}
+
+[data-theme="light"] .why-choose-label {
+  color: #1b2420;
+}
+
+[data-theme="light"] .why-choose-description {
+  color: #4c5752;
+}
+
+[data-theme="light"] .why-feature-content p {
+  color: #59645f;
+}
+
+
+/* =========================================
+   DARK MODE
+========================================= */
+
+[data-theme="dark"] .why-choose-section {
+  background: #071017;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .why-choose-label {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .why-choose-description {
+  color: #e4e8eb;
+}
+
+[data-theme="dark"] .why-feature-content p {
+  color: #cbd2d6;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 900px) {
+  .why-choose-section {
+    padding: 60px 0;
+  }
+
+  .why-choose-container {
+    width: min(720px, calc(100% - 50px));
+
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+
+  .why-choose-content {
+    max-width: 100%;
+  }
+
+  .why-choose-description {
+    max-width: 600px;
+  }
+
+  .why-choose-image {
+    order: -1;
+  }
+
+  .why-choose-image img {
+    max-width: 500px;
+  }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+  .why-choose-section {
+    padding: 50px 0;
+  }
+
+  .why-choose-container {
+    width: calc(100% - 36px);
+
+    gap: 25px;
+  }
+
+  .why-choose-image img {
+    max-width: 380px;
+  }
+
+  .why-choose-label {
+    font-size: 12px;
+  }
+
+  .why-choose-content h2 {
+    font-size: 29px;
+    line-height: 1.25;
+  }
+
+  .why-choose-description {
+    margin: 18px 0 30px;
+
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  .why-feature {
+    gap: 15px;
+    margin-bottom: 23px;
+  }
+
+  .why-feature-icon {
+    flex: 0 0 48px;
+  }
+
+  .why-feature-icon img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .why-feature-content h3 {
+    font-size: 17px;
+  }
+
+  .why-feature-content p {
+    font-size: 12px;
+  }
+}

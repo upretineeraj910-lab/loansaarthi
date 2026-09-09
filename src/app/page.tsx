@@ -2,6 +2,8 @@ import Link from "next/link";
 import Script from "next/script";
 import HeroVerificationCard from "../components/HeroVerificationCard";
 import Team from "@/components/team";
+import LoanTypes from "@/components/LoanTypes";
+import OurOfferings from "@/components/OurOfferings";
 
 import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 
@@ -17,6 +19,7 @@ import { WHY, STEPS, BANKS, FAQS } from "@/components/content";
 import "./main.css";
 import GoogleReviews from "@/components/GoogleReviews";
 import Image from "next/image";
+import WhyChooseUs from "@/components/Experience";
 
 export default function Home() {
   const structuredData = {
@@ -136,22 +139,19 @@ export default function Home() {
         </div>
       </section>
       {/* ---------------- LOAN TYPES ---------------- */}
-      <div className="loan-grid">
+      {/* <div className="loan-grid">
   {LOAN_TYPES.map((l, i) => (
     <Reveal key={l.name} delay={i * 60}>
       <Link href={l.href} className="loan-item" suppressHydrationWarning>
         <div className="loan-header">
-          {/* Number ki jagah Icon use kiya hai */}
           <div className="loan-icon-badge">
             <span aria-hidden="true">{l.icon}</span>
           </div>
           <h3 className="loan-name">{l.name}</h3>
         </div>
 
-        {/* Short & Clean Description */}
         <p className="loan-desc">{l.desc}</p>
 
-        {/* Naye Feature Pills (Scannability ke liye) */}
         <div className="loan-features">
           {l.features.map((feat, idx) => (
             <span key={idx} className="feature-pill">
@@ -160,7 +160,6 @@ export default function Home() {
           ))}
         </div>
 
-        {/* Seamless Stats Footer */}
         <div className="loan-stats-footer">
           <div className="stat-box">
             <span className="stat-label">Interest Rate</span>
@@ -175,7 +174,18 @@ export default function Home() {
       </Link>
     </Reveal>
   ))}
-</div>
+</div> */}
+
+
+{/* ---------------- LOAN TYPES ---------------- */}
+
+<LoanTypes />
+
+
+{/* ---------------- OUR OFFERINGS ---------------- */}
+
+<OurOfferings />
+
 
       {/* ---------------- WHY ---------------- */}
       <section className="bg-paper-dark section-spacing">
@@ -199,7 +209,7 @@ export default function Home() {
       <Team />
 
       {/* ---------------- PROCESS ---------------- */}
-      <section id="process" className="container section-spacing">
+      {/* <section id="process" className="container section-spacing">
   <Reveal>
     <Eyebrow>How it works</Eyebrow>
     <h2 className="section-header">
@@ -220,7 +230,9 @@ export default function Home() {
       </Reveal>
     ))}
   </div>
-</section>
+</section> */}
+
+<WhyChooseUs/>
 
       {/* ---------------- CALCULATOR ---------------- */}
       <section id="calculator" className="container section-spacing">
