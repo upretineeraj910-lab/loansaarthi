@@ -178,8 +178,10 @@ export default function Home() {
 
 
 {/* ---------------- LOAN TYPES ---------------- */}
-
-<LoanTypes />
+<div id="Loan">
+  <LoanTypes />
+</div>
+ 
 
 
 {/* ---------------- OUR OFFERINGS ---------------- */}
