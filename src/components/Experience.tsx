@@ -30,7 +30,7 @@ export default function WhyChooseUs() {
           <div className="why-feature">
             <div className="why-feature-icon">
               <Image
-                src="/fast-loan.png"
+                src="/images/icons/fast-loan.png"
                 alt="Fast loan disbursal"
                 width={58}
                 height={58}
@@ -51,7 +51,7 @@ export default function WhyChooseUs() {
           <div className="why-feature">
             <div className="why-feature-icon">
               <Image
-                src="/safe-secure.png"
+                src="/images/icons/safe-secure.png"
                 alt="Safe and secure loan process"
                 width={58}
                 height={58}
@@ -73,7 +73,7 @@ export default function WhyChooseUs() {
         {/* RIGHT IMAGE */}
         <div className="why-choose-image">
           <Image
-            src="/experienceLoanSaarthi.png"
+            src="/images/icons/experienceLoanSaarthi.png"
             alt="LoanSaarthi finance solutions"
             width={650}
             height={520}

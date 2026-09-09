@@ -49,7 +49,7 @@ export default function Navbar() {
           <Link href="/">
             {/* <span className="logo-icon">₹</span>
             <span className="logo-text">Loan<span>Saarthi</span></span> */}
-            <Image src="/image-removebg-preview.png"
+            <Image src="/images/icons/image-removebg-preview.png"
             alt="loansaarthi_logo"
             width={120} height={150}/>
 

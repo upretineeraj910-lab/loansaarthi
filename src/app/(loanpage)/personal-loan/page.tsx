@@ -109,7 +109,7 @@ export default function PersonalLoanPage() {
           {/* CLEAN IMAGE CONTAINER */}
           <div className="lp-hero-side" style={{ padding: '0', overflow: 'hidden', position: 'relative', minHeight: '350px' }}>
             <Image
-              src="/personal_loan.jpg"
+              src="/images/icons/personal_loan.jpg"
               alt="Personal loan - happy family enjoying financial freedom"
               fill
               style={{ objectFit: 'cover' }}

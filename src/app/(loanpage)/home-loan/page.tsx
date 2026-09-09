@@ -106,7 +106,7 @@ export default function HomeLoanPage() {
           {/* CLEAN IMAGE CONTAINER */}
           <div className="lp-hero-side" style={{ padding: '0', overflow: 'hidden', position: 'relative', minHeight: '350px' }}>
             <Image
-              src="/home.jpg"
+              src="/images/icons/home.jpg"
               alt="Modern home for home loan"
               fill
               style={{ objectFit: 'cover' }}
