@@ -175,6 +175,7 @@ const Team = () => {
                           // sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
                           height={382}
                           width={382}
+                          loading="lazy"
                         />
                       </div>
 
