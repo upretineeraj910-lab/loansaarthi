@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import "./team.css";
 
@@ -46,78 +46,97 @@ const expertTeam: Expert[] = [
 
 const Team = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [transition, setTransition] = useState(true);
+  const [withTransition, setWithTransition] = useState(true);
   const [visibleCards, setVisibleCards] = useState(3);
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
 
+  // Responsive cards check (CSS breakpoints match)
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 650) {
+    const updateVisibleCards = () => {
+      const width = window.innerWidth;
+      if (width <= 650) {
         setVisibleCards(1);
-      } else if (window.innerWidth <= 900) {
+      } else if (width <= 900) {
         setVisibleCards(2);
       } else {
         setVisibleCards(3);
       }
     };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    updateVisibleCards();
+
+    let timeoutId: NodeJS.Timeout;
+    const debouncedResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateVisibleCards, 150);
+    };
+
+    window.addEventListener("resize", debouncedResize, { passive: true });
+    return () => {
+      window.removeEventListener("resize", debouncedResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
-  const sliderItems = [...expertTeam, ...expertTeam.slice(0, 3)];
-
-  // Auto-play logic (Resets if user clicks next/prev because currentIndex changes)
+  // TBT Fix: Only observe and activate slider when scrolled into view
   useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 2500);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
 
-    return () => clearInterval(interval);
-  }, [currentIndex]);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
-  const nextSlide = () => {
+    return () => observer.disconnect();
+  }, []);
+
+  const nextSlide = useCallback(() => {
+    setWithTransition(true);
     setCurrentIndex((prev) => prev + 1);
-  };
+  }, []);
 
   const prevSlide = () => {
-    if (currentIndex === 0) {
-      // Seamlessly jump to the end clone before sliding back
-      setTransition(false);
+    if (currentIndex <= 0) {
+      setWithTransition(false);
       setCurrentIndex(expertTeam.length);
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTransition(true);
-          setCurrentIndex(expertTeam.length - 1);
-        });
-      });
+      setTimeout(() => {
+        setWithTransition(true);
+        setCurrentIndex(expertTeam.length - 1);
+      }, 20);
     } else {
+      setWithTransition(true);
       setCurrentIndex((prev) => prev - 1);
     }
   };
 
+  // Autoplay only runs when visible on screen
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [isVisible, nextSlide]);
+
   const handleTransitionEnd = () => {
     if (currentIndex >= expertTeam.length) {
-      setTransition(false);
+      setWithTransition(false);
       setCurrentIndex(0);
     }
   };
 
-  useEffect(() => {
-    if (!transition) {
-      const frame = requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          setTransition(true);
-        });
-      });
-      return () => cancelAnimationFrame(frame);
-    }
-  }, [transition]);
-
+  const sliderItems = [...expertTeam, ...expertTeam.slice(0, 3)];
   const cardWidthPercent = 100 / visibleCards;
 
   return (
-    <section className="expert-team">
+    <section ref={sectionRef} className="expert-team">
       <div className="expert-team-container">
         <div className="expert-team-heading">
           <span>OUR TEAM</span>
@@ -129,16 +148,25 @@ const Team = () => {
         </div>
 
         <div className="expert-slider-wrapper">
-          {/* Navigation Buttons */}
-          <button className="slider-btn prev-btn" onClick={prevSlide} aria-label="Previous">
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"></path>
+          <button 
+            className="slider-btn prev-btn" 
+            onClick={prevSlide} 
+            aria-label="Previous"
+            type="button"
+          >
+            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px">
+              <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
             </svg>
           </button>
 
-          <button className="slider-btn next-btn" onClick={nextSlide} aria-label="Next">
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"></path>
+          <button 
+            className="slider-btn next-btn" 
+            onClick={nextSlide} 
+            aria-label="Next"
+            type="button"
+          >
+            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px">
+              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
             </svg>
           </button>
 
@@ -147,8 +175,9 @@ const Team = () => {
               className="expert-track"
               onTransitionEnd={handleTransitionEnd}
               style={{
-                transform: `translateX(-${currentIndex * cardWidthPercent}%)`,
-                transition: transition ? "transform 0.55s ease-in-out" : "none",
+                transform: `translate3d(-${currentIndex * cardWidthPercent}%, 0, 0)`,
+                transition: withTransition ? "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)" : "none",
+                willChange: isVisible ? "transform" : "auto",
               }}
             >
               {sliderItems.map((expert, index) => {
@@ -169,13 +198,11 @@ const Team = () => {
                         <Image
                           src={expert.image}
                           alt={isClone ? "" : expert.alt}
-                          // fill
                           className="expert-image"
-                          priority={index < 3}
-                          // sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
                           height={382}
                           width={382}
                           loading="lazy"
+                          sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33vw"
                         />
                       </div>
 
