@@ -5,8 +5,8 @@
 .why-choose-section {
   width: 100%;
   padding: 70px 0;
-  background: #071017;
-  color: #ffffff;
+  background: #f7faf8;
+  color: #151b18;
   overflow: hidden;
 }
 
@@ -39,7 +39,7 @@
   font-weight: 700;
   letter-spacing: 0.5px;
 
-  color: #ffffff;
+  color: #1b2420;
 }
 
 .why-choose-content h2 {
@@ -49,7 +49,7 @@
   line-height: 1.25;
   font-weight: 800;
 
-  color: #82c341;
+  color: #6fae45;
 }
 
 .why-choose-description {
@@ -61,7 +61,7 @@
   line-height: 1.7;
   font-weight: 500;
 
-  color: #e4e8eb;
+  color: #4c5752;
 }
 
 
@@ -103,7 +103,7 @@
   line-height: 1.3;
   font-weight: 800;
 
-  color: #82c341;
+  color: #6fae45;
 }
 
 .why-feature-content p {
@@ -115,7 +115,7 @@
   line-height: 1.65;
   font-weight: 500;
 
-  color: #cbd2d6;
+  color: #59645f;
 }
 
 
@@ -155,8 +155,16 @@
   color: #1b2420;
 }
 
+[data-theme="light"] .why-choose-content h2 {
+  color: #6fae45;
+}
+
 [data-theme="light"] .why-choose-description {
   color: #4c5752;
+}
+
+[data-theme="light"] .why-feature-content h3 {
+  color: #6fae45;
 }
 
 [data-theme="light"] .why-feature-content p {
@@ -177,8 +185,16 @@
   color: #ffffff;
 }
 
+[data-theme="dark"] .why-choose-content h2 {
+  color: #6fae45;
+}
+
 [data-theme="dark"] .why-choose-description {
   color: #e4e8eb;
+}
+
+[data-theme="dark"] .why-feature-content h3 {
+  color: #6fae45;
 }
 
 [data-theme="dark"] .why-feature-content p {

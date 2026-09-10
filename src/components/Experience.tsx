@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "./WhyChooseUs.css";
+import "./experience.css";
 
 export default function WhyChooseUs() {
   return (
@@ -77,7 +77,7 @@ export default function WhyChooseUs() {
             alt="LoanSaarthi finance solutions"
             width={650}
             height={520}
-            priority
+            loading="lazy"
           />
         </div>
 

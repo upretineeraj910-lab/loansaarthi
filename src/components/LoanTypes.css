@@ -1,9 +1,20 @@
+/* =========================================
+   LOAN TYPES SECTION
+========================================= */
+
 .loan-types-section {
   width: 100%;
   padding: 35px 0 75px;
-  background: #071017;
   overflow: hidden;
+  box-sizing: border-box;
+
+  background: #f7faf8;
 }
+
+
+/* ==============================
+   CONTAINER
+============================== */
 
 .loan-types-container {
   width: min(1120px, calc(100% - 80px));
@@ -38,7 +49,7 @@
   line-height: 1.3;
   font-weight: 800;
 
-  color: #ffffff;
+  color: #151b18;
 }
 
 
@@ -82,24 +93,30 @@
 
   background: linear-gradient(
     135deg,
-    #b9ffc8 0%,
-    #edfff0 50%,
-    #e0ffe6 100%
+    #eef7f0 0%,
+    #f8fcf9 50%,
+    #e5f1e8 100%
   );
 
-  text-decoration: none;
+  border: 1px solid rgba(0, 0, 0, 0.04);
 
+  text-decoration: none;
   text-align: center;
 
   transition:
     transform 0.25s ease,
-    box-shadow 0.25s ease;
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .loan-type-card:hover {
   transform: translateY(-5px);
 
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+  border-color: rgba(111, 174, 69, 0.25);
+
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -116,7 +133,7 @@
   width: 60px;
   height: 118px;
 
-  background: #00c92b;
+  background: #6fae45;
 
   border-bottom-right-radius: 55px;
 }
@@ -155,7 +172,7 @@
   width: 48px;
   height: 48px;
 
-  background: #00c92b;
+  background: #6fae45;
 
   clip-path: polygon(
     100% 0,
@@ -181,6 +198,8 @@
   justify-content: center;
 
   margin-bottom: 7px;
+
+  flex-shrink: 0;
 }
 
 .loan-type-icon img {
@@ -205,7 +224,7 @@
   line-height: 1.35;
   font-weight: 800;
 
-  color: #111111;
+  color: #151b18;
 }
 
 
@@ -225,7 +244,7 @@
   line-height: 1.65;
   font-weight: 500;
 
-  color: #666666;
+  color: #5b655f;
 }
 
 
@@ -241,6 +260,32 @@
   color: #151b18;
 }
 
+[data-theme="light"] .loan-type-card {
+  background: linear-gradient(
+    135deg,
+    #eef7f0 0%,
+    #f8fcf9 50%,
+    #e5f1e8 100%
+  );
+
+  border-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .loan-type-card:hover {
+  border-color: rgba(111, 174, 69, 0.25);
+
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .loan-type-card h3 {
+  color: #151b18;
+}
+
+[data-theme="light"] .loan-type-card p {
+  color: #5b655f;
+}
+
 
 /* ==============================
    DARK MODE
@@ -252,6 +297,45 @@
 
 [data-theme="dark"] .loan-type-heading {
   color: #ffffff;
+}
+
+[data-theme="dark"] .loan-type-card {
+  background: linear-gradient(
+    135deg,
+    #1b2a32 0%,
+    #22343e 50%,
+    #17262e 100%
+  );
+
+  border-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .loan-type-card:hover {
+  border-color: rgba(111, 174, 69, 0.35);
+
+  box-shadow:
+    0 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .loan-type-card h3 {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .loan-type-card p {
+  color: #c5ced1;
+}
+
+
+/* ==============================
+   DARK MODE SHAPES
+============================== */
+
+[data-theme="dark"] .loan-card-top-shape {
+  background: #6fae45;
+}
+
+[data-theme="dark"] .loan-card-bottom-shape {
+  background: #6fae45;
 }
 
 
@@ -269,7 +353,6 @@
   .business-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
 }
 
 
@@ -293,7 +376,6 @@
 
   .loan-type-heading {
     margin-bottom: 20px;
-
     font-size: 19px;
   }
 
@@ -304,7 +386,6 @@
 
   .loan-type-card {
     min-height: 190px;
-
     padding: 32px 22px 25px;
   }
 
@@ -315,5 +396,4 @@
   .loan-type-card p {
     max-width: 290px;
   }
-
 }

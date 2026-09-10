@@ -1,8 +1,28 @@
 'use client';
+import { useEffect } from 'react';
 import Script from 'next/script';
 import styles from './GoogleReviews.module.css';
 
 export default function GoogleReviews() {
+  useEffect(() => {
+    const removeBadge = () => {
+      const badge = document.querySelector('a[href*="elfsight.com/google-reviews-widget"]');
+      if (badge) {
+        badge.remove();
+      }
+    };
+
+    removeBadge();
+
+    const observer = new MutationObserver(removeBadge);
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className={styles.reviewSection}>
       <div className={styles.container}>

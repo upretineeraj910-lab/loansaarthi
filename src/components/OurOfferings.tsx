@@ -77,10 +77,10 @@ export default function OurOfferings() {
                 <div className="offerings-heading">
                     <span>OUR OFFERINGS</span>
 
-                    <h1>
+                    <h2>
                         <strong>Explore Our Range</strong>{" "}
                         of Best Services
-                    </h1>
+                    </h2>
                 </div>
 
                 {/* CARDS */}

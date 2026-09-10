@@ -169,14 +169,15 @@ const Team = () => {
                         <Image
                           src={expert.image}
                           alt={isClone ? "" : expert.alt}
-                          fill
+                          // fill
                           className="expert-image"
                           priority={index < 3}
-                          sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
+                          // sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33.33vw"
+                          height={382}
+                          width={382}
                         />
                       </div>
 
-                      {/* ✅ FIX: Structure is same for both original and clone */}
                       <div className="expert-info">
                         <h3>{expert.name}</h3>
                         <p>{expert.title}</p>

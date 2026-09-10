@@ -5,22 +5,20 @@
 .offerings-section {
   width: 100%;
   min-height: 650px;
-
   position: relative;
-
   padding: 48px 0 70px;
-
   overflow: hidden;
+  box-sizing: border-box;
 
   background:
     radial-gradient(
       circle at 15% 45%,
-      rgba(25, 92, 122, 0.16),
+      rgba(130, 195, 65, 0.08),
       transparent 35%
     ),
-    #071017;
+    #f6faf7;
 
-  box-sizing: border-box;
+  color: #151b18;
 }
 
 
@@ -30,9 +28,7 @@
 
 .offerings-container {
   width: min(1100px, calc(100% - 80px));
-
   margin: 0 auto;
-
   position: relative;
   z-index: 2;
 }
@@ -44,35 +40,27 @@
 
 .offerings-heading {
   text-align: center;
-
   margin-bottom: 48px;
 }
 
 .offerings-heading span {
   display: block;
-
   margin-bottom: 8px;
-
   font-size: 11px;
   font-weight: 800;
-
   letter-spacing: 0.7px;
-
-  color: #ffffff;
+  color: #202824;
 }
 
-.offerings-heading h1 {
+.offerings-heading h2 {
   margin: 0;
-
   font-size: clamp(25px, 2.4vw, 32px);
   line-height: 1.25;
-
   font-weight: 800;
-
-  color: #ffffff;
+  color: #151b18;
 }
 
-.offerings-heading h1 strong {
+.offerings-heading h2 strong {
   color: #82c341;
   font-weight: 800;
 }
@@ -84,13 +72,9 @@
 
 .offerings-grid {
   width: 100%;
-
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-
   gap: 16px;
-
   align-items: stretch;
 }
 
@@ -101,9 +85,7 @@
 
 .offering-card {
   min-width: 0;
-
   height: 185px;
-
   padding: 18px 17px 16px;
 
   box-sizing: border-box;
@@ -111,30 +93,29 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   justify-content: flex-start;
 
   text-align: center;
-
   text-decoration: none;
 
-  background: rgba(35, 53, 65, 0.92);
-
-  border: 1px solid rgba(255, 255, 255, 0.025);
+  background: #e8f1eb;
+  border: 1px solid rgba(0, 0, 0, 0.04);
 
   transition:
     transform 0.25s ease,
     background 0.25s ease,
-    box-shadow 0.25s ease;
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .offering-card:hover {
   transform: translateY(-5px);
+  background: #deebe2;
 
-  background:#82c341;
+  border-color: rgba(130, 195, 65, 0.20);
 
   box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.22);
+    0 14px 30px rgba(0, 0, 0, 0.10);
 }
 
 
@@ -147,12 +128,10 @@
   height: 65px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   margin-bottom: 5px;
-
   flex-shrink: 0;
 }
 
@@ -162,9 +141,8 @@
 
   object-fit: contain;
 
-  filter: brightness(0) invert(1);
-
-  opacity: 0.95;
+  filter: brightness(0);
+  opacity: 0.85;
 }
 
 
@@ -177,10 +155,9 @@
 
   font-size: 15px;
   line-height: 1.25;
-
   font-weight: 800;
 
-  color: #ffffff;
+  color: #151b18;
 }
 
 
@@ -196,10 +173,9 @@
 
   font-size: 10.5px;
   line-height: 1.55;
-
   font-weight: 500;
 
-  color: #d3dadd;
+  color: #5b655f;
 }
 
 
@@ -209,7 +185,6 @@
 
 .offerings-wave {
   position: absolute;
-
   left: -5%;
   right: -5%;
   bottom: -85px;
@@ -217,7 +192,6 @@
   height: 170px;
 
   pointer-events: none;
-
   z-index: 1;
 }
 
@@ -231,7 +205,7 @@
 
   border-radius: 50% 50% 0 0;
 
-  background: rgba(10, 31, 45, 0.95);
+  background: rgba(225, 238, 228, 0.95);
 }
 
 .offerings-wave span:nth-child(1) {
@@ -259,59 +233,6 @@
 
 
 /* =========================================
-   LIGHT MODE
-========================================= */
-
-[data-theme="light"] .offerings-section {
-  background:
-    radial-gradient(
-      circle at 15% 45%,
-      rgba(130, 195, 65, 0.10),
-      transparent 35%
-    ),
-    #f6faf7;
-}
-
-[data-theme="light"] .offerings-heading span {
-  color: #202824;
-}
-
-[data-theme="light"] .offerings-heading h1 {
-  color: #151b18;
-}
-
-[data-theme="light"] .offering-card {
-  background: #e8f1eb;
-
-  border-color: rgba(0, 0, 0, 0.04);
-}
-
-[data-theme="light"] .offering-card:hover {
-  background: #deebe2;
-
-  box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.10);
-}
-
-[data-theme="light"] .offering-card h2 {
-  color: #151b18;
-}
-
-[data-theme="light"] .offering-card p {
-  color: #5b655f;
-}
-
-[data-theme="light"] .offering-icon img {
-  filter: brightness(0);
-  opacity: 0.85;
-}
-
-[data-theme="light"] .offerings-wave span {
-  background: rgba(225, 238, 228, 0.95);
-}
-
-
-/* =========================================
    DARK MODE
 ========================================= */
 
@@ -323,18 +244,30 @@
       transparent 35%
     ),
     #071017;
+
+  color: #ffffff;
 }
 
 [data-theme="dark"] .offerings-heading span {
   color: #ffffff;
 }
 
-[data-theme="dark"] .offerings-heading h1 {
+[data-theme="dark"] .offerings-heading h2 {
   color: #ffffff;
 }
 
 [data-theme="dark"] .offering-card {
   background: rgba(35, 53, 65, 0.92);
+  border-color: rgba(255, 255, 255, 0.025);
+}
+
+[data-theme="dark"] .offering-card:hover {
+  background: #82c341;
+
+  border-color: #82c341;
+
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22);
 }
 
 [data-theme="dark"] .offering-card h2 {
@@ -347,6 +280,7 @@
 
 [data-theme="dark"] .offering-icon img {
   filter: brightness(0) invert(1);
+  opacity: 0.95;
 }
 
 [data-theme="dark"] .offerings-wave span {
@@ -359,9 +293,9 @@
 ========================================= */
 
 @media (min-width: 1200px) {
+
   .offerings-section {
     min-height: 680px;
-
     padding-top: 52px;
   }
 
@@ -375,7 +309,6 @@
 
   .offering-card {
     height: 190px;
-
     padding: 20px 20px 17px;
   }
 
@@ -408,7 +341,6 @@
 
   .offerings-section {
     min-height: auto;
-
     padding: 50px 0 70px;
   }
 
@@ -422,22 +354,18 @@
 
   .offerings-grid {
     grid-template-columns: repeat(2, 1fr);
-
     gap: 18px;
   }
 
   .offering-card {
     height: 200px;
-
     padding: 20px 20px 18px;
   }
 
   .offering-card p {
     max-width: 280px;
-
     font-size: 11px;
   }
-
 }
 
 
@@ -463,29 +391,25 @@
     font-size: 10px;
   }
 
-  .offerings-heading h1 {
+  .offerings-heading h2 {
     font-size: 24px;
-
     line-height: 1.3;
   }
 
   .offerings-grid {
     grid-template-columns: 1fr;
-
     gap: 14px;
   }
 
   .offering-card {
     height: auto;
     min-height: 205px;
-
     padding: 22px 20px 22px;
   }
 
   .offering-icon {
     width: 65px;
     height: 60px;
-
     margin-bottom: 7px;
   }
 
@@ -496,22 +420,18 @@
 
   .offering-card h2 {
     font-size: 17px;
-
     margin-bottom: 8px;
   }
 
   .offering-card p {
     max-width: 300px;
-
     font-size: 12px;
-
     line-height: 1.6;
   }
 
   .offerings-wave {
     display: none;
   }
-
 }
 
 
@@ -525,12 +445,11 @@
     width: calc(100% - 24px);
   }
 
-  .offerings-heading h1 {
+  .offerings-heading h2 {
     font-size: 22px;
   }
 
   .offering-card {
     min-height: 200px;
   }
-
 }
