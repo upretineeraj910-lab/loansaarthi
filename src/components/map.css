@@ -52,7 +52,7 @@
   }
 }
 
-:global(.dark) .contact-map-section,
+.dark .contact-map-section,
 .dark .contact-map-section {
   background-color: #0f172a;
   color: #f8fafc;
