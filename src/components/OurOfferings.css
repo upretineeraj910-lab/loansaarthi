@@ -16,9 +16,9 @@
       rgba(130, 195, 65, 0.08),
       transparent 35%
     ),
-    #f6faf7;
+    var(--color-paper);
 
-  color: #151b18;
+  color: var(--color-ink);
 }
 
 
@@ -46,22 +46,26 @@
 .offerings-heading span {
   display: block;
   margin-bottom: 8px;
+
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.7px;
-  color: #202824;
+
+  color: var(--color-ink);
 }
 
 .offerings-heading h2 {
   margin: 0;
+
   font-size: clamp(25px, 2.4vw, 32px);
   line-height: 1.25;
   font-weight: 800;
-  color: #151b18;
+
+  color: var(--color-ink);
 }
 
 .offerings-heading h2 strong {
-  color: #82c341;
+  color: var(--color-brass);
   font-weight: 800;
 }
 
@@ -72,9 +76,11 @@
 
 .offerings-grid {
   width: 100%;
+
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
+
   align-items: stretch;
 }
 
@@ -86,6 +92,7 @@
 .offering-card {
   min-width: 0;
   height: 185px;
+
   padding: 18px 17px 16px;
 
   box-sizing: border-box;
@@ -98,8 +105,9 @@
   text-align: center;
   text-decoration: none;
 
-  background: #e8f1eb;
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--color-paper-light);
+
+  border: 1px solid var(--color-paper-line);
 
   transition:
     transform 0.25s ease,
@@ -110,9 +118,10 @@
 
 .offering-card:hover {
   transform: translateY(-5px);
-  background: #deebe2;
 
-  border-color: rgba(130, 195, 65, 0.20);
+  background: var(--color-paper-dark);
+
+  border-color: rgba(111, 174, 69, 0.25);
 
   box-shadow:
     0 14px 30px rgba(0, 0, 0, 0.10);
@@ -132,6 +141,7 @@
   justify-content: center;
 
   margin-bottom: 5px;
+
   flex-shrink: 0;
 }
 
@@ -157,7 +167,7 @@
   line-height: 1.25;
   font-weight: 800;
 
-  color: #151b18;
+  color: var(--color-ink);
 }
 
 
@@ -175,7 +185,7 @@
   line-height: 1.55;
   font-weight: 500;
 
-  color: #5b655f;
+  color: var(--color-text-muted);
 }
 
 
@@ -185,6 +195,7 @@
 
 .offerings-wave {
   position: absolute;
+
   left: -5%;
   right: -5%;
   bottom: -85px;
@@ -200,7 +211,6 @@
 
   width: 65%;
   height: 110px;
-
   bottom: 0;
 
   border-radius: 50% 50% 0 0;
@@ -234,57 +244,73 @@
 
 /* =========================================
    DARK MODE
+   Same system as global CSS
 ========================================= */
 
-[data-theme="dark"] .offerings-section {
-  background:
-    radial-gradient(
-      circle at 15% 45%,
-      rgba(25, 92, 122, 0.16),
-      transparent 35%
-    ),
-    #071017;
+@media (prefers-color-scheme: dark) {
 
-  color: #ffffff;
-}
+  .offerings-section {
+    background:
+      radial-gradient(
+        circle at 15% 45%,
+        rgba(25, 92, 122, 0.16),
+        transparent 35%
+      ),
+      var(--color-paper);
 
-[data-theme="dark"] .offerings-heading span {
-  color: #ffffff;
-}
+    color: var(--color-ink);
+  }
 
-[data-theme="dark"] .offerings-heading h2 {
-  color: #ffffff;
-}
+  .offerings-heading span {
+    color: var(--color-ink);
+  }
 
-[data-theme="dark"] .offering-card {
-  background: rgba(35, 53, 65, 0.92);
-  border-color: rgba(255, 255, 255, 0.025);
-}
+  .offerings-heading h2 {
+    color: var(--color-ink);
+  }
 
-[data-theme="dark"] .offering-card:hover {
-  background: #82c341;
+  .offerings-heading h2 strong {
+    color: var(--color-brass);
+  }
 
-  border-color: #82c341;
+  .offering-card {
+    background: var(--color-paper-light);
+    border-color: var(--color-paper-line);
+  }
 
-  box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.22);
-}
+  .offering-card:hover {
+    background: var(--color-brass);
+    border-color: var(--color-brass);
 
-[data-theme="dark"] .offering-card h2 {
-  color: #ffffff;
-}
+    box-shadow:
+      0 14px 30px rgba(0, 0, 0, 0.22);
+  }
 
-[data-theme="dark"] .offering-card p {
-  color: #d3dadd;
-}
+  .offering-card h2 {
+    color: var(--color-ink);
+  }
 
-[data-theme="dark"] .offering-icon img {
-  filter: brightness(0) invert(1);
-  opacity: 0.95;
-}
+  .offering-card p {
+    color: var(--color-text-muted);
+  }
 
-[data-theme="dark"] .offerings-wave span {
-  background: rgba(10, 31, 45, 0.95);
+  .offering-icon img {
+    filter: brightness(0) invert(1);
+    opacity: 0.95;
+  }
+
+  .offerings-wave span {
+    background: rgba(10, 31, 45, 0.95);
+  }
+
+  .offering-card:hover h2,
+  .offering-card:hover p {
+    color: #ffffff;
+  }
+
+  .offering-card:hover .offering-icon img {
+    filter: brightness(0) invert(1);
+  }
 }
 
 
@@ -451,5 +477,21 @@
 
   .offering-card {
     min-height: 200px;
+  }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .offering-card {
+    transition: none;
+  }
+
+  .offering-card:hover {
+    transform: none;
   }
 }

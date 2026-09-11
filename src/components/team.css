@@ -1,53 +1,14 @@
 /* ==========================================
-   CSS Variables (Theme Support)
-   ========================================== */
-:root {
-  --team-bg: #f7faf8;
-  --team-heading-tag: #39a96b;
-  --team-title: #1d3028;
-  --team-desc: #68756f;
-  --team-card-bg: #ffffff;
-  --team-img-placeholder: #edf2ef;
-  --team-card-border: #e5ebe7;
-  --team-card-shadow: rgba(20, 50, 35, 0.06);
-  --team-role: #39a96b;
-}
+   EXPERT TEAM SECTION
+   Uses Global LoanSaarthi Theme Variables
+========================================== */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --team-bg: #0d1411;
-    --team-heading-tag: #4ade80;
-    --team-title: #f1f7f4;
-    --team-desc: #9ca3af;
-    --team-card-bg: #141e1a;
-    --team-img-placeholder: #1e2d27;
-    --team-card-border: #22362e;
-    --team-card-shadow: rgba(0, 0, 0, 0.4);
-    --team-role: #4ade80;
-  }
-}
-
-[data-theme="dark"],
-.dark {
-  --team-bg: #0d1411;
-  --team-heading-tag: #4ade80;
-  --team-title: #f1f7f4;
-  --team-desc: #9ca3af;
-  --team-card-bg: #141e1a;
-  --team-img-placeholder: #1e2d27;
-  --team-card-border: #22362e;
-  --team-card-shadow: rgba(0, 0, 0, 0.4);
-  --team-role: #4ade80;
-}
-
-/* ==========================================
-   Main Section
-   ========================================== */
 .expert-team {
   width: 100%;
   height: auto;
-  padding: 80px 20px;
-  background-color: var(--team-bg);
+  padding: 15px 20px;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
   overflow: hidden;
   box-sizing: border-box;
 }
@@ -57,45 +18,71 @@
   margin: 0 auto;
 }
 
-/* Heading */
+
+/* ==========================================
+   HEADING
+========================================== */
+
 .expert-team-heading {
   text-align: center;
   margin-bottom: 45px;
 }
 
+/* OUR TEAM */
 .expert-team-heading span {
   display: inline-block;
   margin-bottom: 12px;
+
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--team-heading-tag);
+
+  /* Same LoanSaarthi accent */
+  color: var(--color-brass);
 }
 
+/* EXPERT TEAM TITLE */
 .expert-team-heading h2 {
   margin: 0 0 12px;
+
   font-size: 36px;
   line-height: 1.2;
   font-weight: 800;
-  color: var(--team-title);
+
+  /* Same website heading color */
+  color: var(--color-ink);
 }
 
 .expert-team-heading p {
   max-width: 600px;
   margin: 0 auto;
+
   font-size: 15px;
   line-height: 1.7;
-  color: var(--team-desc);
+
+  color: var(--color-text-muted);
 }
 
+
 /* ==========================================
-   Slider Track & Cards
-   ========================================== */
+   SLIDER WRAPPER
+========================================== */
+
+.expert-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .expert-slider {
   width: 100%;
   overflow: hidden;
 }
+
+
+/* ==========================================
+   SLIDER TRACK & CARDS
+========================================== */
 
 .expert-track {
   display: flex;
@@ -112,8 +99,10 @@
 .expert-card-inner {
   display: flex;
   flex-direction: column;
+
   border-radius: 14px;
   overflow: hidden;
+
   transition: transform 0.3s ease;
 }
 
@@ -121,19 +110,28 @@
   transform: translateY(-6px);
 }
 
+
+/* ==========================================
+   IMAGE
+========================================== */
+
 .expert-image-wrapper {
   position: relative;
   width: 100%;
   height: 320px;
+
   overflow: hidden;
-  background-color: var(--team-img-placeholder);
+
+  background-color: var(--color-paper-light);
 }
 
 .expert-image {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
   display: block;
+
   transition: transform 0.4s ease;
 }
 
@@ -141,109 +139,86 @@
   transform: scale(1.05);
 }
 
-/* Card Info Box */
+
+/* ==========================================
+   CARD INFO
+========================================== */
+
 .expert-info {
   padding: 20px;
-  background-color: var(--team-card-bg);
-  border: 1px solid var(--team-card-border);
+
+  background-color: var(--color-paper-light);
+
+  border: 1px solid var(--color-paper-line);
   border-top: none;
+
   border-radius: 0 0 14px 14px;
-  box-shadow: 0 8px 24px var(--team-card-shadow);
+
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .expert-info h3 {
   margin: 0 0 6px;
+
   font-size: 19px;
   font-weight: 700;
-  color: var(--team-title);
+
+  color: var(--color-ink);
 }
 
 .expert-info p {
   margin: 0;
+
   font-size: 14px;
   font-weight: 600;
-  color: var(--team-role);
-}
 
-/* Responsive Overrides */
-@media (max-width: 900px) {
-  .expert-team {
-    padding: 60px 15px;
-  }
-  .expert-team-heading h2 {
-    font-size: 30px;
-  }
-  .expert-image-wrapper {
-    height: 280px;
-  }
-}
-
-@media (max-width: 650px) {
-  .expert-team {
-    padding: 50px 10px;
-  }
-  .expert-team-heading h2 {
-    font-size: 26px;
-  }
-  .expert-card {
-    padding: 0 5px;
-  }
-  .expert-image-wrapper {
-    height: 310px;
-  }
+  color: var(--color-brass);
 }
 
 
-.expert-team{
-  padding-top: 15px;
-  padding-bottom: 15px;
-}
+/* ==========================================
+   SLIDER BUTTONS
+========================================== */
 
-
-
-
-
-
-
-
-
-
-/* Add these styles to your existing team.css */
-
-.expert-slider-wrapper {
-  position: relative;
-  width: 100%;
-}
-
-.expert-slider {
-  overflow: hidden;
-  width: 100%;
-}
-
-/* Slider Controls (Buttons) */
 .slider-btn {
   position: absolute;
   top: 50%;
+
   transform: translateY(-50%);
-  background-color: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 50%;
+
   width: 44px;
   height: 44px;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   cursor: pointer;
   z-index: 10;
-  color: #374151;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
+
+  background-color: var(--color-paper-light);
+  color: var(--color-ink);
+
+  border: 1px solid var(--color-paper-line);
+  border-radius: 50%;
+
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.10),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 .slider-btn:hover {
-  background-color: #16a34a; /* LoanSaarthi Green accent - change if needed */
+  background-color: var(--color-brass);
   color: #ffffff;
-  border-color: #16a34a;
+  border-color: var(--color-brass);
+
+  transform: translateY(-50%) scale(1.06);
 }
 
 .slider-btn svg {
@@ -251,26 +226,169 @@
   height: 24px;
 }
 
-/* Button positioning */
+
+/* ==========================================
+   BUTTON POSITIONING
+========================================== */
+
 .prev-btn {
-  left: -22px; /* Pulls button slightly outside the card area */
+  left: -22px;
 }
 
 .next-btn {
   right: -22px;
 }
 
-/* Mobile responsive for buttons */
-@media (max-width: 768px) {
-  .prev-btn {
-    left: 10px; /* Inside the slider for smaller screens */
+
+/* ==========================================
+   DARK MODE
+   Same pattern as rest of your website
+========================================== */
+
+@media (prefers-color-scheme: dark) {
+
+  .expert-team {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
   }
+
+  .expert-team-heading span {
+    color: var(--color-brass);
+  }
+
+  .expert-team-heading h2 {
+    color: var(--color-ink);
+  }
+
+  .expert-team-heading p {
+    color: var(--color-text-muted);
+  }
+
+  .expert-image-wrapper {
+    background-color: var(--color-paper-light);
+  }
+
+  .expert-info {
+    background-color: var(--color-paper-light);
+    border-color: var(--color-paper-line);
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30);
+  }
+
+  .expert-info h3 {
+    color: var(--color-ink);
+  }
+
+  .expert-info p {
+    color: var(--color-brass);
+  }
+
+  .slider-btn {
+    background-color: var(--color-paper-light);
+    color: var(--color-ink);
+    border-color: var(--color-paper-line);
+
+    box-shadow:
+      0 4px 8px rgba(0, 0, 0, 0.35);
+  }
+
+  .slider-btn:hover {
+    background-color: var(--color-brass);
+    color: #ffffff;
+    border-color: var(--color-brass);
+  }
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (max-width: 900px) {
+
+  .expert-team {
+    padding: 60px 15px;
+  }
+
+  .expert-team-heading h2 {
+    font-size: 30px;
+  }
+
+  .expert-image-wrapper {
+    height: 280px;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .prev-btn {
+    left: 10px;
+  }
+
   .next-btn {
     right: 10px;
   }
+
   .slider-btn {
     width: 38px;
     height: 38px;
-    background-color: rgba(255, 255, 255, 0.9); /* Slight transparency on mobile */
+  }
+}
+
+@media (max-width: 650px) {
+
+  .expert-team {
+    padding: 50px 10px;
+  }
+
+  .expert-team-heading {
+    margin-bottom: 32px;
+  }
+
+  .expert-team-heading h2 {
+    font-size: 26px;
+  }
+
+  .expert-team-heading p {
+    font-size: 14px;
+  }
+
+  .expert-card {
+    padding: 0 5px;
+  }
+
+  .expert-image-wrapper {
+    height: 310px;
+  }
+}
+
+
+/* ==========================================
+   REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .expert-card-inner,
+  .expert-image,
+  .slider-btn {
+    transition: none;
+  }
+
+  .expert-card-inner:hover {
+    transform: none;
+  }
+
+  .expert-card-inner:hover .expert-image {
+    transform: none;
+  }
+
+  .slider-btn:hover {
+    transform: translateY(-50%);
   }
 }

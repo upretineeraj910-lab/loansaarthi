@@ -1,6 +1,11 @@
 "use client";
 
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import "./team.css";
 
@@ -44,129 +49,305 @@ const expertTeam: Expert[] = [
   },
 ];
 
-const Team = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [withTransition, setWithTransition] = useState(true);
-  const [visibleCards, setVisibleCards] = useState(3);
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+const AUTOPLAY_DELAY = 3000;
+const TRANSITION_DURATION = 500;
 
-  // Responsive cards check (CSS breakpoints match)
+const getVisibleCards = (width: number): number => {
+  if (width <= 650) return 1;
+  if (width <= 900) return 2;
+  return 3;
+};
+
+const Team = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const resetFrameRef = useRef<number | null>(null);
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(3);
+  const [withTransition, setWithTransition] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  /*
+   * Keep enough cloned slides to fill the visible viewport.
+   * This prevents gaps when the number of visible cards changes.
+   */
+  const cloneCount = Math.min(visibleCards, expertTeam.length);
+
+  const sliderItems = [
+    ...expertTeam,
+    ...expertTeam.slice(0, cloneCount),
+  ];
+
+  const cardWidthPercent = 100 / visibleCards;
+
+  /*
+   * Detect reduced-motion preference.
+   */
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    );
+
+    const updateMotionPreference = () => {
+      setPrefersReducedMotion(mediaQuery.matches);
+    };
+
+    updateMotionPreference();
+
+    mediaQuery.addEventListener("change", updateMotionPreference);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateMotionPreference);
+    };
+  }, []);
+
+  /*
+   * Responsive visible-card calculation.
+   * Only update state when the value actually changes.
+   */
   useEffect(() => {
     const updateVisibleCards = () => {
-      const width = window.innerWidth;
-      if (width <= 650) {
-        setVisibleCards(1);
-      } else if (width <= 900) {
-        setVisibleCards(2);
-      } else {
-        setVisibleCards(3);
-      }
+      const nextVisibleCards = getVisibleCards(window.innerWidth);
+
+      setVisibleCards((previous) =>
+        previous === nextVisibleCards ? previous : nextVisibleCards
+      );
     };
 
     updateVisibleCards();
 
-    let timeoutId: NodeJS.Timeout;
-    const debouncedResize = () => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(updateVisibleCards, 150);
+    let resizeTimeout: ReturnType<typeof setTimeout> | undefined;
+
+    const handleResize = () => {
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
+
+      resizeTimeout = setTimeout(updateVisibleCards, 150);
     };
 
-    window.addEventListener("resize", debouncedResize, { passive: true });
+    window.addEventListener("resize", handleResize, { passive: true });
+
     return () => {
-      window.removeEventListener("resize", debouncedResize);
-      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleResize);
+
+      if (resizeTimeout) {
+        clearTimeout(resizeTimeout);
+      }
     };
   }, []);
 
-  // TBT Fix: Only observe and activate slider when scrolled into view
+  /*
+   * Keep the current position valid after responsive changes.
+   */
   useEffect(() => {
+    setCurrentIndex((previous) => {
+      const maxIndex = expertTeam.length;
+
+      return Math.min(previous, maxIndex);
+    });
+  }, [visibleCards]);
+
+  /*
+   * Only activate carousel behavior while the section is near/in viewport.
+   */
+  useEffect(() => {
+    const section = sectionRef.current;
+
+    if (!section) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.1,
+      }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    observer.observe(section);
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
+  /*
+   * Move to next slide.
+   */
   const nextSlide = useCallback(() => {
     setWithTransition(true);
-    setCurrentIndex((prev) => prev + 1);
+
+    setCurrentIndex((previous) => previous + 1);
   }, []);
 
-  const prevSlide = () => {
-    if (currentIndex <= 0) {
-      setWithTransition(false);
-      setCurrentIndex(expertTeam.length);
-      setTimeout(() => {
+  /*
+   * Move to previous slide.
+   */
+  const prevSlide = useCallback(() => {
+    setCurrentIndex((previous) => {
+      if (previous > 0) {
         setWithTransition(true);
-        setCurrentIndex(expertTeam.length - 1);
-      }, 20);
-    } else {
-      setWithTransition(true);
-      setCurrentIndex((prev) => prev - 1);
-    }
-  };
+        return previous - 1;
+      }
 
-  // Autoplay only runs when visible on screen
+      /*
+       * Jump to the cloned end without animation,
+       * then animate back to the previous real slide.
+       */
+      setWithTransition(false);
+
+      if (resetFrameRef.current !== null) {
+        cancelAnimationFrame(resetFrameRef.current);
+      }
+
+      resetFrameRef.current = requestAnimationFrame(() => {
+        resetFrameRef.current = requestAnimationFrame(() => {
+          setWithTransition(true);
+          setCurrentIndex(expertTeam.length - 1);
+        });
+      });
+
+      return expertTeam.length;
+    });
+  }, []);
+
+  /*
+   * Autoplay:
+   * - Only while visible
+   * - Disabled when user interacts
+   * - Disabled for reduced-motion users
+   */
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || isPaused || prefersReducedMotion) {
+      return;
+    }
 
-    const interval = setInterval(() => {
+    const intervalId = window.setInterval(() => {
       nextSlide();
-    }, 3000);
+    }, AUTOPLAY_DELAY);
 
-    return () => clearInterval(interval);
-  }, [isVisible, nextSlide]);
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, [
+    isVisible,
+    isPaused,
+    prefersReducedMotion,
+    nextSlide,
+  ]);
 
-  const handleTransitionEnd = () => {
+  /*
+   * Reset infinite-loop position after the cloned slides.
+   */
+  const handleTransitionEnd = useCallback(() => {
     if (currentIndex >= expertTeam.length) {
       setWithTransition(false);
-      setCurrentIndex(0);
-    }
-  };
 
-  const sliderItems = [...expertTeam, ...expertTeam.slice(0, 3)];
-  const cardWidthPercent = 100 / visibleCards;
+      if (resetFrameRef.current !== null) {
+        cancelAnimationFrame(resetFrameRef.current);
+      }
+
+      resetFrameRef.current = requestAnimationFrame(() => {
+        setCurrentIndex(0);
+      });
+    }
+  }, [currentIndex]);
+
+  /*
+   * Keyboard support for carousel navigation.
+   */
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        prevSlide();
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        nextSlide();
+      }
+    },
+    [nextSlide, prevSlide]
+  );
+
+  /*
+   * Cleanup pending animation frames.
+   */
+  useEffect(() => {
+    return () => {
+      if (resetFrameRef.current !== null) {
+        cancelAnimationFrame(resetFrameRef.current);
+      }
+    };
+  }, []);
 
   return (
-    <section ref={sectionRef} className="expert-team">
+    <section
+      ref={sectionRef}
+      className="expert-team"
+      aria-labelledby="expert-team-title"
+    >
       <div className="expert-team-container">
-        <div className="expert-team-heading">
+        <header className="expert-team-heading">
           <span>OUR TEAM</span>
-          <h2>Meet Our Expert People</h2>
-          <p>
-            Experienced professionals helping you find suitable loan and
-            financial solutions.
-          </p>
-        </div>
 
-        <div className="expert-slider-wrapper">
-          <button 
-            className="slider-btn prev-btn" 
-            onClick={prevSlide} 
-            aria-label="Previous"
+          <h2 id="expert-team-title">
+            Meet Our Expert People
+          </h2>
+
+          <p>
+            Experienced professionals helping you find suitable
+            loan and financial solutions.
+          </p>
+        </header>
+
+        <div
+          className="expert-slider-wrapper"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Our expert team"
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onFocus={() => setIsPaused(true)}
+          onBlur={() => setIsPaused(false)}
+        >
+          <button
+            className="slider-btn prev-btn"
+            onClick={prevSlide}
+            aria-label="Previous team member"
             type="button"
           >
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px">
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="currentColor"
+            >
               <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z" />
             </svg>
           </button>
 
-          <button 
-            className="slider-btn next-btn" 
-            onClick={nextSlide} 
-            aria-label="Next"
+          <button
+            className="slider-btn next-btn"
+            onClick={nextSlide}
+            aria-label="Next team member"
             type="button"
           >
-            <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 24 24" height="24px" width="24px">
-              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" />
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="currentColor"
+            >
+              <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41 1.41z" />
             </svg>
           </button>
 
@@ -175,16 +356,26 @@ const Team = () => {
               className="expert-track"
               onTransitionEnd={handleTransitionEnd}
               style={{
-                transform: `translate3d(-${currentIndex * cardWidthPercent}%, 0, 0)`,
-                transition: withTransition ? "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)" : "none",
-                willChange: isVisible ? "transform" : "auto",
+                transform: `translate3d(-${
+                  currentIndex * cardWidthPercent
+                }%, 0, 0)`,
+
+                transition:
+                  withTransition && !prefersReducedMotion
+                    ? `transform ${TRANSITION_DURATION}ms cubic-bezier(0.25, 1, 0.5, 1)`
+                    : "none",
+
+                willChange:
+                  isVisible && !prefersReducedMotion
+                    ? "transform"
+                    : "auto",
               }}
             >
               {sliderItems.map((expert, index) => {
                 const isClone = index >= expertTeam.length;
 
                 return (
-                  <div
+                  <article
                     className="expert-card"
                     key={`${expert.name}-${index}`}
                     aria-hidden={isClone}
@@ -199,10 +390,14 @@ const Team = () => {
                           src={expert.image}
                           alt={isClone ? "" : expert.alt}
                           className="expert-image"
-                          height={382}
                           width={382}
+                          height={382}
                           loading="lazy"
-                          sizes="(max-width: 650px) 100vw, (max-width: 900px) 50vw, 33vw"
+                          sizes="
+                            (max-width: 650px) 100vw,
+                            (max-width: 900px) 50vw,
+                            33vw
+                          "
                         />
                       </div>
 
@@ -211,7 +406,7 @@ const Team = () => {
                         <p>{expert.title}</p>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 );
               })}
             </div>

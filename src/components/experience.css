@@ -5,8 +5,10 @@
 .why-choose-section {
   width: 100%;
   padding: 70px 0;
-  background: #f7faf8;
-  color: #151b18;
+
+  background: var(--color-paper);
+  color: var(--color-ink);
+
   overflow: hidden;
 }
 
@@ -39,7 +41,7 @@
   font-weight: 700;
   letter-spacing: 0.5px;
 
-  color: #1b2420;
+  color: var(--color-ink);
 }
 
 .why-choose-content h2 {
@@ -49,7 +51,7 @@
   line-height: 1.25;
   font-weight: 800;
 
-  color: #6fae45;
+  color: var(--color-brass);
 }
 
 .why-choose-description {
@@ -61,7 +63,7 @@
   line-height: 1.7;
   font-weight: 500;
 
-  color: #4c5752;
+  color: var(--color-text-muted);
 }
 
 
@@ -89,6 +91,7 @@
 .why-feature-icon img {
   width: 58px;
   height: 58px;
+
   object-fit: contain;
 }
 
@@ -103,7 +106,7 @@
   line-height: 1.3;
   font-weight: 800;
 
-  color: #6fae45;
+  color: var(--color-brass);
 }
 
 .why-feature-content p {
@@ -115,7 +118,7 @@
   line-height: 1.65;
   font-weight: 500;
 
-  color: #59645f;
+  color: var(--color-text-muted);
 }
 
 
@@ -143,62 +146,52 @@
 
 
 /* =========================================
-   LIGHT MODE
+   DARK MODE
+   Same system as global CSS
 ========================================= */
 
-[data-theme="light"] .why-choose-section {
-  background: #f7faf8;
-  color: #151b18;
-}
+@media (prefers-color-scheme: dark) {
 
-[data-theme="light"] .why-choose-label {
-  color: #1b2420;
-}
+  .why-choose-section {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
 
-[data-theme="light"] .why-choose-content h2 {
-  color: #6fae45;
-}
+  .why-choose-label {
+    color: var(--color-ink);
+  }
 
-[data-theme="light"] .why-choose-description {
-  color: #4c5752;
-}
+  .why-choose-content h2 {
+    color: var(--color-brass);
+  }
 
-[data-theme="light"] .why-feature-content h3 {
-  color: #6fae45;
-}
+  .why-choose-description {
+    color: var(--color-text-muted);
+  }
 
-[data-theme="light"] .why-feature-content p {
-  color: #59645f;
+  .why-feature-content h3 {
+    color: var(--color-brass);
+  }
+
+  .why-feature-content p {
+    color: var(--color-text-muted);
+  }
 }
 
 
 /* =========================================
-   DARK MODE
+   LARGE DESKTOP
 ========================================= */
 
-[data-theme="dark"] .why-choose-section {
-  background: #071017;
-  color: #ffffff;
-}
+@media (min-width: 1200px) {
 
-[data-theme="dark"] .why-choose-label {
-  color: #ffffff;
-}
+  .why-choose-section {
+    padding: 80px 0;
+  }
 
-[data-theme="dark"] .why-choose-content h2 {
-  color: #6fae45;
-}
-
-[data-theme="dark"] .why-choose-description {
-  color: #e4e8eb;
-}
-
-[data-theme="dark"] .why-feature-content h3 {
-  color: #6fae45;
-}
-
-[data-theme="dark"] .why-feature-content p {
-  color: #cbd2d6;
+  .why-choose-container {
+    width: min(1120px, calc(100% - 100px));
+  }
 }
 
 
@@ -207,6 +200,7 @@
 ========================================= */
 
 @media (max-width: 900px) {
+
   .why-choose-section {
     padding: 60px 0;
   }
@@ -242,6 +236,7 @@
 ========================================= */
 
 @media (max-width: 600px) {
+
   .why-choose-section {
     padding: 50px 0;
   }
@@ -292,5 +287,46 @@
 
   .why-feature-content p {
     font-size: 12px;
+  }
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 380px) {
+
+  .why-choose-container {
+    width: calc(100% - 24px);
+  }
+
+  .why-choose-content h2 {
+    font-size: 27px;
+  }
+
+  .why-feature {
+    gap: 12px;
+  }
+
+  .why-feature-icon {
+    flex: 0 0 44px;
+  }
+
+  .why-feature-icon img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .why-choose-section {
+    scroll-behavior: auto;
   }
 }

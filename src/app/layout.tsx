@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "Loan Calculator",
     "EMI Calculator",
     "Personal Loan",
-    "Home Loan Calculator",
+    "Home Loan",
     "LoanSaarthi",
     "Interest Rate Calculator",
   ],

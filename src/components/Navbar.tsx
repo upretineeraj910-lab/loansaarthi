@@ -51,7 +51,9 @@ export default function Navbar() {
             <span className="logo-text">Loan<span>Saarthi</span></span> */}
             <Image src="/images/icons/image-removebg-preview.png"
             alt="loansaarthi_logo"
-            width={120} height={150}
+            // width={120} height={150}
+            width={120}
+            height={150}
             priority={true}
             />
               

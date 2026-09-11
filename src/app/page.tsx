@@ -273,7 +273,6 @@ export default function Home() {
         <a href="https://wa.me/917669486600" className="mobile-cta-whatsapp">
           <MessageCircle size={15} aria-hidden="true" /> WhatsApp
         </a>
-        <button><a href="http://" target="_blank" rel="noopener noreferrer"></a></button>
       </div>
     </main>
   );
