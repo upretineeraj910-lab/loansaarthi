@@ -344,15 +344,14 @@ const page = () => {
                                     policies.
                                 </p>
 
-                                <p>to connect us <button className="bg-blue-500 hover:bg-blue-700 hover:pointer" onClick={()=>setShowForm(true)}>Click Here</button> </p>
+                                <p>to connect us <button className="bg-blue-500 hover:bg-blue-700 hover:pointer" onClick={() => setShowForm(true)}>Click Here</button> </p>
                                 {/* <div className={showForm ? "":"hideForm"} ><HeroVerificationCard /></div> */}
-                           {showForm && <HeroVerificationCard /> }
+                                {/* {showForm && <HeroVerificationCard /> } */}
                             </div>
 
 
                             {/* Existing HeroVerificationCard can be placed here later */}
-                            {/* <HeroVerificationCard /> */}
-
+                            {showForm && <HeroVerificationCard />}
                         </div>
 
                     )}

@@ -33,3 +33,34 @@
   color: #111827;
   margin-bottom: 2.5rem;
 }
+
+/* --- FIX: Layout Shift Prevention --- */
+.widgetWrapper {
+  width: 100%;
+  /* Mobile: Header (Rating/Button) + Long Review Card ke liye minimum space */
+  min-height: 460px; 
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .widgetWrapper {
+    /* Desktop: Grid ya horizontal slider ke hisaab se height */
+    min-height: 380px; 
+  }
+}
+
+/* Elfsight ke card ki inner height ko lock karein taaki 1 line review me card pichke nahi */
+.widgetWrapper :global([class*="ReviewCard__Container"]),
+.widgetWrapper :global([class*="ReviewCard"]),
+.widgetWrapper :global([class*="CardContainer"]) {
+  min-height: 180px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+/* Badge ko DOM se gayab hone se pehle hi instantly hide rakhega */
+.widgetWrapper :global(a[href*="elfsight.com"]) {
+  display: none !important;
+}

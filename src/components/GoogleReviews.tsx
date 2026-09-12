@@ -16,7 +16,7 @@ export default function GoogleReviews() {
           observer.disconnect();
         }
       },
-      { rootMargin: '250px' } // 250px pehle trigger hoga taaki user ko delay na dikhe
+      { rootMargin: '250px' }
     );
 
     if (sectionRef.current) {
@@ -26,7 +26,7 @@ export default function GoogleReviews() {
     return () => observer.disconnect();
   }, []);
 
-  // 2. Badge Removal: Sirf tab chalega jab widget load ho chuka ho
+  // 2. Badge Removal
   useEffect(() => {
     if (!isVisible) return;
 
@@ -42,7 +42,6 @@ export default function GoogleReviews() {
     if (removeBadge()) return;
 
     const observer = new MutationObserver(() => {
-      // Badge milte hi disconnect kar do taaki memory leak aur lag na ho
       if (removeBadge()) {
         observer.disconnect();
       }
@@ -53,7 +52,6 @@ export default function GoogleReviews() {
       subtree: true,
     });
 
-    // 10 sec safety timeout agar badge na mile
     const timeout = setTimeout(() => observer.disconnect(), 10000);
 
     return () => {
@@ -63,28 +61,26 @@ export default function GoogleReviews() {
   }, [isVisible]);
 
   return (
-    <section 
-      ref={sectionRef} 
-      className={styles.reviewSection}
-      style={{ minHeight: '380px' }} // Layout shift (CLS) avoid karne ke liye placeholder height
-    >
+    <section ref={sectionRef} className={styles.reviewSection}>
       <div className={styles.container}>
         <h2 className={styles.heading}>
           From the Ledger Margin
         </h2>
 
-        {isVisible && (
-          <>
-            <Script 
-              src="https://elfsightcdn.com/platform.js" 
-              strategy="afterInteractive" 
-            />
-            <div 
-              className="elfsight-app-f1d71447-2b1f-4470-88de-d0ff6e124ff2" 
-              data-elfsight-app-lazy
-            />
-          </>
-        )}
+        <div className={styles.widgetWrapper}>
+          {isVisible && (
+            <>
+              <Script 
+                src="https://elfsightcdn.com/platform.js" 
+                strategy="afterInteractive" 
+              />
+              <div 
+                className="elfsight-app-f1d71447-2b1f-4470-88de-d0ff6e124ff2" 
+                data-elfsight-app-lazy
+              />
+            </>
+          )}
+        </div>
       </div>
     </section>
   );

@@ -250,8 +250,9 @@ export default function Home() {
       </section>
 
       {/* ---------------- TESTIMONIALS ---------------- */}
-      <GoogleReviews />
-
+     <div className="testimonials" style={{height:"600px",minHeight:'600px'}} >
+        <GoogleReviews />
+      </div>
       {/* ---------------- FAQ ---------------- */}
       <section id="faq" className="faq-section">
         <div className="faq-container">
