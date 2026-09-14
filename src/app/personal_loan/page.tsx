@@ -3,72 +3,75 @@
 import { useState } from "react";
 import "./personal-loan.css"
 import HeroVerificationCard from "@/components/HeroVerificationCard";
+import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
+import '../(loanpage)/loan-page.css'
 
 const categories = [
     {
         name: "Salaried",
         shortDescription: "For employees receiving a regular monthly salary.",
         requirements: [
-            "Stable employment with a regular source of income",
-            "Latest salary slips may be required",
-            "Recent bank statements may be required",
+            "Stable employment with a regular source of income Min - 25,000 INR",
+            "3 Months Latest salary slips",
+            "6 Months bank statements may be required",
             "PAN and Aadhaar or other valid KYC documents",
             "Minimum age and income requirements depend on the lender",
+            "1 recent passport-size photograph",
         ],
     },
+
     {
         name: "Self Employed",
         shortDescription: "For individuals running their own business or working independently.",
         requirements: [
-            "Stable business or self-employment income",
-            "Bank statements may be required",
-            "ITR or other income proof may be required",
+            "Last 2 years' ITR (Income Tax Return) — minimum annual income of ₹5–10 lakh",
+            "GST Registration Certificate and GST Returns (if applicable)",
+            "Udyam Registration Certificate (MSME registration)",
+            "Last 6 months' Current Account bank statement",
+            "Certificate of Incorporation (COI), for registered businesses/companies",
             "PAN and Aadhaar or other valid KYC documents",
-            "Business vintage and income criteria depend on the lender",
+            "1 recent passport-size photograph",
         ],
     },
     {
         name: "Professional",
-        shortDescription: "For eligible professionals with a regular source of income.",
+        shortDescription: "For doctors, chartered accountants, architects, and other qualified professionals.",
         requirements: [
-            "Regular and verifiable professional income",
-            "Relevant professional or business documents where applicable",
-            "Recent bank statements may be required",
+            "Minimum annual income of ₹4 lakh",
+            "Educational degree / professional qualification certificate",
+            "Last 6 months' bank statement",
+            "Certificate of Incorporation (COI), if practicing under a registered firm",
             "PAN and Aadhaar or other valid KYC documents",
-            "Professional eligibility criteria depend on the lender",
         ],
     },
     {
         name: "Housewife",
-        shortDescription: "Loan options may be available subject to lender-specific eligibility.",
+        shortDescription: "For homemakers without independent income, based on household or co-applicant financial standing.",
         requirements: [
-            "Eligibility depends on the lender's income and profile requirements",
-            "A co-applicant or alternate income source may be considered by some lenders",
-            "Bank statements may be required",
+            "Preapproved offers available with minimal documentation",
             "PAN and Aadhaar or other valid KYC documents",
-            "Final approval depends on the lender's policies",
         ],
     },
+    // {
+    //     name: "Business Owner",
+    //     shortDescription: "For business owners looking for suitable personal loan options.",
+    //     requirements: [
+    //         "Established and verifiable business income",
+    //         "Business and financial documents may be required",
+    //         "Recent bank statements may be required",
+    //         "ITR or other income proof may be required",
+    //         "Business vintage, turnover and other criteria depend on the lender",
+    //     ],
+    // },
     {
-        name: "Business Owner",
-        shortDescription: "For business owners looking for suitable personal loan options.",
+        name: "Pensioner",
+        shortDescription: "For retired individuals receiving a regular pension.",
         requirements: [
-            "Established and verifiable business income",
-            "Business and financial documents may be required",
-            "Recent bank statements may be required",
-            "ITR or other income proof may be required",
-            "Business vintage, turnover and other criteria depend on the lender",
-        ],
-    },
-    {
-        name: "Pensioner / Retired",
-        shortDescription: "For eligible pensioners and retired individuals.",
-        requirements: [
-            "Regular pension or eligible income source",
-            "Pension-related documents may be required",
-            "Recent bank statements may be required",
+            "Minimum monthly pension of ₹30,000",
+            "Maximum age limit: 70 years",
+            "Pension account bank statement (last 6 months)",
             "PAN and Aadhaar or other valid KYC documents",
-            "Age and repayment criteria depend on the lender",
+            "Insurance requirement depends on the lender's policy",
         ],
     },
 ];
@@ -98,14 +101,12 @@ const page = () => {
         <main className="personal-loan-page">
 
             {/* HERO SECTION */}
-            <section className="personal-loan-hero">
-
+            <section className="personal-loan-hero ">
                 <div className="hero-badge">
-                    Personal Loan
+                    ⚡ Interest Rates Starting @ 9.99%* p.a.
                 </div>
-
                 <h1>
-                    Personal Loan Starting from 9.99% – Compare 42+ Banks & NBFCs
+                    Personal Loan Online – Check Eligibility & Apply Instantly
                 </h1>
 
                 <p className="hero-description">
@@ -138,54 +139,63 @@ const page = () => {
 
 
             {/* INTRO SECTION */}
-            <section className="personal-loan-content">
 
-                <div className="section-label">
-                    PERSONAL LOAN
+            <div className="loan-page-row">
+                <section className="loan-info-text">
+                    <h2>Compare Personal Loan Options Online</h2>
+
+                    <p>
+                        As a <strong>loan assistance partner</strong>, LoanSaarthi
+                        helps you explore suitable loan options from multiple banks
+                        and NBFCs instead of limiting your application to a single
+                        lender.
+                    </p>
+
+                    <p>
+                        Our team can help you compare available options and proceed
+                        with a lender that may be suitable for your profile, subject
+                        to the lender's eligibility criteria, policies and final
+                        approval.
+                    </p>
+
+                    <h2>No Office Visit Required</h2>
+
+                    <p>
+                        The initial loan assistance process can be completed
+                        <strong> digitally from anywhere in India</strong>. You don't
+                        need to visit the LoanSaarthi office to begin your application.
+                    </p>
+
+                    <p>
+                        You also don't necessarily need an existing bank account with
+                        the selected lender. Account requirements, eligibility,
+                        interest rate, loan amount and final approval depend on the
+                        respective bank or NBFC's policies.
+                    </p>
+
+                    <p className="content-highlight">
+                        <strong>Compare. Choose. Apply — with LoanSaarthi.</strong>
+                    </p>
+                </section>
+
+                <div className="loan-page-calculator">
+                    <LoanEmiCalculator
+                        variant="loan"
+                        title="Personal Loan EMI Calculator" amountLabel="Loan Amount"
+                        amountDefault={500000}
+                        amountMin={50000}
+                        amountMax={2500000} amountStep={10000}
+                        tenureDefault={3}
+                        tenureMin={1}
+                        tenureMax={5} rateLabel="Interest Rate (% p.a.)"
+                        rateDefault={9.99}
+                        rateMin={9.5}
+                        rateMax={18.0}
+                        rateStep={0.1}
+                        emiLabel="Monthly EMI"
+                    />
                 </div>
-
-                <h2>
-                    Compare Personal Loan Options Online
-                </h2>
-
-                <p>
-                    As a <strong>loan assistance partner</strong>, LoanSaarthi
-                    helps you explore suitable loan options from multiple banks
-                    and NBFCs instead of limiting your application to a single
-                    lender.
-                </p>
-
-                <p>
-                    Our team can help you compare available options and proceed
-                    with a lender that may be suitable for your profile, subject
-                    to the lender's eligibility criteria, policies and final
-                    approval.
-                </p>
-
-                <h2>
-                    Apply for a Personal Loan Online – No Office Visit Required
-                </h2>
-
-                <p>
-                    The initial loan assistance process can be completed
-                    <strong> digitally from anywhere in India</strong>. You don't
-                    need to visit the LoanSaarthi office to begin your application.
-                </p>
-
-                <p>
-                    You also don't necessarily need an existing bank account with
-                    the selected lender. Account requirements, eligibility,
-                    interest rate, loan amount and final approval depend on the
-                    respective bank or NBFC's policies.
-                </p>
-
-                <p className="content-highlight">
-                    <strong>
-                        Compare. Choose. Apply — with LoanSaarthi.
-                    </strong>
-                </p>
-
-            </section>
+            </div>
 
 
             {/* WHO CAN APPLY SECTION */}
@@ -193,13 +203,15 @@ const page = () => {
 
                 <div className="section-heading">
 
-                    <div className="section-label">
+                    {/* <div className="section-label">
                         ELIGIBILITY
-                    </div>
+                    </div> */}
 
-                    <h2>
+                    {/* <h2>
                         Who Can Apply
-                    </h2>
+                    </h2> */}
+
+                    <h2>Eligibility Criteria</h2>
 
                     <p>
                         Select your employment or income category to understand
@@ -350,8 +362,22 @@ const page = () => {
                             </div>
 
 
-                            {/* Existing HeroVerificationCard can be placed here later */}
-                            {showForm && <HeroVerificationCard />}
+                            {showForm && (
+                                <div className="verification-section">
+                                    <div className="verification-address">
+                                        <h4>Our Office</h4>
+                                        <p>
+                                            LoanSaarthi<br />
+                                            Goswami Girdhari Lal Marg,<br />
+                                            New Patel Nagar, Shadipur,<br />
+                                            Delhi
+                                        </p>
+                                    </div>
+                                    <div className="verification-form">
+                                        <HeroVerificationCard />
+                                    </div>
+                                </div>
+                            )}
                         </div>
 
                     )}
