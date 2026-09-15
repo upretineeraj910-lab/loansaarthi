@@ -18,14 +18,14 @@ const OFFERINGS: Offering[] = [
         icon: "/images/icons/home-loan.png",
     },
     {
-        name: "Personal Loan",
+        name: "Education Loan",
         description:
-            "Unlock financial flexibility and achieve your goals with Loan Saarthi's personalized personal loan solutions.",
-        href: "/personal-loan",
+            "Unlock financial flexibility and achieve your goals with Loan Saarthi's personalized education loan solutions.",
+        href: "/education-loan",
         icon: "/images/icons/personal-loan-1.png",
     },
     {
-        name: "Business Loan",
+        name: "Loan Balance Transfer",
         description:
             "Fuel your business growth with confidence through Loan Saarthi's tailored business loan solutions.",
         href: "/business-loan",
