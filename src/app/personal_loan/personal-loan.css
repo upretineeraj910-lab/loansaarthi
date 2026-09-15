@@ -74,12 +74,11 @@
   font-family: var(--ls-font);
   color: var(--ls-charcoal);
 
+  /* Updated: Soft vibrant pastel fintech gradient */
   background:
-    linear-gradient(
-      180deg,
-      #f7faf7 0%,
-      #f3f6f3 100%
-    );
+    radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.07) 0%, transparent 45%),
+    linear-gradient(180deg, #f0f7ec 0%, #f7fbf5 40%, #f4f8f3 100%);
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -141,13 +140,14 @@
   position: absolute;
   inset: 0;
 
+  /* Updated: Seamless blend with the new tinted background */
   background:
     linear-gradient(
       90deg,
-      rgba(247, 250, 247, 0.98) 0%,
-      rgba(247, 250, 247, 0.94) 42%,
-      rgba(247, 250, 247, 0.25) 75%,
-      rgba(247, 250, 247, 0) 100%
+      rgba(240, 247, 236, 0.98) 0%,
+      rgba(240, 247, 236, 0.94) 42%,
+      rgba(240, 247, 236, 0.25) 75%,
+      rgba(240, 247, 236, 0) 100%
     );
 
   pointer-events: none;
@@ -176,10 +176,12 @@
 
   padding: 7px 13px;
 
-  background: var(--ls-green-light);
-  border: 1px solid rgba(111, 174, 69, 0.18);
+  /* Updated: Rich frosted-mint badge */
+  background: rgba(220, 245, 212, 0.85);
+  border: 1px solid rgba(111, 174, 69, 0.35);
 
-  color: var(--ls-green-dark);
+  /* color: var(--ls-green-dark); */
+  color: var(--ls-black);
 
   font-size: 11px;
   font-weight: 750;
@@ -253,9 +255,10 @@
 
   padding: 13px 14px;
 
-  background: rgba(255, 255, 255, 0.86);
+  /* Updated: Soft glass card */
+  background: rgba(255, 255, 255, 0.92);
 
-  border: 1px solid rgba(17, 21, 19, 0.07);
+  border: 1px solid rgba(111, 174, 69, 0.16);
 
   border-radius: var(--ls-radius-sm);
 
@@ -276,7 +279,8 @@
 
   border-radius: 50%;
 
-  background: var(--ls-green);
+  /* Updated: Vibrant gradient icon bg */
+  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
 
   color: var(--ls-white);
 
@@ -322,7 +326,7 @@
 
   background: var(--ls-white);
 
-  border: 1px solid var(--ls-gray-100);
+  border: 1px solid rgba(111, 174, 69, 0.12);
 
   border-radius: var(--ls-radius-lg);
 
@@ -375,14 +379,15 @@
 
   padding: 15px 18px;
 
+  /* Updated: Rich tint gradient */
   background:
     linear-gradient(
       135deg,
-      #f6fbf3,
-      #ffffff
+      #eef8eb 0%,
+      #f8fcf7 100%
     );
 
-  border: 1px solid rgba(111, 174, 69, 0.14);
+  border: 1px solid rgba(111, 174, 69, 0.22);
   border-left: 3px solid var(--ls-green);
 
   border-radius: var(--ls-radius-sm);
@@ -503,7 +508,7 @@
 
   background: var(--ls-white);
 
-  border: 1px solid var(--ls-gray-100);
+  border: 1px solid rgba(111, 174, 69, 0.14);
 
   border-radius: var(--ls-radius-md);
 
@@ -521,9 +526,10 @@
 .apply_box:hover {
   transform: translateY(-3px);
 
-  background: #fcfefb;
+  /* Updated: Soft warm highlight */
+  background: #f5fbf2;
 
-  border-color: rgba(111, 174, 69, 0.45);
+  border-color: rgba(111, 174, 69, 0.55);
 
   box-shadow: var(--ls-shadow-md);
 }
@@ -551,9 +557,10 @@
 
   color: var(--ls-green-dark);
 
-  background: var(--ls-green-light);
+  /* Updated: Fresh pill tone */
+  background: #e4f5de;
 
-  border: 1px solid rgba(111, 174, 69, 0.15);
+  border: 1px solid rgba(111, 174, 69, 0.25);
 
   border-radius: 999px;
 
@@ -659,7 +666,7 @@
 
   background: var(--ls-white);
 
-  border: 1px solid var(--ls-gray-100);
+  border: 1px solid rgba(111, 174, 69, 0.15);
 
   border-radius: var(--ls-radius-lg);
 
@@ -747,9 +754,10 @@
 
   padding: 13px 15px;
 
-  background: var(--ls-gray-50);
+  /* Updated: Soft pale mint item bg */
+  background: #f8fbf6;
 
-  border: 1px solid rgba(17, 21, 19, 0.035);
+  border: 1px solid rgba(111, 174, 69, 0.10);
 
   border-radius: var(--ls-radius-sm);
 }
@@ -766,7 +774,7 @@
 
   color: var(--ls-white);
 
-  background: var(--ls-green);
+  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
 
   border-radius: 50%;
 
@@ -791,14 +799,15 @@
 .requirements-note {
   padding: 16px 18px;
 
+  /* Updated: Multi-stop fintech glow */
   background:
     linear-gradient(
       135deg,
-      #f0f8ec,
-      #f8fbf6
+      #eaf6e6 0%,
+      #f4fbf1 100%
     );
 
-  border: 1px solid rgba(111, 174, 69, 0.18);
+  border: 1px solid rgba(111, 174, 69, 0.25);
 
   border-radius: var(--ls-radius-sm);
 }
@@ -844,7 +853,8 @@
 
   color: var(--ls-white);
 
-  background: var(--ls-green);
+  /* Updated: Vivid high-conversion gradient */
+  background: linear-gradient(135deg, #7ec44f 0%, #589934 100%);
 
   border: 0;
   border-radius: 999px;
@@ -855,7 +865,7 @@
   cursor: pointer;
 
   box-shadow:
-    0 4px 12px rgba(111, 174, 69, 0.2);
+    0 4px 12px rgba(111, 174, 69, 0.28);
 
   transition:
     transform 0.18s ease,
@@ -864,12 +874,12 @@
 }
 
 .requirements-note button:hover {
-  background: var(--ls-green-dark);
+  background: linear-gradient(135deg, #6fae45 0%, #478426 100%);
 
   transform: translateY(-1px);
 
   box-shadow:
-    0 6px 16px rgba(111, 174, 69, 0.26);
+    0 6px 18px rgba(111, 174, 69, 0.38);
 }
 
 
@@ -906,7 +916,7 @@
 
   background: var(--ls-white);
 
-  border: 1px solid var(--ls-gray-100);
+  border: 1px solid rgba(111, 174, 69, 0.14);
 
   border-radius: var(--ls-radius-md);
 
@@ -962,11 +972,12 @@
 
   color: var(--ls-white);
 
+  /* Updated: Deep premium dark forest-charcoal gradient */
   background:
     linear-gradient(
       135deg,
-      #151917,
-      #202521
+      #0d140f 0%,
+      #1a241c 100%
     );
 
   border-radius: var(--ls-radius-md);
@@ -989,7 +1000,7 @@
   align-items: center;
   justify-content: center;
 
-  background: var(--ls-green);
+  background: linear-gradient(135deg, #7ec44f 0%, #589934 100%);
 
   color: var(--ls-white);
 
@@ -1075,11 +1086,12 @@
   }
 
   .personal-loan-hero::before {
+    /* Updated: Matching soft responsive mobile gradient */
     background:
       linear-gradient(
         180deg,
-        #f7faf7 0%,
-        #f7faf7 100%
+        #f0f7ec 0%,
+        #f4f8f3 100%
       );
   }
 

@@ -13,7 +13,7 @@ const categories = [
         requirements: [
             "Stable employment with a regular source of income Min - 25,000 INR",
             "3 Months Latest salary slips",
-            "6 Months bank statements may be required",
+            "6 Months bank statements ",
             "PAN and Aadhaar or other valid KYC documents",
             "Minimum age and income requirements depend on the lender",
             "1 recent passport-size photograph",
@@ -142,7 +142,7 @@ const page = () => {
 
             <div className="loan-page-row">
                 <section className="loan-info-text">
-                    <h2>Compare Personal Loan Options Online</h2>
+                    <h2>Compare Personal Loan</h2>
 
                     <p>
                         As a <strong>loan assistance partner</strong>, LoanSaarthi
@@ -173,9 +173,9 @@ const page = () => {
                         respective bank or NBFC's policies.
                     </p>
 
-                    <p className="content-highlight">
+                    {/* <p className="content-highlight">
                         <strong>Compare. Choose. Apply — with LoanSaarthi.</strong>
-                    </p>
+                    </p> */}
                 </section>
 
                 <div className="loan-page-calculator">
