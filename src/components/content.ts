@@ -138,4 +138,6 @@ export const BANKS = [
   { name: "Aditya Birla Capital", logo: "/banks/ADITYA BIRLA.svg" }, // Apne file extension ke hisaab se check kar lein
   { name: "Piramal Finance", logo: "/banks/PIRAMAL FINANCE.svg" },
   { name: "L&T Finance", logo: "/banks/L&T.png" },
+  { name: "Poonawalla", logo: "/banks/poonawalla_Fincorp.svg" },
+
 ];

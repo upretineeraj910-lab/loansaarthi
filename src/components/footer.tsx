@@ -2,18 +2,24 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import "./Footer.css";
 
 export default function Footer() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const router = useRouter();
 
-  // Check login status from server
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Check login status
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch("/api/auth/me");
+        const res = await fetch("/api/auth/me", {
+          method: "GET",
+          credentials: "include",
+          cache: "no-store",
+        });
 
         if (!res.ok) {
           setIsLoggedIn(false);
@@ -30,20 +36,27 @@ export default function Footer() {
     };
 
     checkAuth();
-  }, []);
+  }, [pathname]);
 
   // Logout
   const handleLogout = async () => {
     try {
       const res = await fetch("/api/logout", {
         method: "POST",
+        credentials: "include",
       });
 
-      if (res.ok) {
-        setIsLoggedIn(false);
-        router.push("/login");
-        router.refresh();
+      if (!res.ok) {
+        console.error("Logout failed");
+        return;
       }
+
+      // Immediately update UI
+      setIsLoggedIn(false);
+
+      // Go to login
+      router.push("/login");
+      router.refresh();
     } catch (error) {
       console.error("LOGOUT ERROR:", error);
     }
@@ -86,7 +99,9 @@ export default function Footer() {
             {isLoggedIn ? (
               <>
                 <li>
-                  <Link href="/dashboard">Dashboard</Link>
+                  <Link href="/dashboard">
+                    Dashboard
+                  </Link>
                 </li>
 
                 <li>
@@ -101,7 +116,9 @@ export default function Footer() {
               </>
             ) : (
               <li>
-                <Link href="/login">Login</Link>
+                <Link href="/login">
+                  Login
+                </Link>
               </li>
             )}
           </ul>
@@ -113,19 +130,27 @@ export default function Footer() {
 
           <ul>
             <li>
-              <Link href="/personal-loan">Personal Loan</Link>
+              <Link href="/personal-loan">
+                Personal Loan
+              </Link>
             </li>
 
             <li>
-              <Link href="/business-loan">Business Loan</Link>
+              <Link href="/business-loan">
+                Business Loan
+              </Link>
             </li>
 
             <li>
-              <Link href="/home-loan">Home Loan</Link>
+              <Link href="/home-loan">
+                Home Loan
+              </Link>
             </li>
 
             <li>
-              <Link href="/education-loan">Education Loan</Link>
+              <Link href="/education-loan">
+                Education Loan
+              </Link>
             </li>
           </ul>
         </div>
@@ -148,12 +173,16 @@ export default function Footer() {
 
           <div className="ls-contact-item">
             <span className="ls-contact-icon">☎</span>
-            <a href="tel:01125792874">011-25792874</a>
+            <a href="tel:01125792874">
+              011-25792874
+            </a>
           </div>
 
           <div className="ls-contact-item">
             <span className="ls-contact-icon">📱</span>
-            <a href="tel:+917669486600">+91-7669486600</a>
+            <a href="tel:+917669486600">
+              +91-7669486600
+            </a>
           </div>
 
           <div className="ls-contact-item">
@@ -171,7 +200,8 @@ export default function Footer() {
         <div className="ls-footer-bottom-container">
 
           <p>
-            © {new Date().getFullYear()} LoanSaarthi. All Rights Reserved.
+            © {new Date().getFullYear()} LoanSaarthi.
+            All Rights Reserved.
           </p>
 
           <div className="ls-footer-bottom-links">

@@ -73,10 +73,10 @@ export default function Home() {
           <Reveal>
             <h1 className="hero-title">
               Get Loans at Lowest Interest Rates –<br />
-              Compare 42 Banks & NBFCs.
+              Compare 42+ Banks & NBFCs.
             </h1>
             <p className="hero-text">
-              We compare offers across 42 banks and NBFCs, prepare your file,
+              We compare offers across 42+ banks and NBFCs, prepare your file,
               and follow it through to disbursement — so the only thing you
               sign is the sanction letter.
             </p>
@@ -99,7 +99,7 @@ export default function Home() {
                 <div className="stat-label">avg. sanction</div>
               </div>
               <div>
-                <div className="stat-number">42</div>
+                <div className="stat-number">42+</div>
                 <div className="stat-label">partner lenders</div>
               </div>
             </div>

@@ -207,13 +207,13 @@ export default function LoanEmiCalculator({
           <span>Interest {100 - principalShare}%</span>
         </div>
 
-        <LedgerRow label="Principal" value={fmt(amount)} />
-        <LedgerRow label="Total interest" value={fmt(totalInterest)} />
-        <LedgerRow label="Total payable" value={fmt(totalPay)} />
+        <LedgerRow label="Principal :- " value={fmt(amount)} />
+        <LedgerRow label="Total interest :- " value={fmt(totalInterest)} />
+        <LedgerRow label="Total payable :- " value={fmt(totalPay)} />
 
-        <a href="#contact" className="btn-get-rate">
-          Get this rate reviewed <ArrowRight size={15} aria-hidden="true" />
-        </a>
+        {/* <a href="#contact" className="btn-get-rate">
+          Get this rate reviewed  
+        </a>*/}
       </div>
     </div>
   );
