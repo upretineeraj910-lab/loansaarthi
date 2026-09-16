@@ -1,15 +1,1769 @@
-/* =========================================================
-   Home Loan for Salaried — Page Scoped CSS
-   ========================================================= */
 
-.hls-page,
-.hls-page *,
-.hls-page *::before,
-.hls-page *::after {
+:root {
+  --ls-green: #6fae45;
+  --ls-green-dark: #4f8f2f;
+  --ls-green-light: #edf7e9;
+  --ls-green-soft: #f5faF2;
+
+  --ls-black: #111513;
+  --ls-charcoal: #252a27;
+
+  --ls-gray-50: #f8faf8;
+  --ls-gray-100: #edf1ed;
+  --ls-gray-200: #e2e7e2;
+  --ls-gray-300: #cbd2cc;
+  --ls-gray-500: #68716a;
+  --ls-gray-700: #3f4741;
+
+  --ls-white: #ffffff;
+
+  --ls-radius-xs: 8px;
+  --ls-radius-sm: 12px;
+  --ls-radius-md: 16px;
+  --ls-radius-lg: 22px;
+
+  --ls-shadow-xs:
+    0 1px 4px rgba(17, 21, 19, 0.04);
+
+  --ls-shadow-sm:
+    0 4px 16px rgba(17, 21, 19, 0.06);
+
+  --ls-shadow-md:
+    0 12px 30px rgba(17, 21, 19, 0.08);
+
+  --ls-shadow-lg:
+    0 20px 50px rgba(17, 21, 19, 0.11);
+
+  --ls-maxw: 1180px;
+
+  --ls-font:
+    "Inter",
+    "Segoe UI",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+}
+
+
+/* =========================
+   GLOBAL RESET
+   ========================= */
+
+.personal-loan-page,
+.personal-loan-page *,
+.personal-loan-page *::before,
+.personal-loan-page *::after {
   box-sizing: border-box;
 }
 
-.hls-page {
+.personal-loan-page {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+
+  font-family: var(--ls-font);
+  color: var(--ls-charcoal);
+
+  /* Updated: Soft vibrant pastel fintech gradient */
+  background:
+    radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
+    radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.07) 0%, transparent 45%),
+    linear-gradient(180deg, #f0f7ec 0%, #f7fbf5 40%, #f4f8f3 100%);
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.personal-loan-page img {
+  max-width: 100%;
+  height: auto;
+}
+
+.personal-loan-page button,
+.personal-loan-page input,
+.personal-loan-page textarea,
+.personal-loan-page select {
+  font: inherit;
+}
+
+
+/* =========================
+   SECTION SYSTEM
+   ========================= */
+
+.personal-loan-page section {
+  width: min(100%, var(--ls-maxw));
+  margin: 0 auto;
+  padding: 40px 24px;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.personal-loan-hero {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-height: 430px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 48px max(24px, calc((100% - 1180px) / 2));
+
+  background-image: url("/personal_loan_background.png");
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  background-position: right center;
+
+  overflow: hidden;
+}
+
+/* subtle readability layer */
+.personal-loan-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* Updated: Seamless blend with the new tinted background */
+  background:
+    linear-gradient(
+      90deg,
+      rgba(240, 247, 236, 0.98) 0%,
+      rgba(240, 247, 236, 0.94) 42%,
+      rgba(240, 247, 236, 0.25) 75%,
+      rgba(240, 247, 236, 0) 100%
+    );
+
+  pointer-events: none;
+}
+
+.personal-loan-hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+.personal-loan-hero > * {
+  max-width: 700px;
+}
+
+
+/* =========================
+   HERO BADGE
+   ========================= */
+
+.hero-badge {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+
+  padding: 7px 13px;
+
+  /* Updated: Rich frosted-mint badge */
+  background: rgba(220, 245, 212, 0.85);
+  border: 1px solid rgba(111, 174, 69, 0.35);
+
+  /* color: var(--ls-green-dark); */
+  color: var(--ls-black);
+
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1;
+
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+
+  border-radius: 999px;
+
+  margin-bottom: 16px;
+}
+
+
+/* =========================
+   HERO HEADING
+   ========================= */
+
+.personal-loan-hero h1 {
+  max-width: 680px;
+
+  margin: 0 0 14px;
+
+  color: var(--ls-black);
+
+  font-size: clamp(30px, 3.5vw, 44px);
+  line-height: 1.08;
+
+  font-weight: 800;
+
+  letter-spacing: -0.035em;
+}
+
+
+/* =========================
+   HERO DESCRIPTION
+   ========================= */
+
+.hero-description {
+  max-width: 650px;
+
+  margin: 0 0 24px;
+
+  color: var(--ls-gray-700);
+
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+
+/* =========================
+   HERO POINTS
+   ========================= */
+
+.hero-points {
+  width: min(100%, 700px);
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.hero-point {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 13px 14px;
+
+  /* Updated: Soft glass card */
+  background: rgba(255, 255, 255, 0.92);
+
+  border: 1px solid rgba(111, 174, 69, 0.16);
+
+  border-radius: var(--ls-radius-sm);
+
+  box-shadow: var(--ls-shadow-xs);
+
+  backdrop-filter: blur(8px);
+}
+
+.hero-point span {
+  flex: 0 0 28px;
+
+  width: 28px;
+  height: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  /* Updated: Vibrant gradient icon bg */
+  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
+
+  color: var(--ls-white);
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.hero-point p {
+  margin: 0;
+
+  color: var(--ls-gray-700);
+
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   INTRO + EMI CALCULATOR
+   ========================================================= */
+
+.loan-page-row {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+
+  align-items: start;
+
+  gap: 22px;
+}
+
+
+/* =========================
+   INFORMATION CARD
+   ========================= */
+
+.loan-info-text {
+  width: 100%;
+  max-width: none;
+
+  padding: 24px;
+
+  background: var(--ls-white);
+
+  border: 1px solid rgba(111, 174, 69, 0.12);
+
+  border-radius: var(--ls-radius-lg);
+
+  box-shadow: var(--ls-shadow-sm);
+
+  /* IMPORTANT:
+     No fixed height
+     No internal scroll */
+  height: auto;
+  overflow: visible;
+}
+
+.loan-info-text h2 {
+  margin: 24px 0 9px;
+
+  color: var(--ls-black);
+
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.2;
+
+  font-weight: 780;
+
+  letter-spacing: -0.025em;
+}
+
+.loan-info-text h2:first-of-type {
+  margin-top: 0;
+}
+
+.loan-info-text p {
+  margin: 0 0 11px;
+
+  color: var(--ls-gray-700);
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.loan-info-text strong {
+  color: var(--ls-black);
+}
+
+
+/* =========================
+   CONTENT HIGHLIGHT
+   ========================= */
+
+.content-highlight {
+  margin-top: 18px;
+
+  padding: 15px 18px;
+
+  /* Updated: Rich tint gradient */
+  background:
+    linear-gradient(
+      135deg,
+      #eef8eb 0%,
+      #f8fcf7 100%
+    );
+
+  border: 1px solid rgba(111, 174, 69, 0.22);
+  border-left: 3px solid var(--ls-green);
+
+  border-radius: var(--ls-radius-sm);
+
+  box-shadow: var(--ls-shadow-xs);
+}
+
+.content-highlight strong {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: var(--ls-green-dark);
+
+  font-size: 15px;
+}
+
+
+/* =========================
+   CALCULATOR
+   ========================= */
+
+.loan-page-calculator {
+  width: 100%;
+  max-width: none;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   WHO CAN APPLY
+   ========================================================= */
+
+.apply-section {
+  padding-top: 30px;
+}
+
+
+/* =========================
+   SECTION HEADING
+   ========================= */
+
+.section-heading {
+  max-width: 680px;
+
+  margin: 0 auto 24px;
+
+  text-align: center;
+}
+
+.section-heading h2 {
+  margin: 0 0 7px;
+
+  color: var(--ls-black);
+
+  font-size: clamp(24px, 2.8vw, 32px);
+  line-height: 1.15;
+
+  font-weight: 800;
+
+  letter-spacing: -0.03em;
+}
+
+.section-heading p {
+  margin: 0;
+
+  color: var(--ls-gray-500);
+
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   CATEGORY GRID
+   ========================= */
+
+.apply_categary {
+  width: 100%;
+
+  opacity: 1;
+
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.apply_categary.category-hidden {
+  display: none;
+}
+
+.apply_grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+/* =========================
+   CATEGORY CARD
+   ========================= */
+
+.apply_box {
+  position: relative;
+
+  min-height: 132px;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 13px;
+
+  padding: 19px;
+
+  background: var(--ls-white);
+
+  border: 1px solid rgba(111, 174, 69, 0.14);
+
+  border-radius: var(--ls-radius-md);
+
+  box-shadow: var(--ls-shadow-xs);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.apply_box:hover {
+  transform: translateY(-3px);
+
+  /* Updated: Soft warm highlight */
+  background: #f5fbf2;
+
+  border-color: rgba(111, 174, 69, 0.55);
+
+  box-shadow: var(--ls-shadow-md);
+}
+
+.apply_box:active {
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   CARD NUMBER
+   ========================= */
+
+.apply_box_number {
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 30px;
+  height: 30px;
+
+  padding: 0 8px;
+
+  color: var(--ls-green-dark);
+
+  /* Updated: Fresh pill tone */
+  background: #e4f5de;
+
+  border: 1px solid rgba(111, 174, 69, 0.25);
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   CARD CONTENT
+   ========================= */
+
+.apply_box_content {
+  min-width: 0;
+  flex: 1;
+}
+
+.apply_box_content h3 {
+  margin: 1px 0 5px;
+
+  color: var(--ls-black);
+
+  font-size: 16px;
+  line-height: 1.25;
+
+  font-weight: 750;
+}
+
+.apply_box_content p {
+  margin: 0;
+
+  color: var(--ls-gray-500);
+
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   CARD ARROW
+   ========================= */
+
+.apply_box_arrow {
+  flex: 0 0 auto;
+
+  align-self: center;
+
+  color: var(--ls-gray-300);
+
+  font-size: 17px;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.apply_box:hover .apply_box_arrow {
+  color: var(--ls-green);
+
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   SELECTED CATEGORY
+   ========================================================= */
+
+.category-details {
+  display: none;
+
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.category-details.category-details-visible {
+  display: block;
+
+  animation:
+    ls-fade-in 0.28s ease forwards;
+}
+
+@keyframes ls-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   REQUIREMENTS
+   ========================================================= */
+
+.requirements-card {
+  width: 100%;
+
+  padding: 28px;
+
+  background: var(--ls-white);
+
+  border: 1px solid rgba(111, 174, 69, 0.15);
+
+  border-radius: var(--ls-radius-lg);
+
+  box-shadow: var(--ls-shadow-md);
+}
+
+
+/* =========================
+   BACK BUTTON
+   ========================= */
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  margin: 0 0 18px;
+  padding: 0;
+
+  color: var(--ls-green-dark);
+
+  background: none;
+  border: 0;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-button:hover {
+  opacity: 0.75;
+  transform: translateX(-2px);
+}
+
+
+/* =========================
+   REQUIREMENT HEADER
+   ========================= */
+
+.requirements-header h2 {
+  margin: 0 0 7px;
+
+  color: var(--ls-black);
+
+  font-size: 24px;
+  line-height: 1.2;
+
+  font-weight: 800;
+
+  letter-spacing: -0.025em;
+}
+
+.requirements-header p {
+  margin: 0 0 20px;
+
+  color: var(--ls-gray-500);
+
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+
+/* =========================
+   REQUIREMENTS LIST
+   ========================= */
+
+.requirements-list {
+  display: grid;
+
+  gap: 9px;
+
+  margin: 0 0 20px;
+}
+
+.requirement-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  padding: 13px 15px;
+
+  /* Updated: Soft pale mint item bg */
+  background: #f8fbf6;
+
+  border: 1px solid rgba(111, 174, 69, 0.10);
+
+  border-radius: var(--ls-radius-sm);
+}
+
+.requirement-number {
+  flex: 0 0 27px;
+
+  width: 27px;
+  height: 27px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--ls-white);
+
+  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
+
+  border-radius: 50%;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.requirement-item p {
+  margin: 0;
+
+  color: var(--ls-gray-700);
+
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+
+/* =========================
+   REQUIREMENT NOTE
+   ========================= */
+
+.requirements-note {
+  padding: 16px 18px;
+
+  /* Updated: Multi-stop fintech glow */
+  background:
+    linear-gradient(
+      135deg,
+      #eaf6e6 0%,
+      #f4fbf1 100%
+    );
+
+  border: 1px solid rgba(111, 174, 69, 0.25);
+
+  border-radius: var(--ls-radius-sm);
+}
+
+.requirements-note strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: var(--ls-green-dark);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.requirements-note p {
+  margin: 0 0 8px;
+
+  color: var(--ls-gray-700);
+
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.requirements-note p:last-child {
+  margin-bottom: 0;
+}
+
+
+/* =========================
+   CTA BUTTON
+   ========================= */
+
+.requirements-note button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 34px;
+
+  margin-left: 4px;
+  padding: 7px 16px;
+
+  color: var(--ls-white);
+
+  /* Updated: Vivid high-conversion gradient */
+  background: linear-gradient(135deg, #7ec44f 0%, #589934 100%);
+
+  border: 0;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 4px 12px rgba(111, 174, 69, 0.28);
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.requirements-note button:hover {
+  background: linear-gradient(135deg, #6fae45 0%, #478426 100%);
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 18px rgba(111, 174, 69, 0.38);
+}
+
+
+/* =========================================================
+   VERIFICATION SECTION
+   ========================================================= */
+
+.verification-section {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 0.72fr)
+    minmax(0, 1.28fr);
+
+  align-items: start;
+
+  gap: 20px;
+
+  margin-top: 22px;
+}
+
+
+/* =========================
+   ADDRESS CARD
+   ========================= */
+
+.verification-address {
+  width: 100%;
+  max-width: none;
+
+  padding: 20px;
+
+  background: var(--ls-white);
+
+  border: 1px solid rgba(111, 174, 69, 0.14);
+
+  border-radius: var(--ls-radius-md);
+
+  box-shadow: var(--ls-shadow-xs);
+}
+
+.verification-address h4 {
+  margin: 0 0 8px;
+
+  color: var(--ls-black);
+
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.verification-address p {
+  margin: 0;
+
+  color: var(--ls-gray-700);
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+.verification-form {
+  width: 100%;
+  max-width: none;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   DISCLAIMER
+   ========================================================= */
+
+.loan-disclaimer {
+  width: min(100%, var(--ls-maxw));
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 14px;
+
+  margin: 4px auto 28px;
+
+  padding: 22px 24px;
+
+  color: var(--ls-white);
+
+  /* Updated: Deep premium dark forest-charcoal gradient */
+  background:
+    linear-gradient(
+      135deg,
+      #0d140f 0%,
+      #1a241c 100%
+    );
+
+  border-radius: var(--ls-radius-md);
+
+  box-shadow: var(--ls-shadow-md);
+}
+
+
+/* =========================
+   DISCLAIMER ICON
+   ========================= */
+
+.disclaimer-icon {
+  flex: 0 0 34px;
+
+  width: 34px;
+  height: 34px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(135deg, #7ec44f 0%, #589934 100%);
+
+  color: var(--ls-white);
+
+  border-radius: 50%;
+
+  font-size: 14px;
+  font-weight: 800;
+}
+
+
+/* =========================
+   DISCLAIMER CONTENT
+   ========================= */
+
+.loan-disclaimer h3 {
+  margin: 0 0 5px;
+
+  color: var(--ls-white);
+
+  font-size: 14px;
+  line-height: 1.3;
+
+  font-weight: 750;
+}
+
+.loan-disclaimer p {
+  max-width: 850px;
+
+  margin: 0;
+
+  color: #c8cfca;
+
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .personal-loan-hero {
+    min-height: 400px;
+
+    background-size: auto 90%;
+  }
+
+  .loan-page-row {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(320px, 0.9fr);
+  }
+
+  .apply_grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .personal-loan-page section {
+    padding: 32px 20px;
+  }
+
+  .personal-loan-hero {
+    min-height: auto;
+
+    padding:
+      42px
+      20px
+      32px;
+
+    background-image: none;
+  }
+
+  .personal-loan-hero::before {
+    /* Updated: Matching soft responsive mobile gradient */
+    background:
+      linear-gradient(
+        180deg,
+        #f0f7ec 0%,
+        #f4f8f3 100%
+      );
+  }
+
+  .personal-loan-hero h1 {
+    max-width: 650px;
+
+    font-size: clamp(28px, 6vw, 38px);
+  }
+
+  .hero-points {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+
+  .hero-point {
+    padding: 12px 14px;
+  }
+
+  .loan-page-row {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .loan-info-text {
+    padding: 21px;
+  }
+
+  .loan-page-calculator {
+    width: 100%;
+  }
+
+  .verification-section {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .personal-loan-page section {
+    padding: 28px 16px;
+  }
+
+  .personal-loan-hero {
+    padding:
+      32px
+      16px
+      28px;
+  }
+
+  .hero-badge {
+    margin-bottom: 13px;
+
+    padding: 6px 11px;
+
+    font-size: 10px;
+  }
+
+  .personal-loan-hero h1 {
+    margin-bottom: 12px;
+
+    font-size: 29px;
+    line-height: 1.1;
+  }
+
+  .hero-description {
+    margin-bottom: 18px;
+
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+
+  .hero-point {
+    padding: 11px 12px;
+  }
+
+  .hero-point p {
+    font-size: 12px;
+  }
+
+  .loan-info-text {
+    padding: 18px;
+  }
+
+  .loan-info-text h2 {
+    font-size: 20px;
+  }
+
+  .loan-info-text p {
+    font-size: 13.5px;
+  }
+
+  .content-highlight {
+    padding: 13px 15px;
+  }
+
+  .apply-section {
+    padding-top: 26px;
+  }
+
+  .section-heading {
+    margin-bottom: 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 24px;
+  }
+
+  .section-heading p {
+    font-size: 13px;
+  }
+
+  .apply_grid {
+    grid-template-columns: 1fr;
+
+    gap: 10px;
+  }
+
+  .apply_box {
+    min-height: 0;
+
+    padding: 16px;
+  }
+
+  .apply_box_content h3 {
+    font-size: 15px;
+  }
+
+  .apply_box_content p {
+    font-size: 12px;
+  }
+
+  .requirements-card {
+    padding: 20px;
+  }
+
+  .requirements-header h2 {
+    font-size: 21px;
+  }
+
+  .requirements-header p {
+    font-size: 13px;
+  }
+
+  .requirement-item {
+    padding: 12px;
+  }
+
+  .requirement-item p {
+    font-size: 12.5px;
+  }
+
+  .requirements-note {
+    padding: 14px;
+  }
+
+  .requirements-note p {
+    font-size: 12.5px;
+  }
+
+  .requirements-note button {
+    margin-top: 7px;
+    margin-left: 0;
+  }
+
+  .verification-address {
+    padding: 17px;
+  }
+
+  .loan-disclaimer {
+    flex-direction: row;
+
+    gap: 10px;
+
+    margin:
+      0
+      16px;
+
+    padding: 17px;
+  }
+
+  .disclaimer-icon {
+    flex-basis: 30px;
+
+    width: 30px;
+    height: 30px;
+
+    font-size: 12px;
+  }
+
+  .loan-disclaimer h3 {
+    font-size: 13px;
+  }
+
+  .loan-disclaimer p {
+    font-size: 11.5px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .personal-loan-hero h1 {
+    font-size: 26px;
+  }
+
+  .personal-loan-hero {
+    padding-top: 27px;
+  }
+
+  .requirements-card {
+    padding: 17px;
+  }
+
+  .loan-disclaimer {
+    align-items: flex-start;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .personal-loan-page *,
+  .personal-loan-page *::before,
+  .personal-loan-page *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+  }
+
+}
+
+
+
+/* =========================================================
+   LoanSaarthi Personal Loan — SEO Sections
+   NEW CSS ONLY
+   Existing personal-loan.css remains untouched.
+   ========================================================= */
+
+
+/* =========================================================
+   SEO CONTENT SECTION
+   ========================================================= */
+
+.ls-seo-content-section {
+    width: 100%;
+    margin: 28px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.ls-seo-content-inner {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+    padding: 28px 32px;
+    border-radius: 18px;
+    box-sizing: border-box;
+
+    /* intentionally transparent — does not alter page BGC */
+    background: transparent;
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.ls-seo-label {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+
+    opacity: 0.7;
+}
+
+.ls-seo-content-inner h2 {
+    margin: 0 0 10px;
+
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.2;
+}
+
+.ls-seo-content-inner p {
+    max-width: 900px;
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.ls-seo-keyword-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+.ls-seo-keyword-row span {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    border: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+
+/* =========================================================
+   BENEFITS SECTION
+   ========================================================= */
+
+.ls-seo-benefits-section {
+    width: 100%;
+    margin: 42px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.ls-seo-benefits-container {
+    width: min(1100px, 100%);
+    margin: 0 auto;
+}
+
+.ls-seo-benefits-heading {
+    max-width: 780px;
+    margin-bottom: 22px;
+}
+
+.ls-seo-benefits-heading h2 {
+    margin: 0 0 10px;
+
+    font-size: clamp(23px, 3vw, 32px);
+    line-height: 1.2;
+}
+
+.ls-seo-benefits-heading p {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.ls-seo-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.ls-seo-benefit-card {
+    position: relative;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    border: 1px solid rgba(0, 0, 0, 0.08);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.ls-seo-benefit-card:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.ls-seo-benefit-number {
+    display: inline-flex;
+
+    margin-bottom: 12px;
+
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    opacity: 0.6;
+}
+
+.ls-seo-benefit-card h3 {
+    margin: 0 0 8px;
+
+    font-size: 17px;
+    line-height: 1.3;
+}
+
+.ls-seo-benefit-card p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+
+.ls-faq-section {
+    width: 100%;
+    margin: 42px 0;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.ls-faq-container {
+    width: min(1000px, 100%);
+    margin: 0 auto;
+}
+
+.ls-faq-heading {
+    margin-bottom: 20px;
+}
+
+.ls-faq-heading h2 {
+    margin: 0;
+
+    font-size: clamp(23px, 3vw, 32px);
+    line-height: 1.25;
+}
+
+.ls-faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.ls-faq-item {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 13px;
+
+    overflow: hidden;
+}
+
+.ls-faq-item summary {
+    position: relative;
+
+    padding: 17px 48px 17px 18px;
+
+    cursor: pointer;
+
+    list-style: none;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    user-select: none;
+}
+
+.ls-faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.ls-faq-item summary::after {
+    content: "+";
+
+    position: absolute;
+    right: 18px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.ls-faq-item[open] summary::after {
+    content: "−";
+}
+
+.ls-faq-item p {
+    margin: 0;
+
+    padding: 0 18px 18px;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================================
+   CONNECT BUTTON
+   Scoped only to our new class
+   ========================================================= */
+
+.ls-connect-text {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    margin-top: 16px !important;
+}
+
+.ls-connect-text button {
+    border: 0;
+
+    padding: 7px 13px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    background: #6fae45;
+    color: #ffffff;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.ls-connect-text button:hover {
+    transform: translateY(-1px);
+    opacity: 0.9;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .ls-seo-content-section,
+    .ls-seo-benefits-section,
+    .ls-faq-section {
+        padding: 0 14px;
+        margin: 30px 0;
+    }
+
+    .ls-seo-content-inner {
+        padding: 22px 18px;
+    }
+
+    .ls-seo-benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 11px;
+    }
+
+    .ls-seo-benefit-card {
+        padding: 18px;
+    }
+
+    .ls-faq-item summary {
+        padding: 15px 42px 15px 15px;
+        font-size: 14px;
+    }
+
+    .ls-faq-item p {
+        padding: 0 15px 15px;
+        font-size: 13px;
+    }
+
+    .ls-seo-keyword-row {
+        gap: 6px;
+    }
+
+    .ls-seo-keyword-row span {
+        font-size: 11px;
+        padding: 6px 9px;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .ls-seo-content-inner {
+        padding: 19px 15px;
+        border-radius: 14px;
+    }
+
+    .ls-seo-benefit-card {
+        padding: 16px;
+        border-radius: 13px;
+    }
+
+    .ls-seo-benefit-card h3 {
+        font-size: 16px;
+    }
+
+    .ls-seo-benefit-card p {
+        font-size: 13px;
+    }
+
+    .ls-faq-item {
+        border-radius: 11px;
+    }
+
+    .ls-connect-text {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+}/* =========================================================
+   LoanSaarthi — Personal Loan Page
+   Theme Colors & Design Tokens (Preserved)
+   ========================================================= */
+
+:root {
+  --ls-green: #6fae45;
+  --ls-green-dark: #4f8f2f;
+  --ls-green-light: #edf7e9;
+  --ls-green-soft: #f5faF2;
+
+  --ls-black: #111513;
+  --ls-charcoal: #252a27;
+
+  --ls-gray-50: #f8faf8;
+  --ls-gray-100: #edf1ed;
+  --ls-gray-200: #e2e7e2;
+  --ls-gray-300: #cbd2cc;
+  --ls-gray-500: #68716a;
+  --ls-gray-700: #3f4741;
+
+  --ls-white: #ffffff;
+
+  --ls-radius-xs: 8px;
+  --ls-radius-sm: 12px;
+  --ls-radius-md: 16px;
+  --ls-radius-lg: 22px;
+
+  --ls-shadow-xs: 0 1px 4px rgba(17, 21, 19, 0.04);
+  --ls-shadow-sm: 0 4px 16px rgba(17, 21, 19, 0.06);
+  --ls-shadow-md: 0 12px 30px rgba(17, 21, 19, 0.08);
+  --ls-shadow-lg: 0 20px 50px rgba(17, 21, 19, 0.11);
+
+  --ls-maxw: 1180px;
+
+  --ls-font: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* =========================
+   GLOBAL RESET
+   ========================= */
+
+.personal-loan-page,
+.personal-loan-page *,
+.personal-loan-page *::before,
+.personal-loan-page *::after {
+  box-sizing: border-box;
+}
+
+.personal-loan-page {
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -25,28 +1779,41 @@
   overflow-x: hidden;
 }
 
-.hls-page img { max-width: 100%; height: auto; }
-.hls-page button,
-.hls-page input,
-.hls-page textarea,
-.hls-page select { font: inherit; }
+.personal-loan-page img {
+  max-width: 100%;
+  height: auto;
+}
 
-.hls-page section {
+.personal-loan-page button,
+.personal-loan-page input,
+.personal-loan-page textarea,
+.personal-loan-page select {
+  font: inherit;
+}
+
+/* =========================
+   SECTION SYSTEM
+   ========================= */
+
+.personal-loan-page section {
   width: min(100%, var(--ls-maxw));
   margin: 0 auto;
   padding: 40px 24px;
 }
 
-/* ---------- HERO ---------- */
-.hls-page .personal-loan-hero {
+/* =========================
+   HERO
+   ========================= */
+
+.personal-loan-hero {
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: 100% !important;
   min-height: 430px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 48px max(24px, calc((100% - 1180px) / 2));
+  padding: 48px 24px;
   background-image: url("/personal_loan_background.png");
   background-repeat: no-repeat;
   background-size: auto 100%;
@@ -54,7 +1821,7 @@
   overflow: hidden;
 }
 
-.hls-page .personal-loan-hero::before {
+.personal-loan-hero::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -68,13 +1835,13 @@
   pointer-events: none;
 }
 
-.hls-page .personal-loan-hero > * {
+.personal-loan-hero > * {
   position: relative;
   z-index: 1;
   max-width: 700px;
 }
 
-.hls-page .hero-badge {
+.hero-badge {
   width: fit-content;
   display: inline-flex;
   align-items: center;
@@ -92,7 +1859,7 @@
   margin-bottom: 16px;
 }
 
-.hls-page .personal-loan-hero h1 {
+.personal-loan-hero h1 {
   max-width: 680px;
   margin: 0 0 14px;
   color: var(--ls-black);
@@ -102,7 +1869,7 @@
   letter-spacing: -0.035em;
 }
 
-.hls-page .hero-description {
+.hero-description {
   max-width: 650px;
   margin: 0 0 24px;
   color: var(--ls-gray-700);
@@ -110,14 +1877,14 @@
   line-height: 1.65;
 }
 
-.hls-page .hero-points {
+.hero-points {
   width: min(100%, 700px);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
 }
 
-.hls-page .hero-point {
+.hero-point {
   min-width: 0;
   display: flex;
   align-items: flex-start;
@@ -130,7 +1897,7 @@
   backdrop-filter: blur(8px);
 }
 
-.hls-page .hero-point span {
+.hero-point span {
   flex: 0 0 28px;
   width: 28px;
   height: 28px;
@@ -144,113 +1911,146 @@
   font-weight: 800;
 }
 
-.hls-page .hero-point p {
+.hero-point p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 12.5px;
   line-height: 1.45;
 }
 
-/* ---------- INTRO + CALCULATOR ---------- */
-.hls-page .loan-page-calculator-section {
-  width: 100%;
-  max-width: var(--ls-maxw);
+/* =========================
+   INTRO + EMI ROW
+   ========================= */
+
+.loan-page-row {
+  width: min(100%, var(--ls-maxw));
   margin: 0 auto;
-  padding: 36px 24px;
-}
-
-.hls-page .loan-page-row {
-  width: 100%;
+  padding: 0 24px;
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
   align-items: start;
-  gap: 28px;
+  gap: 22px;
 }
 
-.hls-page .loan-info-text {
+.loan-info-text {
   width: 100%;
-  padding: 28px;
+  padding: 24px;
   background: var(--ls-white);
-  border: 1px solid rgba(111, 174, 69, 0.14);
+  border: 1px solid rgba(111, 174, 69, 0.12);
   border-radius: var(--ls-radius-lg);
   box-shadow: var(--ls-shadow-sm);
-  height: fit-content;
+  height: auto;
+  overflow: visible;
 }
 
-.hls-page .loan-info-text h2 {
-  margin: 24px 0 10px;
+.loan-info-text h2 {
+  margin: 24px 0 9px;
   color: var(--ls-black);
-  font-size: clamp(20px, 2vw, 25px);
-  line-height: 1.25;
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.2;
   font-weight: 780;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
-.hls-page .loan-info-text h2:first-of-type { margin-top: 0; }
+.loan-info-text h2:first-of-type {
+  margin-top: 0;
+}
 
-.hls-page .loan-info-text p {
-  margin: 0 0 12px;
+.loan-info-text p {
+  margin: 0 0 11px;
   color: var(--ls-gray-700);
-  font-size: 14.5px;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-.hls-page .loan-info-text p:last-child { margin-bottom: 0; }
-.hls-page .loan-info-text strong { color: var(--ls-black); }
-
-.hls-page .loan-page-calculator-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  width: 100%;
-  min-width: 0;
-}
-
-.hls-page .loan-page-calculator {
-  width: 100%;
-  min-width: 0;
-  position: sticky;
-  top: 24px;
-}
-
-.hls-page .loan-page-calculator > * {
-  width: 100% !important;
-  max-width: 100% !important;
-  margin: 0 !important;
-}
-
-.hls-page .ls-calc-seo-box {
-  padding: 18px 20px;
-  background: var(--ls-white);
-  border: 1px solid rgba(111, 174, 69, 0.14);
-  border-radius: var(--ls-radius-md);
-  box-shadow: var(--ls-shadow-xs);
-}
-
-.hls-page .ls-calc-seo-box h3 {
-  margin: 0 0 6px;
-  font-size: 16px;
+.loan-info-text strong {
   color: var(--ls-black);
-  font-weight: 750;
 }
 
-.hls-page .ls-calc-seo-box p {
+.loan-page-calculator {
+  width: 100%;
+  min-width: 0;
+}
+
+/* =========================
+   SEO CALCULATOR CONTENT
+   ========================= */
+
+.ls-seo-content-section {
+  width: min(100%, var(--ls-maxw));
+  margin: 28px auto;
+  padding: 0 24px;
+}
+
+.ls-seo-content-inner {
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 32px;
+  border-radius: var(--ls-radius-lg);
+  background: transparent;
+  border: 1px solid var(--ls-gray-200);
+}
+
+.ls-seo-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ls-gray-500);
+}
+
+.ls-seo-content-inner h2 {
+  margin: 0 0 10px;
+  color: var(--ls-black);
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.2;
+  font-weight: 780;
+}
+
+.ls-seo-content-inner p {
+  max-width: 900px;
   margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
   color: var(--ls-gray-700);
+  font-size: 15px;
+  line-height: 1.75;
 }
 
-/* ---------- APPLY ---------- */
-.hls-page .apply-section { padding-top: 30px; }
+.ls-seo-keyword-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
 
-.hls-page .section-heading {
+.ls-seo-keyword-row span {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ls-charcoal);
+  background: var(--ls-white);
+  border: 1px solid var(--ls-gray-200);
+}
+
+/* =========================
+   APPLY / CATEGORIES
+   ========================= */
+
+.apply-section {
+  padding-top: 30px;
+}
+
+.section-heading {
   max-width: 680px;
   margin: 0 auto 24px;
   text-align: center;
 }
 
-.hls-page .section-heading h2 {
+.section-heading h2 {
   margin: 0 0 7px;
   color: var(--ls-black);
   font-size: clamp(24px, 2.8vw, 32px);
@@ -259,23 +2059,24 @@
   letter-spacing: -0.03em;
 }
 
-.hls-page .section-heading p {
+.section-heading p {
   margin: 0;
   color: var(--ls-gray-500);
   font-size: 14px;
   line-height: 1.6;
 }
 
-.hls-page .apply_categary { width: 100%; }
-.hls-page .apply_categary.category-hidden { display: none; }
+.apply_categary.category-hidden {
+  display: none;
+}
 
-.hls-page .apply_grid {
+.apply_grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
-.hls-page .apply_box {
+.apply_box {
   position: relative;
   min-height: 132px;
   display: flex;
@@ -290,14 +2091,18 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
-.hls-page .apply_box:hover {
+.apply_box:hover {
   transform: translateY(-3px);
   background: #f5fbf2;
   border-color: rgba(111, 174, 69, 0.55);
   box-shadow: var(--ls-shadow-md);
 }
 
-.hls-page .apply_box_number {
+.apply_box:active {
+  transform: translateY(-1px);
+}
+
+.apply_box_number {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -313,8 +2118,12 @@
   font-weight: 800;
 }
 
-.hls-page .apply_box_content { min-width: 0; flex: 1; }
-.hls-page .apply_box_content h3 {
+.apply_box_content {
+  min-width: 0;
+  flex: 1;
+}
+
+.apply_box_content h3 {
   margin: 1px 0 5px;
   color: var(--ls-black);
   font-size: 16px;
@@ -322,14 +2131,14 @@
   font-weight: 750;
 }
 
-.hls-page .apply_box_content p {
+.apply_box_content p {
   margin: 0;
   color: var(--ls-gray-500);
   font-size: 12.5px;
   line-height: 1.5;
 }
 
-.hls-page .apply_box_arrow {
+.apply_box_arrow {
   flex: 0 0 auto;
   align-self: center;
   color: var(--ls-gray-300);
@@ -337,24 +2146,38 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.hls-page .apply_box:hover .apply_box_arrow {
+.apply_box:hover .apply_box_arrow {
   color: var(--ls-green);
   transform: translateX(3px);
 }
 
-/* ---------- CATEGORY DETAILS ---------- */
-.hls-page .category-details { display: none; opacity: 0; transform: translateY(8px); }
-.hls-page .category-details.category-details-visible {
+/* =========================
+   CATEGORY DETAILS / REQS
+   ========================= */
+
+.category-details {
+  display: none;
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.category-details.category-details-visible {
   display: block;
-  animation: hls-fade-in 0.28s ease forwards;
+  animation: ls-fade-in 0.28s ease forwards;
 }
 
-@keyframes hls-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes ls-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.hls-page .requirements-card {
+.requirements-card {
   width: 100%;
   padding: 28px;
   background: var(--ls-white);
@@ -363,7 +2186,7 @@
   box-shadow: var(--ls-shadow-md);
 }
 
-.hls-page .back-button {
+.back-button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -378,9 +2201,12 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.hls-page .back-button:hover { opacity: 0.75; transform: translateX(-2px); }
+.back-button:hover {
+  opacity: 0.75;
+  transform: translateX(-2px);
+}
 
-.hls-page .requirements-header h2 {
+.requirements-header h2 {
   margin: 0 0 7px;
   color: var(--ls-black);
   font-size: 24px;
@@ -389,16 +2215,20 @@
   letter-spacing: -0.025em;
 }
 
-.hls-page .requirements-header p {
+.requirements-header p {
   margin: 0 0 20px;
   color: var(--ls-gray-500);
   font-size: 14px;
   line-height: 1.55;
 }
 
-.hls-page .requirements-list { display: grid; gap: 9px; margin: 0 0 20px; }
+.requirements-list {
+  display: grid;
+  gap: 9px;
+  margin: 0 0 20px;
+}
 
-.hls-page .requirement-item {
+.requirement-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -408,7 +2238,7 @@
   border-radius: var(--ls-radius-sm);
 }
 
-.hls-page .requirement-number {
+.requirement-number {
   flex: 0 0 27px;
   width: 27px;
   height: 27px;
@@ -422,21 +2252,21 @@
   font-weight: 800;
 }
 
-.hls-page .requirement-item p {
+.requirement-item p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 13.5px;
   line-height: 1.55;
 }
 
-.hls-page .requirements-note {
+.requirements-note {
   padding: 16px 18px;
   background: linear-gradient(135deg, #eaf6e6 0%, #f4fbf1 100%);
   border: 1px solid rgba(111, 174, 69, 0.25);
   border-radius: var(--ls-radius-sm);
 }
 
-.hls-page .requirements-note strong {
+.requirements-note strong {
   display: block;
   margin-bottom: 5px;
   color: var(--ls-green-dark);
@@ -444,16 +2274,22 @@
   font-weight: 800;
 }
 
-.hls-page .requirements-note p {
+.requirements-note p {
   margin: 0 0 8px;
   color: var(--ls-gray-700);
   font-size: 13px;
   line-height: 1.55;
 }
 
-.hls-page .requirements-note p:last-child { margin-bottom: 0; }
+.requirements-note p:last-child {
+  margin-bottom: 0;
+}
 
-.hls-page .ls-connect-text {
+/* =========================
+   CONNECT CTA
+   ========================= */
+
+.ls-connect-text {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -461,7 +2297,7 @@
   margin-top: 14px;
 }
 
-.hls-page .ls-connect-text button {
+.ls-connect-text button {
   border: 0;
   padding: 7px 16px;
   border-radius: 999px;
@@ -474,14 +2310,17 @@
   transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
-.hls-page .ls-connect-text button:hover {
+.ls-connect-text button:hover {
   background: linear-gradient(135deg, #6fae45 0%, #478426 100%);
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(111, 174, 69, 0.38);
 }
 
-/* ---------- VERIFICATION ---------- */
-.hls-page .verification-section {
+/* =========================
+   VERIFICATION SECTION
+   ========================= */
+
+.verification-section {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
@@ -490,7 +2329,7 @@
   margin-top: 22px;
 }
 
-.hls-page .verification-address {
+.verification-address {
   width: 100%;
   padding: 20px;
   background: var(--ls-white);
@@ -499,43 +2338,41 @@
   box-shadow: var(--ls-shadow-xs);
 }
 
-.hls-page .verification-address h4 {
+.verification-address h4 {
   margin: 0 0 8px;
   color: var(--ls-black);
   font-size: 14px;
   font-weight: 750;
 }
 
-.hls-page .verification-address p {
+.verification-address p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 13px;
   line-height: 1.65;
 }
 
-.hls-page .verification-form { width: 100%; min-width: 0; }
-
-/* ---------- SEO LABELS / BENEFITS / FAQ ---------- */
-.hls-page .ls-seo-label {
-  display: inline-block;
-  margin-bottom: 8px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--ls-gray-500);
+.verification-form {
+  width: 100%;
+  min-width: 0;
 }
 
-.hls-page .ls-seo-benefits-section {
+/* =========================
+   SEO BENEFITS SECTION
+   ========================= */
+
+.ls-seo-benefits-section {
   width: min(100%, var(--ls-maxw));
   margin: 42px auto;
   padding: 0 24px;
 }
 
-.hls-page .ls-seo-benefits-container { width: 100%; }
-.hls-page .ls-seo-benefits-heading { max-width: 780px; margin-bottom: 22px; }
+.ls-seo-benefits-heading {
+  max-width: 780px;
+  margin-bottom: 22px;
+}
 
-.hls-page .ls-seo-benefits-heading h2 {
+.ls-seo-benefits-heading h2 {
   margin: 0 0 10px;
   color: var(--ls-black);
   font-size: clamp(23px, 3vw, 32px);
@@ -543,20 +2380,20 @@
   font-weight: 800;
 }
 
-.hls-page .ls-seo-benefits-heading p {
+.ls-seo-benefits-heading p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 15px;
   line-height: 1.7;
 }
 
-.hls-page .ls-seo-benefits-grid {
+.ls-seo-benefits-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
-.hls-page .ls-seo-benefit-card {
+.ls-seo-benefit-card {
   position: relative;
   padding: 22px;
   border-radius: var(--ls-radius-md);
@@ -565,12 +2402,12 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.hls-page .ls-seo-benefit-card:hover {
+.ls-seo-benefit-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--ls-shadow-md);
 }
 
-.hls-page .ls-seo-benefit-number {
+.ls-seo-benefit-number {
   display: inline-flex;
   margin-bottom: 12px;
   font-size: 11px;
@@ -579,7 +2416,7 @@
   color: var(--ls-green-dark);
 }
 
-.hls-page .ls-seo-benefit-card h3 {
+.ls-seo-benefit-card h3 {
   margin: 0 0 8px;
   color: var(--ls-black);
   font-size: 17px;
@@ -587,23 +2424,33 @@
   font-weight: 750;
 }
 
-.hls-page .ls-seo-benefit-card p {
+.ls-seo-benefit-card p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 14px;
   line-height: 1.65;
 }
 
-.hls-page .ls-faq-section {
+/* =========================
+   FAQ SECTION
+   ========================= */
+
+.ls-faq-section {
   width: min(100%, var(--ls-maxw));
   margin: 42px auto;
   padding: 0 24px;
 }
 
-.hls-page .ls-faq-container { width: min(1000px, 100%); margin: 0 auto; }
-.hls-page .ls-faq-heading { margin-bottom: 20px; }
+.ls-faq-container {
+  width: min(1000px, 100%);
+  margin: 0 auto;
+}
 
-.hls-page .ls-faq-heading h2 {
+.ls-faq-heading {
+  margin-bottom: 20px;
+}
+
+.ls-faq-heading h2 {
   margin: 0;
   color: var(--ls-black);
   font-size: clamp(23px, 3vw, 32px);
@@ -611,16 +2458,20 @@
   font-weight: 800;
 }
 
-.hls-page .ls-faq-list { display: flex; flex-direction: column; gap: 9px; }
+.ls-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
 
-.hls-page .ls-faq-item {
+.ls-faq-item {
   border: 1px solid var(--ls-gray-200);
   border-radius: var(--ls-radius-sm);
   background: var(--ls-white);
   overflow: hidden;
 }
 
-.hls-page .ls-faq-item summary {
+.ls-faq-item summary {
   position: relative;
   padding: 17px 48px 17px 18px;
   cursor: pointer;
@@ -631,9 +2482,11 @@
   user-select: none;
 }
 
-.hls-page .ls-faq-item summary::-webkit-details-marker { display: none; }
+.ls-faq-item summary::-webkit-details-marker {
+  display: none;
+}
 
-.hls-page .ls-faq-item summary::after {
+.ls-faq-item summary::after {
   content: "+";
   position: absolute;
   right: 18px;
@@ -644,9 +2497,11 @@
   color: var(--ls-green-dark);
 }
 
-.hls-page .ls-faq-item[open] summary::after { content: "−"; }
+.ls-faq-item[open] summary::after {
+  content: "−";
+}
 
-.hls-page .ls-faq-item p {
+.ls-faq-item p {
   margin: 0;
   padding: 0 18px 18px;
   font-size: 14px;
@@ -654,28 +2509,11 @@
   color: var(--ls-gray-700);
 }
 
-/* ---------- KEYWORD ROW ---------- */
-.hls-page .ls-seo-keyword-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
-}
+/* =========================
+   DISCLAIMER
+   ========================= */
 
-.hls-page .ls-seo-keyword-row span {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 11px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--ls-charcoal);
-  background: var(--ls-white);
-  border: 1px solid var(--ls-gray-200);
-}
-
-/* ---------- DISCLAIMER ---------- */
-.hls-page .loan-disclaimer {
+.loan-disclaimer {
   width: min(100%, var(--ls-maxw));
   display: flex;
   align-items: flex-start;
@@ -688,7 +2526,7 @@
   box-shadow: var(--ls-shadow-md);
 }
 
-.hls-page .disclaimer-icon {
+.disclaimer-icon {
   flex: 0 0 34px;
   width: 34px;
   height: 34px;
@@ -702,7 +2540,7 @@
   font-weight: 800;
 }
 
-.hls-page .loan-disclaimer h3 {
+.loan-disclaimer h3 {
   margin: 0 0 5px;
   color: var(--ls-white);
   font-size: 14px;
@@ -710,7 +2548,7 @@
   font-weight: 750;
 }
 
-.hls-page .loan-disclaimer p {
+.loan-disclaimer p {
   max-width: 850px;
   margin: 0;
   color: #c8cfca;
@@ -718,56 +2556,1006 @@
   line-height: 1.6;
 }
 
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 1000px) {
-  .hls-page .personal-loan-hero { min-height: 400px; background-size: auto 90%; }
-  .hls-page .loan-page-row { grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr); }
-  .hls-page .apply_grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+/* =========================
+   RESPONSIVE BREAKPOINTS
+   ========================= */
 
-@media (max-width: 980px) {
-  .hls-page .loan-page-row { grid-template-columns: 1fr; gap: 24px; }
-  .hls-page .loan-page-calculator { position: static; }
+@media (max-width: 1000px) {
+  .personal-loan-hero {
+    min-height: 400px;
+    background-size: auto 90%;
+  }
+
+  .loan-page-row {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  }
+
+  .apply_grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 800px) {
-  .hls-page section,
-  .hls-page .loan-page-calculator-section,
-  .hls-page .ls-seo-benefits-section,
-  .hls-page .ls-faq-section { padding-left: 20px; padding-right: 20px; }
+  .personal-loan-page section,
+  .loan-page-row,
+  .ls-seo-content-section,
+  .ls-seo-benefits-section,
+  .ls-faq-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 
-  .hls-page .personal-loan-hero {
+  .personal-loan-hero {
     min-height: auto;
     padding: 42px 20px 32px;
     background-image: none;
   }
 
-  .hls-page .personal-loan-hero::before {
+  .personal-loan-hero::before {
     background: linear-gradient(180deg, #f0f7ec 0%, #f4f8f3 100%);
   }
 
-  .hls-page .hero-points,
-  .hls-page .verification-section,
-  .hls-page .ls-seo-benefits-grid { grid-template-columns: 1fr; gap: 16px; }
+  .hero-points,
+  .loan-page-row,
+  .verification-section,
+  .ls-seo-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 
-  .hls-page .loan-info-text { padding: 21px; }
+  .loan-info-text {
+    padding: 21px;
+  }
 }
 
 @media (max-width: 600px) {
-  .hls-page section,
-  .hls-page .loan-page-calculator-section,
-  .hls-page .ls-seo-benefits-section,
-  .hls-page .ls-faq-section { padding-left: 16px; padding-right: 16px; }
+  .personal-loan-page section,
+  .loan-page-row,
+  .ls-seo-content-section,
+  .ls-seo-benefits-section,
+  .ls-faq-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
-  .hls-page .apply_grid { grid-template-columns: 1fr; }
-  .hls-page .loan-disclaimer { margin: 16px; padding: 17px; }
-  .hls-page .ls-faq-item summary { padding: 15px 42px 15px 15px; font-size: 14px; }
-  .hls-page .ls-faq-item p { padding: 0 15px 15px; font-size: 13px; }
+  .apply_grid {
+    grid-template-columns: 1fr;
+  }
+
+  .loan-disclaimer {
+    margin: 16px;
+    padding: 17px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hls-page *, .hls-page *::before, .hls-page *::after {
+  .personal-loan-page *,
+  .personal-loan-page *::before,
+  .personal-loan-page *::after {
+    scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
+
+
+
+/* =========================================================
+   INTRO + EMI CALCULATOR (SIDE BY SIDE FIX)
+   ========================================================= */
+
+.loan-page-calculator-section {
+  width: 100% !important;
+  max-width: var(--ls-maxw) !important;
+  margin: 0 auto;
+  padding: 36px 24px !important;
+}
+
+.loan-page-row {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* 1.15fr left text, 0.85fr calculator - dono perfectly fit honge */
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: start;
+  gap: 28px;
+}
+
+/* Left text box */
+.loan-info-text {
+  width: 100%;
+  padding: 28px;
+  background: var(--ls-white);
+  border: 1px solid rgba(111, 174, 69, 0.14);
+  border-radius: var(--ls-radius-lg);
+  box-shadow: var(--ls-shadow-sm);
+  height: fit-content;
+}
+
+.loan-info-text h2 {
+  margin: 24px 0 10px;
+  color: var(--ls-black);
+  font-size: clamp(20px, 2vw, 25px);
+  line-height: 1.25;
+  font-weight: 780;
+  letter-spacing: -0.02em;
+}
+
+.loan-info-text h2:first-of-type {
+  margin-top: 0;
+}
+
+.loan-info-text p {
+  margin: 0 0 12px;
+  color: var(--ls-gray-700);
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+.loan-info-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Right Calculator Container */
+.loan-page-calculator {
+  width: 100%;
+  min-width: 0; /* Prevents child blowout */
+  position: sticky;
+  top: 24px; /* Calculator scrolling ke time screen ke sath softly stick rahega */
+}
+
+/* Force inner calculator card to fill properly without overflowing */
+.loan-page-calculator > * {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* =========================
+   RESPONSIVE BREAKPOINTS
+   ========================= */
+
+@media (max-width: 980px) {
+  .loan-page-row {
+    /* Tablet/Mobile pe stack hoga natural flow me */
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .loan-page-calculator {
+    position: static;
+  }
+}
+
+
+/* Right Side Column Wrapper for Calculator + SEO Card */
+.loan-page-calculator-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  min-width: 0;
+}
+
+.ls-calc-seo-box {
+  padding: 18px 20px;
+  background: var(--ls-white);
+  border: 1px solid rgba(111, 174, 69, 0.14);
+  border-radius: var(--ls-radius-md);
+  box-shadow: var(--ls-shadow-xs);
+}
+
+.ls-calc-seo-box h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: var(--ls-black);
+  font-weight: 750;
+}
+
+.ls-calc-seo-box p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ls-gray-700);
+}
+
+/* =========================================================
+   LoanSaarthi — AUTOMATIC DEVICE THEME
+   Light/Dark mode follows the user's operating-system/browser
+   preference automatically via prefers-color-scheme.
+
+   Existing layout, spacing, typography and responsive rules are
+   preserved. These rules only adapt theme colors.
+   ========================================================= */
+
+/* =========================
+   LIGHT DEVICE THEME
+   ========================= */
+@media (prefers-color-scheme: light) {
+  .personal-loan-page {
+    color: #252a27;
+    background:
+      radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
+      radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.07) 0%, transparent 45%),
+      linear-gradient(180deg, #f0f7ec 0%, #f7fbf5 40%, #f4f8f3 100%);
+  }
+}
+
+/* =========================
+   DARK DEVICE THEME
+   ========================= */
+@media (prefers-color-scheme: dark) {
+
+  /* ---------- THEME TOKENS ---------- */
+  :root {
+    --ls-green: #82c341;
+    --ls-green-dark: #9bd65d;
+    --ls-green-light: #1d2a1d;
+    --ls-green-soft: #182219;
+
+    --ls-black: #f4f7f4;
+    --ls-charcoal: #d9e1db;
+
+    --ls-gray-50: #111713;
+    --ls-gray-100: #1a211c;
+    --ls-gray-200: #29332c;
+    --ls-gray-300: #3a473d;
+    --ls-gray-500: #a6b1a9;
+    --ls-gray-700: #c4cdc6;
+
+    --ls-white: #171d19;
+
+    --ls-shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.28);
+    --ls-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.30);
+    --ls-shadow-md: 0 12px 30px rgba(0, 0, 0, 0.34);
+    --ls-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.40);
+  }
+
+  /* ---------- PAGE BACKGROUND ---------- */
+  .personal-loan-page {
+    color: #d9e1db;
+    background:
+      radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
+      radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.08) 0%, transparent 45%),
+      linear-gradient(180deg, #0d120f 0%, #111713 42%, #0f1411 100%);
+  }
+
+  /* ---------- HERO ---------- */
+  .personal-loan-hero::before {
+    background: linear-gradient(
+      90deg,
+      rgba(13, 18, 15, 0.98) 0%,
+      rgba(13, 18, 15, 0.94) 42%,
+      rgba(13, 18, 15, 0.35) 75%,
+      rgba(13, 18, 15, 0) 100%
+    );
+  }
+
+  .hero-badge {
+    background: rgba(53, 82, 42, 0.78);
+    border-color: rgba(130, 195, 65, 0.34);
+    color: #e9f5e7;
+  }
+
+  .personal-loan-hero h1 {
+    color: #f5f8f5;
+  }
+
+  .hero-description {
+    color: #c0cac3;
+  }
+
+  .hero-point {
+    background: rgba(23, 29, 25, 0.94);
+    border-color: rgba(130, 195, 65, 0.20);
+    box-shadow: var(--ls-shadow-xs);
+  }
+
+  .hero-point p {
+    color: #c2ccc5;
+  }
+
+  /* ---------- GENERIC CONTENT ---------- */
+  .loan-info-text,
+  .requirements-card,
+  .verification-address,
+  .ls-seo-benefit-card,
+  .ls-faq-item,
+  .ls-calc-seo-box {
+    background: #171d19;
+    color: #d9e1db;
+    border-color: #2b362e;
+    box-shadow: var(--ls-shadow-sm);
+  }
+
+  .loan-info-text h2,
+  .section-heading h2,
+  .requirements-header h2,
+  .verification-address h4,
+  .ls-seo-content-inner h2,
+  .ls-seo-benefits-heading h2,
+  .ls-seo-benefit-card h3,
+  .ls-faq-heading h2,
+  .ls-faq-item summary,
+  .ls-calc-seo-box h3 {
+    color: #f1f5f2;
+  }
+
+  .loan-info-text p,
+  .section-heading p,
+  .requirements-header p,
+  .requirement-item p,
+  .verification-address p,
+  .ls-seo-content-inner p,
+  .ls-seo-benefits-heading p,
+  .ls-seo-benefit-card p,
+  .ls-faq-item p,
+  .ls-calc-seo-box p {
+    color: #b9c4bc;
+  }
+
+  .loan-info-text strong {
+    color: #e5ebe6;
+  }
+
+  /* ---------- CONTENT HIGHLIGHT ---------- */
+  .content-highlight {
+    background: linear-gradient(135deg, #1a281b 0%, #172119 100%);
+    border-color: rgba(130, 195, 65, 0.25);
+    border-left-color: #82c341;
+  }
+
+  .content-highlight strong {
+    color: #9bd65d;
+  }
+
+  /* ---------- CATEGORY CARDS ---------- */
+  .apply_box {
+    background: #171d19;
+    border-color: rgba(130, 195, 65, 0.18);
+    box-shadow: var(--ls-shadow-xs);
+  }
+
+  .apply_box:hover {
+    background: #1d271f;
+    border-color: rgba(130, 195, 65, 0.55);
+    box-shadow: var(--ls-shadow-md);
+  }
+
+  .apply_box_number {
+    color: #b3e27b;
+    background: #213020;
+    border-color: rgba(130, 195, 65, 0.30);
+  }
+
+  .apply_box_content h3 {
+    color: #f1f5f2;
+  }
+
+  .apply_box_content p {
+    color: #aab5ad;
+  }
+
+  .apply_box_arrow {
+    color: #56645a;
+  }
+
+  .apply_box:hover .apply_box_arrow {
+    color: #9bd65d;
+  }
+
+  /* ---------- REQUIREMENTS ---------- */
+  .back-button {
+    color: #9bd65d;
+  }
+
+  .requirement-item {
+    background: #121a15;
+    border-color: rgba(130, 195, 65, 0.13);
+  }
+
+  .requirements-note {
+    background: linear-gradient(135deg, #1b2a1c 0%, #18241a 100%);
+    border-color: rgba(130, 195, 65, 0.28);
+  }
+
+  .requirements-note strong {
+    color: #a2db67;
+  }
+
+  .requirements-note p {
+    color: #b9c4bc;
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .requirements-note button,
+  .ls-connect-text button {
+    background: linear-gradient(135deg, #82c341 0%, #5e9f37 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(111, 174, 69, 0.24);
+  }
+
+  .requirements-note button:hover,
+  .ls-connect-text button:hover {
+    background: linear-gradient(135deg, #91d250 0%, #6aaa3f 100%);
+    box-shadow: 0 6px 18px rgba(111, 174, 69, 0.32);
+  }
+
+  /* ---------- SEO CONTENT ---------- */
+  .ls-seo-content-inner {
+    border-color: #29332c;
+  }
+
+  .ls-seo-label {
+    color: #9bd65d;
+    opacity: 0.9;
+  }
+
+  .ls-seo-keyword-row span {
+    color: #c9d9cd;
+    background: #19231c;
+    border-color: #314037;
+  }
+
+  .ls-seo-benefit-card {
+    background: #171d19;
+    border-color: #2b362e;
+  }
+
+  .ls-seo-benefit-card:hover {
+    box-shadow: var(--ls-shadow-md);
+  }
+
+  .ls-seo-benefit-number {
+    color: #9bd65d;
+  }
+
+  /* ---------- FAQ ---------- */
+  .ls-faq-item {
+    background: #171d19;
+    border-color: #2b362e;
+  }
+
+  .ls-faq-item summary {
+    color: #f1f5f2;
+  }
+
+  .ls-faq-item summary::after {
+    color: #9bd65d;
+  }
+
+  .ls-faq-item p {
+    color: #b7c2ba;
+  }
+
+  /* ---------- DISCLAIMER ---------- */
+  .loan-disclaimer {
+    color: #f0f5f1;
+    background: linear-gradient(135deg, #0a0f0c 0%, #141d17 100%);
+    box-shadow: var(--ls-shadow-md);
+  }
+
+  .loan-disclaimer h3 {
+    color: #f2f6f3;
+  }
+
+  .loan-disclaimer p {
+    color: #b9c4bc;
+  }
+
+  /* ---------- CALCULATOR SEO CARD ---------- */
+  .ls-calc-seo-box {
+    background: #171d19;
+    border-color: rgba(130, 195, 65, 0.18);
+  }
+
+  /* ---------- FORM CONTROLS ---------- */
+  .verification-form input,
+  .verification-form textarea,
+  .verification-form select {
+    color: #edf3ee;
+    background: #111713;
+    border-color: #344138;
+  }
+
+  .verification-form input::placeholder,
+  .verification-form textarea::placeholder {
+    color: #7f8c83;
+  }
+
+  .verification-form input:focus,
+  .verification-form textarea:focus,
+  .verification-form select:focus {
+    border-color: #82c341;
+    outline-color: rgba(130, 195, 65, 0.22);
+  }
+
+  .verification-form label {
+    color: #c7d0ca;
+  }
+
+  /* ---------- MOBILE HERO ---------- */
+  @media (max-width: 800px) {
+    .personal-loan-hero::before {
+      background: linear-gradient(
+        180deg,
+        #0d120f 0%,
+        #111713 100%
+      );
+    }
+  }
+}
+
+/* =========================================================
+   SAFETY: keep native form controls readable in dark mode
+   even where a browser applies its own dark UI treatment.
+   ========================================================= */
+@media (prefers-color-scheme: dark) {
+  .personal-loan-page input,
+  .personal-loan-page textarea,
+  .personal-loan-page select,
+  .personal-loan-page button {
+    color-scheme: dark;
+  }
+}
+/* =========================================================
+   LOANSAARTHI — COMPLETE DEVICE DARK MODE
+   HERO IMAGE UNTOUCHED
+   Paste this at the VERY END of CSS
+   ========================================================= */
+
+@media (prefers-color-scheme: dark) {
+
+  /* =========================
+     MAIN PAGE BACKGROUND
+     ========================= */
+
+  .personal-loan-page {
+    background:
+      radial-gradient(
+        circle at 10% 15%,
+        rgba(130, 195, 65, 0.08) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 90% 65%,
+        rgba(130, 195, 65, 0.05) 0%,
+        transparent 45%
+      ),
+      linear-gradient(
+        180deg,
+        #0b0f0d 0%,
+        #0d120f 45%,
+        #0a0e0c 100%
+      );
+
+    color: #e8eee9;
+  }
+
+
+  /* =========================
+     NORMAL SECTION BACKGROUND
+     ========================= */
+
+  .personal-loan-page section:not(.personal-loan-hero) {
+    background: transparent;
+  }
+
+
+  /* =========================
+     HEADINGS
+     ========================= */
+
+  .personal-loan-page h1,
+  .personal-loan-page h2,
+  .personal-loan-page h3,
+  .personal-loan-page h4 {
+    color: #f1f5f2;
+  }
+
+
+  /* =========================
+     NORMAL PARAGRAPHS
+     ========================= */
+
+  .personal-loan-page p {
+    color: #b8c2bb;
+  }
+
+
+  /* =========================
+     INTRO / LOAN INFO
+     ========================= */
+
+  .loan-info-text {
+    background: #111713;
+    border: 1px solid rgba(130, 195, 65, 0.14);
+    color: #dce5de;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.22);
+  }
+
+  .loan-info-text h2 {
+    color: #f1f5f2;
+  }
+
+  .loan-info-text p {
+    color: #b8c2bb;
+  }
+
+  .loan-info-text strong {
+    color: #9bd65d;
+  }
+
+
+  /* =========================
+     EMI CALCULATOR WRAPPER
+     ========================= */
+
+  .loan-page-calculator-wrapper {
+    color: #e8eee9;
+  }
+
+  .loan-page-calculator {
+    background: #111713;
+    border-color: rgba(130, 195, 65, 0.15);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  }
+
+
+  /* =========================
+     CALCULATOR SEO BOX
+     ========================= */
+
+  .ls-calc-seo-box {
+    background: #111713;
+    border: 1px solid rgba(130, 195, 65, 0.14);
+    color: #e8eee9;
+  }
+
+  .ls-calc-seo-box h3 {
+    color: #f1f5f2;
+  }
+
+  .ls-calc-seo-box p {
+    color: #aeb9b1;
+  }
+
+  .ls-seo-keyword-row span {
+    background: #172019;
+    border-color: rgba(130, 195, 65, 0.18);
+    color: #bfe49a;
+  }
+
+
+  /* =========================
+     ELIGIBILITY SECTION
+     ========================= */
+
+  .section-heading h2 {
+    color: #f1f5f2;
+  }
+
+  .section-heading p {
+    color: #aeb9b1;
+  }
+
+
+  /* =========================
+     ELIGIBILITY CARDS
+     ========================= */
+
+  .apply_box {
+    background: #111713;
+    border-color: rgba(130, 195, 65, 0.14);
+    color: #e8eee9;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.20);
+  }
+
+  .apply_box:hover {
+    background: #151d17;
+    border-color: rgba(130, 195, 65, 0.30);
+  }
+
+  .apply_box_number {
+    background: #1b2a1b;
+    color: #9bd65d;
+  }
+
+  .apply_box_content h3 {
+    color: #f1f5f2;
+  }
+
+  .apply_box_content p {
+    color: #aeb9b1;
+  }
+
+  .apply_box_arrow {
+    color: #718078;
+  }
+
+  .apply_box:hover .apply_box_arrow {
+    color: #9bd65d;
+  }
+
+
+  /* =========================
+     SELECTED CATEGORY
+     ========================= */
+
+  .requirements-card {
+    background: #111713;
+    border-color: rgba(130, 195, 65, 0.16);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  .requirements-header h2 {
+    color: #f1f5f2;
+  }
+
+  .requirements-header p {
+    color: #aeb9b1;
+  }
+
+  .back-button {
+    color: #9bd65d;
+  }
+
+
+  /* =========================
+     REQUIREMENT ITEMS
+     ========================= */
+
+  .requirement-item {
+    background: #161d18;
+    border-color: rgba(130, 195, 65, 0.10);
+  }
+
+  .requirement-item p {
+    color: #b8c2bb;
+  }
+
+  .requirement-number {
+    color: #ffffff;
+    background: linear-gradient(
+      135deg,
+      #7ec44f 0%,
+      #4f8d32 100%
+    );
+  }
+
+
+  /* =========================
+     REQUIREMENT NOTE
+     ========================= */
+
+  .requirements-note {
+    background: linear-gradient(
+      135deg,
+      #182419 0%,
+      #111913 100%
+    );
+    border-color: rgba(130, 195, 65, 0.14);
+  }
+
+  .requirements-note p {
+    color: #b8c2bb;
+  }
+
+
+  /* =========================
+     CONNECT TEXT
+     ========================= */
+
+  .ls-connect-text {
+    color: #b8c2bb;
+  }
+
+  .ls-connect-text button {
+    background: #82c341;
+    color: #071008;
+  }
+
+
+  /* =========================
+     VERIFICATION SECTION
+     ========================= */
+
+  .verification-section {
+    color: #e8eee9;
+  }
+
+  .verification-address,
+  .verification-form {
+    background: #111713;
+    border-color: rgba(130, 195, 65, 0.14);
+    color: #e8eee9;
+  }
+
+  .verification-address h3,
+  .verification-form h3,
+  .verification-address h2,
+  .verification-form h2 {
+    color: #f1f5f2;
+  }
+
+  .verification-address p,
+  .verification-form p {
+    color: #aeb9b1;
+  }
+
+
+  /* =========================
+     SEO BENEFITS SECTION
+     ========================= */
+
+  .ls-seo-benefits-section {
+    background: transparent;
+  }
+
+  .ls-seo-benefits-heading h2 {
+    color: #f1f5f2;
+  }
+
+  .ls-seo-benefits-heading p {
+    color: #aeb9b1;
+  }
+
+  .ls-seo-benefit-card {
+    background: #111713;
+    border-color: rgba(130, 195, 65, 0.14);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.20);
+  }
+
+  .ls-seo-benefit-card:hover {
+    background: #151d17;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28);
+  }
+
+  .ls-seo-benefit-number {
+    color: #9bd65d;
+  }
+
+  .ls-seo-benefit-card h3 {
+    color: #f1f5f2;
+  }
+
+  .ls-seo-benefit-card p {
+    color: #aeb9b1;
+  }
+
+
+  /* =========================
+     FAQ
+     ========================= */
+
+  .ls-faq-section {
+    background: transparent;
+  }
+
+  .ls-faq-heading h2 {
+    color: #f1f5f2;
+  }
+
+  .ls-faq-item {
+    background: #111713;
+    border-color: rgba(130, 195, 65, 0.14);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+
+  .ls-faq-item summary {
+    color: #f1f5f2;
+  }
+
+  .ls-faq-item summary::after {
+    color: #9bd65d;
+  }
+
+  .ls-faq-item p {
+    color: #aeb9b1;
+  }
+
+
+  /* =========================
+     SEO CONTENT IF PRESENT
+     ========================= */
+
+  .ls-seo-content-section {
+    background: transparent;
+  }
+
+  .ls-seo-content-inner {
+    background: #111713;
+    border-color: rgba(130, 195, 65, 0.14);
+  }
+
+  .ls-seo-content-inner h2 {
+    color: #f1f5f2;
+  }
+
+  .ls-seo-content-inner p {
+    color: #aeb9b1;
+  }
+
+  .ls-seo-content-inner .ls-seo-keyword-row span {
+    background: #172019;
+    border-color: rgba(130, 195, 65, 0.18);
+    color: #bfe49a;
+  }
+
+
+  /* =========================
+     LABELS
+     ========================= */
+
+  .ls-seo-label {
+    color: #9bd65d;
+  }
+
+
+  /* =========================
+     DISCLAIMER
+     Already dark — keep it
+     ========================= */
+
+  .loan-disclaimer {
+    background: linear-gradient(
+      135deg,
+      #0d140f 0%,
+      #172019 100%
+    );
+    border: 1px solid rgba(130, 195, 65, 0.10);
+  }
+
+  .loan-disclaimer h3 {
+    color: #f1f5f2;
+  }
+
+  .loan-disclaimer p {
+    color: #aeb9b1;
+  }
+
+
+  /* =========================
+     INPUTS / FORM ELEMENTS
+     ========================= */
+
+  .personal-loan-page input,
+  .personal-loan-page textarea,
+  .personal-loan-page select {
+    background: #0f1511;
+    color: #e8eee9;
+    border-color: #2a382d;
+  }
+
+  .personal-loan-page input::placeholder,
+  .personal-loan-page textarea::placeholder {
+    color: #718078;
+  }
+
+  .personal-loan-page input:focus,
+  .personal-loan-page textarea:focus,
+  .personal-loan-page select:focus {
+    border-color: #82c341;
+    outline-color: rgba(130, 195, 65, 0.20);
+  }
+
+
+  /* =====================================================
+     IMPORTANT:
+     HERO IS NOT TOUCHED HERE.
+     
+     .personal-loan-hero
+     .personal-loan-hero::before
+     background-image
+     
+     SAB EXACTLY AS-IS RAHENGE.
+     ===================================================== */
+}
+
+
+/* =========================================================
+   LIGHT MODE — NOTHING EXTRA
+   Browser ka normal existing light CSS use hoga.
+   ========================================================= */

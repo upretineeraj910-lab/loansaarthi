@@ -2760,3 +2760,343 @@
   line-height: 1.5;
   color: var(--ls-gray-700);
 }
+
+/* =========================================================
+   LoanSaarthi — AUTOMATIC DEVICE THEME
+   Light/Dark mode follows the user's operating-system/browser
+   preference automatically via prefers-color-scheme.
+
+   Existing layout, spacing, typography and responsive rules are
+   preserved. These rules only adapt theme colors.
+   ========================================================= */
+
+/* =========================
+   LIGHT DEVICE THEME
+   ========================= */
+@media (prefers-color-scheme: light) {
+  .personal-loan-page {
+    color: #252a27;
+    background:
+      radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
+      radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.07) 0%, transparent 45%),
+      linear-gradient(180deg, #f0f7ec 0%, #f7fbf5 40%, #f4f8f3 100%);
+  }
+}
+
+/* =========================
+   DARK DEVICE THEME
+   ========================= */
+@media (prefers-color-scheme: dark) {
+
+  /* ---------- THEME TOKENS ---------- */
+  :root {
+    --ls-green: #82c341;
+    --ls-green-dark: #9bd65d;
+    --ls-green-light: #1d2a1d;
+    --ls-green-soft: #182219;
+
+    --ls-black: #f4f7f4;
+    --ls-charcoal: #d9e1db;
+
+    --ls-gray-50: #111713;
+    --ls-gray-100: #1a211c;
+    --ls-gray-200: #29332c;
+    --ls-gray-300: #3a473d;
+    --ls-gray-500: #a6b1a9;
+    --ls-gray-700: #c4cdc6;
+
+    --ls-white: #171d19;
+
+    --ls-shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.28);
+    --ls-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.30);
+    --ls-shadow-md: 0 12px 30px rgba(0, 0, 0, 0.34);
+    --ls-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.40);
+  }
+
+  /* ---------- PAGE BACKGROUND ---------- */
+  .personal-loan-page {
+    color: #d9e1db;
+    background:
+      radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
+      radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.08) 0%, transparent 45%),
+      linear-gradient(180deg, #0d120f 0%, #111713 42%, #0f1411 100%);
+  }
+
+  /* ---------- HERO ---------- */
+  .personal-loan-hero::before {
+    background: linear-gradient(
+      90deg,
+      rgba(13, 18, 15, 0.98) 0%,
+      rgba(13, 18, 15, 0.94) 42%,
+      rgba(13, 18, 15, 0.35) 75%,
+      rgba(13, 18, 15, 0) 100%
+    );
+  }
+
+  .hero-badge {
+    background: rgba(53, 82, 42, 0.78);
+    border-color: rgba(130, 195, 65, 0.34);
+    color: #e9f5e7;
+  }
+
+  .personal-loan-hero h1 {
+    color: #f5f8f5;
+  }
+
+  .hero-description {
+    color: #c0cac3;
+  }
+
+  .hero-point {
+    background: rgba(23, 29, 25, 0.94);
+    border-color: rgba(130, 195, 65, 0.20);
+    box-shadow: var(--ls-shadow-xs);
+  }
+
+  .hero-point p {
+    color: #c2ccc5;
+  }
+
+  /* ---------- GENERIC CONTENT ---------- */
+  .loan-info-text,
+  .requirements-card,
+  .verification-address,
+  .ls-seo-benefit-card,
+  .ls-faq-item,
+  .ls-calc-seo-box {
+    background: #171d19;
+    color: #d9e1db;
+    border-color: #2b362e;
+    box-shadow: var(--ls-shadow-sm);
+  }
+
+  .loan-info-text h2,
+  .section-heading h2,
+  .requirements-header h2,
+  .verification-address h4,
+  .ls-seo-content-inner h2,
+  .ls-seo-benefits-heading h2,
+  .ls-seo-benefit-card h3,
+  .ls-faq-heading h2,
+  .ls-faq-item summary,
+  .ls-calc-seo-box h3 {
+    color: #f1f5f2;
+  }
+
+  .loan-info-text p,
+  .section-heading p,
+  .requirements-header p,
+  .requirement-item p,
+  .verification-address p,
+  .ls-seo-content-inner p,
+  .ls-seo-benefits-heading p,
+  .ls-seo-benefit-card p,
+  .ls-faq-item p,
+  .ls-calc-seo-box p {
+    color: #b9c4bc;
+  }
+
+  .loan-info-text strong {
+    color: #e5ebe6;
+  }
+
+  /* ---------- CONTENT HIGHLIGHT ---------- */
+  .content-highlight {
+    background: linear-gradient(135deg, #1a281b 0%, #172119 100%);
+    border-color: rgba(130, 195, 65, 0.25);
+    border-left-color: #82c341;
+  }
+
+  .content-highlight strong {
+    color: #9bd65d;
+  }
+
+  /* ---------- CATEGORY CARDS ---------- */
+  .apply_box {
+    background: #171d19;
+    border-color: rgba(130, 195, 65, 0.18);
+    box-shadow: var(--ls-shadow-xs);
+  }
+
+  .apply_box:hover {
+    background: #1d271f;
+    border-color: rgba(130, 195, 65, 0.55);
+    box-shadow: var(--ls-shadow-md);
+  }
+
+  .apply_box_number {
+    color: #b3e27b;
+    background: #213020;
+    border-color: rgba(130, 195, 65, 0.30);
+  }
+
+  .apply_box_content h3 {
+    color: #f1f5f2;
+  }
+
+  .apply_box_content p {
+    color: #aab5ad;
+  }
+
+  .apply_box_arrow {
+    color: #56645a;
+  }
+
+  .apply_box:hover .apply_box_arrow {
+    color: #9bd65d;
+  }
+
+  /* ---------- REQUIREMENTS ---------- */
+  .back-button {
+    color: #9bd65d;
+  }
+
+  .requirement-item {
+    background: #121a15;
+    border-color: rgba(130, 195, 65, 0.13);
+  }
+
+  .requirements-note {
+    background: linear-gradient(135deg, #1b2a1c 0%, #18241a 100%);
+    border-color: rgba(130, 195, 65, 0.28);
+  }
+
+  .requirements-note strong {
+    color: #a2db67;
+  }
+
+  .requirements-note p {
+    color: #b9c4bc;
+  }
+
+  /* ---------- BUTTONS ---------- */
+  .requirements-note button,
+  .ls-connect-text button {
+    background: linear-gradient(135deg, #82c341 0%, #5e9f37 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(111, 174, 69, 0.24);
+  }
+
+  .requirements-note button:hover,
+  .ls-connect-text button:hover {
+    background: linear-gradient(135deg, #91d250 0%, #6aaa3f 100%);
+    box-shadow: 0 6px 18px rgba(111, 174, 69, 0.32);
+  }
+
+  /* ---------- SEO CONTENT ---------- */
+  .ls-seo-content-inner {
+    border-color: #29332c;
+  }
+
+  .ls-seo-label {
+    color: #9bd65d;
+    opacity: 0.9;
+  }
+
+  .ls-seo-keyword-row span {
+    color: #c9d9cd;
+    background: #19231c;
+    border-color: #314037;
+  }
+
+  .ls-seo-benefit-card {
+    background: #171d19;
+    border-color: #2b362e;
+  }
+
+  .ls-seo-benefit-card:hover {
+    box-shadow: var(--ls-shadow-md);
+  }
+
+  .ls-seo-benefit-number {
+    color: #9bd65d;
+  }
+
+  /* ---------- FAQ ---------- */
+  .ls-faq-item {
+    background: #171d19;
+    border-color: #2b362e;
+  }
+
+  .ls-faq-item summary {
+    color: #f1f5f2;
+  }
+
+  .ls-faq-item summary::after {
+    color: #9bd65d;
+  }
+
+  .ls-faq-item p {
+    color: #b7c2ba;
+  }
+
+  /* ---------- DISCLAIMER ---------- */
+  .loan-disclaimer {
+    color: #f0f5f1;
+    background: linear-gradient(135deg, #0a0f0c 0%, #141d17 100%);
+    box-shadow: var(--ls-shadow-md);
+  }
+
+  .loan-disclaimer h3 {
+    color: #f2f6f3;
+  }
+
+  .loan-disclaimer p {
+    color: #b9c4bc;
+  }
+
+  /* ---------- CALCULATOR SEO CARD ---------- */
+  .ls-calc-seo-box {
+    background: #171d19;
+    border-color: rgba(130, 195, 65, 0.18);
+  }
+
+  /* ---------- FORM CONTROLS ---------- */
+  .verification-form input,
+  .verification-form textarea,
+  .verification-form select {
+    color: #edf3ee;
+    background: #111713;
+    border-color: #344138;
+  }
+
+  .verification-form input::placeholder,
+  .verification-form textarea::placeholder {
+    color: #7f8c83;
+  }
+
+  .verification-form input:focus,
+  .verification-form textarea:focus,
+  .verification-form select:focus {
+    border-color: #82c341;
+    outline-color: rgba(130, 195, 65, 0.22);
+  }
+
+  .verification-form label {
+    color: #c7d0ca;
+  }
+
+  /* ---------- MOBILE HERO ---------- */
+  @media (max-width: 800px) {
+    .personal-loan-hero::before {
+      background: linear-gradient(
+        180deg,
+        #0d120f 0%,
+        #111713 100%
+      );
+    }
+  }
+}
+
+/* =========================================================
+   SAFETY: keep native form controls readable in dark mode
+   even where a browser applies its own dark UI treatment.
+   ========================================================= */
+@media (prefers-color-scheme: dark) {
+  .personal-loan-page input,
+  .personal-loan-page textarea,
+  .personal-loan-page select,
+  .personal-loan-page button {
+    color-scheme: dark;
+  }
+}
