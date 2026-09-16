@@ -17,13 +17,13 @@ const OFFERINGS: Offering[] = [
         href: "/home-loan",
         icon: "/images/icons/home-loan.png",
     },
-    {
-        name: "Education Loan",
-        description:
-            "Unlock financial flexibility and achieve your goals with Loan Saarthi's personalized education loan solutions.",
-        href: "/education-loan",
-        icon: "/images/icons/personal-loan-1.png",
-    },
+    // {
+    //     name: "Education Loan",
+    //     description:
+    //         "Unlock financial flexibility and achieve your goals with Loan Saarthi's personalized education loan solutions.",
+    //     href: "/education-loan",
+    //     icon: "/images/icons/personal-loan-1.png",
+    // },
     {
         name: "Loan Balance Transfer",
         description:
@@ -35,14 +35,14 @@ const OFFERINGS: Offering[] = [
         name: "Credit Card",
         description:
             "Our credit cards are designed to cater to your lifestyle, offering a seamless payment experience and a host of benefits.",
-        href: "/credit-cards",
+        href: "#",
         icon: "/images/icons/credit-card-1.png",
     },
     {
         name: "Vehicle Loan",
         description:
             "Whether you're eyeing a new car, or a motorcycle, we're here to make your dream ride a reality.",
-        href: "/vehicle-loan",
+        href: "#",
         icon: "/images/icons/vehicle-loan.png",
     },
     {
@@ -56,14 +56,14 @@ const OFFERINGS: Offering[] = [
         name: "Gold Loan",
         description:
             "Cash in on your gold's value with Loan Saarthi's Gold Loan, your trusted financial partner.",
-        href: "/gold-loan",
+        href: "#",
         icon: "/images/icons/gold-loan.png",
     },
     {
         name: "Loan Against FD",
         description:
             "Don't let your savings stay idle; leverage them to access immediate funds for your financial needs.",
-        href: "/loan-against-fd",
+        href: "#",
         icon: "/images/icons/fd-loan.png",
     },
 ];

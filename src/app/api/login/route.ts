@@ -10,7 +10,7 @@ export async function POST(request: Request): Promise<NextResponse<ILoginRespons
   try {
     // Connect to MongoDB
     await connectToDatabase();
-    console.log("mongodb connected");
+    // console.log("mongodb connected");
 
     // Get request body
     const body: ILoginInput = await request.json();
@@ -37,7 +37,7 @@ export async function POST(request: Request): Promise<NextResponse<ILoginRespons
 
     // Verify password
     const isValidPassword = await bcrypt.compare(password, user.password);
-    console.log('🔑 Password valid:', isValidPassword);
+    // console.log('🔑 Password valid:', isValidPassword);
 
     if (!isValidPassword) {
       return NextResponse.json(
@@ -70,7 +70,7 @@ export async function POST(request: Request): Promise<NextResponse<ILoginRespons
 
     // Middleware ke liye Cookie set kar do
     response.cookies.set('token', token, {
-      httpOnly: false,
+      httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       maxAge: 7 * 24 * 60 * 60, // 7 days

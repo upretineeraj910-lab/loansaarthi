@@ -1,6 +1,7 @@
 /* ==========================================
-   CSS Variables (Theme Support - Matched with LoanSaarthi)
+   CSS Variables (Theme Support - LoanSaarthi)
    ========================================== */
+
 :root {
   --hvc-bg: #ffffff;
   --hvc-border: #e2e8f0;
@@ -24,7 +25,10 @@
   --hvc-success: #6fae45;
 }
 
-/* Dark Mode - System Preference & Manual */
+/* ==========================================
+   Dark Mode - System Preference
+   ========================================== */
+
 @media (prefers-color-scheme: dark) {
   :root {
     --hvc-bg: #111827;
@@ -49,6 +53,10 @@
     --hvc-success: #4ade80;
   }
 }
+
+/* ==========================================
+   Manual Dark Theme
+   ========================================== */
 
 [data-theme="dark"],
 .dark {
@@ -77,6 +85,7 @@
 /* ==========================================
    Hero Card Container
    ========================================== */
+
 .hero-card {
   width: 100%;
   max-width: 440px;
@@ -85,7 +94,9 @@
   background-color: var(--hvc-bg);
   border: 1px solid var(--hvc-border);
   border-radius: 12px;
-  box-shadow: 0 10px 30px var(--hvc-shadow), 0 1px 3px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 10px 30px var(--hvc-shadow),
+    0 1px 3px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -94,7 +105,10 @@
   transition: all 0.3s ease;
 }
 
-/* Header */
+/* ==========================================
+   Header
+   ========================================== */
+
 .hero-card-header {
   padding: 1.1rem 1.4rem;
   background-color: var(--hvc-header-bg);
@@ -119,7 +133,10 @@
   color: var(--hvc-badge);
 }
 
-/* Card Body */
+/* ==========================================
+   Card Body
+   ========================================== */
+
 .hero-card-body {
   padding: 1.5rem;
   flex: 1;
@@ -128,7 +145,10 @@
   justify-content: center;
 }
 
-/* Error Banner */
+/* ==========================================
+   Error Banner
+   ========================================== */
+
 .hero-error-banner {
   font-size: 0.82rem;
   color: var(--hvc-error-text);
@@ -139,7 +159,10 @@
   margin-bottom: 12px;
 }
 
-/* Forms & Inputs */
+/* ==========================================
+   Forms
+   ========================================== */
+
 .hero-form {
   display: flex;
   flex-direction: column;
@@ -152,6 +175,10 @@
   line-height: 1.5;
   color: var(--hvc-desc);
 }
+
+/* ==========================================
+   Phone Input
+   ========================================== */
 
 .hero-phone-group {
   display: flex;
@@ -171,6 +198,10 @@
   align-items: center;
 }
 
+/* ==========================================
+   Common Inputs
+   ========================================== */
+
 .hero-input {
   width: 100%;
   padding: 11px 14px;
@@ -181,13 +212,24 @@
   color: var(--hvc-input-text);
   box-sizing: border-box;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hero-input::placeholder {
+  color: var(--hvc-desc);
+  opacity: 0.8;
 }
 
 .hero-input:focus {
   border-color: var(--hvc-input-focus);
   box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
 }
+
+/* ==========================================
+   OTP Input
+   ========================================== */
 
 .hero-otp-input {
   font-size: 1.3rem;
@@ -196,13 +238,26 @@
   font-weight: 700;
 }
 
+/* ==========================================
+   STEP 3 FIELD LAYOUT
+   Occupation + Income
+   Loan Type below
+   ========================================== */
+
 .hero-select-row {
-  display: flex;
-  gap: 8px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
 }
 
+/* ==========================================
+   Select Fields
+   ========================================== */
+
 .hero-select {
-  flex: 1;
+  width: 100%;
+  min-width: 0;
   padding: 11px 10px;
   background-color: var(--hvc-input-bg);
   border: 1px solid var(--hvc-input-border);
@@ -211,7 +266,10 @@
   color: var(--hvc-input-text);
   outline: none;
   cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .hero-select:focus {
@@ -219,7 +277,68 @@
   box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
 }
 
-/* Primary Button */
+/* ==========================================
+   Income Field
+   ========================================== */
+
+.hero-select-row .income {
+  width: 100%;
+  min-width: 0;
+}
+
+.hero-select-row .income input {
+  width: 100%;
+  height: 42px;
+  padding: 11px 14px;
+  background-color: var(--hvc-input-bg);
+  border: 1px solid var(--hvc-input-border);
+  border-radius: 6px;
+  font-size: 0.92rem;
+  color: var(--hvc-input-text);
+  box-sizing: border-box;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.hero-select-row .income input::placeholder {
+  color: var(--hvc-desc);
+  opacity: 0.8;
+}
+
+.hero-select-row .income input:focus {
+  border-color: var(--hvc-input-focus);
+  box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
+}
+
+/* Remove number arrows */
+
+.hero-select-row .income input::-webkit-outer-spin-button,
+.hero-select-row .income input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.hero-select-row .income input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* ==========================================
+   Loan Type
+   ========================================== */
+
+.hero-select-row > .hero-select:last-child {
+  grid-column: 1 / -1;
+  width: 50%;
+  justify-self: center;
+}
+
+/* ==========================================
+   Primary Button
+   ========================================== */
+
 .hero-submit-btn {
   width: 100%;
   padding: 12px 18px;
@@ -247,6 +366,10 @@
   cursor: not-allowed;
 }
 
+/* ==========================================
+   Link Button
+   ========================================== */
+
 .hero-link-btn {
   background: none;
   border: none;
@@ -256,6 +379,10 @@
   text-decoration: underline;
   margin-top: 4px;
 }
+
+/* ==========================================
+   Trust Indicator
+   ========================================== */
 
 .hero-trust-indicator {
   display: flex;
@@ -268,7 +395,10 @@
   margin-top: 4px;
 }
 
-/* Success View */
+/* ==========================================
+   Success View
+   ========================================== */
+
 .hero-success-state {
   text-align: center;
   padding: 1.2rem 0;
@@ -295,6 +425,7 @@
 /* ==========================================
    Mobile Responsive
    ========================================== */
+
 @media (max-width: 480px) {
   .hero-card {
     max-width: 100%;
@@ -306,7 +437,22 @@
   }
 
   .hero-select-row {
+    display: flex;
     flex-direction: column;
     gap: 10px;
   }
+
+  .hero-select-row > .hero-select:last-child {
+    width: 100%;
+    justify-self: auto;
+  }
+
+  .hero-select-row .income {
+    width: 100%;
+  }
+}
+
+.hero-select-row > .hero-select:last-child {
+  grid-column: 1 / -1;
+  width: 100%;
 }

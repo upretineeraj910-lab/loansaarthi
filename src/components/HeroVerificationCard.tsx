@@ -32,6 +32,7 @@ export default function HeroVerificationCard() {
     email: "",
     occupation: "Salaried",
     loanType: "Home Loan",
+    income:""
   });
 
   useEffect(() => {
@@ -272,6 +273,19 @@ export default function HeroVerificationCard() {
                 <option value="Professional">Professional</option>
                 <option value="Other">Other</option>
               </select>
+                  <div className="income">
+                    <input type="number"
+                    placeholder="Annual Income" 
+                    name="income"
+                    value={profile.income}
+                    minLength={6}
+                    onChange={(e)=>{
+                      setProfile({...profile,income:e.target.value})
+                    }}
+                    />
+
+                  </div>
+
               <select
                 value={profile.loanType}
                 onChange={(e) =>
