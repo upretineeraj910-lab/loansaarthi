@@ -11,7 +11,7 @@ export default function Navbar() {
   const router = useRouter();
 
   // Helper function: Cookie se value read karne ke liye
-  const getCookie = (name:string) => {
+  const getCookie = (name: string) => {
     if (typeof document === "undefined") return null;
     const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
     return match ? match[2] : null;
@@ -47,29 +47,41 @@ export default function Navbar() {
         {/* Logo */}
         <div className="logo">
           <Link href="/">
-            {/* <span className="logo-icon">₹</span>
-            <span className="logo-text">Loan<span>Saarthi</span></span> */}
             <Image src="/images/icons/image-removebg-preview.png"
-            alt="loansaarthi_logo"
-            // width={120} height={150}
-            width={120}
-            height={150}
-            priority={true}
+              alt="loansaarthi_logo"
+
+              width={120}
+              height={150}
+              priority={true}
+
+              style={{
+                width: "120px",
+                height: "auto",
+              }}
             />
-              
+
           </Link>
         </div>
 
         {/* Desktop Nav Links */}
         <div className="nav-links">
           <Link href="/#home">Home</Link>
-          <Link href="/#Loan">Loans</Link>
+          <div className="nav-item">
+            <Link href="/#Loan">Loans</Link>
+            <div className="dropdown-menu">
+              <Link href="/personal-loan">Personal Loan</Link>
+              <Link href="/home-loan">Home Loan for Salaried</Link>
+              <Link href="/loan-against-property">Loan Against Property</Link>
+              <Link href="/business-loan">Business Loan</Link>
+              <Link href="/dropline-overdraft">Dropline Overdraft</Link>
+            </div>
+          </div>
           {/* <Link href="/Credit_card">Credit Cards</Link> */}
           <Link href="/#calculator">EMI Calculator</Link>
           {/* <Link href="/Blog">Blog</Link> */}
           {/* <Link href="/Career">Career</Link> */}
           <Link href="/Contact_Us">Contact Us</Link>
-          
+
           {/* {isLoggedIn ? (
             <>
               <Link href="/dashboard">Dashboard</Link>
@@ -85,8 +97,8 @@ export default function Navbar() {
         </div>
 
         {/* Hamburger Button */}
-        <button 
-          className={`hamburger ${isOpen ? "active" : ""}`} 
+        <button
+          className={`hamburger ${isOpen ? "active" : ""}`}
           onClick={toggleMenu}
           aria-label="Toggle menu"
         >
@@ -97,8 +109,8 @@ export default function Navbar() {
       </nav>
 
       {/* Overlay */}
-      <div 
-        className={`mobile-menu-overlay ${isOpen ? "open" : ""}`} 
+      <div
+        className={`mobile-menu-overlay ${isOpen ? "open" : ""}`}
         onClick={closeMenu}
       ></div>
 

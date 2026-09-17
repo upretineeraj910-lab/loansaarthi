@@ -1461,3 +1461,59 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+
+
+.loan-back-button {
+  position: fixed;
+  top: 92px;
+  left: 24px;
+  z-index: 100;
+
+  padding: 9px 15px;
+  border: none;
+  border-radius: 7px;
+
+  background: #86cc58;
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 12px rgba(17, 21, 19, 0.12);
+
+  transition: all 0.2s ease;
+}
+
+.loan-back-button:hover {
+  background: #5f9f39;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(17, 21, 19, 0.16);
+}
+
+.loan-back-button:active {
+  transform: translateY(0);
+}
+
+/* Phone par hide */
+@media (max-width: 767px) {
+  .loan-back-button {
+    display: none;
+  }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .loan-back-button {
+    background: #6fae45;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  }
+
+  .loan-back-button:hover {
+    background: #7fc653;
+  }
+}

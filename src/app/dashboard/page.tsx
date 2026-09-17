@@ -174,8 +174,8 @@ export default function Dashboard() {
             Dashboard
           </a>
 
-          <a href="#" className={styles.navItem}>
-            Lead Management
+          <a href="/lead" className={styles.navItem}>
+            Lead
           </a>
 
           <a href="#" className={styles.navItem}>

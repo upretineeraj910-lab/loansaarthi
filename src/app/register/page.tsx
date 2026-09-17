@@ -158,7 +158,7 @@ export default function RegisterPage() {
               required
               value={formData.name}
               onChange={handleChange}
-              placeholder="John Doe"
+              placeholder="Iron Man"
             />
             {errors.name && <span className="auth-error-text">{errors.name}</span>}
           </div>
@@ -173,7 +173,7 @@ export default function RegisterPage() {
               required
               value={formData.email}
               onChange={handleChange}
-              placeholder="you@example.com"
+              placeholder="you@loansaarthi.com"
             />
             {errors.email && <span className="auth-error-text">{errors.email}</span>}
           </div>

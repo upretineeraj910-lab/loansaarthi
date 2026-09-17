@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import "./personal-loan.css";
 import HeroVerificationCard from "@/components/HeroVerificationCard";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
@@ -71,6 +73,11 @@ const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
 
+  
+  const router = useRouter();
+
+
+
   const handleClick = (category: string) => {
     setSelectedCategory(category);
     setShowForm(false);
@@ -86,28 +93,17 @@ const Page = () => {
   );
 
   return (
-    <main className="personal-loan-page">
-      {/* =====================================================
-          SEO STRUCTURED DATA
-      ===================================================== */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FinancialProduct",
-            name: "Personal Loan",
-            description:
-              "Compare personal loan options from Banks and NBFCs in India with LoanSaarthi. Explore low-interest personal loan options and complete the initial loan assistance process digitally.",
-            brand: {
-              "@type": "Brand",
-              name: "LoanSaarthi",
-            },
-            category: "Personal Loan",
-          }),
-        }}
-      />
 
+
+    <main className="personal-loan-page">
+
+      <button
+      type="button"
+      className="loan-back-button"
+      onClick={() => router.push("/#Loan")}
+    >
+      ← Back
+    </button>
       {/* =====================================================
           HERO SECTION
       ===================================================== */}
@@ -249,9 +245,8 @@ const Page = () => {
 
         {/* CATEGORY CARDS */}
         <div
-          className={`apply_categary ${
-            selectedCategory ? "category-hidden" : ""
-          }`}
+          className={`apply_categary ${selectedCategory ? "category-hidden" : ""
+            }`}
         >
           <div className="apply_grid">
             {categories.map((category) => (
@@ -281,9 +276,8 @@ const Page = () => {
 
         {/* SELECTED CATEGORY DETAILS */}
         <div
-          className={`category-details ${
-            selectedCategory ? "category-details-visible" : ""
-          }`}
+          className={`category-details ${selectedCategory ? "category-details-visible" : ""
+            }`}
         >
           {selectedData && (
             <div className="requirements-card">

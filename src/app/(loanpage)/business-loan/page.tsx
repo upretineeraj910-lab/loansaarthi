@@ -6,6 +6,8 @@ import HeroVerificationCard from "@/components/HeroVerificationCard";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
 import "@/app/(loanpage)/loan-page.css"
 
+import { useRouter } from "next/navigation";
+
 const categories = [
   {
     name: "Proprietorship",
@@ -80,6 +82,8 @@ const categories = [
 const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  
+  const router = useRouter();
 
   const handleClick = (category: string) => {
     setSelectedCategory(category);
@@ -97,7 +101,7 @@ const Page = () => {
 
   return (
     <main className="bl-page">
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -110,7 +114,16 @@ const Page = () => {
             category: "Business Loan",
           }),
         }}
-      />
+      /> */}
+
+       <button
+      type="button"
+      className="loan-back-button"
+      onClick={() => router.push("/#Loan")}
+    >
+      ← Back
+    </button>
+
 
       <section className="personal-loan-hero">
         <div className="hero-badge">⚡ Business Loan Starting @ 11.99%* p.a.</div>

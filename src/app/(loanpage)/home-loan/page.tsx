@@ -5,6 +5,7 @@ import "./home-loan-salaried.css";
 import HeroVerificationCard from "@/components/HeroVerificationCard";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
 import "@/app/(loanpage)/loan-page.css"
+import { useRouter } from "next/navigation";
 
 const categories = [
   {
@@ -75,6 +76,8 @@ const categories = [
 const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
+  
+  const router = useRouter();
 
   const handleClick = (category: string) => {
     setSelectedCategory(category);
@@ -93,7 +96,7 @@ const Page = () => {
   return (
     <main className="hls-page">
       {/* SEO STRUCTURED DATA */}
-      <script
+      {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -106,7 +109,15 @@ const Page = () => {
             category: "Home Loan",
           }),
         }}
-      />
+      /> */}
+
+      <button
+      type="button"
+      className="loan-back-button"
+      onClick={() => router.push("/#Loan")}
+    >
+      ← Back
+    </button>
 
       {/* HERO */}
       <section className="personal-loan-hero">
