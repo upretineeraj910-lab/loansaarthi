@@ -97,13 +97,13 @@ const Page = () => {
 
     <main className="personal-loan-page">
 
-      <button
+      {/* <button
       type="button"
       className="loan-back-button"
       onClick={() => router.push("/#Loan")}
     >
       ← Back
-    </button>
+    </button> */}
       {/* =====================================================
           HERO SECTION
       ===================================================== */}

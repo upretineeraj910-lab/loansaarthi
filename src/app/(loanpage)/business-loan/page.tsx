@@ -116,13 +116,13 @@ const Page = () => {
         }}
       /> */}
 
-       <button
+       {/* <button
       type="button"
       className="loan-back-button"
       onClick={() => router.push("/#Loan")}
     >
       ← Back
-    </button>
+    </button> */}
 
 
       <section className="personal-loan-hero">
