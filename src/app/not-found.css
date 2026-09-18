@@ -1,0 +1,164 @@
+/* not-found.css — shared by both Next.js and Vite versions */
+
+.nf-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  background-color: var(--color-paper, #f5f6f4);
+  text-align: center;
+}
+
+.nf-inner {
+  max-width: 32rem;
+  width: 100%;
+}
+
+.nf-code {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 6rem;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--brand-green, #6fae45);
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .nf-code {
+    font-size: 8rem;
+  }
+}
+
+.nf-title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-ink, #202020);
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .nf-title {
+    font-size: 1.875rem;
+  }
+}
+
+.nf-text {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--color-text-muted, #6a6a6a);
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .nf-text {
+    font-size: 1.05rem;
+  }
+}
+
+.nf-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+@media (min-width: 480px) {
+  .nf-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.nf-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: var(--brand-green, #6fae45);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(111, 174, 69, 0.25);
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 480px) {
+  .nf-btn-primary {
+    width: auto;
+  }
+}
+
+.nf-btn-primary:hover {
+  transform: translateY(-2px);
+  background-color: #5d9a39;
+  box-shadow: 0 6px 20px rgba(111, 174, 69, 0.3);
+}
+
+.nf-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-ink, #202020);
+  background-color: transparent;
+  border: 1px solid rgba(32, 32, 32, 0.15);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (min-width: 480px) {
+  .nf-btn-secondary {
+    width: auto;
+  }
+}
+
+.nf-btn-secondary:hover {
+  border-color: var(--brand-green, #6fae45);
+  color: var(--brand-green, #6fae45);
+}
+
+.nf-links {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(32, 32, 32, 0.08);
+  font-size: 0.85rem;
+  color: var(--color-text-muted, #6a6a6a);
+}
+
+.nf-links a {
+  color: var(--brand-green, #6fae45);
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 0.4rem;
+}
+
+.nf-links a:hover {
+  text-decoration: underline;
+}
+
+@media (prefers-color-scheme: dark) {
+  .nf-wrapper {
+    background-color: #1a1a1a;
+  }
+  .nf-title {
+    color: #e8e8e8;
+  }
+  .nf-btn-secondary {
+    color: #e8e8e8;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}

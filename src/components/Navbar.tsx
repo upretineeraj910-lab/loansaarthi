@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import "./navbar.css";
 import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [loansOpen, setLoansOpen] = useState(false); // mobile accordion state
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
@@ -30,7 +32,12 @@ export default function Navbar() {
 
   const closeMenu = () => {
     setIsOpen(false);
+    setLoansOpen(false);
     document.body.style.overflow = "auto";
+  };
+
+  const toggleLoans = () => {
+    setLoansOpen((prev) => !prev);
   };
 
   const handleLogout = () => {
@@ -47,19 +54,17 @@ export default function Navbar() {
         {/* Logo */}
         <div className="logo">
           <Link href="/">
-            <Image src="/images/icons/image-removebg-preview.png"
+            <Image
+              src="/images/icons/image-removebg-preview.png"
               alt="loansaarthi_logo"
-
               width={120}
               height={150}
               priority={true}
-
               style={{
                 width: "120px",
                 height: "auto",
               }}
             />
-
           </Link>
         </div>
 
@@ -76,24 +81,8 @@ export default function Navbar() {
               <Link href="/dropline-overdraft">Dropline Overdraft</Link>
             </div>
           </div>
-          {/* <Link href="/Credit_card">Credit Cards</Link> */}
           <Link href="/#calculator">EMI Calculator</Link>
-          {/* <Link href="/Blog">Blog</Link> */}
-          {/* <Link href="/Career">Career</Link> */}
-          <Link href="/Contact_Us">Contact Us</Link>
-
-          {/* {isLoggedIn ? (
-            <>
-              <Link href="/dashboard">Dashboard</Link>
-              <button onClick={handleLogout} className="nav-auth-btn logout-btn">
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link href="/login" className="nav-auth-btn login-btn">
-              Login
-            </Link>
-          )} */}
+          <Link href="/about-us">About Us</Link>
         </div>
 
         {/* Hamburger Button */}
@@ -126,26 +115,51 @@ export default function Navbar() {
         </div>
 
         <div className="mobile-menu-links">
-          <Link href="/" onClick={closeMenu}>Home</Link>
-          <Link href="/#Loan" onClick={closeMenu}>Loans</Link>
-          {/* <Link href="/Credit_card" onClick={closeMenu}>Credit Cards</Link> */}
-          <Link href="/#calculator" onClick={closeMenu}>EMI Calculator</Link>
-          {/* <Link href="/Blog" onClick={closeMenu}>Blog</Link> */}
-          {/* <Link href="/Career" onClick={closeMenu}>Career</Link> */}
-          <Link href="/Contact_Us" onClick={closeMenu}>Contact Us</Link>
+          <Link href="/" onClick={closeMenu}>
+            Home
+          </Link>
 
-          {/* {isLoggedIn ? (
-            <>
-              <Link href="/dashboard" onClick={closeMenu}>Dashboard</Link>
-              <button onClick={handleLogout} className="mobile-auth-btn logout-btn">
-                Logout
-              </button>
-            </>
-          ) : (
-            <Link href="/login" onClick={closeMenu} className="mobile-auth-btn login-btn">
-              Login
-            </Link>
-          )} */}
+          {/* Loans — click to expand accordion (no hover on mobile) */}
+          <div className={`mobile-nav-item ${loansOpen ? "expanded" : ""}`}>
+            <button
+              type="button"
+              className="mobile-nav-item-trigger"
+              onClick={toggleLoans}
+              aria-expanded={loansOpen}
+            >
+              <span>Loans</span>
+              <ChevronDown
+                size={18}
+                className={`mobile-nav-item-chevron ${loansOpen ? "open" : ""}`}
+                aria-hidden="true"
+              />
+            </button>
+
+            <div className={`mobile-submenu ${loansOpen ? "open" : ""}`}>
+              <Link href="/personal-loan" onClick={closeMenu}>
+                Personal Loan
+              </Link>
+              <Link href="/home-loan" onClick={closeMenu}>
+                Home Loan for Salaried
+              </Link>
+              <Link href="/loan-against-property" onClick={closeMenu}>
+                Loan Against Property
+              </Link>
+              <Link href="/business-loan" onClick={closeMenu}>
+                Business Loan
+              </Link>
+              <Link href="/dropline-overdraft" onClick={closeMenu}>
+                Dropline Overdraft
+              </Link>
+            </div>
+          </div>
+
+          <Link href="/#calculator" onClick={closeMenu}>
+            EMI Calculator
+          </Link>
+          <Link href="/about-us" onClick={closeMenu}>
+            About Us
+          </Link>
         </div>
       </div>
     </>
