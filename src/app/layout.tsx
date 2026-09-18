@@ -3,6 +3,8 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
+import { GoogleAnalytics } from '@next/third-parties/google';
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -66,7 +68,12 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <GoogleAnalytics gaId="G-BJE4D5EX9T" />
       </body>
     </html>
   );
 }
+
+
+
+
