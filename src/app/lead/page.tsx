@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import "./lead.css"
+import "./lead.css";
 
 interface Lead {
   _id: string;
@@ -14,6 +14,19 @@ interface Lead {
   isVerified: boolean;
   createdAt: string;
 }
+
+// Indian currency formatter
+const formatIndianCurrency = (value: string) => {
+  const number = Number(value.replace(/,/g, ""));
+
+  if (isNaN(number)) {
+    return value;
+  }
+
+  return new Intl.NumberFormat("en-IN", {
+    maximumFractionDigits: 0,
+  }).format(number);
+};
 
 export default function LeadPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -69,7 +82,11 @@ export default function LeadPage() {
                   <td>{lead.email}</td>
                   <td>{lead.occupation}</td>
                   <td>{lead.loanType}</td>
-                  <td>₹{lead.income}</td>
+
+                  <td>
+                    ₹{formatIndianCurrency(lead.income)}
+                  </td>
+
                   <td>
                     {new Date(lead.createdAt).toLocaleString("en-IN")}
                   </td>
