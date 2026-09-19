@@ -16,11 +16,16 @@ interface Lead {
 }
 
 // Indian currency formatter
-const formatIndianCurrency = (value: string) => {
-  const number = Number(value.replace(/,/g, ""));
+const formatIndianCurrency = (value?: string | number) => {
+  if (value === undefined || value === null || value === "") {
+    return "0";
+  }
+
+  const str = String(value).replace(/,/g, "");
+  const number = Number(str);
 
   if (isNaN(number)) {
-    return value;
+    return String(value);
   }
 
   return new Intl.NumberFormat("en-IN", {
@@ -77,18 +82,18 @@ export default function LeadPage() {
             <tbody>
               {leads.map((lead) => (
                 <tr key={lead._id}>
-                  <td>{lead.fullName}</td>
-                  <td>{lead.phone}</td>
-                  <td>{lead.email}</td>
-                  <td>{lead.occupation}</td>
-                  <td>{lead.loanType}</td>
+                  <td>{lead.fullName || (lead as any).name || 'N/A'}</td>
+                  <td>{lead.phone || '--'}</td>
+                  <td>{lead.email || '--'}</td>
+                  <td>{lead.occupation || 'N/A'}</td>
+                  <td>{lead.loanType || '--'}</td>
 
                   <td>
-                    ₹{formatIndianCurrency(lead.income)}
+                    ₹{formatIndianCurrency(lead.income || (lead as any).loanAmount)}
                   </td>
 
                   <td>
-                    {new Date(lead.createdAt).toLocaleString("en-IN")}
+                    {lead.createdAt ? new Date(lead.createdAt).toLocaleString('en-IN') : '--'}
                   </td>
                 </tr>
               ))}
