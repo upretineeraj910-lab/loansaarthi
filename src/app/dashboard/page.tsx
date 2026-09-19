@@ -182,7 +182,7 @@ export default function Dashboard() {
             CRM
           </a>
 
-          <a href="/crm/entries" className={styles.navItem}>
+          <a href="/crm/entry" className={styles.navItem}>
             CRM Entries
           </a>
 
