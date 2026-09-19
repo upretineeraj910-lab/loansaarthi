@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import styles from './Dashboard.module.css';
-import { Link } from 'lucide-react';
+// import { Link } from 'lucide-react';
+import Link from 'next/link';
 
 interface DocumentUrl {
   fileName: string;
