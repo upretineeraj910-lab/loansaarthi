@@ -180,8 +180,8 @@ export default function Footer() {
 
           <div className="ls-contact-item">
             <span className="ls-contact-icon">📱</span>
-            <a href="tel:+917669486600">
-              +91-7669486600
+            <a href="tel:+919810168635">
+              +91-9810168635
             </a>
           </div>
 
