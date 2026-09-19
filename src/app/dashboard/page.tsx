@@ -178,12 +178,12 @@ export default function Dashboard() {
             Lead
           </a>
 
-          <a href="#" className={styles.navItem}>
-            Loan Applications
+          <a href="/crm" className={styles.navItem}>
+            CRM
           </a>
 
-          <a href="#" className={styles.navItem}>
-            Analytics
+          <a href="/crm/entries" className={styles.navItem}>
+            CRM Entries
           </a>
 
           <a href="#" className={styles.navItem}>
