@@ -102,12 +102,11 @@ const LeadSchema = new Schema<ILeadDocument>(
   }
 );
 
-// Compound indexes for sorting and fast search
 LeadSchema.index({ createdAt: -1 });
-LeadSchema.index({ phone: 1, panNumber: 1 });
 
 const Lead: Model<ILeadDocument> =
-  mongoose.models.CrmLead || mongoose.model<ILeadDocument>('CrmLead', LeadSchema, 'crm');
+  mongoose.models.CrmLead ||
+  mongoose.model<ILeadDocument>('CrmLead', LeadSchema, 'crmlead');
 
 export default Lead;
 

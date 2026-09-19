@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './Dashboard.module.css';
+import { Link } from 'lucide-react';
 
 interface DocumentUrl {
   fileName: string;
@@ -167,28 +168,28 @@ export default function Dashboard() {
         <div className={styles.logo}>LoanSaarthi</div>
 
         <nav className={styles.nav}>
-          <a
-            href="#"
+          <Link
+            href="/dashboard"
             className={`${styles.navItem} ${styles.navItemActive}`}
           >
             Dashboard
-          </a>
+          </Link>
 
-          <a href="/lead" className={styles.navItem}>
+          <Link href="/lead" className={styles.navItem}>
             Lead
-          </a>
+          </Link>
 
-          <a href="/crm" className={styles.navItem}>
+          <Link href="/crm" className={styles.navItem}>
             CRM
-          </a>
+          </Link>
 
-          <a href="/crm/entry" className={styles.navItem}>
+          <Link href="/crm/entry" className={styles.navItem}>
             CRM Entries
-          </a>
+          </Link>
 
-          <a href="#" className={styles.navItem}>
+          {/* <a href="#" className={styles.navItem}>
             Settings
-          </a>
+          </a> */}
         </nav>
       </aside>
 
