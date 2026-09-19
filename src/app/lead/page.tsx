@@ -92,8 +92,11 @@ export default function LeadPage() {
                     ₹{formatIndianCurrency(lead.income || (lead as any).loanAmount)}
                   </td>
 
-                  <td>
+                  {/* <td>
                     {lead.createdAt ? new Date(lead.createdAt).toLocaleString('en-IN') : '--'}
+                  </td> */}
+                  <td>
+                    {lead.createdAt ? new Date(lead.createdAt).toLocaleDateString('en-IN') : '--'}
                   </td>
                 </tr>
               ))}
