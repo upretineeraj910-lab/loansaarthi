@@ -28,7 +28,7 @@ export async function GET() {
       role: payload.role,
     });
   } catch (error) {
-    console.error("AUTH ME ERROR:", error);
+    console.error("AUTH ME ERROR:");
 
     return NextResponse.json(
       { authenticated: false },
