@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, useEffect, useRef, useCallback, ChangeEvent, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import './register.css';
@@ -26,6 +26,17 @@ interface IFormErrors {
   submit?: string;
 }
 
+const formatEmailFromName = (name: string): string => {
+  const sanitized = name
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '')
+    .replace(/^_+|_+$/g, '');
+  if (!sanitized) return '';
+  return `${sanitized}@loansaarthi.com`;
+};
+
 export default function RegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
@@ -45,13 +56,87 @@ export default function RegisterPage() {
     special: false,
   });
 
+  const [emailStatus, setEmailStatus] = useState<'idle' | 'checking' | 'available' | 'taken'>('idle');
+  const [emailSuggestions, setEmailSuggestions] = useState<string[]>([]);
+  const checkTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (checkTimerRef.current) {
+        clearTimeout(checkTimerRef.current);
+      }
+    };
+  }, []);
+
+  const checkEmailAvailability = useCallback((emailToCheck: string) => {
+    if (checkTimerRef.current) {
+      clearTimeout(checkTimerRef.current);
+    }
+
+    if (!emailToCheck || !emailToCheck.includes('@loansaarthi.com')) {
+      setEmailStatus('idle');
+      setEmailSuggestions([]);
+      return;
+    }
+
+    setEmailStatus('checking');
+    checkTimerRef.current = setTimeout(async () => {
+      try {
+        const res = await fetch(
+          `/api/register/check-email?email=${encodeURIComponent(emailToCheck)}`
+        );
+        const data = await res.json();
+        if (data.available) {
+          setEmailStatus('available');
+          setEmailSuggestions([]);
+          setErrors((prev) => {
+            const next = { ...prev };
+            delete next.email;
+            return next;
+          });
+        } else {
+          setEmailStatus('taken');
+          setEmailSuggestions(data.suggestions || []);
+          setErrors((prev) => ({
+            ...prev,
+            email: 'Email already taken. Select an available suggestion below.',
+          }));
+        }
+      } catch {
+        setEmailStatus('idle');
+      }
+    }, 400);
+  }, []);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    if (name === 'name') {
+      const generatedEmail = formatEmailFromName(value);
+      setFormData((prev) => ({
+        ...prev,
+        name: value,
+        email: generatedEmail,
+      }));
+      checkEmailAvailability(generatedEmail);
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
 
     if (name === 'password') {
       validatePasswordStrength(value);
     }
+  };
+
+  const handleSelectSuggestion = (suggestedEmail: string) => {
+    setFormData((prev) => ({ ...prev, email: suggestedEmail }));
+    setEmailStatus('available');
+    setEmailSuggestions([]);
+    setErrors((prev) => {
+      const next = { ...prev };
+      delete next.email;
+      return next;
+    });
   };
 
   const validatePasswordStrength = (password: string): void => {
@@ -70,9 +155,13 @@ export default function RegisterPage() {
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Please enter your name to generate an email address';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
+    } else if (emailStatus === 'taken') {
+      newErrors.email = 'This email is already registered. Please choose an available suggestion below';
+    } else if (emailStatus === 'checking') {
+      newErrors.email = 'Checking email availability, please wait...';
     }
 
     const { length, capital, special } = passwordStrength;
@@ -158,24 +247,55 @@ export default function RegisterPage() {
               required
               value={formData.name}
               onChange={handleChange}
-              placeholder="Iron Man"
+              placeholder="e.g. Neeraj Upreti"
             />
             {errors.name && <span className="auth-error-text">{errors.name}</span>}
           </div>
 
           {/* Email */}
           <div className="auth-form-group">
-            <label htmlFor="email">Email Address</label>
+            <div className="auth-email-label-row">
+              <label htmlFor="email">Email Address (Auto-Generated)</label>
+              {emailStatus === 'checking' && (
+                <span className="auth-email-status checking">⏳ Checking...</span>
+              )}
+              {emailStatus === 'available' && (
+                <span className="auth-email-status available">✓ Available</span>
+              )}
+              {emailStatus === 'taken' && (
+                <span className="auth-email-status taken">✗ Already Taken</span>
+              )}
+            </div>
             <input
               id="email"
               name="email"
               type="email"
               required
+              readOnly
               value={formData.email}
-              onChange={handleChange}
-              placeholder="you@loansaarthi.com"
+              className={`auth-email-readonly ${emailStatus === 'taken' ? 'input-error' : ''}`}
+              placeholder="e.g. neeraj_upreti@loansaarthi.com"
             />
             {errors.email && <span className="auth-error-text">{errors.email}</span>}
+
+            {/* Suggestions if already taken */}
+            {emailStatus === 'taken' && emailSuggestions.length > 0 && (
+              <div className="auth-suggestions-box">
+                <p className="auth-suggestions-title">Available Suggestions (Click to select):</p>
+                <div className="auth-suggestions-list">
+                  {emailSuggestions.map((suggestion) => (
+                    <button
+                      type="button"
+                      key={suggestion}
+                      className="auth-suggestion-pill"
+                      onClick={() => handleSelectSuggestion(suggestion)}
+                    >
+                      + {suggestion}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Password */}

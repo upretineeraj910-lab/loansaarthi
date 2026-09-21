@@ -1,0 +1,73 @@
+/* =========================================
+   EMI CALCULATOR NUMBER INPUTS
+   ========================================= */
+
+.lp-number-input,
+.calc-number-input {
+  width: 130px;
+  height: 38px;
+  padding: 6px 10px;
+  border: 1px solid #d8ded9;
+  border-radius: 7px;
+  background: #fff;
+  color: #202020;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lp-number-input:focus,
+.calc-number-input:focus {
+  border-color: #6fae45;
+  box-shadow: 0 0 0 2px rgba(111, 174, 69, 0.12);
+}
+
+/* Remove browser number arrows */
+
+.lp-number-input::-webkit-inner-spin-button,
+.lp-number-input::-webkit-outer-spin-button,
+.calc-number-input::-webkit-inner-spin-button,
+.calc-number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.lp-number-input,
+.calc-number-input {
+  -moz-appearance: textfield;
+}
+
+
+/* =========================================
+   HOME VARIANT
+   ========================================= */
+
+.calc-slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.calc-number-input {
+  width: 125px;
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+  .lp-number-input,
+  .calc-number-input {
+    width: 105px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .calc-slider-header {
+    gap: 8px;
+  }
+}

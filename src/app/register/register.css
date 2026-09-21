@@ -268,3 +268,90 @@
     font-size: 1.5rem;
   }
 }
+
+/* Email Auto-Generation & Availability */
+.auth-email-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.auth-email-status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.auth-email-status.checking {
+  background-color: #FEF3C7;
+  color: #B45309;
+}
+
+.auth-email-status.available {
+  background-color: #DCFCE7;
+  color: #15803D;
+}
+
+.auth-email-status.taken {
+  background-color: #FEE2E2;
+  color: #B91C1C;
+}
+
+.auth-email-readonly {
+  background-color: #F8FAFC !important;
+  color: #334155 !important;
+  cursor: default;
+  border: 1px solid #CBD5E1 !important;
+  font-weight: 500;
+}
+
+.auth-email-readonly.input-error {
+  border-color: var(--ls-error) !important;
+  background-color: #FFF5F5 !important;
+}
+
+.auth-suggestions-box {
+  margin-top: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.auth-suggestions-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+.auth-suggestions-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.auth-suggestion-pill {
+  background-color: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #0F172A;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: inherit;
+}
+
+.auth-suggestion-pill:hover {
+  background-color: var(--ls-black);
+  color: var(--ls-white);
+  border-color: var(--ls-black);
+  transform: translateY(-1px);
+}
