@@ -72,13 +72,11 @@ export default function Home() {
         <div className="hero-grid">
           <Reveal>
             <h1 className="hero-title">
-              Get Loans at Lowest Interest Rates –<br />
-              Compare 42+ Banks & NBFCs.
+              India's Most Trusted Loan Distribution Partner.<br />
+              <strong style={{ fontWeight: "normal" }}>42+ Lenders, One Platform</strong>
             </h1>
             <p className="hero-text">
-              We compare offers across 42+ banks and NBFCs, prepare your file,
-              and follow it through to disbursement — so the only thing you
-              sign is the sanction letter.
+              We manage the entire digital distribution journey—from lender comparison and documentation to final disbursement.
             </p>
             <div className="hero-actions">
               <a href="#calculator" className="btn-primary">
@@ -177,16 +175,16 @@ export default function Home() {
 </div> */}
 
 
-{/* ---------------- LOAN TYPES ---------------- */}
-<div id="Loan">
-  <LoanTypes />
-</div>
- 
+      {/* ---------------- LOAN TYPES ---------------- */}
+      <div id="Loan">
+        <LoanTypes />
+      </div>
 
 
-{/* ---------------- OUR OFFERINGS ---------------- */}
 
-<OurOfferings />
+      {/* ---------------- OUR OFFERINGS ---------------- */}
+
+      <OurOfferings />
 
 
       {/* ---------------- WHY ---------------- */}
@@ -234,7 +232,7 @@ export default function Home() {
   </div>
 </section> */}
 
-<WhyChooseUs/>
+      <WhyChooseUs />
 
       {/* ---------------- CALCULATOR ---------------- */}
       <section id="calculator" className="container section-spacing">
@@ -250,7 +248,7 @@ export default function Home() {
       </section>
 
       {/* ---------------- TESTIMONIALS ---------------- */}
-     <div className="testimonials" style={{height:"600px",minHeight:'600px'}} >
+      <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
         <GoogleReviews />
       </div>
       {/* ---------------- FAQ ---------------- */}
