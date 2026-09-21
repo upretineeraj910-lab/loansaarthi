@@ -38,17 +38,17 @@ export const metadata = {
   ],
   authors: [{ name: "LoanSaarthi" }],
   alternates: {
-    canonical: "https://app.loansaarthi.com/about-us",
+    canonical: "https://www.loansaarthi.com/about-us",
   },
   openGraph: {
     title: "About Us | LoanSaarthi",
     description:
       "1,200+ loans placed, 42+ partner banks & NBFCs, 4–7 day average sanction. Meet the team behind LoanSaarthi.",
-    url: "https://app.loansaarthi.com/about-us",
+    url: "https://www.loansaarthi.com/about-us",
     siteName: "LoanSaarthi",
     images: [
       {
-        url: "https://app.loansaarthi.com/logo.png",
+        url: "/logo.png",
         width: 800,
         height: 600,
         alt: "LoanSaarthi",
@@ -62,7 +62,7 @@ export const metadata = {
     title: "About Us | LoanSaarthi",
     description:
       "Compare and apply for Personal, Business, and Home loans across 42+ banks and NBFCs.",
-    images: ["https://app.loansaarthi.com/logo.png"],
+    images: ["/logo.png"],
   },
   robots: {
     index: true,
@@ -76,22 +76,22 @@ export default function AboutUs() {
     "@graph": [
       {
         "@type": "AboutPage",
-        "@id": "https://app.loansaarthi.com/about-us/#aboutpage",
-        url: "https://app.loansaarthi.com/about-us",
+        "@id": "https://www.loansaarthi.com/about-us/#aboutpage",
+        url: "https://www.loansaarthi.com/about-us",
         name: "About LoanSaarthi",
         description:
           "LoanSaarthi compares and arranges Personal, Business, and Home loans across 42+ banks and NBFCs with instant sanction and lowest interest rates.",
         isPartOf: {
-          "@id": "https://app.loansaarthi.com/#organization",
+          "@id": "https://www.loansaarthi.com/#organization",
         },
       },
       {
         "@type": "FinancialService",
-        "@id": "https://app.loansaarthi.com/#organization",
+        "@id": "https://www.loansaarthi.com/#organization",
         name: "LoanSaarthi",
-        url: "https://app.loansaarthi.com",
-        logo: "https://app.loansaarthi.com/logo.png",
-        telephone: "+91-7669486600",
+        url: "https://www.loansaarthi.com",
+        logo: "https://www.loansaarthi.com/logo.png",
+        telephone: "+91-9810168635",
         priceRange: "₹₹",
         address: {
           "@type": "PostalAddress",

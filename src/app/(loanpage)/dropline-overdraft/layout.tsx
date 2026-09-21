@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     "dropline overdraft eligibility",
   ],
   alternates: {
-    canonical: "https://loansaarthi.com/dropline-overdraft",
+    canonical: "https://www.loansaarthi.com/dropline-overdraft",
   },
   robots: {
     index: true,
@@ -24,15 +24,17 @@ export const metadata: Metadata = {
     title: "Dropline Overdraft Facility | Secured Business Funding in India",
     description:
       "Compare Dropline Overdraft facility options from 42+ Banks & NBFCs with LoanSaarthi. Secured funding solution with 100% digital loan assistance.",
-    url: "https://loansaarthi.com/dropline-overdraft",
+    url: "https://www.loansaarthi.com/dropline-overdraft",
     siteName: "LoanSaarthi",
     type: "website",
+    images: ["/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Dropline Overdraft Facility | Secured Business Funding in India",
     description:
       "Compare Dropline Overdraft facility options from 42+ Banks & NBFCs with LoanSaarthi.",
+    images: ["/logo.png"],
   },
 };
 

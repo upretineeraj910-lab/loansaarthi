@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "personal loan interest rate",
   ],
   alternates: {
-    canonical: "https://loansaarthi.com/personal-loan",
+    canonical: "https://www.loansaarthi.com/personal-loan",
   },
   robots: {
     index: true,
@@ -28,15 +28,17 @@ export const metadata: Metadata = {
     title: "Personal Loan Online | Cheapest Personal Loan in India",
     description:
       "Compare personal loan options from 42+ Banks & NBFCs in India with LoanSaarthi. Explore low-interest personal loans and 100% digital loan assistance.",
-    url: "https://loansaarthi.com/personal-loan",
+    url: "https://www.loansaarthi.com/personal-loan",
     siteName: "LoanSaarthi",
     type: "website",
+    images: ["/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Personal Loan Online | Cheapest Personal Loan in India",
     description:
       "Compare personal loan options from 42+ Banks & NBFCs in India with LoanSaarthi.",
+    images: ["/logo.png"],
   },
 };
 

@@ -107,8 +107,59 @@ export async function proxy(request: NextRequest) {
     }
   }
 
+
+
+  // ============================================
+// CRM + SUPERADMIN ROUTES
+// ============================================
+
+const crmPaths = [
+  '/crm',
+  '/crm/entry',
+];
+
+const isCRMPath = crmPaths.some((path) =>
+  pathname.startsWith(path)
+);
+
+if (isCRMPath) {
+  // No token = not logged in
+  if (!token) {
+    return NextResponse.redirect(
+      new URL('/login', request.url)
+    );
+  }
+
+  try {
+    const secret = new TextEncoder().encode(
+      process.env.JWT_SECRET
+    );
+
+    const { payload } = await jwtVerify(token, secret);
+
+    const role = payload.role;
+
+    // Only CRM and SUPERADMIN can access
+    if (role !== 'crm' && role !== 'superadmin') {
+      return NextResponse.redirect(
+        new URL('/dashboard', request.url)
+      );
+    }
+
+    return NextResponse.next();
+  } catch (error) {
+    console.error('CRM JWT Error:', error);
+
+    return NextResponse.redirect(
+      new URL('/login', request.url)
+    );
+  }
+}
+
   return NextResponse.next();
 }
+
+
 
 export const config = {
   matcher: [
@@ -118,5 +169,7 @@ export const config = {
     '/register',
     '/borrower-form/:path*',
     '/lead/:path*',
+
+     '/crm/:path*',
   ],
 };

@@ -6,7 +6,30 @@ import "./Contact.css";
 export const metadata = {
   title: "Contact Us | LoanSaarthi",
   description:
-    "Get in touch with LoanSaarthi for Personal Loans, Credit Cards, Home Loans, Business Loans and financial assistance.",
+    "Get in touch with LoanSaarthi for Personal Loans, Credit Cards, Home Loans, Business Loans and financial assistance across 42+ partner banks.",
+  alternates: {
+    canonical: "https://www.loansaarthi.com/contact-us",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Contact Us | LoanSaarthi",
+    description:
+      "Get in touch with LoanSaarthi for Personal Loans, Home Loans, Business Loans and loan assistance in Delhi.",
+    url: "https://www.loansaarthi.com/contact-us",
+    siteName: "LoanSaarthi",
+    type: "website",
+    images: ["/logo.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | LoanSaarthi",
+    description:
+      "Get in touch with LoanSaarthi for loan assistance across 42+ partner banks.",
+    images: ["/logo.png"],
+  },
 };
 
 export default function ContactPage() {

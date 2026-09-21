@@ -17,25 +17,18 @@ const OFFERINGS: Offering[] = [
         href: "/home-loan",
         icon: "/images/icons/home-loan.png",
     },
-    // {
-    //     name: "Education Loan",
-    //     description:
-    //         "Unlock financial flexibility and achieve your goals with Loan Saarthi's personalized education loan solutions.",
-    //     href: "/education-loan",
-    //     icon: "/images/icons/personal-loan-1.png",
-    // },
     {
         name: "Loan Balance Transfer",
         description:
-            "Fuel your business growth with confidence through Loan Saarthi's tailored business loan solutions.",
-        href: "/business-loan",
+            "Transfer high-cost existing loans to lower interest rates and reduce your monthly EMI payouts.",
+        href: "/loan-balance-transfer",
         icon: "/images/icons/business-loan.png",
     },
     {
         name: "Credit Card",
         description:
             "Our credit cards are designed to cater to your lifestyle, offering a seamless payment experience and a host of benefits.",
-        href: "#",
+        href: "/credit-card",
         icon: "/images/icons/credit-card-1.png",
     },
     {
@@ -49,7 +42,7 @@ const OFFERINGS: Offering[] = [
         name: "Overdraft Facility",
         description:
             "With competitive interest rates and easy access to funds, our overdraft facility provides you with peace of mind.",
-        href: "/overdraft-facility",
+        href: "/dropline-overdraft",
         icon: "/images/icons/overdraft.png",
     },
     {
@@ -100,7 +93,7 @@ export default function OurOfferings() {
                                 />
                             </div>
 
-                            <h2>{offering.name}</h2>
+                            <h3>{offering.name}</h3>
 
                             <p>{offering.description}</p>
                         </Link>

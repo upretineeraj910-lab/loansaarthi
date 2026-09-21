@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "unsecured business loan India",
   ],
   alternates: {
-    canonical: "https://loansaarthi.com/business-loan",
+    canonical: "https://www.loansaarthi.com/business-loan",
   },
   robots: {
     index: true,
@@ -25,15 +25,17 @@ export const metadata: Metadata = {
     title: "Business Loan Online | Instant Business Loans for MSMEs in India",
     description:
       "Compare Business Loan options from 42+ Banks & NBFCs with LoanSaarthi. Flexible repayment options and 100% digital loan assistance.",
-    url: "https://loansaarthi.com/business-loan",
+    url: "https://www.loansaarthi.com/business-loan",
     siteName: "LoanSaarthi",
     type: "website",
+    images: ["/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Business Loan Online | Instant Business Loans for MSMEs in India",
     description:
       "Compare Business Loan options from 42+ Banks & NBFCs with LoanSaarthi.",
+    images: ["/logo.png"],
   },
 };
 

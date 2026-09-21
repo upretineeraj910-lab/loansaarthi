@@ -18,38 +18,55 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.loansaarthi.com"),
   title: {
-    default: "LoanSaarthi | Instant Loan & EMI Calculator",
+    default: "LoanSaarthi | Compare 42+ Banks & Lowest Interest Loans",
     template: "%s | LoanSaarthi",
   },
   description:
-    "Calculate instant loan EMIs, interest rates, and loan tenure easily with LoanSaarthi. Get transparent loan breakdown and best rate reviews.",
+    "Compare and apply for Personal, Business, Home Loans & Dropline Overdraft across 42+ Banks & NBFCs with LoanSaarthi. Lowest interest rates and 100% digital loan assistance.",
   keywords: [
     "Loan Calculator",
     "EMI Calculator",
     "Personal Loan",
     "Home Loan",
+    "Business Loan",
+    "Dropline Overdraft",
+    "Loan Against Property",
     "LoanSaarthi",
     "Interest Rate Calculator",
   ],
   authors: [{ name: "LoanSaarthi" }],
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
-    title: "LoanSaarthi | Instant Loan & EMI Calculator",
+    title: "LoanSaarthi | Compare 42+ Banks & Lowest Interest Loans",
     description:
-      "Calculate your monthly EMI and total loan interest instantly with LoanSaarthi.",
+      "Compare loan offers across 42+ banks and NBFCs with instant sanctions and lowest interest rates at LoanSaarthi.",
+    url: "https://www.loansaarthi.com",
     siteName: "LoanSaarthi",
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: "/logo.png",
+        width: 600,
+        height: 600,
+        alt: "LoanSaarthi Logo",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LoanSaarthi | Instant Loan & EMI Calculator",
+    title: "LoanSaarthi | Compare 42+ Banks & Lowest Interest Loans",
     description:
-      "Calculate your monthly EMI and total loan interest instantly with LoanSaarthi.",
+      "Compare loan offers across 42+ banks and NBFCs with instant sanctions and lowest interest rates at LoanSaarthi.",
+    images: ["/logo.png"],
   },
 };
 

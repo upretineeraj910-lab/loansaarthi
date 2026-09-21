@@ -88,11 +88,15 @@ export default function Footer() {
             </li>
 
             <li>
-              <Link href="/Blog">Blog</Link>
+              <Link href="/about-us">About Us</Link>
             </li>
 
             <li>
-              <Link href="/Career">Career</Link>
+              <Link href="/contact-us">Contact Us</Link>
+            </li>
+
+            <li>
+              <Link href="/career">Career</Link>
             </li>
 
             {/* Auth Links */}
@@ -148,8 +152,20 @@ export default function Footer() {
             </li>
 
             <li>
-              <Link href="/education-loan">
-                Education Loan
+              <Link href="/loan-against-property">
+                Loan Against Property
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/dropline-overdraft">
+                Dropline Overdraft
+              </Link>
+            </li>
+
+            <li>
+              <Link href="/loan-balance-transfer">
+                Loan Balance Transfer
               </Link>
             </li>
           </ul>
@@ -181,7 +197,7 @@ export default function Footer() {
           <div className="ls-contact-item">
             <span className="ls-contact-icon">📱</span>
             <a href="tel:+919810168635">
-              +91-9810168635
+              +91-9810168635 (10AM-6:30PM)
             </a>
           </div>
 

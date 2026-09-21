@@ -15,7 +15,8 @@ export default function ContactInfo() {
         <div>
           <div className="contact-info-label">Phone</div>
           <div className="contact-info-value">
-            <a href="tel:917669486600">+91 76694 86600</a>
+            <a href="tel:+919810168635">+91 98101 68635</a> /{" "}
+            <a href="tel:01125792874">011-25792874</a>
           </div>
         </div>
       </div>
@@ -27,7 +28,7 @@ export default function ContactInfo() {
         <div>
           <div className="contact-info-label">Email</div>
           <div className="contact-info-value">
-            <a href="mailto:info@loansaarthi.com">info@loansaarthi.com</a>
+            <a href="mailto:contactus@loansaarthi.com">contactus@loansaarthi.com</a>
           </div>
         </div>
       </div>
@@ -39,7 +40,7 @@ export default function ContactInfo() {
         <div>
           <div className="contact-info-label">Address</div>
           <div className="contact-info-value">
-            Sadipur, New Delhi
+            2151/9B Goswami Girdhari Lal Marg, New Patel Nagar, Shadipur, Delhi - 110008
           </div>
         </div>
       </div>

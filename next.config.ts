@@ -38,6 +38,55 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  // 301 Redirects for retired/deprecated URLs & URL casing
+  async redirects() {
+    return [
+      {
+        source: '/education-loan',
+        destination: '/personal-loan',
+        permanent: true,
+      },
+      {
+        source: '/overdraft-facility',
+        destination: '/dropline-overdraft',
+        permanent: true,
+      },
+      {
+        source: '/Contact_Us',
+        destination: '/contact-us',
+        permanent: true,
+      },
+      {
+        source: '/Credit_card',
+        destination: '/credit-card',
+        permanent: true,
+      },
+      {
+        source: '/Career',
+        destination: '/career',
+        permanent: true,
+      },
+    ];
+  },
+
+  // Rewrites for clean, SEO-friendly lowercase URLs to existing folders
+  async rewrites() {
+    return [
+      {
+        source: '/contact-us',
+        destination: '/Contact_Us',
+      },
+      {
+        source: '/credit-card',
+        destination: '/Credit_card',
+      },
+      {
+        source: '/career',
+        destination: '/Career',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

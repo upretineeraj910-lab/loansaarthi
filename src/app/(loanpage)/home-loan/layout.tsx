@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "apply home loan online",
   ],
   alternates: {
-    canonical: "https://loansaarthi.com/home-loan",
+    canonical: "https://www.loansaarthi.com/home-loan",
   },
   robots: {
     index: true,
@@ -26,15 +26,17 @@ export const metadata: Metadata = {
     title: "Home Loan for Salaried | Best Home Loan Interest Rates in India",
     description:
       "Compare Home Loan options for salaried employees from 42+ Banks & NBFCs with LoanSaarthi. Explore low interest rates and 100% digital loan assistance.",
-    url: "https://loansaarthi.com/home-loan",
+    url: "https://www.loansaarthi.com/home-loan",
     siteName: "LoanSaarthi",
     type: "website",
+    images: ["/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Home Loan for Salaried | Best Home Loan Interest Rates in India",
     description:
       "Compare Home Loan options for salaried employees from 42+ Banks & NBFCs with LoanSaarthi.",
+    images: ["/logo.png"],
   },
 };
 

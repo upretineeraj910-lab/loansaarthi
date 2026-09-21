@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     "secured loan against property",
   ],
   alternates: {
-    canonical: "https://loansaarthi.com/loan-against-property",
+    canonical: "https://www.loansaarthi.com/loan-against-property",
   },
   robots: {
     index: true,
@@ -25,15 +25,17 @@ export const metadata: Metadata = {
     title: "Loan Against Property (LAP) | Mortgage Loan Online in India",
     description:
       "Compare Loan Against Property options from 42+ Banks & NBFCs with LoanSaarthi. Explore low interest rates and 100% digital loan assistance.",
-    url: "https://loansaarthi.com/loan-against-property",
+    url: "https://www.loansaarthi.com/loan-against-property",
     siteName: "LoanSaarthi",
     type: "website",
+    images: ["/logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Loan Against Property (LAP) | Mortgage Loan Online in India",
     description:
       "Compare Loan Against Property options from 42+ Banks & NBFCs with LoanSaarthi.",
+    images: ["/logo.png"],
   },
 };
 

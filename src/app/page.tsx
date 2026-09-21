@@ -27,11 +27,11 @@ export default function Home() {
     "@graph": [
       {
         "@type": "FinancialService",
-        "@id": "https://app.loansaarthi.com/#organization",
+        "@id": "https://www.loansaarthi.com/#organization",
         name: "LoanSaarthi",
-        url: "https://app.loansaarthi.com",
-        logo: "https://app.loansaarthi.com/logo.png",
-        telephone: "+91-7669486600",
+        url: "https://www.loansaarthi.com",
+        logo: "https://www.loansaarthi.com/logo.png",
+        telephone: "+91-9810168635",
         priceRange: "₹₹",
         address: {
           "@type": "PostalAddress",
@@ -46,7 +46,7 @@ export default function Home() {
       },
       {
         "@type": "FAQPage",
-        "@id": "https://app.loansaarthi.com/#faq",
+        "@id": "https://www.loansaarthi.com/#faq",
         mainEntity: FAQS.map((f) => ({
           "@type": "Question",
           name: f.q,
@@ -268,10 +268,10 @@ export default function Home() {
 
       {/* ---------------- MOBILE STICKY CTA ---------------- */}
       <div className="mobile-cta">
-        <a href="tel:917669486600" className="mobile-cta-call">
+        <a href="tel:919810168635" className="mobile-cta-call">
           <Phone size={15} aria-hidden="true" /> Call
         </a>
-        <a href="https://wa.me/917669486600" className="mobile-cta-whatsapp">
+        <a href="https://wa.me/919810168635" className="mobile-cta-whatsapp">
           <MessageCircle size={15} aria-hidden="true" /> WhatsApp
         </a>
       </div>

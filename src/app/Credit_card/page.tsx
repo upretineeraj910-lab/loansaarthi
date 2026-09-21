@@ -73,6 +73,43 @@ const steps = [
   },
 ];
 
+export const metadata = {
+  title: "Best Credit Cards in India | Compare Cashback & Rewards | LoanSaarthi",
+  description:
+    "Compare and apply for top credit cards in India with LoanSaarthi. Explore cashback, rewards, travel, and fuel credit cards that match your lifestyle.",
+  keywords: [
+    "credit cards",
+    "best credit cards India",
+    "cashback credit cards",
+    "rewards credit cards",
+    "apply credit card online",
+    "compare credit cards",
+  ],
+  alternates: {
+    canonical: "https://www.loansaarthi.com/credit-card",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "Best Credit Cards in India | Compare Cashback & Rewards | LoanSaarthi",
+    description:
+      "Explore and compare the best credit cards in India with LoanSaarthi. Choose cashback, rewards, and travel benefits.",
+    url: "https://www.loansaarthi.com/credit-card",
+    siteName: "LoanSaarthi",
+    type: "website",
+    images: ["/logo.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Best Credit Cards in India | Compare Offers | LoanSaarthi",
+    description:
+      "Explore and compare top credit cards in India with LoanSaarthi.",
+    images: ["/logo.png"],
+  },
+};
+
 export default function CreditCardPage() {
   return (
     <main className="credit-page">

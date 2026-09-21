@@ -4,13 +4,8 @@ import Link from "next/link";
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
 import "../loan-page.css";
-import { useEffect } from "react";
-
 
 export default function LoanBalanceTransferPage() {
-   useEffect(()=>{
-      document.title = "Loan Balance Transfer"
-    })
   return (
     <main className="lp-page">
       <div className="lp-container">
