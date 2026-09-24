@@ -94,7 +94,7 @@ export default function LeadPage() {
 
                   {/* <td>
                     {lead.createdAt ? new Date(lead.createdAt).toLocaleString('en-IN') : '--'}
-                  </td> */}
+                  </td>  */}
                   <td>
                     {lead.createdAt ? new Date(lead.createdAt).toLocaleDateString('en-IN') : '--'}
                   </td>

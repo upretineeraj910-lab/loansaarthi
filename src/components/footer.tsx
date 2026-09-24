@@ -96,7 +96,7 @@ export default function Footer() {
             </li>
 
             <li>
-              <Link href="/career">Career</Link>
+              <Link href="/Career">Career</Link>
             </li>
 
             {/* Auth Links */}

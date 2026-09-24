@@ -1,10 +1,8 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // आपका पुराना गूगल क्लाउड पैकेज
   serverExternalPackages: ['@google-cloud/storage'],
 
-  // सिक्योरिटी हेडर्स (Lighthouse की गलतियाँ ठीक करने के लिए)
   async headers() {
     return [
       {
@@ -39,8 +37,7 @@ const nextConfig: NextConfig = {
     ];
   },
 
-  // 301 Redirects for retired/deprecated URLs & URL casing
-  async redirects() {
+ async redirects() {
     return [
       {
         source: '/education-loan',
@@ -62,11 +59,11 @@ const nextConfig: NextConfig = {
         destination: '/credit-card',
         permanent: true,
       },
-      {
-        source: '/Career',
-        destination: '/career',
-        permanent: true,
-      },
+      // {
+      //   source: '/Career',
+      //   destination: '/career',
+      //   permanent: true,
+      // },
     ];
   },
 
@@ -81,10 +78,10 @@ const nextConfig: NextConfig = {
         source: '/credit-card',
         destination: '/Credit_card',
       },
-      {
-        source: '/career',
-        destination: '/Career',
-      },
+      // {
+      //   source: '/career',
+      //   destination: '/Career',
+      // },
     ];
   },
 };
