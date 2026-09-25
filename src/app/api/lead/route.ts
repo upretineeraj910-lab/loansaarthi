@@ -1,79 +1,8 @@
-// import { NextRequest, NextResponse } from "next/server";
-// import mongoose from "mongoose";
-
-// const LeadSchema = new mongoose.Schema(
-//   {
-//     phone: { type: String, required: true },
-//     fullName: { type: String, required: true },
-//     email: { type: String, required: true },
-//     occupation: { type: String, default: "Salaried" },
-//     loanType: { type: String, default: "Home Loan" },
-//     income:{ type: String, required: true },
-//     isVerified: { type: Boolean, default: true },
-//   },
-//   { timestamps: true }
-// );
-
-// const Lead = mongoose.models.Lead || mongoose.model("Lead", LeadSchema);
-
-// export async function POST(req: NextRequest) {
-//   try {
-//     const body = await req.json();
-//     const { phone, fullName, email, occupation, loanType,income } = body;
-
-//     if (!phone || !fullName || !email || !income) {
-//       return NextResponse.json(
-//         { success: false, message: "Required fields missing" },
-//         { status: 400 }
-//       );
-//     }
-
-//     const uri = process.env.MONGODB_URI;
-//     if (!uri) {
-//       console.error("MONGODB_URI is missing in .env.local");
-//       return NextResponse.json(
-//         { success: false, message: "Database URI not configured" },
-//         { status: 500 }
-//       );
-//     }
-
-//     // Connect with a 5-second timeout to avoid infinite pending state
-//     if (mongoose.connection.readyState !== 1) {
-//       await mongoose.connect(uri, {
-//         serverSelectionTimeoutMS: 5000,
-//         bufferCommands: false,
-//       });
-//     }
-
-//     const newLead = await Lead.create({
-//       phone,
-//       fullName,
-//       email,
-//       occupation,
-//       loanType,
-//       income,
-//       isVerified: true,
-//     });
-
-//     return NextResponse.json({
-//       success: true,
-//       message: "Lead saved successfully",
-//       data: newLead,
-//     });
-//   } catch (error: any) {
-//     console.error("Database / API Error:", error);
-//     return NextResponse.json(
-//       { success: false, message: error.message || "Failed to connect to database" },
-//       { status: 500 }
-//     );
-//   }
-// }
-
-
-
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import connectDB from "@/lib/mongodb";
+
+export const dynamic = "force-dynamic";
 
 const LeadSchema = new mongoose.Schema(
   {
@@ -81,32 +10,29 @@ const LeadSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     fullName: {
       type: String,
-      required: true,
     },
-
+    name: {
+      type: String,
+    },
     email: {
       type: String,
-      required: true,
     },
-
     occupation: {
       type: String,
       default: "Salaried",
     },
-
     loanType: {
       type: String,
       default: "Home Loan",
     },
-
     income: {
       type: String,
-      required: true,
     },
-
+    loanAmount: {
+      type: mongoose.Schema.Types.Mixed,
+    },
     isVerified: {
       type: Boolean,
       default: true,
@@ -114,44 +40,74 @@ const LeadSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    strict: false,
   }
 );
 
 const Lead =
   mongoose.models.Lead || mongoose.model("Lead", LeadSchema);
 
-
 // =========================
-// GET ALL LEADS
+// GET LEADS (PAGINATED & SEARCH)
 // =========================
-export async function GET() {
+export async function GET(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+    const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10) || 1);
+    const limit = Math.max(1, parseInt(searchParams.get("limit") || "10", 10) || 10);
+    const search = searchParams.get("search")?.trim() || "";
+
+    const query: Record<string, any> = {};
+
+    if (search) {
+      query.$or = [
+        { fullName: { $regex: search, $options: "i" } },
+        { name: { $regex: search, $options: "i" } },
+        { phone: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+        { occupation: { $regex: search, $options: "i" } },
+        { loanType: { $regex: search, $options: "i" } },
+      ];
+    }
+
+    const skip = (page - 1) * limit;
+
     await connectDB();
 
-    const leads = await Lead.find()
-      .sort({ createdAt: -1 })
-      .lean();
+    const [total, leads] = await Promise.all([
+      Lead.countDocuments(query),
+      Lead.find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        .lean(),
+    ]);
+
+    const totalPages = Math.max(1, Math.ceil(total / limit));
 
     return NextResponse.json(
       {
         success: true,
         leads,
+        total,
+        page,
+        limit,
+        totalPages,
       },
       { status: 200 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("GET LEADS ERROR:", error);
 
     return NextResponse.json(
       {
         success: false,
-        message: "Failed to fetch leads",
+        message: error?.message || "Failed to fetch leads",
       },
       { status: 500 }
     );
   }
 }
-
 
 // =========================
 // CREATE NEW LEAD
@@ -171,7 +127,10 @@ export async function POST(req: Request) {
       income,
     } = body;
 
-    if (!phone || !fullName || !email || !income) {
+    const leadName = fullName || body.name;
+    const leadIncome = income || (body.loanAmount ? String(body.loanAmount) : "");
+
+    if (!phone || !leadName || !email || !leadIncome) {
       return NextResponse.json(
         {
           success: false,
@@ -183,11 +142,11 @@ export async function POST(req: Request) {
 
     const newLead = await Lead.create({
       phone,
-      fullName,
+      fullName: leadName,
       email,
-      occupation,
-      loanType,
-      income,
+      occupation: occupation || "Salaried",
+      loanType: loanType || "Home Loan",
+      income: leadIncome,
       isVerified: true,
     });
 
@@ -199,14 +158,52 @@ export async function POST(req: Request) {
       },
       { status: 201 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error("POST LEAD ERROR:", error);
 
     return NextResponse.json(
       {
         success: false,
-        message: "Failed to save lead",
+        message: error?.message || "Failed to save lead",
       },
+      { status: 500 }
+    );
+  }
+}
+
+// =========================
+// DELETE LEAD
+// =========================
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Lead ID is required" },
+        { status: 400 }
+      );
+    }
+
+    await connectDB();
+    const deletedLead = await Lead.findByIdAndDelete(id);
+
+    if (!deletedLead) {
+      return NextResponse.json(
+        { success: false, message: "Lead not found" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(
+      { success: true, message: "Lead deleted successfully" },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error("DELETE LEAD ERROR:", error);
+    return NextResponse.json(
+      { success: false, message: error?.message || "Failed to delete lead" },
       { status: 500 }
     );
   }
