@@ -174,37 +174,37 @@ export async function POST(req: Request) {
 // =========================
 // DELETE LEAD
 // =========================
-export async function DELETE(req: Request) {
-  try {
-    const { searchParams } = new URL(req.url);
-    const id = searchParams.get("id");
+// export async function DELETE(req: Request) {
+//   try {
+//     const { searchParams } = new URL(req.url);
+//     const id = searchParams.get("id");
 
-    if (!id) {
-      return NextResponse.json(
-        { success: false, message: "Lead ID is required" },
-        { status: 400 }
-      );
-    }
+//     if (!id) {
+//       return NextResponse.json(
+//         { success: false, message: "Lead ID is required" },
+//         { status: 400 }
+//       );
+//     }
 
-    await connectDB();
-    const deletedLead = await Lead.findByIdAndDelete(id);
+//     await connectDB();
+//     const deletedLead = await Lead.findByIdAndDelete(id);
 
-    if (!deletedLead) {
-      return NextResponse.json(
-        { success: false, message: "Lead not found" },
-        { status: 404 }
-      );
-    }
+//     if (!deletedLead) {
+//       return NextResponse.json(
+//         { success: false, message: "Lead not found" },
+//         { status: 404 }
+//       );
+//     }
 
-    return NextResponse.json(
-      { success: true, message: "Lead deleted successfully" },
-      { status: 200 }
-    );
-  } catch (error: any) {
-    console.error("DELETE LEAD ERROR:", error);
-    return NextResponse.json(
-      { success: false, message: error?.message || "Failed to delete lead" },
-      { status: 500 }
-    );
-  }
-}
+//     return NextResponse.json(
+//       { success: true, message: "Lead deleted successfully" },
+//       { status: 200 }
+//     );
+//   } catch (error: any) {
+//     console.error("DELETE LEAD ERROR:", error);
+//     return NextResponse.json(
+//       { success: false, message: error?.message || "Failed to delete lead" },
+//       { status: 500 }
+//     );
+//   }
+// }

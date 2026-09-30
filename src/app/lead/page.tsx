@@ -385,7 +385,7 @@ export default function LeadPage() {
                   <th>Loan Type</th>
                   <th>Annual Income</th>
                   <th>Created At</th>
-                  <th style={{ textAlign: "center", width: "80px" }}>Action</th>
+                  {/* <th style={{ textAlign: "center", width: "80px" }}>Action</th> */}
                 </tr>
               </thead>
 
@@ -490,7 +490,7 @@ export default function LeadPage() {
                       </td>
 
                       {/* ACTIONS */}
-                      <td data-label="Action" style={{ textAlign: "center" }}>
+                      {/* <td data-label="Action" style={{ textAlign: "center" }}>
                         <button
                           onClick={() => handleDeleteLead(lead._id, displayName)}
                           disabled={deletingId === lead._id}
@@ -499,7 +499,7 @@ export default function LeadPage() {
                         >
                           <Trash2 size={16} />
                         </button>
-                      </td>
+                      </td> */}
                     </tr>
                   );
                 })}
