@@ -1,988 +1,1056 @@
 /* =========================================================
-   CREDIT PAGE — LOAN SAARTHI BRAND STYLES
-   Based on Official Brand Guidelines
-   Colors: Green #6FAE45 | Black #202020 | Light Green #EAF4E4 | Neutral #F5F6F4
-   Font: Inter (primary) | IBM Plex Mono (for numbers)
+   LOANSAARTHI CREDIT CARD PAGE
+   GREEN THEME — BASED ON LOANSAARTHI REFERENCE CSS
    ========================================================= */
 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap");
+
+
 /* =========================================================
-   ROOT VARIABLES — LOAN SAARTHI BRAND
-========================================================= */
+   ROOT VARIABLES
+   ========================================================= */
 
-.credit-page {
-  /* ----- Loan Saarthi Brand Colors ----- */
-  --brand-green: #6FAE45;
-  --brand-green-light: #EAF4E4;
-  --brand-black: #202020;
-  --brand-neutral: #F5F6F4;
-  --brand-white: #FFFFFF;
+:root {
+  --ls-primary: #6fae45;
+  --ls-primary-dark: #5d9a39;
+  --ls-primary-light: #eaf4e4;
 
-  /* ----- Extended Palette ----- */
-  --credit-paper: #F5F6F4;
-  --credit-paper-soft: #FAFBF9;
-  --credit-ink: #202020;
-  --credit-muted: #5A5A5A;
-  --credit-brass: #6FAE45;
-  --credit-brass-deep: #5d9a39;
-  --credit-green: #6FAE45;
-  --credit-green-dark: #3A6B2E;
-  --credit-line: rgba(32, 32, 32, 0.10);
-  --credit-white: #FFFFFF;
+  --ls-secondary: #6fae45;
+  --ls-accent: #ffab00;
 
-  /* ----- Typography ----- */
-  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --ls-text-main: #202020;
+  --ls-text-muted: #6a6a6a;
+  --ls-text-light: #b0b0b0;
 
-  min-height: 100vh;
-  background: var(--credit-paper);
-  color: var(--credit-ink);
-  font-family: var(--font-primary);
+  --ls-bg: #f5f6f4;
+  --ls-bg-light: #fafbf9;
+  --ls-bg-dark: #e8eae6;
+
+  --ls-card-bg: #ffffff;
+
+  --ls-border: rgba(32, 32, 32, 0.1);
+  --ls-border-hover: rgba(111, 174, 69, 0.45);
+
+  --ls-success: #6fae45;
+  --ls-danger: #a13d2c;
+
+  --ls-shadow: 0 4px 14px rgba(32, 32, 32, 0.06);
+  --ls-shadow-hover: 0 14px 30px rgba(32, 32, 32, 0.1);
+
+  --ls-radius-sm: 8px;
+  --ls-radius-md: 12px;
+  --ls-radius-lg: 16px;
+
+  --ls-font-primary: "Inter", sans-serif;
+  --ls-font-serif: "Playfair Display", Georgia, serif;
 }
 
-/* =========================================================
-   COMMON
-========================================================= */
 
-.credit-container {
-  width: min(1180px, calc(100% - 40px));
+/* =========================================================
+   MAIN CONTAINER
+   ========================================================= */
+
+.cc-container {
+  width: 100%;
+  max-width: 1280px;
   margin: 0 auto;
+  padding: 40px 24px 70px;
+
+  background: var(--ls-bg);
+  color: var(--ls-text-main);
+
+  font-family: var(--ls-font-primary);
+  box-sizing: border-box;
 }
 
-.credit-eyebrow {
-  margin: 0 0 18px;
-  color: var(--credit-brass-deep);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+.cc-container *,
+.cc-container *::before,
+.cc-container *::after {
+  box-sizing: border-box;
 }
 
-.credit-page h1,
-.credit-page h2,
-.credit-page h3,
-.credit-page p {
-  margin-top: 0;
-}
-
-.credit-page h1,
-.credit-page h2 {
-  letter-spacing: -0.045em;
-  font-family: 'Georgia', 'Times New Roman', serif;
-}
-
-.credit-page h1 span,
-.credit-page h2 span {
-  color: var(--brand-green);
-}
-
-.credit-page a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* =========================================================
-   BUTTONS — LOAN SAARTHI BRAND
-========================================================= */
-
-.credit-hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 32px;
-}
-
-.credit-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 0 28px;
-  border-radius: 0.5rem;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: var(--font-primary);
-  text-decoration: none;
-  transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-  cursor: pointer;
-  border: none;
-}
-
-.credit-btn:hover {
-  transform: translateY(-2px);
-}
-
-.credit-btn-primary {
-  background: var(--brand-green);
-  color: #FFFFFF !important;
-  box-shadow: 0 2px 8px rgba(111, 174, 69, 0.25);
-}
-
-.credit-btn-primary:hover {
-  background: var(--credit-brass-deep);
-  box-shadow: 0 6px 20px rgba(111, 174, 69, 0.30);
-}
-
-.credit-btn-secondary {
-  border: 1px solid var(--credit-line);
-  background: transparent;
-  color: var(--credit-ink);
-}
-
-.credit-btn-secondary:hover {
-  border-color: var(--brand-green);
-  background: var(--brand-green-light);
-}
-
-.credit-btn-light {
-  background: var(--credit-paper);
-  color: var(--credit-ink) !important;
-  border: 1px solid var(--credit-line);
-}
-
-.credit-btn-light:hover {
-  border-color: var(--brand-green);
-  background: var(--brand-green-light);
-}
 
 /* =========================================================
    HERO
-========================================================= */
+   ========================================================= */
 
-.credit-hero {
-  padding: 86px 0 96px;
-  overflow: hidden;
-  position: relative;
+.cc-hero {
+  text-align: center;
+  padding: 20px 0 42px;
 }
 
-.credit-hero::before {
-  content: '';
+.cc-hero h1 {
+  margin: 0 auto 14px;
+
+  max-width: 850px;
+
+  font-family: var(--ls-font-serif);
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.12;
+  font-weight: 600;
+
+  color: var(--ls-text-main);
+  letter-spacing: -0.5px;
+}
+
+.cc-hero p {
+  max-width: 720px;
+  margin: 0 auto;
+
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ls-text-muted);
+}
+
+.cc-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 14px;
+  margin-bottom: 16px;
+
+  border-radius: 999px;
+
+  background: var(--ls-primary-light);
+  color: var(--ls-primary-dark);
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+
+  border: 1px solid rgba(111, 174, 69, 0.18);
+}
+
+
+/* =========================================================
+   FILTER CARD
+   ========================================================= */
+
+.cc-filter-card {
+  background: var(--ls-card-bg);
+
+  border: 1px solid var(--ls-border);
+  border-radius: var(--ls-radius-lg);
+
+  padding: 22px;
+
+  box-shadow: var(--ls-shadow);
+
+  margin-bottom: 28px;
+}
+
+.cc-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   SEARCH
+   ========================================================= */
+
+.cc-search-input {
+  flex: 1;
+  min-width: 240px;
+
+  height: 46px;
+
+  padding: 0 16px;
+
+  border: 1px solid var(--ls-border);
+  border-radius: 9px;
+
+  background: #fff;
+
+  color: var(--ls-text-main);
+
+  font-family: var(--ls-font-primary);
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.cc-search-input::placeholder {
+  color: var(--ls-text-light);
+}
+
+.cc-search-input:focus {
+  border-color: var(--ls-primary);
+
+  box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.12);
+}
+
+
+/* =========================================================
+   TYPE TOGGLE
+   ========================================================= */
+
+.cc-type-toggle {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 4px;
+
+  background: var(--ls-bg);
+  border: 1px solid var(--ls-border);
+
+  border-radius: 10px;
+}
+
+.cc-type-btn {
+  height: 38px;
+
+  padding: 0 16px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: var(--ls-text-muted);
+
+  font-family: var(--ls-font-primary);
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cc-type-btn:hover {
+  color: var(--ls-text-main);
+}
+
+.cc-type-btn.active {
+  background: #fff;
+
+  color: var(--ls-primary-dark);
+
+  box-shadow: 0 2px 7px rgba(32, 32, 32, 0.08);
+}
+
+
+/* =========================================================
+   CATEGORY BAR
+   ========================================================= */
+
+.cc-categories-bar {
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  overflow-x: auto;
+
+  padding: 3px 1px 7px;
+
+  scrollbar-width: thin;
+}
+
+.cc-categories-bar::-webkit-scrollbar {
+  height: 4px;
+}
+
+.cc-categories-bar::-webkit-scrollbar-thumb {
+  background: rgba(111, 174, 69, 0.3);
+  border-radius: 999px;
+}
+
+.cc-cat-btn {
+  flex: 0 0 auto;
+
+  padding: 9px 15px;
+
+  border: 1px solid var(--ls-border);
+  border-radius: 999px;
+
+  background: #fff;
+
+  color: var(--ls-text-muted);
+
+  font-family: var(--ls-font-primary);
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    all 0.2s ease;
+}
+
+.cc-cat-btn:hover {
+  border-color: var(--ls-primary);
+  color: var(--ls-primary-dark);
+  background: var(--ls-primary-light);
+}
+
+.cc-cat-btn.active {
+  background: var(--ls-primary);
+  border-color: var(--ls-primary);
+
+  color: #fff;
+
+  box-shadow: 0 4px 10px rgba(111, 174, 69, 0.22);
+}
+
+
+/* =========================================================
+   CREDIT CARD GRID
+   ========================================================= */
+
+.cc-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 22px;
+
+  margin-top: 24px;
+}
+
+
+/* =========================================================
+   CARD ITEM
+   ========================================================= */
+
+.cc-card-item {
+  display: flex;
+  flex-direction: column;
+
+  background: var(--ls-card-bg);
+
+  border: 1px solid var(--ls-border);
+
+  border-radius: var(--ls-radius-lg);
+
+  overflow: hidden;
+
+  box-shadow: var(--ls-shadow);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.cc-card-item:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--ls-border-hover);
+
+  box-shadow: var(--ls-shadow-hover);
+}
+
+
+/* =========================================================
+   CARD VISUAL
+   ========================================================= */
+
+.cc-card-visual {
+  position: relative;
+
+  min-height: 205px;
+
+  padding: 22px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      135deg,
+      #202020 0%,
+      #2a2720 48%,
+      #5d9a39 100%
+    );
+
+  color: #fff;
+}
+
+.cc-card-visual::before {
+  content: "";
+
   position: absolute;
-  top: -30%;
-  right: -10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(111, 174, 69, 0.05) 0%, transparent 70%);
+
+  width: 180px;
+  height: 180px;
+
+  top: -80px;
+  right: -55px;
+
   border-radius: 50%;
+
+  background: rgba(111, 174, 69, 0.25);
+
   pointer-events: none;
 }
 
-.credit-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(400px, 0.95fr);
-  gap: 80px;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-}
+.cc-card-visual::after {
+  content: "";
 
-.credit-hero-content h1 {
-  max-width: 680px;
-  margin-bottom: 24px;
-  font-size: clamp(48px, 6vw, 82px);
-  line-height: 0.98;
-  font-weight: 700;
-  color: var(--credit-ink);
-  font-family: 'Georgia', 'Times New Roman', serif;
-}
-
-.credit-hero-content h1 span {
-  color: var(--brand-green);
-}
-
-.credit-hero-text {
-  max-width: 600px;
-  color: var(--credit-muted);
-  font-size: 18px;
-  line-height: 1.75;
-  font-weight: 400;
-}
-
-.credit-disclaimer {
-  max-width: 590px;
-  margin-top: 20px;
-  color: #7b817b;
-  font-size: 12px;
-  line-height: 1.6;
-  font-weight: 400;
-}
-
-/* =========================================================
-   CREDIT CARD VISUAL
-========================================================= */
-
-.credit-card-visual-wrap {
-  position: relative;
-  min-height: 460px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.credit-card-visual {
-  position: relative;
-  width: min(100%, 500px);
-  aspect-ratio: 1.58 / 1;
-  padding: 34px;
-  border-radius: 22px;
-  color: #FFFFFF;
-  background: radial-gradient(
-      circle at 80% 20%,
-      rgba(111, 174, 69, 0.4),
-      transparent 30%
-    ),
-    linear-gradient(135deg, #3A6B2E, #6FAE45);
-  box-shadow: 0 30px 60px rgba(32, 32, 32, 0.18), 0 5px 20px rgba(32, 32, 32, 0.08);
-  transform: rotate(4deg);
-  border: 1px solid rgba(255, 255, 255, 0.10);
-}
-
-.credit-card-top,
-.credit-card-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.credit-card-top {
-  font-size: 18px;
-  font-weight: 600;
-  font-family: var(--font-primary);
-}
-
-.credit-card-chip {
-  font-size: 30px;
-  opacity: 0.8;
-}
-
-.credit-card-number {
   position: absolute;
-  left: 34px;
-  bottom: 95px;
-  font-family: var(--font-mono);
-  font-size: 20px;
-  letter-spacing: 0.12em;
-  font-weight: 400;
+
+  width: 120px;
+  height: 120px;
+
+  bottom: -70px;
+  left: -35px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  pointer-events: none;
 }
 
-.credit-card-bottom {
-  position: absolute;
-  right: 34px;
-  bottom: 30px;
-  left: 34px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  font-weight: 400;
-}
-
-.credit-floating-note {
-  position: absolute;
-  right: 0;
-  bottom: 12px;
-  width: 220px;
-  padding: 20px;
-  background: var(--credit-white);
-  border: 1px solid var(--credit-line);
-  box-shadow: 0 15px 35px rgba(32, 32, 32, 0.12);
-  border-radius: 0.5rem;
-  border-left: 3px solid var(--brand-green);
-}
-
-.credit-floating-note strong,
-.credit-floating-note span {
-  display: block;
-}
-
-.credit-floating-note strong {
-  margin-bottom: 7px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--credit-ink);
-}
-
-.credit-floating-note span {
-  color: var(--credit-muted);
-  font-size: 12px;
-  line-height: 1.5;
-  font-weight: 400;
-}
-
-/* =========================================================
-   INTRO
-========================================================= */
-
-.credit-intro {
-  padding: 90px 0;
-  background: var(--credit-paper-soft);
-  border-top: 1px solid var(--credit-line);
-  border-bottom: 1px solid var(--credit-line);
-}
-
-.credit-intro-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 90px;
-}
-
-.credit-intro h2 {
-  max-width: 600px;
-  margin-bottom: 0;
-  font-size: clamp(36px, 4vw, 58px);
-  line-height: 1.05;
-  font-weight: 700;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--credit-ink);
-}
-
-.credit-intro h2 span {
-  color: var(--brand-green);
-}
-
-.credit-intro-grid > div:last-child {
-  padding-top: 8px;
-}
-
-.credit-intro-grid p:not(.credit-eyebrow) {
-  color: var(--credit-muted);
-  font-size: 16px;
-  line-height: 1.8;
-  font-weight: 400;
-}
-
-.credit-intro-grid p + p {
-  margin-top: 22px;
-}
-
-/* =========================================================
-   SECTION HEADINGS
-========================================================= */
-
-.credit-section-heading {
-  display: flex;
-  justify-content: space-between;
-  gap: 60px;
-  margin-bottom: 50px;
-}
-
-.credit-section-heading h2 {
-  max-width: 700px;
-  margin-bottom: 0;
-  font-size: clamp(36px, 4vw, 58px);
-  line-height: 1.05;
-  font-weight: 700;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--credit-ink);
-}
-
-.credit-section-heading h2 span {
-  color: var(--brand-green);
-}
-
-.credit-section-heading > p {
-  max-width: 350px;
-  color: var(--credit-muted);
-  font-size: 15px;
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-/* =========================================================
-   CARD TYPES
-========================================================= */
-
-.credit-types {
-  padding: 100px 0;
-}
-
-.credit-type-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--credit-line);
-  border-left: 1px solid var(--credit-line);
-  background: var(--credit-white);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(32, 32, 32, 0.06);
-}
-
-.credit-type-card {
-  min-height: 360px;
-  padding: 32px;
-  border-right: 1px solid var(--credit-line);
-  border-bottom: 1px solid var(--credit-line);
-  transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
-  background: var(--credit-white);
-}
-
-.credit-type-card:hover {
-  background: var(--credit-paper-soft);
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(32, 32, 32, 0.08);
+.cc-card-visual-top,
+.cc-card-visual-bottom {
   position: relative;
   z-index: 2;
 }
 
-.credit-type-icon {
-  width: 48px;
-  height: 48px;
+.cc-card-visual-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.cc-card-issuer {
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.cc-card-network {
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cc-card-title-preview {
+  margin-top: 12px;
+
+  max-width: 230px;
+
+  font-family: var(--ls-font-serif);
+
+  font-size: 21px;
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  color: #fff;
+}
+
+.cc-card-visual-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.cc-card-number-mask {
+  font-size: 13px;
+  letter-spacing: 2px;
+
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.cc-card-cat-badge {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 9px;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.14);
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  color: #fff;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   CARD DETAILS
+   ========================================================= */
+
+.cc-details-header {
+  padding: 20px 20px 13px;
+}
+
+.cc-card-name {
+  margin: 0 0 5px;
+
+  font-family: var(--ls-font-serif);
+
+  font-size: 22px;
+  line-height: 1.25;
+
+  font-weight: 600;
+
+  color: var(--ls-text-main);
+}
+
+.cc-card-issuer-sub {
+  font-size: 12px;
+
+  color: var(--ls-text-muted);
+}
+
+
+/* =========================================================
+   TAG / PILL
+   ========================================================= */
+
+.cc-pill-tag {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 6px 10px;
+
+  margin-top: 11px;
+
+  border-radius: 999px;
+
+  background: var(--ls-primary-light);
+
+  color: var(--ls-primary-dark);
+
+  font-size: 11px;
+  font-weight: 700;
+
+  border: 1px solid rgba(111, 174, 69, 0.12);
+}
+
+
+/* =========================================================
+   PERKS
+   ========================================================= */
+
+.cc-perk-box {
+  margin: 0 20px 16px;
+
+  padding: 15px;
+
+  border-radius: 10px;
+
+  background: var(--ls-bg-light);
+
+  border: 1px solid var(--ls-border);
+}
+
+.cc-perks-list {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.cc-perks-list li {
+  position: relative;
+
+  padding-left: 22px;
+
+  font-size: 12px;
+  line-height: 1.55;
+
+  color: var(--ls-text-muted);
+}
+
+.cc-perks-list li::before {
+  content: "✓";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  color: var(--ls-primary);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CARD FOOTER
+   ========================================================= */
+
+.cc-card-footer {
+  margin-top: auto;
+
+  padding: 17px 20px 20px;
+
+  background: var(--ls-bg-light);
+
+  border-top: 1px solid var(--ls-border);
+}
+
+.cc-fees-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 15px;
+}
+
+.cc-fee-label {
+  font-size: 11px;
+  color: var(--ls-text-muted);
+}
+
+.cc-fee-val {
+  font-size: 13px;
+  font-weight: 700;
+
+  color: var(--ls-text-main);
+
+  text-align: right;
+}
+
+.cc-fee-waiver {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  color: var(--ls-primary-dark);
+}
+
+
+/* =========================================================
+   APPLY BUTTON
+   ========================================================= */
+
+.cc-apply-btn {
+  width: 100%;
+
+  min-height: 45px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;
+
+  border: 1px solid var(--ls-primary);
+  border-radius: 8px;
+
+  background: var(--ls-primary);
+
+  color: #fff;
+
+  font-family: var(--ls-font-primary);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cc-apply-btn:hover {
+  background: var(--ls-primary-dark);
+  border-color: var(--ls-primary-dark);
+
+  color: #fff;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 5px 13px rgba(111, 174, 69, 0.22);
+}
+
+.cc-apply-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   INFORMATION SECTION
+   ========================================================= */
+
+.cc-info-section {
+  margin-top: 55px;
+
+  padding: 36px 28px;
+
+  background: #fff;
+
+  border: 1px solid var(--ls-border);
+
+  border-radius: var(--ls-radius-lg);
+
+  box-shadow: var(--ls-shadow);
+}
+
+.cc-info-section h2 {
+  margin: 0 0 10px;
+
+  font-family: var(--ls-font-serif);
+
+  font-size: clamp(25px, 4vw, 36px);
+  line-height: 1.2;
+
+  font-weight: 600;
+
+  color: var(--ls-text-main);
+}
+
+.cc-info-section > p {
+  max-width: 760px;
+
+  margin: 0 0 28px;
+
+  font-size: 14px;
+  line-height: 1.7;
+
+  color: var(--ls-text-muted);
+}
+
+
+/* =========================================================
+   INFO GRID
+   ========================================================= */
+
+.cc-info-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.cc-info-grid > div {
+  padding: 20px;
+
+  background: var(--ls-bg-light);
+
+  border: 1px solid var(--ls-border);
+
+  border-radius: 12px;
+
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cc-info-grid > div:hover {
+  border-color: var(--ls-border-hover);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 7px 18px rgba(32, 32, 32, 0.06);
+}
+
+.cc-info-grid h3 {
+  margin: 0 0 8px;
+
+  font-family: var(--ls-font-serif);
+
+  font-size: 18px;
+  line-height: 1.3;
+
+  color: var(--ls-text-main);
+}
+
+.cc-info-grid p {
+  margin: 0;
+
+  font-size: 12px;
+  line-height: 1.65;
+
+  color: var(--ls-text-muted);
+}
+
+
+/* =========================================================
+   EMPTY / NO RESULTS
+   ========================================================= */
+
+.cc-no-results {
+  grid-column: 1 / -1;
+
+  padding: 45px 20px;
+
+  text-align: center;
+
+  background: #fff;
+
+  border: 1px dashed var(--ls-border);
+
+  border-radius: var(--ls-radius-lg);
+
+  color: var(--ls-text-muted);
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   LOADING
+   ========================================================= */
+
+.cc-loading {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 70px;
-  border: 1px solid var(--brand-green);
-  color: var(--brand-green);
-  font-size: 20px;
-  border-radius: 0.5rem;
-  background: var(--brand-green-light);
-}
 
-.credit-type-card h3 {
-  margin-bottom: 14px;
-  font-size: 21px;
-  font-weight: 600;
-  color: var(--credit-ink);
-}
+  min-height: 220px;
 
-.credit-type-card p {
-  min-height: 95px;
-  margin-bottom: 24px;
-  color: var(--credit-muted);
+  color: var(--ls-text-muted);
+
   font-size: 14px;
-  line-height: 1.7;
-  font-weight: 400;
 }
 
-.credit-type-card a {
-  color: var(--brand-green);
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  font-family: var(--font-primary);
-  border-bottom: 1px solid var(--brand-green);
-  padding-bottom: 3px;
-  transition: color 0.2s ease, border-color 0.2s ease;
+.cc-loading::before {
+  content: "";
+
+  width: 20px;
+  height: 20px;
+
+  margin-right: 10px;
+
+  border: 2px solid var(--ls-primary-light);
+  border-top-color: var(--ls-primary);
+
+  border-radius: 50%;
+
+  animation: cc-spin 0.7s linear infinite;
 }
 
-.credit-type-card a:hover {
-  color: var(--credit-ink);
-  border-color: var(--credit-ink);
-}
-
-/* =========================================================
-   BENEFITS
-========================================================= */
-
-.credit-benefits {
-  padding: 100px 0;
-  background: var(--brand-green);
-  color: var(--credit-paper);
-}
-
-.credit-benefits .credit-eyebrow {
-  color: var(--brand-white);
-  opacity: 0.8;
-}
-
-.credit-benefits .credit-section-heading h2 {
-  color: var(--brand-white);
-}
-
-.credit-benefits .credit-section-heading h2 span {
-  color: var(--brand-white);
-  opacity: 0.7;
-}
-
-.credit-benefits .credit-section-heading > p {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-.credit-benefit-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.credit-benefit {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 20px;
-  padding: 36px 30px 36px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-.credit-benefit:nth-child(odd) {
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  padding-right: 50px;
-}
-
-.credit-benefit:nth-child(even) {
-  padding-left: 50px;
-}
-
-.credit-benefit > span {
-  color: rgba(255, 255, 255, 0.6);
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.credit-benefit h3 {
-  margin-bottom: 12px;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--brand-white);
-}
-
-.credit-benefit p {
-  max-width: 450px;
-  margin-bottom: 0;
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-/* =========================================================
-   HOW TO CHOOSE
-========================================================= */
-
-.credit-how {
-  padding: 110px 0;
-}
-
-.credit-how-heading {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  margin-bottom: 70px;
-}
-
-.credit-how-heading h2 {
-  margin-bottom: 20px;
-  font-size: clamp(42px, 5vw, 68px);
-  line-height: 1;
-  font-weight: 700;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--credit-ink);
-}
-
-.credit-how-heading h2 span {
-  color: var(--brand-green);
-}
-
-.credit-how-heading > p:last-child {
-  align-self: end;
-  max-width: 500px;
-  color: var(--credit-muted);
-  font-size: 16px;
-  line-height: 1.8;
-  font-weight: 400;
-}
-
-.credit-steps {
-  border-top: 1px solid var(--credit-line);
-  background: var(--credit-white);
-  border-radius: 0.75rem;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(32, 32, 32, 0.06);
-}
-
-.credit-step {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 40px;
-  padding: 34px 40px;
-  border-bottom: 1px solid var(--credit-line);
-  transition: background 0.2s ease;
-}
-
-.credit-step:last-child {
-  border-bottom: none;
-}
-
-.credit-step:hover {
-  background: var(--credit-paper-soft);
-}
-
-.credit-step > span {
-  color: var(--brand-green);
-  font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.credit-step h3 {
-  margin-bottom: 10px;
-  font-size: 23px;
-  font-weight: 600;
-  color: var(--credit-ink);
-}
-
-.credit-step p {
-  max-width: 650px;
-  margin-bottom: 0;
-  color: var(--credit-muted);
-  font-size: 15px;
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-/* =========================================================
-   RESPONSIBLE USAGE
-========================================================= */
-
-.credit-responsible {
-  padding: 100px 0;
-  background: var(--credit-paper-soft);
-}
-
-.credit-responsible-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  padding: 70px;
-  border: 1px solid var(--credit-line);
-  background: var(--credit-white);
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 12px rgba(32, 32, 32, 0.06);
-  border-left: 4px solid var(--brand-green);
-}
-
-.credit-responsible-box h2 {
-  max-width: 600px;
-  margin-bottom: 0;
-  font-size: clamp(36px, 4vw, 55px);
-  line-height: 1.05;
-  font-weight: 700;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: var(--credit-ink);
-}
-
-.credit-responsible-box h2 span {
-  color: var(--brand-green);
-}
-
-.credit-responsible-points {
-  align-self: center;
-}
-
-.credit-responsible-points p {
-  margin-bottom: 15px;
-  color: var(--credit-muted);
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.7;
-}
-
-.credit-responsible-points p:last-child {
-  margin-bottom: 0;
-}
-
-/* =========================================================
-   CTA — LOAN SAARTHI BRAND
-========================================================= */
-
-.credit-cta {
-  padding: 100px 0;
-  background: var(--brand-green);
-  color: #FFFFFF;
-}
-
-.credit-cta-inner {
-  max-width: 800px;
-}
-
-.credit-cta .credit-eyebrow {
-  color: #FFFFFF;
-  opacity: 0.75;
-}
-
-.credit-cta h2 {
-  margin-bottom: 24px;
-  font-size: clamp(44px, 6vw, 76px);
-  line-height: 1;
-  font-weight: 700;
-  font-family: 'Georgia', 'Times New Roman', serif;
-  color: #FFFFFF;
-}
-
-.credit-cta h2 span {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-.credit-cta p:not(.credit-eyebrow) {
-  max-width: 600px;
-  margin-bottom: 32px;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 17px;
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-.credit-cta .credit-btn {
-  background: #FFFFFF;
-  color: var(--brand-green) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
-}
-
-.credit-cta .credit-btn:hover {
-  background: var(--credit-paper-soft);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* =========================================================
-   SOURCE NOTE
-========================================================= */
-
-.credit-source-note {
-  padding: 30px 0;
-  background: var(--credit-ink);
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.credit-source-note p {
-  max-width: 950px;
-  margin-bottom: 0;
-  font-size: 12px;
-  line-height: 1.7;
-  font-weight: 400;
-}
-
-.credit-source-note strong {
-  color: var(--brand-green);
-}
-
-/* =========================================================
-   RESPONSIVE — TABLET
-========================================================= */
-
-@media (max-width: 1000px) {
-  .credit-hero-grid {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-
-  .credit-card-visual-wrap {
-    max-width: 600px;
-  }
-
-  .credit-type-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .credit-intro-grid,
-  .credit-responsible-box,
-  .credit-how-heading {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .credit-section-heading {
-    flex-direction: column;
-    gap: 25px;
+@keyframes cc-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
+
 /* =========================================================
-   RESPONSIVE — MOBILE
-========================================================= */
+   FOCUS STATES
+   ========================================================= */
+
+.cc-container button:focus-visible,
+.cc-container input:focus-visible,
+.cc-container a:focus-visible {
+  outline: 3px solid rgba(111, 174, 69, 0.22);
+
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 1024px) {
+  .cc-container {
+    padding: 32px 20px 55px;
+  }
+
+  .cc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cc-info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cc-hero {
+    padding-bottom: 34px;
+  }
+
+  .cc-card-visual {
+    min-height: 195px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 700px) {
-  .credit-container {
-    width: min(100% - 28px, 1180px);
+  .cc-container {
+    padding: 24px 14px 45px;
   }
 
-  .credit-hero {
-    padding: 60px 0;
+  .cc-hero {
+    padding: 8px 0 28px;
   }
 
-  .credit-hero-content h1 {
-    font-size: 48px;
+  .cc-hero h1 {
+    font-size: 31px;
+    line-height: 1.15;
   }
 
-  .credit-card-visual-wrap {
-    min-height: 350px;
+  .cc-hero p {
+    font-size: 13px;
+    line-height: 1.6;
   }
 
-  .credit-card-visual {
-    padding: 24px;
+  .cc-filter-card {
+    padding: 15px;
+
+    border-radius: 13px;
   }
 
-  .credit-card-number {
-    left: 24px;
-    bottom: 75px;
-    font-size: 14px;
+  .cc-controls-row {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .credit-card-bottom {
-    right: 24px;
-    bottom: 22px;
-    left: 24px;
+  .cc-search-input {
+    width: 100%;
+    min-width: 0;
   }
 
-  .credit-floating-note {
-    right: 5px;
-    bottom: 0;
-    width: 180px;
+  .cc-type-toggle {
+    width: 100%;
+  }
+
+  .cc-type-btn {
+    flex: 1;
+  }
+
+  .cc-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+
+    margin-top: 18px;
+  }
+
+  .cc-card-visual {
+    min-height: 190px;
+  }
+
+  .cc-card-name {
+    font-size: 20px;
+  }
+
+  .cc-info-section {
+    margin-top: 38px;
+
+    padding: 25px 17px;
+  }
+
+  .cc-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .cc-container {
+    padding-left: 11px;
+    padding-right: 11px;
+  }
+
+  .cc-hero h1 {
+    font-size: 27px;
+  }
+
+  .cc-badge {
+    font-size: 10px;
+  }
+
+  .cc-card-visual {
+    min-height: 180px;
+
+    padding: 18px;
+  }
+
+  .cc-card-title-preview {
+    font-size: 19px;
+  }
+
+  .cc-card-footer {
     padding: 15px;
   }
 
-  .credit-type-grid,
-  .credit-benefit-grid {
-    grid-template-columns: 1fr;
+  .cc-details-header {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 
-  .credit-type-card {
-    min-height: auto;
-  }
-
-  .credit-type-icon {
-    margin-bottom: 45px;
-  }
-
-  .credit-benefit:nth-child(odd) {
-    border-right: 0;
-    padding-right: 0;
-  }
-
-  .credit-benefit:nth-child(even) {
-    padding-left: 0;
-  }
-
-  .credit-responsible-box {
-    padding: 35px 25px;
-  }
-
-  .credit-step {
-    grid-template-columns: 60px 1fr;
-    gap: 20px;
-    padding: 24px 20px;
+  .cc-perk-box {
+    margin-left: 15px;
+    margin-right: 15px;
   }
 }
 
-/* =========================================================
-   RESPONSIVE — SMALL MOBILE
-========================================================= */
-
-@media (max-width: 480px) {
-  .credit-hero-content h1 {
-    font-size: 42px;
-  }
-
-  .credit-hero-text {
-    font-size: 16px;
-  }
-
-  .credit-hero-actions {
-    flex-direction: column;
-  }
-
-  .credit-btn {
-    width: 100%;
-  }
-
-  .credit-card-visual {
-    width: 100%;
-    transform: rotate(2deg);
-  }
-
-  .credit-card-number {
-    font-size: 12px;
-  }
-
-  .credit-type-grid {
-    border-radius: 0.5rem;
-  }
-
-  .credit-type-card {
-    padding: 24px 20px;
-  }
-
-  .credit-benefits {
-    padding: 70px 0;
-  }
-
-  .credit-benefit {
-    padding: 24px 0;
-  }
-
-  .credit-how-heading h2 {
-    font-size: 38px;
-  }
-
-  .credit-cta h2 {
-    font-size: 38px;
-  }
-}
 
 /* =========================================================
-   DARK MODE SUPPORT
-========================================================= */
+   REDUCED MOTION
+   ========================================================= */
 
-@media (prefers-color-scheme: dark) {
-  .credit-page {
-    --credit-paper: #1A1A1A;
-    --credit-paper-soft: #242424;
-    --credit-ink: #E8E8E8;
-    --credit-muted: #B0B0B0;
-    --credit-line: rgba(255, 255, 255, 0.08);
-    --credit-white: #242424;
-    background: #1A1A1A;
+@media (prefers-reduced-motion: reduce) {
+  .cc-card-item,
+  .cc-apply-btn,
+  .cc-cat-btn,
+  .cc-type-btn,
+  .cc-info-grid > div,
+  .cc-search-input {
+    transition: none;
   }
 
-  .credit-hero::before {
-    background: radial-gradient(circle, rgba(111, 174, 69, 0.08) 0%, transparent 70%);
-  }
-
-  .credit-type-grid {
-    background: #242424;
-  }
-
-  .credit-type-card {
-    background: #242424;
-  }
-
-  .credit-type-card:hover {
-    background: #2A2A2A;
-  }
-
-  .credit-type-icon {
-    background: rgba(111, 174, 69, 0.15);
-  }
-
-  .credit-steps {
-    background: #242424;
-  }
-
-  .credit-step:hover {
-    background: #2A2A2A;
-  }
-
-  .credit-responsible-box {
-    background: #242424;
-  }
-
-  .credit-floating-note {
-    background: #242424;
-  }
-
-  .credit-cta .credit-btn {
-    background: #FFFFFF;
-    color: var(--brand-green) !important;
-  }
-
-  .credit-btn-secondary {
-    color: #E8E8E8;
-  }
-
-  .credit-btn-light {
-    background: #242424;
-    color: #E8E8E8 !important;
-  }
-
-  .credit-source-note {
-    background: #1A1A1A;
+  .cc-loading::before {
+    animation: none;
   }
 }

@@ -1,351 +1,87 @@
-import "./credit-card.css";
+import type { Metadata } from 'next';
+import { CREDIT_CARDS } from '@/components/creditCards';
+import CreditCardList from '@/components/CreditCardList';
+import './credit-card.css';
 
-const cardTypes = [
-  {
-    title: "Cashback Cards",
-    description:
-      "Earn cashback on eligible everyday spending such as shopping, dining, and other selected categories.",
-    icon: "₹",
-  },
-  {
-    title: "Rewards Cards",
-    description:
-      "Earn reward points on eligible transactions and redeem them according to the card issuer's programme.",
-    icon: "★",
-  },
-  {
-    title: "Travel Cards",
-    description:
-      "Designed for frequent travellers with travel-focused rewards and selected travel-related benefits.",
-    icon: "✈",
-  },
-  {
-    title: "Fuel Cards",
-    description:
-      "May provide rewards or savings on eligible fuel transactions, subject to issuer terms and conditions.",
-    icon: "⌁",
-  },
-];
-
-const benefits = [
-  {
-    number: "01",
-    title: "Convenient payments",
-    text: "Use a credit card for eligible purchases without paying the full amount immediately, subject to your available credit limit.",
-  },
-  {
-    number: "02",
-    title: "Rewards and cashback",
-    text: "Depending on the card, you may earn reward points, cashback, discounts, or other benefits on eligible transactions.",
-  },
-  {
-    number: "03",
-    title: "Credit building",
-    text: "Responsible repayment and timely bill payments can help maintain a healthy credit history over time.",
-  },
-  {
-    number: "04",
-    title: "Flexible options",
-    text: "Some cards offer features such as EMI conversion or promotional offers. Always check the applicable interest, fees, and terms before choosing.",
-  },
-];
-
-const steps = [
-  {
-    step: "01",
-    title: "Understand your spending",
-    text: "Think about where you spend most: shopping, travel, fuel, dining, or everyday purchases.",
-  },
-  {
-    step: "02",
-    title: "Compare card features",
-    text: "Look at annual fees, rewards, cashback rules, interest rates, charges, and eligibility requirements.",
-  },
-  {
-    step: "03",
-    title: "Check the terms",
-    text: "Read the key facts, fees, interest rates, and reward conditions before applying.",
-  },
-  {
-    step: "04",
-    title: "Apply responsibly",
-    text: "Choose a card that matches your financial needs and repay your bills on time.",
-  },
-];
-
-export const metadata = {
-  title: "Best Credit Cards in India | Compare Cashback & Rewards | LoanSaarthi",
+export const metadata: Metadata = {
+  title: 'Best Credit Cards in India 2026 | Private Banks & Top NBFCs',
   description:
-    "Compare and apply for top credit cards in India with LoanSaarthi. Explore cashback, rewards, travel, and fuel credit cards that match your lifestyle.",
+    'Compare top credit cards from private banks (HDFC, ICICI, Axis, IDFC FIRST, Kotak) & NBFCs in India. Find lifetime free, cashback, UPI RuPay & lounge access cards with instant approval.',
   keywords: [
-    "credit cards",
-    "best credit cards India",
-    "cashback credit cards",
-    "rewards credit cards",
-    "apply credit card online",
-    "compare credit cards",
+    'best credit cards in india',
+    'lifetime free credit card',
+    'hdfc millennia credit card',
+    'amazon pay icici card',
+    'rupay credit card on upi',
+    'private sector bank credit cards',
+    'instant approval credit card nbfc',
+    'airport lounge access credit cards'
   ],
-  alternates: {
-    canonical: "https://www.loansaarthi.com/credit-card",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
-    title: "Best Credit Cards in India | Compare Cashback & Rewards | LoanSaarthi",
-    description:
-      "Explore and compare the best credit cards in India with LoanSaarthi. Choose cashback, rewards, and travel benefits.",
-    url: "https://www.loansaarthi.com/credit-card",
-    siteName: "LoanSaarthi",
-    type: "website",
-    images: ["/logo.png"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Best Credit Cards in India | Compare Offers | LoanSaarthi",
-    description:
-      "Explore and compare top credit cards in India with LoanSaarthi.",
-    images: ["/logo.png"],
-  },
 };
 
-export default function CreditCardPage() {
+export default function CreditCardsPage() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Top Private Bank & NBFC Credit Cards in India',
+    itemListElement: CREDIT_CARDS.map((card, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      item: {
+        '@type': 'FinancialProduct',
+        name: card.name,
+        feesAndCommissionsSpecification: card.feeWaiverText,
+        annualPercentageRate: card.annualFee === 0 ? '0 Annual Fee' : `₹${card.annualFee} / year`,
+        provider: {
+          '@type': 'BankOrCreditUnion',
+          name: card.issuer,
+        },
+      },
+    })),
+  };
+
   return (
-    <main className="credit-page">
-      {/* Hero */}
-      <section className="credit-hero">
-        <div className="credit-container credit-hero-grid">
-          <div className="credit-hero-content">
-            <p className="credit-eyebrow">CREDIT CARDS</p>
+    <main className="cc-container">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-            <h1>
-              Find a credit card
-              <span> that fits your lifestyle.</span>
-            </h1>
-
-            <p className="credit-hero-text">
-              Explore different types of credit cards and understand rewards,
-              cashback, fees, and important terms before choosing a card.
-            </p>
-
-            <div className="credit-hero-actions">
-              <a href="#compare" className="credit-btn credit-btn-primary">
-                Explore options
-              </a>
-
-              <a href="#how-to-choose" className="credit-btn credit-btn-secondary">
-                How to choose
-              </a>
-            </div>
-
-            <p className="credit-disclaimer">
-              Information is for general guidance. Card approval, fees,
-              rewards, and eligibility depend on the card issuer and its
-              current terms.
-            </p>
-          </div>
-
-          {/* Visual credit card */}
-          <div className="credit-card-visual-wrap">
-            <div className="credit-card-visual">
-              <div className="credit-card-top">
-                <span>LoanSaarthi</span>
-                <span className="credit-card-chip">▦</span>
-              </div>
-
-              <div className="credit-card-number">
-                •••• &nbsp; •••• &nbsp; •••• &nbsp; 2026
-              </div>
-
-              <div className="credit-card-bottom">
-                <span>YOUR NAME</span>
-                <span>VISA</span>
-              </div>
-            </div>
-
-            <div className="credit-floating-note">
-              <strong>Choose wisely</strong>
-              <span>
-                Compare fees, benefits and repayment terms.
-              </span>
-            </div>
-          </div>
+      <section className="cc-hero">
+        <div className="cc-badge">
+          🇮🇳 Private Banks & NBFCs Only
         </div>
+        <h1>
+          Find the Best <span>Credit Card</span> in India
+        </h1>
+        <p>
+          Compare premium cashback, lifetime free, airport lounge perks, and RuPay UPI credit cards from top private lenders like HDFC, ICICI, Axis, IDFC FIRST, and OneCard.
+        </p>
       </section>
 
-      {/* Quick intro */}
-      <section className="credit-intro">
-        <div className="credit-container credit-intro-grid">
+      <CreditCardList cards={CREDIT_CARDS} />
+
+      <section className="cc-info-section">
+        <h2>Eligibility & Required Documents for Private Bank Credit Cards</h2>
+        <div className="cc-info-grid">
           <div>
-            <p className="credit-eyebrow">UNDERSTANDING CREDIT CARDS</p>
-            <h2>
-              A credit card is a payment tool with a
-              <span> predefined credit limit.</span>
-            </h2>
+            <h3>1. Minimum Age & Income</h3>
+            <p>
+              Salaried professionals typically require a net take-home income of ₹25,000/month or higher. Self-employed applicants must show an ITR of at least ₹5 Lakhs p.a.
+            </p>
           </div>
-
           <div>
+            <h3>2. Credit Score (CIBIL)</h3>
             <p>
-              A credit card lets you make eligible purchases using the credit
-              made available by the card issuer. Depending on the card and
-              issuer, you may receive a billing cycle and a payment due date.
-            </p>
-
-            <p>
-              If you carry an unpaid balance, interest and other applicable
-              charges may apply. Always check the issuer's terms and pay your
-              bills on time.
+              A CIBIL credit score of 750+ offers higher approval rates and lower APRs across leading private sector banks like HDFC, ICICI, and Axis Bank.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Card Types */}
-      <section className="credit-types" id="compare">
-        <div className="credit-container">
-          <div className="credit-section-heading">
-            <div>
-              <p className="credit-eyebrow">EXPLORE YOUR OPTIONS</p>
-              <h2>Different cards for different spending habits.</h2>
-            </div>
-
+          <div>
+            <h3>3. KYC Documentation</h3>
             <p>
-              The right card depends on your spending patterns, preferred
-              benefits, fees, and eligibility.
+              PAN Card (mandatory), Aadhaar for digital e-KYC/Video KYC, and latest 3 months salary slips or bank statements for credit limit assessment.
             </p>
           </div>
-
-          <div className="credit-type-grid">
-            {cardTypes.map((card) => (
-              <article className="credit-type-card" key={card.title}>
-                <div className="credit-type-icon">{card.icon}</div>
-
-                <h3>{card.title}</h3>
-
-                <p>{card.description}</p>
-
-                <a href="#contact">Learn more →</a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="credit-benefits">
-        <div className="credit-container">
-          <div className="credit-section-heading">
-            <div>
-              <p className="credit-eyebrow">WHY CONSIDER A CREDIT CARD?</p>
-              <h2>Benefits that can make everyday spending more convenient.</h2>
-            </div>
-          </div>
-
-          <div className="credit-benefit-grid">
-            {benefits.map((benefit) => (
-              <article className="credit-benefit" key={benefit.number}>
-                <span>{benefit.number}</span>
-
-                <div>
-                  <h3>{benefit.title}</h3>
-                  <p>{benefit.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How to choose */}
-      <section className="credit-how" id="how-to-choose">
-        <div className="credit-container">
-          <div className="credit-how-heading">
-            <p className="credit-eyebrow">HOW TO CHOOSE</p>
-
-            <h2>
-              Take a closer look before
-              <span> applying.</span>
-            </h2>
-
-            <p>
-              A good credit card is not necessarily the one with the most
-              rewards. Look for a card whose costs and benefits make sense for
-              your actual spending habits.
-            </p>
-          </div>
-
-          <div className="credit-steps">
-            {steps.map((item) => (
-              <article className="credit-step" key={item.step}>
-                <span>{item.step}</span>
-
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Responsible usage */}
-      <section className="credit-responsible">
-        <div className="credit-container">
-          <div className="credit-responsible-box">
-            <div>
-              <p className="credit-eyebrow">USE CREDIT RESPONSIBLY</p>
-
-              <h2>
-                Rewards are useful.
-                <span> Responsible repayment matters more.</span>
-              </h2>
-            </div>
-
-            <div className="credit-responsible-points">
-              <p>✓ Pay your bill by the due date.</p>
-              <p>✓ Understand interest and applicable charges.</p>
-              <p>✓ Check annual and other applicable fees.</p>
-              <p>✓ Keep your spending within a manageable budget.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="credit-cta" id="contact">
-        <div className="credit-container">
-          <div className="credit-cta-inner">
-            <p className="credit-eyebrow">NEED HELP CHOOSING?</p>
-
-            <h2>
-              Let's find a card that
-              <span> makes sense for you.</span>
-            </h2>
-
-            <p>
-              Share your requirements with the LoanSaarthi team and explore
-              available options based on your needs and eligibility.
-            </p>
-
-            <a href="tel:+911244567890" className="credit-btn credit-btn-light">
-              Talk to an advisor
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer note */}
-      <section className="credit-source-note">
-        <div className="credit-container">
-          <p>
-            <strong>Important:</strong> Credit card fees, interest rates,
-            rewards, cashback, eligibility, and other benefits vary by issuer
-            and card. Always review the issuer's latest Key Fact Statement,
-            Most Important Terms and Conditions, and applicable fees before
-            applying.
-          </p>
         </div>
       </section>
     </main>

@@ -238,6 +238,29 @@ export default function BlogListingPage() {
               )}
               <button type="button">Search</button>
             </div>
+
+            {/* QUICK LINK TO PUBLISH BLOG FORM */}
+            <div style={{ marginTop: "18px", display: "flex", gap: "12px", alignItems: "center" }}>
+              <Link
+                href="/admin/blogs/new"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  backgroundColor: "rgba(255, 255, 255, 0.15)",
+                  color: "#181717",
+                  padding: "8px 16px",
+                  borderRadius: "20px",
+                  fontSize: "13px",
+                  fontWeight: 600,
+                  textDecoration: "none",
+                  border: "1px solid rgba(255, 255, 255, 0.3)",
+                  transition: "all 0.2s ease",
+                }}
+              >
+                ✍️ Write & Publish New Article →
+              </Link>
+            </div>
           </div>
         </div>
       </section>
