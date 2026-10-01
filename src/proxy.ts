@@ -64,11 +64,12 @@ export async function proxy(request: NextRequest) {
       const { payload } = await jwtVerify(token, secret);
 
       // Check role
-      if (payload.role !== 'admin') {
-        return NextResponse.redirect(
-          new URL('/dashboard', request.url)
-        );
-      }
+      // Check role
+if (payload.role !== 'admin' && payload.role !== 'superadmin') {
+  return NextResponse.redirect(
+    new URL('/dashboard', request.url)
+  );
+}
 
       // Admin is allowed
       return NextResponse.next();
@@ -116,6 +117,7 @@ export async function proxy(request: NextRequest) {
 const crmPaths = [
   '/crm',
   '/crm/entry',
+  '/lead'
 ];
 
 const isCRMPath = crmPaths.some((path) =>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -32,7 +33,7 @@ export default function HeroVerificationCard() {
     email: "",
     occupation: "Salaried",
     loanType: "Home Loan",
-    income:""
+    income: "",
   });
 
   useEffect(() => {
@@ -48,20 +49,28 @@ export default function HeroVerificationCard() {
     };
   }, []);
 
-  const handleSendOtp = async (e: React.FormEvent<HTMLFormElement>) => {
+  // STEP 1: SEND OTP
+  const handleSendOtp = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setError("");
 
     const cleanNumber = phone.replace(/\D/g, "");
-    if (cleanNumber.length < 10) {
+
+    if (cleanNumber.length !== 10) {
       setError("Please enter a valid 10-digit mobile number.");
       return;
     }
 
     setLoading(true);
+    console.time("OTP Send Total");
 
     try {
+      // reCAPTCHA setup
       if (!window.recaptchaVerifier) {
+        console.time("reCAPTCHA Initialization");
+
         window.recaptchaVerifier = new RecaptchaVerifier(
           auth,
           "global-recaptcha-container",
@@ -73,36 +82,58 @@ export default function HeroVerificationCard() {
             },
           }
         );
+
+        console.timeEnd("reCAPTCHA Initialization");
       }
 
-      const formattedPhone = `+91${cleanNumber.slice(-10)}`;
-      const confirmation = await signInWithPhoneNumber(
-        auth,
-        formattedPhone,
-        window.recaptchaVerifier
-      );
+      const formattedPhone = `+91${cleanNumber}`;
+
+      // Firebase OTP request timing
+      console.time("Firebase OTP Request");
+
+      let confirmation: ConfirmationResult;
+
+      try {
+        confirmation = await signInWithPhoneNumber(
+          auth,
+          formattedPhone,
+          window.recaptchaVerifier!
+        );
+      } finally {
+        console.timeEnd("Firebase OTP Request");
+      }
 
       setConfirmationResult(confirmation);
       setStep(2);
+
+      console.log("OTP request successful");
     } catch (err: unknown) {
-      console.error("number verification Error:", err);
+      console.error("Number verification Error:", err);
+
       if (window.recaptchaVerifier) {
         try {
           window.recaptchaVerifier.clear();
-        } catch (e) {}
+        } catch (e) {
+          console.error("reCAPTCHA clear error:", e);
+        }
         window.recaptchaVerifier = null;
       }
+
       if (err instanceof Error) {
         setError(err.message || "Unable to send OTP.");
       } else {
         setError("Unable to send OTP.");
       }
     } finally {
+      console.timeEnd("OTP Send Total");
       setLoading(false);
     }
   };
 
-  const handleVerifyOtp = async (e: React.FormEvent<HTMLFormElement>) => {
+  // STEP 2: VERIFY OTP
+  const handleVerifyOtp = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setError("");
 
@@ -118,42 +149,76 @@ export default function HeroVerificationCard() {
     }
 
     setLoading(true);
+    console.time("OTP Verification Total");
 
     try {
-      await confirmationResult.confirm(otp);
+      console.time("Firebase OTP Confirmation");
+
+      try {
+        await confirmationResult.confirm(otp);
+      } finally {
+        console.timeEnd("Firebase OTP Confirmation");
+      }
+
       setStep(3);
+      console.log("OTP verified successfully");
     } catch (err) {
-      console.error(err);
+      console.error("OTP verification error:", err);
       setError("Invalid or expired OTP.");
     } finally {
+      console.timeEnd("OTP Verification Total");
       setLoading(false);
     }
   };
 
-  const handleSaveDetails = async (e: React.FormEvent<HTMLFormElement>) => {
+  // STEP 3: SAVE DETAILS
+  const handleSaveDetails = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setError("");
 
     setLoading(true);
+    console.time("Save Details Total");
 
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          phone: `+91${phone.slice(-10)}`,
-          ...profile,
-        }),
-      });
+      console.time("Lead API Request");
+
+      let res: Response;
+
+      try {
+        res = await fetch("/api/lead", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            phone: `+91${phone.replace(/\D/g, "").slice(-10)}`,
+            ...profile,
+          }),
+        });
+      } finally {
+        console.timeEnd("Lead API Request");
+      }
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to save details");
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to save details");
+      }
 
       setStep(4);
+      console.log("Details saved successfully");
     } catch (err: unknown) {
-      console.error(err);
-      if (err instanceof Error) setError(err.message);
+      console.error("Save details error:", err);
+
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Failed to save details.");
+      }
     } finally {
+      console.timeEnd("Save Details Total");
       setLoading(false);
     }
   };
@@ -169,38 +234,52 @@ export default function HeroVerificationCard() {
           {step === 3 && "Applicant Information"}
           {step === 4 && "Application Received"}
         </span>
+
         <span className="hero-step-badge">
           {step <= 3 ? `STEP 0${step}/03` : "VERIFIED"}
         </span>
       </div>
 
       <div className="hero-card-body">
-        {error && <div className="hero-error-banner">{error}</div>}
+        {error && (
+          <div className="hero-error-banner">{error}</div>
+        )}
 
-        {/* STEP 1: Phone */}
+        {/* STEP 1: PHONE */}
         {step === 1 && (
           <form onSubmit={handleSendOtp} className="hero-form">
             <p className="hero-form-desc">
               Enter mobile number to verify and check instant loan offers.
             </p>
+
             <div className="hero-phone-group">
               <span className="hero-phone-prefix">+91</span>
+
               <input
                 type="tel"
                 maxLength={10}
                 placeholder="10-digit Number"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) =>
+                  setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))
+                }
                 className="hero-input"
                 required
                 autoFocus
               />
             </div>
-            <button type="submit" disabled={loading} className="hero-submit-btn">
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="hero-submit-btn"
+            >
               {loading ? "Sending OTP..." : "Get Verification Code"}
             </button>
+
             <div className="hero-trust-indicator">
-              <ShieldCheck size={15} /> Soft enquiry · No impact on credit score
+              <ShieldCheck size={15} />
+              Soft enquiry · No impact on credit score
             </div>
           </form>
         )}
@@ -211,23 +290,34 @@ export default function HeroVerificationCard() {
             <p className="hero-form-desc">
               Enter OTP sent to <strong>+91 {phone.slice(-10)}</strong>
             </p>
+
             <input
               type="text"
+              inputMode="numeric"
               maxLength={6}
               placeholder="••••••"
               value={otp}
-              onChange={(e) => setOtp(e.target.value)}
+              onChange={(e) =>
+                setOtp(e.target.value.replace(/\D/g, "").slice(0, 6))
+              }
               className="hero-input hero-otp-input"
               required
             />
-            <button type="submit" disabled={loading} className="hero-submit-btn">
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="hero-submit-btn"
+            >
               {loading ? "Verifying..." : "Verify & Proceed"}
             </button>
+
             <button
               type="button"
               onClick={() => {
                 setStep(1);
                 setOtp("");
+                setConfirmationResult(null);
                 setError("");
               }}
               className="hero-link-btn"
@@ -237,7 +327,7 @@ export default function HeroVerificationCard() {
           </form>
         )}
 
-        {/* STEP 3: Details */}
+        {/* STEP 3: APPLICANT DETAILS */}
         {step === 3 && (
           <form onSubmit={handleSaveDetails} className="hero-form">
             <input
@@ -245,26 +335,37 @@ export default function HeroVerificationCard() {
               placeholder="Full Name (as per PAN)"
               value={profile.fullName}
               onChange={(e) =>
-                setProfile({ ...profile, fullName: e.target.value })
+                setProfile({
+                  ...profile,
+                  fullName: e.target.value,
+                })
               }
               className="hero-input"
               required
             />
+
             <input
               type="email"
               placeholder="Email Address"
               value={profile.email}
               onChange={(e) =>
-                setProfile({ ...profile, email: e.target.value })
+                setProfile({
+                  ...profile,
+                  email: e.target.value,
+                })
               }
               className="hero-input"
               required
             />
+
             <div className="hero-select-row">
               <select
                 value={profile.occupation}
                 onChange={(e) =>
-                  setProfile({ ...profile, occupation: e.target.value })
+                  setProfile({
+                    ...profile,
+                    occupation: e.target.value,
+                  })
                 }
                 className="hero-select"
               >
@@ -273,23 +374,29 @@ export default function HeroVerificationCard() {
                 <option value="Professional">Professional</option>
                 <option value="Other">Other</option>
               </select>
-                  <div className="income">
-                    <input type="number"
-                    placeholder="Annual Income" 
-                    name="income"
-                    value={profile.income}
-                    minLength={6}
-                    onChange={(e)=>{
-                      setProfile({...profile,income:e.target.value})
-                    }}
-                    />
 
-                  </div>
+              <div className="income">
+                <input
+                  type="number"
+                  placeholder="Annual Income"
+                  name="income"
+                  value={profile.income}
+                  onChange={(e) =>
+                    setProfile({
+                      ...profile,
+                      income: e.target.value,
+                    })
+                  }
+                />
+              </div>
 
               <select
                 value={profile.loanType}
                 onChange={(e) =>
-                  setProfile({ ...profile, loanType: e.target.value })
+                  setProfile({
+                    ...profile,
+                    loanType: e.target.value,
+                  })
                 }
                 className="hero-select"
               >
@@ -300,17 +407,27 @@ export default function HeroVerificationCard() {
                 <option value="Balance Transfer">Balance Transfer</option>
               </select>
             </div>
-            <button type="submit" disabled={loading} className="hero-submit-btn">
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="hero-submit-btn"
+            >
               {loading ? "Saving Details..." : "Submit Details"}
             </button>
           </form>
         )}
 
-        {/* STEP 4: Success */}
+        {/* STEP 4: SUCCESS */}
         {step === 4 && (
           <div className="hero-success-state">
-            <CheckCircle2 size={44} className="hero-success-icon" />
+            <CheckCircle2
+              size={44}
+              className="hero-success-icon"
+            />
+
             <h4>Application Received</h4>
+
             <p>
               Thank you, <strong>{profile.fullName}</strong>. Your loan
               requirement has been submitted successfully.
@@ -321,3 +438,4 @@ export default function HeroVerificationCard() {
     </div>
   );
 }
+
