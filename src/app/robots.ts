@@ -4,6 +4,10 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
+        userAgent: ["meta-externalagent", "Meta-ExternalAgent"],
+        disallow: "/",
+      },
+      {
         userAgent: "*",
         allow: "/",
         disallow: [
@@ -26,4 +30,3 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: "https://www.loansaarthi.com/sitemap.xml",
   };
 }
-

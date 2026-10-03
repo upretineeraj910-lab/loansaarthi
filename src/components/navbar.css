@@ -292,6 +292,7 @@
 .logo {
   display: flex;
   align-items: center;
+  height: auto;
 }
 
 .logo a {
@@ -353,4 +354,10 @@
   .dropdown-menu {
     display: none;
   }
+}
+
+
+.nav-logo img {
+  width: 120px;
+  height: auto;
 }
