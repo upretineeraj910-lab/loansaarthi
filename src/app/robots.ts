@@ -3,28 +3,36 @@ import type { MetadataRoute } from "next";
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
+      // 1. Aggressive scrapers aur commercial SEO bots ko completely block karein
       {
-        userAgent: ["meta-externalagent", "Meta-ExternalAgent"],
+        userAgent: [
+          "AhrefsBot",
+          "SemrushBot",
+          "DotBot",
+          "PetalBot",
+          "Bytespider",
+          "ClaudeBot",
+          "GPTBot",
+          "CCBot",
+          "meta-externalagent",
+          "Meta-ExternalAgent",
+        ],
         disallow: "/",
       },
+      // 2. Legitimate search engines (Google, Bing, etc.) ke liye rules
       {
         userAgent: "*",
         allow: "/",
         disallow: [
           "/api/",
-          "/crm",
+          "/_next/",            // Next.js internal static assets & prefetch chunks
           "/crm/",
-          "/crm/*",
-          "/lead",
           "/lead/",
-          "/lead/*",
-          "/dashboard",
           "/dashboard/",
-          "/dashboard/*",
-          "/shared-form",
           "/shared-form/",
-          "/shared-form/*",
+          "/*?*",               // Query parameters crawl karne se roke (reduces 50%+ duplicate hits)
         ],
+        crawlDelay: 5,         // Aggressive requests par throttle lagaye
       },
     ],
     sitemap: "https://www.loansaarthi.com/sitemap.xml",
