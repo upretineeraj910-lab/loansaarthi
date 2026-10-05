@@ -59,7 +59,7 @@ const BUSINESS_LOANS: LoanCard[] = [
 
 function LoanCard({ loan }: { loan: LoanCard }) {
   return (
-    <Link href={loan.href} className="loan-type-card">
+    <Link href={loan.href} prefetch={false} className="loan-type-card">
       <div className="loan-card-top-shape">
         <span className="loan-card-dots">
           • • •

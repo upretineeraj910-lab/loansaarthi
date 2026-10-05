@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Script from "next/script";
 import HeroVerificationCard from "../components/HeroVerificationCard";
 import Team from "@/components/team";
@@ -9,12 +8,10 @@ import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 
 import Reveal from "@/components/Reveal";
 import Eyebrow from "@/components/Eyebrow";
-import LedgerRow from "@/components/LedgerRow";
 import EmiCalculator from "@/components/loan/LoanEmiCalculator";
 import Faq from "@/components/Faq";
 
-import { LOAN_TYPES } from "@/components/loans";
-import { WHY, STEPS, BANKS, FAQS } from "@/components/content";
+import { WHY, BANKS, FAQS } from "@/components/content";
 
 import "./main.css";
 import GoogleReviews from "@/components/GoogleReviews";
@@ -136,56 +133,14 @@ export default function Home() {
           </div>
         </div>
       </section>
-      {/* ---------------- LOAN TYPES ---------------- */}
-      {/* <div className="loan-grid">
-  {LOAN_TYPES.map((l, i) => (
-    <Reveal key={l.name} delay={i * 60}>
-      <Link href={l.href} className="loan-item" suppressHydrationWarning>
-        <div className="loan-header">
-          <div className="loan-icon-badge">
-            <span aria-hidden="true">{l.icon}</span>
-          </div>
-          <h3 className="loan-name">{l.name}</h3>
-        </div>
-
-        <p className="loan-desc">{l.desc}</p>
-
-        <div className="loan-features">
-          {l.features.map((feat, idx) => (
-            <span key={idx} className="feature-pill">
-              {feat}
-            </span>
-          ))}
-        </div>
-
-        <div className="loan-stats-footer">
-          <div className="stat-box">
-            <span className="stat-label">Interest Rate</span>
-            <span className="stat-value">{l.rate}</span>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-box">
-            <span className="stat-label">Max Amount</span>
-            <span className="stat-value">{l.range}</span>
-          </div>
-        </div>
-      </Link>
-    </Reveal>
-  ))}
-</div> */}
-
 
       {/* ---------------- LOAN TYPES ---------------- */}
       <div id="Loan">
         <LoanTypes />
       </div>
 
-
-
       {/* ---------------- OUR OFFERINGS ---------------- */}
-
       <OurOfferings />
-
 
       {/* ---------------- WHY ---------------- */}
       <section className="bg-paper-dark section-spacing">
@@ -208,30 +163,6 @@ export default function Home() {
       {/* ---------------- TEAM ---------------- */}
       <Team />
 
-      {/* ---------------- PROCESS ---------------- */}
-      {/* <section id="process" className="container section-spacing">
-  <Reveal>
-    <Eyebrow>How it works</Eyebrow>
-    <h2 className="section-header">
-      Four entries from first call to funds in hand.
-    </h2>
-  </Reveal>
-
-  <div className="process-grid">
-    <div className="process-line" />
-
-    {STEPS.map((s, i) => (
-      <Reveal key={s.label} delay={i * 100}>
-        <div className="process-step">
-          <div className="process-number">{i + 1}</div>
-          <h3 className="process-title">{s.label}</h3>
-          <p className="process-detail">{s.detail}</p>
-        </div>
-      </Reveal>
-    ))}
-  </div>
-</section> */}
-
       <WhyChooseUs />
 
       {/* ---------------- CALCULATOR ---------------- */}
@@ -251,6 +182,7 @@ export default function Home() {
       <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
         <GoogleReviews />
       </div>
+
       {/* ---------------- FAQ ---------------- */}
       <section id="faq" className="faq-section">
         <div className="faq-container">

@@ -68,7 +68,7 @@ export default function Footer() {
 
         {/* Brand */}
         <div className="ls-footer-column ls-footer-brand">
-          <Link href="/" className="ls-footer-logo">
+          <Link href="/" prefetch={false} className="ls-footer-logo">
             Loan<span>Saarthi</span>
           </Link>
 
@@ -84,26 +84,26 @@ export default function Footer() {
 
           <ul>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/" prefetch={false}>Home</Link>
             </li>
 
             <li>
-              <Link href="/blog">Blogs</Link>
+              <Link href="/blog" prefetch={false}>Blogs</Link>
             </li>
 
             <li>
-              <Link href="/contact-us">Contact Us</Link>
+              <Link href="/contact-us" prefetch={false}>Contact Us</Link>
             </li>
 
             <li>
-              <Link href="/Career">Career</Link>
+              <Link href="/Career" prefetch={false}>Career</Link>
             </li>
 
             {/* Auth Links */}
             {isLoggedIn ? (
               <>
                 <li>
-                  <Link href="/dashboard">
+                  <Link href="/dashboard" prefetch={false}>
                     Dashboard
                   </Link>
                 </li>
@@ -120,7 +120,7 @@ export default function Footer() {
               </>
             ) : (
               <li>
-                <Link href="/login">
+                <Link href="/login" prefetch={false}>
                   Login
                 </Link>
               </li>
@@ -134,37 +134,37 @@ export default function Footer() {
 
           <ul>
             <li>
-              <Link href="/personal-loan">
+              <Link href="/personal-loan" prefetch={false}>
                 Personal Loan
               </Link>
             </li>
 
             <li>
-              <Link href="/business-loan">
+              <Link href="/business-loan" prefetch={false}>
                 Business Loan
               </Link>
             </li>
 
             <li>
-              <Link href="/home-loan">
+              <Link href="/home-loan" prefetch={false}>
                 Home Loan
               </Link>
             </li>
 
             <li>
-              <Link href="/loan-against-property">
+              <Link href="/loan-against-property" prefetch={false}>
                 Loan Against Property
               </Link>
             </li>
 
             <li>
-              <Link href="/dropline-overdraft">
+              <Link href="/dropline-overdraft" prefetch={false}>
                 Dropline Overdraft
               </Link>
             </li>
 
             <li>
-              <Link href="/loan-balance-transfer">
+              <Link href="/loan-balance-transfer" prefetch={false}>
                 Loan Balance Transfer
               </Link>
             </li>
@@ -221,11 +221,11 @@ export default function Footer() {
           </p>
 
           <div className="ls-footer-bottom-links">
-            <Link href="/privacy-policy">
+            <Link href="/privacy-policy" prefetch={false}>
               Privacy Policy
             </Link>
 
-            <Link href="/terms-and-conditions">
+            <Link href="/terms-and-conditions" prefetch={false}>
               Terms & Conditions
             </Link>
           </div>

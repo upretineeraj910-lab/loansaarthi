@@ -53,7 +53,7 @@ export default function Navbar() {
       <nav className="navbar">
         {/* Logo */}
         <div className="logo">
-          <Link href="/">
+          <Link href="/" prefetch={false}>
             <Image
               src="/images/icons/image-removebg-preview.png"
               alt="loansaarthi_logo"
@@ -70,19 +70,19 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <div className="nav-links">
-          <Link href="/#home">Home</Link>
+          <Link href="/#home" prefetch={false}>Home</Link>
           <div className="nav-item">
-            <Link href="/#Loan">Loans</Link>
+            <Link href="/#Loan" prefetch={false}>Loans</Link>
             <div className="dropdown-menu">
-              <Link href="/personal-loan">Personal Loan</Link>
-              <Link href="/home-loan">Home Loan for Salaried</Link>
-              <Link href="/loan-against-property">Loan Against Property</Link>
-              <Link href="/business-loan">Business Loan</Link>
-              <Link href="/dropline-overdraft">Dropline Overdraft</Link>
+              <Link href="/personal-loan" prefetch={false}>Personal Loan</Link>
+              <Link href="/home-loan" prefetch={false}>Home Loan for Salaried</Link>
+              <Link href="/loan-against-property" prefetch={false}>Loan Against Property</Link>
+              <Link href="/business-loan" prefetch={false}>Business Loan</Link>
+              <Link href="/dropline-overdraft" prefetch={false}>Dropline Overdraft</Link>
             </div>
           </div>
-          <Link href="/#calculator">EMI Calculator</Link>
-          <Link href="/about-us">About Us</Link>
+          <Link href="/#calculator" prefetch={false}>EMI Calculator</Link>
+          <Link href="/about-us" prefetch={false}>About Us</Link>
         </div>
 
         {/* Hamburger Button */}
@@ -115,7 +115,7 @@ export default function Navbar() {
         </div>
 
         <div className="mobile-menu-links">
-          <Link href="/" onClick={closeMenu}>
+          <Link href="/" prefetch={false} onClick={closeMenu}>
             Home
           </Link>
 
@@ -136,28 +136,28 @@ export default function Navbar() {
             </button>
 
             <div className={`mobile-submenu ${loansOpen ? "open" : ""}`}>
-              <Link href="/personal-loan" onClick={closeMenu}>
+              <Link href="/personal-loan" prefetch={false} onClick={closeMenu}>
                 Personal Loan
               </Link>
-              <Link href="/home-loan" onClick={closeMenu}>
+              <Link href="/home-loan" prefetch={false} onClick={closeMenu}>
                 Home Loan for Salaried
               </Link>
-              <Link href="/loan-against-property" onClick={closeMenu}>
+              <Link href="/loan-against-property" prefetch={false} onClick={closeMenu}>
                 Loan Against Property
               </Link>
-              <Link href="/business-loan" onClick={closeMenu}>
+              <Link href="/business-loan" prefetch={false} onClick={closeMenu}>
                 Business Loan
               </Link>
-              <Link href="/dropline-overdraft" onClick={closeMenu}>
+              <Link href="/dropline-overdraft" prefetch={false} onClick={closeMenu}>
                 Dropline Overdraft
               </Link>
             </div>
           </div>
 
-          <Link href="/#calculator" onClick={closeMenu}>
+          <Link href="/#calculator" prefetch={false} onClick={closeMenu}>
             EMI Calculator
           </Link>
-          <Link href="/about-us" onClick={closeMenu}>
+          <Link href="/about-us" prefetch={false} onClick={closeMenu}>
             About Us
           </Link>
         </div>
