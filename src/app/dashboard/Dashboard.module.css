@@ -10,15 +10,16 @@
    ROOT VARIABLES — LOAN SAARTHI BRAND
 ========================================================= */
 
-:root {
-  /* ----- Loan Saarthi Brand Colors ----- */
+
+
+
+:global(:root) {
   --brand-green: #6FAE45;
   --brand-green-light: #EAF4E4;
   --brand-black: #202020;
   --brand-neutral: #F5F6F4;
   --brand-white: #FFFFFF;
 
-  /* ----- Dashboard Specific ----- */
   --bg-main: #F5F6F4;
   --bg-card: #FFFFFF;
   --bg-sidebar: #FFFFFF;
@@ -38,7 +39,7 @@
   --radius-sm: 0.5rem;
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
   --transition: all 0.25s ease;
-}
+} 
 
 /* =========================================================
    DARK MODE — OVERRIDE

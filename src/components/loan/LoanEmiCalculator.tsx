@@ -1,234 +1,3 @@
-// "use client";
-
-// import React, { useState } from "react";
-// import { ArrowRight } from "lucide-react";
-// import LedgerRow from "@/components/LedgerRow";
-
-// type LoanEmiCalculatorProps = {
-//   /** "loan" (default) = simple table-row UI, lp-* classes, loan-page.css.
-//    *  "home" = fancy breakdown-bar UI, calc-* classes, main.css. */
-//   variant?: "loan" | "home";
-//   /** Heading shown only in "loan" variant. */
-//   title?: string;
-//   amountLabel?: string;
-//   amountDefault?: number;
-//   amountMin?: number;
-//   amountMax?: number;
-//   amountStep?: number;
-//   tenureDefault?: number;
-//   tenureMin?: number;
-//   tenureMax?: number;
-//   rateLabel?: string;
-//   rateDefault?: number;
-//   rateMin?: number;
-//   rateMax?: number;
-//   rateStep?: number;
-//   emiLabel?: string;
-// };
-
-// export default function LoanEmiCalculator({
-//   variant = "loan",
-//   title,
-//   amountLabel = "Amount (₹)",
-//   amountDefault = 2500000,
-//   amountMin = 100000,
-//   amountMax = 10000000,
-//   amountStep = 50000,
-//   tenureDefault = 20,
-//   tenureMin = 1,
-//   tenureMax = 30,
-//   rateLabel,
-//   rateDefault = 8.6,
-//   rateMin = 7,
-//   rateMax = 16,
-//   rateStep = 0.05,
-//   emiLabel,
-// }: LoanEmiCalculatorProps) {
-//   const [amount, setAmount] = useState(amountDefault);
-//   const [tenure, setTenure] = useState(tenureDefault);
-//   const [rate, setRate] = useState(rateDefault);
-
-//   // Sensible label defaults per variant, unless the caller overrides them.
-//   const resolvedRateLabel =
-//     rateLabel ?? (variant === "loan" ? "Rate (% p.a.)" : "Interest rate");
-//   const resolvedEmiLabel =
-//     emiLabel ?? (variant === "loan" ? "Monthly EMI" : "Monthly instalment");
-
-//   const r = rate / 12 / 100;
-//   const n = tenure * 12;
-//   const emi =
-//     r === 0
-//       ? amount / n
-//       : (amount * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-//   const totalPay = emi * n;
-//   const totalInterest = totalPay - amount;
-//   const principalShare = Math.round((amount / totalPay) * 100);
-
-//   const fmt = (v: number) => "₹" + Math.round(v).toLocaleString("en-IN");
-
-//   // ---------------- LOAN variant (simple, table-style, lp-* classes) ----------------
-//   if (variant === "loan") {
-//     return (
-//       <div className="lp-card-box">
-//         {title && <h3>{title}</h3>}
-//         <div className="lp-input-row">
-//           <div className="lp-input-label">
-//             <label>{amountLabel}</label>
-//             <span>{fmt(amount)}</span>
-//           </div>
-//           <input
-//             type="range"
-//             min={amountMin}
-//             max={amountMax}
-//             step={amountStep}
-//             value={amount}
-//             onChange={(e) => setAmount(Number(e.target.value))}
-//             className="lp-range"
-//           />
-//         </div>
-//         <div className="lp-input-row">
-//           <div className="lp-input-label">
-//             <label>Tenure (Years)</label>
-//             <span>{tenure} Yrs</span>
-//           </div>
-//           <input
-//             type="range"
-//             min={tenureMin}
-//             max={tenureMax}
-//             step={1}
-//             value={tenure}
-//             onChange={(e) => setTenure(Number(e.target.value))}
-//             className="lp-range"
-//           />
-//         </div>
-//         <div className="lp-input-row">
-//           <div className="lp-input-label">
-//             <label>{resolvedRateLabel}</label>
-//             <span>{rate}%</span>
-//           </div>
-//           <input
-//             type="range"
-//             min={rateMin}
-//             max={rateMax}
-//             step={rateStep}
-//             value={rate}
-//             onChange={(e) => setRate(Number(e.target.value))}
-//             className="lp-range"
-//           />
-//         </div>
-//         <div className="lp-calc-res">
-//           <div className="lp-res-row highlight">
-//             <span>{resolvedEmiLabel}</span>
-//             <strong>{fmt(emi)}</strong>
-//           </div>
-//           <div className="lp-res-row">
-//             <span>Total Interest</span>
-//             <span>{fmt(totalInterest)}</span>
-//           </div>
-//           <div className="lp-res-row">
-//             <span>Total Payable</span>
-//             <span>{fmt(totalPay)}</span>
-//           </div>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   // ---------------- HOME variant (fancy breakdown bar, calc-* classes) ----------------
-//   return (
-//     <div className="calculator-wrapper">
-//       <div className="calc-slider-group">
-//         <div>
-//           <div className="calc-slider-header">
-//             <span>Loan amount</span>
-//             <span className="calc-slider-value">{fmt(amount)}</span>
-//           </div>
-//           <input
-//             type="range"
-//             aria-label="Loan amount"
-//             min={amountMin}
-//             max={amountMax}
-//             step={amountStep}
-//             value={amount}
-//             onChange={(e) => setAmount(Number(e.target.value))}
-//             className="calc-slider"
-//           />
-//         </div>
-//         <div>
-//           <div className="calc-slider-header">
-//             <span>{resolvedRateLabel}</span>
-//             <span className="calc-slider-value">{rate.toFixed(2)}%</span>
-//           </div>
-//           <input
-//             type="range"
-//             aria-label="Interest rate"
-//             min={rateMin}
-//             max={rateMax}
-//             step={rateStep}
-//             value={rate}
-//             onChange={(e) => setRate(Number(e.target.value))}
-//             className="calc-slider"
-//           />
-//         </div>
-//         <div>
-//           <div className="calc-slider-header">
-//             <span>Tenure</span>
-//             <span className="calc-slider-value">{tenure} yrs</span>
-//           </div>
-//           <input
-//             type="range"
-//             aria-label="Loan tenure in years"
-//             min={tenureMin}
-//             max={tenureMax}
-//             step={1}
-//             value={tenure}
-//             onChange={(e) => setTenure(Number(e.target.value))}
-//             className="calc-slider"
-//           />
-//         </div>
-//       </div>
-
-//       <div className="calc-divider">
-//         <div className="calc-emi-label">{resolvedEmiLabel}</div>
-//         <div className="calc-emi-value">{fmt(emi)}</div>
-
-//         <div className="calc-breakdown">
-//           <div
-//             className="calc-breakdown-principal"
-//             style={{ width: `${principalShare}%` }}
-//           />
-//           <div
-//             className="calc-breakdown-interest"
-//             style={{ width: `${100 - principalShare}%` }}
-//           />
-//         </div>
-//         <div className="calc-breakdown-labels">
-//           <span>Principal {principalShare}%</span>
-//           <span>Interest {100 - principalShare}%</span>
-//         </div>
-
-//         <LedgerRow label="Principal :- " value={fmt(amount)} />
-//         <LedgerRow label="Total interest :- " value={fmt(totalInterest)} />
-//         <LedgerRow label="Total payable :- " value={fmt(totalPay)} />
-
-//         {/* <a href="#contact" className="btn-get-rate">
-//           Get this rate reviewed  
-//         </a>*/}
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
-
 "use client";
 
 import React, { useState } from "react";
@@ -284,6 +53,10 @@ export default function LoanEmiCalculator({
   const [tenure, setTenure] = useState(tenureDefault);
   const [rate, setRate] = useState(rateDefault);
 
+  // Text state for the typed inputs (so "0" / "09" issue doesn't happen)
+  const [amountText, setAmountText] = useState(String(amountDefault));
+  const [rateText, setRateText] = useState(String(rateDefault));
+
   const resolvedRateLabel =
     rateLabel ??
     (variant === "loan" ? "Rate (% p.a.)" : "Interest rate");
@@ -321,62 +94,81 @@ export default function LoanEmiCalculator({
     "₹" + Math.round(v).toLocaleString("en-IN");
 
   // =========================
-  // AMOUNT INPUT
+  // AMOUNT HANDLERS
   // =========================
 
   const handleAmountInput = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = e.target.value;
+    setAmountText(value); // show exactly what the user typed
 
-    // Allow empty value temporarily
     if (value === "") {
       setAmount(0);
       return;
     }
 
-    const numericValue = Number(value);
+    const num = Number(value);
 
-    if (!Number.isNaN(numericValue)) {
-      let newAmount = numericValue;
-
-      // Apply minimum only when amountMin exists
-      if (amountMin !== null && amountMin !== undefined) {
-        newAmount = Math.max(newAmount, amountMin);
-      }
-
-      // Always apply maximum
-      newAmount = Math.min(newAmount, amountMax);
-
-      setAmount(newAmount);
+    if (!Number.isNaN(num)) {
+      setAmount(Math.min(Math.max(num, 0), amountMax));
     }
   };
 
+  const handleAmountBlur = () => {
+    let v = amount;
+
+    // Apply minimum only when amountMin exists
+    if (amountMin !== null && amountMin !== undefined) {
+      v = Math.max(v, amountMin);
+    }
+
+    setAmount(v);
+    setAmountText(String(v)); // clean value on blur
+  };
+
+  const handleAmountSlider = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const v = Number(e.target.value);
+    setAmount(v);
+    setAmountText(String(v));
+  };
+
   // =========================
-  // RATE INPUT
+  // RATE HANDLERS
   // =========================
 
   const handleRateInput = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     const value = e.target.value;
+    setRateText(value); // show exactly what the user typed
 
-    // Allow empty value temporarily
     if (value === "") {
       setRate(0);
       return;
     }
 
-    const numericValue = Number(value);
+    const num = Number(value);
 
-    if (!Number.isNaN(numericValue)) {
-      const newRate = Math.min(
-        Math.max(numericValue, rateMin),
-        rateMax
-      );
-
-      setRate(newRate);
+    if (!Number.isNaN(num)) {
+      setRate(Math.min(Math.max(num, 0), rateMax));
     }
+  };
+
+  const handleRateBlur = () => {
+    const v = Math.min(Math.max(rate, rateMin), rateMax);
+    setRate(v);
+    setRateText(String(v)); // clean value on blur
+  };
+
+  const handleRateSlider = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const v = Number(e.target.value);
+    setRate(v);
+    setRateText(String(v));
   };
 
   // =========================================================
@@ -404,8 +196,9 @@ export default function LoanEmiCalculator({
               min={amountMin ?? undefined}
               max={amountMax}
               step={amountStep}
-              value={amount}
+              value={amountText}
               onChange={handleAmountInput}
+              onBlur={handleAmountBlur}
               className="lp-number-input"
               aria-label={amountLabel}
             />
@@ -418,9 +211,7 @@ export default function LoanEmiCalculator({
             max={amountMax}
             step={amountStep}
             value={amount}
-            onChange={(e) =>
-              setAmount(Number(e.target.value))
-            }
+            onChange={handleAmountSlider}
             className="lp-range"
             aria-label={amountLabel}
           />
@@ -471,8 +262,9 @@ export default function LoanEmiCalculator({
               min={rateMin}
               max={rateMax}
               step={rateStep}
-              value={rate}
+              value={rateText}
               onChange={handleRateInput}
+              onBlur={handleRateBlur}
               className="lp-number-input"
               aria-label={resolvedRateLabel}
             />
@@ -485,9 +277,7 @@ export default function LoanEmiCalculator({
             max={rateMax}
             step={rateStep}
             value={rate}
-            onChange={(e) =>
-              setRate(Number(e.target.value))
-            }
+            onChange={handleRateSlider}
             className="lp-range"
             aria-label={resolvedRateLabel}
           />
@@ -554,8 +344,9 @@ export default function LoanEmiCalculator({
               min={amountMin ?? undefined}
               max={amountMax}
               step={amountStep}
-              value={amount}
+              value={amountText}
               onChange={handleAmountInput}
+              onBlur={handleAmountBlur}
               className="calc-number-input"
               aria-label="Loan amount"
             />
@@ -568,9 +359,7 @@ export default function LoanEmiCalculator({
             max={amountMax}
             step={amountStep}
             value={amount}
-            onChange={(e) =>
-              setAmount(Number(e.target.value))
-            }
+            onChange={handleAmountSlider}
             className="calc-slider"
             aria-label="Loan amount"
           />
@@ -592,8 +381,9 @@ export default function LoanEmiCalculator({
               min={rateMin}
               max={rateMax}
               step={rateStep}
-              value={rate}
+              value={rateText}
               onChange={handleRateInput}
+              onBlur={handleRateBlur}
               className="calc-number-input"
               aria-label="Interest rate"
             />
@@ -606,9 +396,7 @@ export default function LoanEmiCalculator({
             max={rateMax}
             step={rateStep}
             value={rate}
-            onChange={(e) =>
-              setRate(Number(e.target.value))
-            }
+            onChange={handleRateSlider}
             className="calc-slider"
             aria-label="Interest rate"
           />
