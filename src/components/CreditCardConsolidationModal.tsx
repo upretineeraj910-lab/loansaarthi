@@ -74,7 +74,9 @@ export default function CreditCardConsolidationModal() {
 
         {/* Footer with Bottom-Right Close */}
         <div className={styles.footerRow}>
-          <span>Free eligibility check</span>
+          <button onClick={handleApplyNow} className={styles.dismissBtn}>
+            <span>Free eligibility check</span>
+          </button>
           <button onClick={handleClose} className={styles.dismissBtn}>
             Dismiss &times;
           </button>
