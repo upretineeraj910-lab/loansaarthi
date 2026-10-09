@@ -1,12 +1,28 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Lead from '@/models/Lead';
+import { getAuthUser, canViewLeads, canEnterLeads } from '@/lib/crmAuth';
 
 export const dynamic = 'force-dynamic';
 
 // GET: Fetch leads with search and filter + stats
 export async function GET(request: NextRequest) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: 'Authentication required. Please log in to view CRM leads.' },
+        { status: 401 }
+      );
+    }
+
+    if (!canViewLeads(authUser.role)) {
+      return NextResponse.json(
+        { success: false, message: 'Access Denied: You do not have permission to view CRM leads.' },
+        { status: 403 }
+      );
+    }
+
     await connectToDatabase();
 
     const { searchParams } = new URL(request.url);
@@ -73,6 +89,24 @@ export async function GET(request: NextRequest) {
 // POST: Add a single lead (Form submission)
 export async function POST(request: NextRequest) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: 'Authentication required. Please log in.' },
+        { status: 401 }
+      );
+    }
+
+    if (!canEnterLeads(authUser.role)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Access Denied: Only Data Entry Operators (crm_entry) can submit leads. CRM Editors are not permitted to add leads.',
+        },
+        { status: 403 }
+      );
+    }
+
     await connectToDatabase();
 
     const body = await request.json();

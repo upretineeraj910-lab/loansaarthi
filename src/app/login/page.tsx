@@ -41,8 +41,17 @@ export default function LoginPage() {
         // Store token and user data
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
-        // router.push('/dashboard');
-        window.location.href = '/dashboard'
+
+        const role = data.user?.role;
+        if (role === 'crm_editor') {
+          window.location.href = '/crm';
+        } else if (role === 'crm_entry') {
+          window.location.href = '/crm/entry';
+        } else if (role === 'admin' || role === 'superadmin' || role === 'crm') {
+          window.location.href = '/crm';
+        } else {
+          window.location.href = '/dashboard';
+        }
       } else {
         setError(data.error || 'Login failed');
       }

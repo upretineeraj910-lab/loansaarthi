@@ -25,6 +25,8 @@ export async function GET() {
 
     return NextResponse.json({
       authenticated: true,
+      id: payload.id,
+      email: payload.email,
       role: payload.role,
     });
   } catch (error) {

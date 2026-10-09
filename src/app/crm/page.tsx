@@ -24,6 +24,9 @@ import {
   Landmark,
   IndianRupee,
   AlertTriangle,
+  Shield,
+  UserCheck,
+  Lock,
 } from 'lucide-react';
 import './crm-theme.css';
 
@@ -130,6 +133,68 @@ export default function CrmDashboardPage() {
     reason: COMMON_REJECTION_REASONS[0],
     customReason: '',
   });
+
+  // User Authentication & Roles
+  const [authLoading, setAuthLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<{ id?: string; email?: string; role?: string; name?: string } | null>(null);
+  const [switchingRole, setSwitchingRole] = useState(false);
+
+  const fetchUserAuth = useCallback(async () => {
+    try {
+      const res = await fetch('/api/auth/me');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.authenticated) {
+          setCurrentUser(data);
+        } else {
+          setCurrentUser(null);
+        }
+      } else {
+        setCurrentUser(null);
+      }
+    } catch (err) {
+      console.error('Failed to fetch auth info:', err);
+    } finally {
+      setAuthLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchUserAuth();
+  }, [fetchUserAuth]);
+
+  const canEdit = currentUser?.role === 'crm_editor' || currentUser?.role === 'admin';
+  const canEnter = currentUser?.role === 'crm_entry' || currentUser?.role === 'admin';
+
+  const handleQuickSwitchRole = async (targetRole: 'crm_entry' | 'crm_editor' | 'admin') => {
+    setSwitchingRole(true);
+    try {
+      const res = await fetch('/api/crm/quick-login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role: targetRole }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setCurrentUser(data.user);
+        setStatusMessage(
+          `Logged in as: ${
+            targetRole === 'crm_entry'
+              ? 'Data Entry Operator (View Only)'
+              : targetRole === 'crm_editor'
+              ? 'CRM Editor (Manager Mode)'
+              : 'Super Admin'
+          }`
+        );
+        setTimeout(() => setStatusMessage(null), 3500);
+        fetchLeads();
+      }
+    } catch (err: any) {
+      alert('Failed to switch role: ' + err.message);
+    } finally {
+      setSwitchingRole(false);
+    }
+  };
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
@@ -313,11 +378,128 @@ export default function CrmDashboardPage() {
           </div>
         )}
 
+        {/* Role Quick-Switcher Banner */}
+        <div style={{
+          backgroundColor: '#ffffff',
+          border: '1px solid #e2e8f0',
+          borderRadius: '10px',
+          padding: '10px 16px',
+          marginBottom: '1rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '12px',
+          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#334155' }}>
+            <UserCheck size={16} className="text-green" />
+            <span>
+              <strong>Active Role:</strong>{' '}
+              {currentUser?.role === 'crm_editor'
+                ? 'CRM Editor (Can Edit Statuses & Delete, Cannot Enter Data)'
+                : currentUser?.role === 'crm_entry'
+                ? 'Data Entry Operator (Can Enter Data, View Only on CRM)'
+                : currentUser?.role === 'admin'
+                ? 'Super Admin (Full CRM & Entry Access)'
+                : 'Not Logged In'}
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '12px', color: '#64748b', marginRight: '4px' }}>Quick Switch Demo Role:</span>
+            <button
+              onClick={() => handleQuickSwitchRole('crm_entry')}
+              disabled={switchingRole || currentUser?.role === 'crm_entry'}
+              className="crm-btn"
+              style={{
+                fontSize: '11px',
+                padding: '4px 10px',
+                backgroundColor: currentUser?.role === 'crm_entry' ? '#f59e0b' : '#f8fafc',
+                color: currentUser?.role === 'crm_entry' ? '#ffffff' : '#334155',
+                border: '1px solid #cbd5e1',
+                borderRadius: '6px',
+                cursor: currentUser?.role === 'crm_entry' ? 'default' : 'pointer',
+                fontWeight: currentUser?.role === 'crm_entry' ? 700 : 500
+              }}
+            >
+              1. Data Entry Operator
+            </button>
+            <button
+              onClick={() => handleQuickSwitchRole('crm_editor')}
+              disabled={switchingRole || currentUser?.role === 'crm_editor'}
+              className="crm-btn"
+              style={{
+                fontSize: '11px',
+                padding: '4px 10px',
+                backgroundColor: currentUser?.role === 'crm_editor' ? '#4f46e5' : '#f8fafc',
+                color: currentUser?.role === 'crm_editor' ? '#ffffff' : '#334155',
+                border: '1px solid #cbd5e1',
+                borderRadius: '6px',
+                cursor: currentUser?.role === 'crm_editor' ? 'default' : 'pointer',
+                fontWeight: currentUser?.role === 'crm_editor' ? 700 : 500
+              }}
+            >
+              2. CRM Editor
+            </button>
+            <button
+              onClick={() => handleQuickSwitchRole('admin')}
+              disabled={switchingRole || currentUser?.role === 'admin'}
+              className="crm-btn"
+              style={{
+                fontSize: '11px',
+                padding: '4px 10px',
+                backgroundColor: currentUser?.role === 'admin' ? '#16a34a' : '#f8fafc',
+                color: currentUser?.role === 'admin' ? '#ffffff' : '#334155',
+                border: '1px solid #cbd5e1',
+                borderRadius: '6px',
+                cursor: currentUser?.role === 'admin' ? 'default' : 'pointer',
+                fontWeight: currentUser?.role === 'admin' ? 700 : 500
+              }}
+            >
+              3. Super Admin
+            </button>
+          </div>
+        </div>
+
         {/* Header */}
         <div className="crm-header-card">
           <div>
-            <div className="crm-badge">
-              <Building2 size={13} /> LoanSaarthi Lead CRM Portal
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap', marginBottom: '8px' }}>
+              <div className="crm-badge">
+                <Building2 size={13} /> LoanSaarthi Lead CRM Portal
+              </div>
+              {currentUser && (
+                <div
+                  className="crm-badge"
+                  style={{
+                    backgroundColor:
+                      currentUser.role === 'crm_editor'
+                        ? '#e0e7ff'
+                        : currentUser.role === 'crm_entry'
+                        ? '#fef3c7'
+                        : '#dcfce7',
+                    color:
+                      currentUser.role === 'crm_editor'
+                        ? '#3730a3'
+                        : currentUser.role === 'crm_entry'
+                        ? '#92400e'
+                        : '#166534',
+                    borderColor:
+                      currentUser.role === 'crm_editor'
+                        ? '#c7d2fe'
+                        : currentUser.role === 'crm_entry'
+                        ? '#fde68a'
+                        : '#bbf7d0',
+                  }}
+                >
+                  <Shield size={12} />
+                  {currentUser.role === 'crm_editor'
+                    ? 'Role: CRM Editor (Manager Mode)'
+                    : currentUser.role === 'crm_entry'
+                    ? 'Role: Data Entry Operator (View Only)'
+                    : 'Role: Super Admin'}
+                </div>
+              )}
             </div>
             <h1 className="crm-title">Leads Pipeline &amp; Dashboard</h1>
             <p className="crm-subtitle">
@@ -339,10 +521,12 @@ export default function CrmDashboardPage() {
               Export to Excel
             </button>
 
-            <Link href="/crm/entry" className="crm-btn crm-btn-primary crm-link-ml">
-              <PlusCircle size={16} />
-              + Add Lead / Excel
-            </Link>
+            {canEnter && (
+              <Link href="/crm/entry" className="crm-btn crm-btn-primary crm-link-ml">
+                <PlusCircle size={16} />
+                + Add Lead / Excel
+              </Link>
+            )}
           </div>
         </div>
 
@@ -465,7 +649,7 @@ export default function CrmDashboardPage() {
                   <th>Mobile Number</th>
                   <th>PAN Card (Unique)</th>
                   <th>Loan Applied</th>
-                  <th className="is-strong">Status (Click to Update) ⚡</th>
+                  <th className="is-strong">{canEdit ? 'Status (Click to Update) ⚡' : 'Status (View-Only 🔒)'}</th>
                   <th>Bank / Rejection Details</th>
                   <th>Source</th>
                   <th style={{ textAlign: 'right' }}>Actions</th>
@@ -484,11 +668,13 @@ export default function CrmDashboardPage() {
                     <td colSpan={9} className="crm-table-empty">
                       <Filter size={26} style={{ margin: '0 auto 0.5rem' }} />
                       No leads found matching your criteria.
-                      <div style={{ marginTop: '0.75rem' }}>
-                        <Link href="/crm/entry" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex' }}>
-                          <PlusCircle size={13} /> Add first lead
-                        </Link>
-                      </div>
+                      {canEnter && (
+                        <div style={{ marginTop: '0.75rem' }}>
+                          <Link href="/crm/entry" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex' }}>
+                            <PlusCircle size={13} /> Add first lead
+                          </Link>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ) : (
@@ -525,29 +711,56 @@ export default function CrmDashboardPage() {
                       </td>
 
                       <td className="crm-status-cell" onClick={(e) => e.stopPropagation()}>
-                        <div className="crm-status-wrap">
-                          <select
-                            disabled={updatingId === lead._id}
-                            value={lead.status}
-                            onChange={(e) => onSelectStatusChange(lead, e.target.value as Lead['status'])}
+                        {canEdit ? (
+                          <div className="crm-status-wrap">
+                            <select
+                              disabled={updatingId === lead._id}
+                              value={lead.status}
+                              onChange={(e) => onSelectStatusChange(lead, e.target.value as Lead['status'])}
+                              className={`crm-status-select ${
+                                STATUS_OPTIONS.find((s) => s.value === lead.status)?.className || ''
+                              }${updatingId === lead._id ? ' is-updating' : ''}`}
+                            >
+                              <option value="Login">🟡 1. Login</option>
+                              <option value="Underwriting">🔵 2. Underwriting</option>
+                              <option value="Approved">🟢 3. Approved</option>
+                              <option value="Rejected">🔴 4. Rejected</option>
+                              <option value="Disbursed">🟣 5. Disbursed</option>
+                            </select>
+                            <span className="crm-status-chevron">
+                              {updatingId === lead._id ? (
+                                <RefreshCw size={12} className="animate-spin" />
+                              ) : (
+                                <ChevronDown size={13} />
+                              )}
+                            </span>
+                          </div>
+                        ) : (
+                          <div
                             className={`crm-status-select ${
                               STATUS_OPTIONS.find((s) => s.value === lead.status)?.className || ''
-                            }${updatingId === lead._id ? ' is-updating' : ''}`}
+                            }`}
+                            title="View-Only: Status editing is restricted to CRM Editors"
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '6px',
+                              cursor: 'default',
+                              opacity: 0.95,
+                              userSelect: 'none',
+                              borderStyle: 'dashed',
+                            }}
                           >
-                            <option value="Login">🟡 1. Login</option>
-                            <option value="Underwriting">🔵 2. Underwriting</option>
-                            <option value="Approved">🟢 3. Approved</option>
-                            <option value="Rejected">🔴 4. Rejected</option>
-                            <option value="Disbursed">🟣 5. Disbursed</option>
-                          </select>
-                          <span className="crm-status-chevron">
-                            {updatingId === lead._id ? (
-                              <RefreshCw size={12} className="animate-spin" />
-                            ) : (
-                              <ChevronDown size={13} />
-                            )}
-                          </span>
-                        </div>
+                            <span>
+                              {lead.status === 'Login' && '🟡 1. Login'}
+                              {lead.status === 'Underwriting' && '🔵 2. Underwriting'}
+                              {lead.status === 'Approved' && '🟢 3. Approved'}
+                              {lead.status === 'Rejected' && '🔴 4. Rejected'}
+                              {lead.status === 'Disbursed' && '🟣 5. Disbursed'}
+                            </span>
+                            <Lock size={11} style={{ opacity: 0.7 }} />
+                          </div>
+                        )}
                       </td>
 
                       <td>
@@ -599,13 +812,15 @@ export default function CrmDashboardPage() {
                           >
                             <Eye size={14} />
                           </button>
-                          <button
-                            onClick={() => handleDeleteLead(lead._id, lead.name)}
-                            className="crm-icon-btn crm-icon-btn--delete"
-                            title="Delete Lead"
-                          >
-                            <Trash2 size={14} />
-                          </button>
+                          {canEdit && (
+                            <button
+                              onClick={() => handleDeleteLead(lead._id, lead.name)}
+                              className="crm-icon-btn crm-icon-btn--delete"
+                              title="Delete Lead"
+                            >
+                              <Trash2 size={14} />
+                            </button>
+                          )}
                         </div>
                       </td>
                     </tr>
@@ -791,22 +1006,49 @@ export default function CrmDashboardPage() {
               <div className="crm-status-picker">
                 <div>
                   <div className="crm-field-label">Current Lead Status:</div>
-                  <div className="crm-field-hint">Click dropdown to update stage</div>
+                  <div className="crm-field-hint">
+                    {canEdit ? 'Click dropdown to update stage' : 'Status editing restricted to CRM Editors (View Only)'}
+                  </div>
                 </div>
-                <div className="crm-status-wrap" style={{ width: 'auto' }}>
-                  <select
-                    value={selectedLead.status}
-                    onChange={(e) => onSelectStatusChange(selectedLead, e.target.value as Lead['status'])}
-                    className="crm-status-select"
-                    style={{ background: 'var(--brand-white)', borderColor: 'var(--color-paper-line)' }}
+                {canEdit ? (
+                  <div className="crm-status-wrap" style={{ width: 'auto' }}>
+                    <select
+                      value={selectedLead.status}
+                      onChange={(e) => onSelectStatusChange(selectedLead, e.target.value as Lead['status'])}
+                      className="crm-status-select"
+                      style={{ background: 'var(--brand-white)', borderColor: 'var(--color-paper-line)' }}
+                    >
+                      <option value="Login">🟡 1. Login</option>
+                      <option value="Underwriting">🔵 2. Underwriting</option>
+                      <option value="Approved">🟢 3. Approved</option>
+                      <option value="Rejected">🔴 4. Rejected</option>
+                      <option value="Disbursed">🟣 5. Disbursed</option>
+                    </select>
+                  </div>
+                ) : (
+                  <div
+                    className={`crm-status-select ${
+                      STATUS_OPTIONS.find((s) => s.value === selectedLead.status)?.className || ''
+                    }`}
+                    style={{
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      padding: '8px 14px',
+                      cursor: 'default',
+                      borderStyle: 'dashed',
+                    }}
                   >
-                    <option value="Login">🟡 1. Login</option>
-                    <option value="Underwriting">🔵 2. Underwriting</option>
-                    <option value="Approved">🟢 3. Approved</option>
-                    <option value="Rejected">🔴 4. Rejected</option>
-                    <option value="Disbursed">🟣 5. Disbursed</option>
-                  </select>
-                </div>
+                    <span>
+                      {selectedLead.status === 'Login' && '🟡 1. Login'}
+                      {selectedLead.status === 'Underwriting' && '🔵 2. Underwriting'}
+                      {selectedLead.status === 'Approved' && '🟢 3. Approved'}
+                      {selectedLead.status === 'Rejected' && '🔴 4. Rejected'}
+                      {selectedLead.status === 'Disbursed' && '🟣 5. Disbursed'}
+                    </span>
+                    <Lock size={12} style={{ opacity: 0.7 }} />
+                  </div>
+                )}
               </div>
 
               {(selectedLead.status === 'Approved' || selectedLead.status === 'Disbursed') && (
@@ -895,9 +1137,11 @@ export default function CrmDashboardPage() {
 
               <div className="crm-modal-footer">
                 <span>Added: {new Date(selectedLead.createdAt).toLocaleString('en-IN')}</span>
-                <button onClick={() => handleDeleteLead(selectedLead._id, selectedLead.name)} className="crm-delete-link">
-                  <Trash2 size={12} /> Delete Lead
-                </button>
+                {canEdit && (
+                  <button onClick={() => handleDeleteLead(selectedLead._id, selectedLead.name)} className="crm-delete-link">
+                    <Trash2 size={12} /> Delete Lead
+                  </button>
+                )}
               </div>
             </div>
           </div>

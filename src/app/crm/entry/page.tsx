@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
 import {
   FileSpreadsheet,
@@ -9,6 +10,8 @@ import {
   ArrowRight,
   CheckCircle2,
   AlertCircle,
+  ShieldAlert,
+  Lock,
   Upload,
   Download,
   FileCheck,
@@ -44,6 +47,34 @@ const POPULAR_BANKS = [
 ];
 
 export default function LeadEntryPage() {
+  const router = useRouter();
+  const [authLoading, setAuthLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<{ id?: string; email?: string; role?: string } | null>(null);
+
+  useEffect(() => {
+    const verifyAccess = async () => {
+      try {
+        const res = await fetch('/api/auth/me');
+        if (!res.ok) {
+          setCurrentUser(null);
+          return;
+        }
+        const data = await res.json();
+        if (data.authenticated) {
+          setCurrentUser(data);
+        } else {
+          setCurrentUser(null);
+        }
+      } catch (err) {
+        console.error('Auth verification error:', err);
+      } finally {
+        setAuthLoading(false);
+      }
+    };
+
+    verifyAccess();
+  }, []);
+
   const [activeTab, setActiveTab] = useState<'form' | 'excel'>('form');
 
   const [formData, setFormData] = useState({
@@ -250,14 +281,112 @@ export default function LeadEntryPage() {
     XLSX.writeFile(workbook, 'LoanSaarthi_Leads_Template.xlsx');
   };
 
+  // 1. Loading state
+  if (authLoading) {
+    return (
+      <div className="crm-page">
+        <div className="crm-shell crm-shell--narrow" style={{ marginTop: '4rem', textAlign: 'center' }}>
+          <div className="crm-panel" style={{ padding: '3rem' }}>
+            <RefreshCw size={32} className="animate-spin text-green" style={{ margin: '0 auto 1rem auto' }} />
+            <p style={{ color: '#64748b', fontSize: '15px' }}>Verifying entry portal permissions...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. Not logged in state
+  if (!currentUser) {
+    return (
+      <div className="crm-page">
+        <div className="crm-shell crm-shell--narrow" style={{ marginTop: '3rem' }}>
+          <div className="crm-panel" style={{ textAlign: 'center', padding: '3rem 2rem' }}>
+            <div style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '50%',
+              backgroundColor: '#e0e7ff',
+              color: '#4338ca',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1.25rem auto'
+            }}>
+              <Lock size={28} />
+            </div>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
+              Authentication Required
+            </h2>
+            <p style={{ color: '#64748b', maxWidth: '440px', margin: '0 auto 1.5rem auto', lineHeight: 1.5, fontSize: '14px' }}>
+              Please sign in with your <strong>Data Entry Operator</strong> account (e.g. <code>entry@loansaarthi.com</code>) or Admin credentials to enter and upload leads.
+            </p>
+            <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+              <Link href="/login" className="crm-btn crm-btn-primary">
+                Sign In to Continue
+              </Link>
+              <Link href="/crm" className="crm-btn crm-btn-ghost">
+                View CRM Leads
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 3. CRM Editor blocked state
+  if (currentUser.role === 'crm_editor') {
+    return (
+      <div className="crm-page">
+        <div className="crm-shell crm-shell--narrow" style={{ marginTop: '3rem' }}>
+          <div className="crm-panel" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
+            <div style={{
+              width: '64px',
+              height: '64px',
+              borderRadius: '50%',
+              backgroundColor: '#fee2e2',
+              color: '#dc2626',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1.25rem auto'
+            }}>
+              <ShieldAlert size={34} />
+            </div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.75rem' }}>
+              Access Denied: Data Entry Portal
+            </h2>
+            <p style={{ color: '#475569', maxWidth: '520px', margin: '0 auto 1.75rem auto', lineHeight: 1.6, fontSize: '14px' }}>
+              You are currently logged in as a <strong>CRM Editor ({currentUser.email})</strong>. As per your system permissions, CRM Editors are responsible for updating lead statuses and pipeline management, and are <strong>strictly restricted</strong> from accessing the Data Entry Portal.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link href="/crm" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <LayoutDashboard size={16} />
+                Go to CRM Dashboard
+              </Link>
+              <Link href="/login" className="crm-btn crm-btn-ghost">
+                Switch to Data Entry Account
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="crm-page">
       {/* Header */}
       <div className="crm-shell crm-shell--narrow" style={{ marginBottom: '1.5rem' }}>
         <div className="crm-header-card">
           <div>
-            <div className="crm-badge">
-              <Building2 size={13} /> LoanSaarthi Intake Portal
+            <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap', marginBottom: '6px' }}>
+              <div className="crm-badge">
+                <Building2 size={13} /> LoanSaarthi Intake Portal
+              </div>
+              <div className="crm-badge" style={{ backgroundColor: '#fef3c7', color: '#92400e', borderColor: '#fde68a' }}>
+                <UserPlus size={12} /> {currentUser.role === 'admin' ? 'Super Admin' : 'Data Entry Operator'}: {currentUser.email}
+              </div>
             </div>
             <h1 className="crm-title">Lead Data Entry Portal</h1>
             <p className="crm-subtitle">

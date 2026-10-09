@@ -1,11 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Lead from '@/models/Lead';
+import { getAuthUser, canEnterLeads } from '@/lib/crmAuth';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: 'Authentication required. Please log in.' },
+        { status: 401 }
+      );
+    }
+
+    if (!canEnterLeads(authUser.role)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Access Denied: Only Data Entry Operators (crm_entry) can upload leads. CRM Editors are not permitted to upload data.',
+        },
+        { status: 403 }
+      );
+    }
+
     await connectToDatabase();
 
     const body = await request.json();

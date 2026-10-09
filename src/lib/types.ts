@@ -5,7 +5,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  role: 'borrower' | 'lender' | 'admin';
+  role: 'borrower' | 'lender' | 'admin' | 'crm_entry' | 'crm_editor';
   isActive: boolean;
   createdAt?: Date;
   updatedAt?: Date;
@@ -16,7 +16,7 @@ export interface IRegisterInput {
   email: string;
   password: string;
   confirmPassword: string;
-  role: 'borrower' | 'lender' | 'admin';
+  role: 'borrower' | 'lender' | 'admin' | 'crm_entry' | 'crm_editor';
 }
 
 export interface ILoginInput {
@@ -93,7 +93,7 @@ export interface IUser {
   name: string;
   email: string;
   password: string;
-  role: 'borrower' | 'lender' | 'admin';
+  role: 'borrower' | 'lender' | 'admin' | 'crm_entry' | 'crm_editor';
   isActive: boolean;
   createdAt?: Date;
   updatedAt?: Date;
@@ -104,7 +104,7 @@ export interface IRegisterInput {
   email: string;
   password: string;
   confirmPassword: string;
-  role: 'borrower' | 'lender' | 'admin';
+  role: 'borrower' | 'lender' | 'admin' | 'crm_entry' | 'crm_editor';
 }
 
 export interface ILoginInput {

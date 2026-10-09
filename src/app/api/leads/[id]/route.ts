@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Lead from '@/models/Lead';
+import { getAuthUser, canEditLeads } from '@/lib/crmAuth';
 
 export const dynamic = 'force-dynamic';
 
@@ -11,6 +12,24 @@ interface RouteParams {
 // PATCH: Update lead status or details
 export async function PATCH(request: NextRequest, { params }: RouteParams) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: 'Authentication required. Please log in.' },
+        { status: 401 }
+      );
+    }
+
+    if (!canEditLeads(authUser.role)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Access Denied: Data Entry Operators cannot modify lead statuses or details. Only CRM Editors can edit leads.',
+        },
+        { status: 403 }
+      );
+    }
+
     await connectToDatabase();
     const { id } = await params;
     const body = await request.json();
@@ -62,6 +81,24 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
 // DELETE: Delete lead
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: 'Authentication required. Please log in.' },
+        { status: 401 }
+      );
+    }
+
+    if (!canEditLeads(authUser.role)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Access Denied: Only CRM Editors can delete leads.',
+        },
+        { status: 403 }
+      );
+    }
+
     await connectToDatabase();
     const { id } = await params;
 
