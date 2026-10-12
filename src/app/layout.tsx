@@ -4,7 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
-import CreditCardConsolidationModal from "@/components/CreditCardConsolidationModal";
+// import CreditCardConsolidationModal from "@/components/CreditCardConsolidationModal";
+import ConditionalCreditCardModal from "@/components/ConditionalCreditCardModal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -86,7 +87,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <GoogleAnalytics gaId="G-HH4G9YY3LC" />
-        <CreditCardConsolidationModal />
+        <ConditionalCreditCardModal />
       </body>
     </html>
   );
