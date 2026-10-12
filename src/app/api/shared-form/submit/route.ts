@@ -51,7 +51,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const referrer = await User.findById(referrerId);
+    await connectToDatabase();
+
+    const referrer = await User.findById(referrerId).select('name').lean();
 
     if (!referrer) {
       return NextResponse.json(
@@ -249,43 +251,37 @@ export async function POST(request: Request) {
     }
 
     // =====================================
-    // READ DOCUMENTS
+    // READ DOCUMENTS IN PARALLEL
     // =====================================
 
     console.log('📂 Reading documents...');
 
-    const panFileData = await fileToBuffer(formData.get('panDocument'));
-    const aadhaarFileData = await fileToBuffer(formData.get('aadhaarDocument'));
-    const bankFileData = await fileToBuffer(formData.get('bankStatement'));
-    const itrFileData = await fileToBuffer(formData.get('itr'));
-    const form16FileData = await fileToBuffer(formData.get('form16'));
-    const businessProofFileData = await fileToBuffer(formData.get('businessProof'));
-
     const rawSalaryFiles = formData.getAll('salarySlips');
-    const salarySlipDataList: {
-      buffer: Buffer;
-      name: string;
-      type: string;
-      size: number;
-    }[] = [];
 
-    for (const file of rawSalaryFiles) {
-      const parsed = await fileToBuffer(file);
-      if (parsed) {
-        salarySlipDataList.push(parsed);
-      }
-    }
+    const [
+      panFileData,
+      aadhaarFileData,
+      bankFileData,
+      itrFileData,
+      form16FileData,
+      businessProofFileData,
+      parsedSalarySlips,
+    ] = await Promise.all([
+      fileToBuffer(formData.get('panDocument')),
+      fileToBuffer(formData.get('aadhaarDocument')),
+      fileToBuffer(formData.get('bankStatement')),
+      fileToBuffer(formData.get('itr')),
+      fileToBuffer(formData.get('form16')),
+      fileToBuffer(formData.get('businessProof')),
+      Promise.all(rawSalaryFiles.map((file) => fileToBuffer(file))),
+    ]);
 
-    console.log('📄 PAN:', panFileData ? 'YES' : 'NO');
-    console.log('📄 Aadhaar:', aadhaarFileData ? 'YES' : 'NO');
-    console.log('📄 Bank:', bankFileData ? 'YES' : 'NO');
-    console.log('📄 ITR:', itrFileData ? 'YES' : 'NO');
-    console.log('📄 Form 16:', form16FileData ? 'YES' : 'NO');
-    console.log('📄 Business Proof:', businessProofFileData ? 'YES' : 'NO');
-    console.log('📄 Salary Slips:', salarySlipDataList.length);
+    const salarySlipDataList = parsedSalarySlips.filter(
+      (item): item is NonNullable<typeof item> => item !== null
+    );
 
     // =====================================
-    // GOOGLE CLOUD DOCUMENTS
+    // GOOGLE CLOUD DOCUMENTS (PARALLEL UPLOAD)
     // =====================================
 
     const documents: {
@@ -298,101 +294,108 @@ export async function POST(request: Request) {
       businessProof?: any;
     } = {};
 
-    // PAN
+    const uploadTasks: Promise<void>[] = [];
+
     if (panFileData) {
-      console.log('☁️ Uploading PAN...');
-      documents.pan = await uploadToGoogleCloud(
-        panFileData.buffer,
-        panFileData.name,
-        panFileData.type,
-        `borrowers/${referrerId}/pan`
+      uploadTasks.push(
+        uploadToGoogleCloud(
+          panFileData.buffer,
+          panFileData.name,
+          panFileData.type,
+          `borrowers/${referrerId}/pan`
+        ).then((res) => {
+          documents.pan = res;
+        })
       );
-      console.log('✅ PAN uploaded');
     }
 
-    // AADHAAR
     if (aadhaarFileData) {
-      console.log('☁️ Uploading Aadhaar...');
-      documents.aadhaar = await uploadToGoogleCloud(
-        aadhaarFileData.buffer,
-        aadhaarFileData.name,
-        aadhaarFileData.type,
-        `borrowers/${referrerId}/aadhaar`
+      uploadTasks.push(
+        uploadToGoogleCloud(
+          aadhaarFileData.buffer,
+          aadhaarFileData.name,
+          aadhaarFileData.type,
+          `borrowers/${referrerId}/aadhaar`
+        ).then((res) => {
+          documents.aadhaar = res;
+        })
       );
-      console.log('✅ Aadhaar uploaded');
     }
 
-    // BANK STATEMENT
     if (bankFileData) {
-      console.log('☁️ Uploading Bank Statement...');
-      documents.bankStatement = await uploadToGoogleCloud(
-        bankFileData.buffer,
-        bankFileData.name,
-        bankFileData.type,
-        `borrowers/${referrerId}/bank-statements`
+      uploadTasks.push(
+        uploadToGoogleCloud(
+          bankFileData.buffer,
+          bankFileData.name,
+          bankFileData.type,
+          `borrowers/${referrerId}/bank-statements`
+        ).then((res) => {
+          documents.bankStatement = res;
+        })
       );
-      console.log('✅ Bank Statement uploaded');
     }
 
-    // ITR
     if (itrFileData) {
-      console.log('☁️ Uploading ITR...');
-      documents.itr = await uploadToGoogleCloud(
-        itrFileData.buffer,
-        itrFileData.name,
-        itrFileData.type,
-        `borrowers/${referrerId}/itr`
+      uploadTasks.push(
+        uploadToGoogleCloud(
+          itrFileData.buffer,
+          itrFileData.name,
+          itrFileData.type,
+          `borrowers/${referrerId}/itr`
+        ).then((res) => {
+          documents.itr = res;
+        })
       );
-      console.log('✅ ITR uploaded');
     }
 
-    // FORM 16
     if (form16FileData) {
-      console.log('☁️ Uploading Form 16...');
-      documents.form16 = await uploadToGoogleCloud(
-        form16FileData.buffer,
-        form16FileData.name,
-        form16FileData.type,
-        `borrowers/${referrerId}/form16`
+      uploadTasks.push(
+        uploadToGoogleCloud(
+          form16FileData.buffer,
+          form16FileData.name,
+          form16FileData.type,
+          `borrowers/${referrerId}/form16`
+        ).then((res) => {
+          documents.form16 = res;
+        })
       );
-      console.log('✅ Form 16 uploaded');
     }
 
-    // BUSINESS PROOF
     if (businessProofFileData) {
-      console.log('☁️ Uploading Business Proof...');
-      documents.businessProof = await uploadToGoogleCloud(
-        businessProofFileData.buffer,
-        businessProofFileData.name,
-        businessProofFileData.type,
-        `borrowers/${referrerId}/business-proof`
+      uploadTasks.push(
+        uploadToGoogleCloud(
+          businessProofFileData.buffer,
+          businessProofFileData.name,
+          businessProofFileData.type,
+          `borrowers/${referrerId}/business-proof`
+        ).then((res) => {
+          documents.businessProof = res;
+        })
       );
-      console.log('✅ Business Proof uploaded');
     }
 
-    // SALARY SLIPS
     if (salarySlipDataList.length > 0) {
-      console.log(`☁️ Uploading ${salarySlipDataList.length} salary slip(s)...`);
-      const salarySlips = [];
-      for (const item of salarySlipDataList) {
-        const uploaded = await uploadToGoogleCloud(
-          item.buffer,
-          item.name,
-          item.type,
-          `borrowers/${referrerId}/salary-slips`
-        );
-        salarySlips.push(uploaded);
-      }
-      documents.salarySlips = salarySlips;
-      console.log('✅ Salary slips uploaded');
+      uploadTasks.push(
+        Promise.all(
+          salarySlipDataList.map((item) =>
+            uploadToGoogleCloud(
+              item.buffer,
+              item.name,
+              item.type,
+              `borrowers/${referrerId}/salary-slips`
+            )
+          )
+        ).then((res) => {
+          documents.salarySlips = res;
+        })
+      );
     }
+
+    await Promise.all(uploadTasks);
 
     // =====================================
     // SAVE TO MONGODB
     // =====================================
-
-    console.log('💾 Connecting to MongoDB...');
-    await connectToDatabase();
 
     console.log('💾 Saving submission...');
 

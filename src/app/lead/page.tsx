@@ -84,13 +84,16 @@ export default function LeadPage() {
 
   // Debounce search input
   useEffect(() => {
+    const trimmed = searchInput.trim();
+    if (trimmed === debouncedSearch) return;
+
     const timer = setTimeout(() => {
-      setDebouncedSearch(searchInput.trim());
+      setDebouncedSearch(trimmed);
       setPage(1);
     }, 350);
 
     return () => clearTimeout(timer);
-  }, [searchInput]);
+  }, [searchInput, debouncedSearch]);
 
   // Fetch leads
   const fetchLeads = useCallback(

@@ -44,8 +44,16 @@ const LeadSchema = new mongoose.Schema(
   }
 );
 
+LeadSchema.index({ createdAt: -1 });
+LeadSchema.index({ phone: 1 });
+LeadSchema.index({ email: 1 });
+LeadSchema.index({ fullName: 1 });
+
 const Lead =
   mongoose.models.Lead || mongoose.model("Lead", LeadSchema);
+
+const escapeRegex = (str: string) =>
+  str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 // =========================
 // GET LEADS (PAGINATED & SEARCH)
@@ -54,19 +62,20 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10) || 1);
-    const limit = Math.max(1, parseInt(searchParams.get("limit") || "10", 10) || 10);
+    const limit = Math.min(100, Math.max(1, parseInt(searchParams.get("limit") || "10", 10) || 10));
     const search = searchParams.get("search")?.trim() || "";
 
     const query: Record<string, any> = {};
 
     if (search) {
+      const safeSearch = escapeRegex(search);
       query.$or = [
-        { fullName: { $regex: search, $options: "i" } },
-        { name: { $regex: search, $options: "i" } },
-        { phone: { $regex: search, $options: "i" } },
-        { email: { $regex: search, $options: "i" } },
-        { occupation: { $regex: search, $options: "i" } },
-        { loanType: { $regex: search, $options: "i" } },
+        { fullName: { $regex: safeSearch, $options: "i" } },
+        { name: { $regex: safeSearch, $options: "i" } },
+        { phone: { $regex: safeSearch, $options: "i" } },
+        { email: { $regex: safeSearch, $options: "i" } },
+        { occupation: { $regex: safeSearch, $options: "i" } },
+        { loanType: { $regex: safeSearch, $options: "i" } },
       ];
     }
 
@@ -77,6 +86,7 @@ export async function GET(req: Request) {
     const [total, leads] = await Promise.all([
       Lead.countDocuments(query),
       Lead.find(query)
+        .select("fullName name phone email occupation loanType income loanAmount isVerified createdAt")
         .sort({ createdAt: -1 })
         .skip(skip)
         .limit(limit)

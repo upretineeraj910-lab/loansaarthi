@@ -177,10 +177,11 @@ export async function GET(request: Request) {
       role: string;
     };
 
-    // Fetch ONLY this logged-in user's cases
+    // Fetch ONLY this logged-in user's cases with required fields
     const cases = await FormSubmission.find({
       referrerId: decoded.id,
     })
+      .select('applicantName loanType loanAmount createdAt')
       .sort({ createdAt: -1 })
       .lean();
 

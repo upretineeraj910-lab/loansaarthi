@@ -11,14 +11,22 @@ export default function Footer() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Check login status
+  // Check login status without hitting API for public visitors without a session
   useEffect(() => {
+    const hasLocalAuth =
+      typeof window !== "undefined" &&
+      Boolean(localStorage.getItem("token") || localStorage.getItem("user"));
+
+    if (!hasLocalAuth) {
+      setIsLoggedIn(false);
+      return;
+    }
+
     const checkAuth = async () => {
       try {
         const res = await fetch("/api/auth/me", {
           method: "GET",
           credentials: "include",
-          cache: "no-store",
         });
 
         if (!res.ok) {
@@ -27,7 +35,6 @@ export default function Footer() {
         }
 
         const data = await res.json();
-
         setIsLoggedIn(data.authenticated === true);
       } catch (error) {
         console.error("AUTH CHECK ERROR:", error);
@@ -49,6 +56,11 @@ export default function Footer() {
       if (!res.ok) {
         console.error("Logout failed");
         return;
+      }
+
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
       }
 
       // Immediately update UI

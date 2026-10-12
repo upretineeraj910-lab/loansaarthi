@@ -443,6 +443,8 @@ const FormSubmissionSchema = new Schema<IFormSubmissionDocument>(
   }
 );
 
+FormSubmissionSchema.index({ referrerId: 1, createdAt: -1 });
+
 const FormSubmission: Model<IFormSubmissionDocument> =
   mongoose.models.FormSubmission ||
   mongoose.model<IFormSubmissionDocument>(

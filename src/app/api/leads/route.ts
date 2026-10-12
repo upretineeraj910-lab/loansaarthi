@@ -42,27 +42,36 @@ export async function GET(request: NextRequest) {
     }
 
     if (search) {
+      const safeSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       // Fast search targeting phone, PAN, or name
       query.$or = [
-        { phone: { $regex: search, $options: 'i' } },
-        { panNumber: { $regex: search, $options: 'i' } },
-        { name: { $regex: search, $options: 'i' } },
+        { phone: { $regex: safeSearch, $options: 'i' } },
+        { panNumber: { $regex: safeSearch, $options: 'i' } },
+        { name: { $regex: safeSearch, $options: 'i' } },
       ];
     }
 
-    // Fetch matching leads sorted by newest first
-    const leads = await Lead.find(query).sort({ createdAt: -1 }).lean();
+    // Run leads query and status aggregation concurrently in 1 round-trip
+    const [leads, statusCounts] = await Promise.all([
+      Lead.find(query).sort({ createdAt: -1 }).lean(),
+      Lead.aggregate([
+        {
+          $group: {
+            _id: '$status',
+            count: { $sum: 1 },
+          },
+        },
+      ]),
+    ]);
 
-    // Fetch status metrics for top overview cards
-    const [total, login, underwriting, approved, rejected, disbursed] =
-      await Promise.all([
-        Lead.countDocuments({}),
-        Lead.countDocuments({ status: 'Login' }),
-        Lead.countDocuments({ status: 'Underwriting' }),
-        Lead.countDocuments({ status: 'Approved' }),
-        Lead.countDocuments({ status: 'Rejected' }),
-        Lead.countDocuments({ status: 'Disbursed' }),
-      ]);
+    const countsMap: Record<string, number> = {};
+    let total = 0;
+    for (const item of statusCounts) {
+      if (item._id) {
+        countsMap[item._id] = item.count;
+      }
+      total += item.count;
+    }
 
     return NextResponse.json({
       success: true,
@@ -70,11 +79,11 @@ export async function GET(request: NextRequest) {
       leads,
       stats: {
         total,
-        login,
-        underwriting,
-        approved,
-        rejected,
-        disbursed,
+        login: countsMap['Login'] || 0,
+        underwriting: countsMap['Underwriting'] || 0,
+        approved: countsMap['Approved'] || 0,
+        rejected: countsMap['Rejected'] || 0,
+        disbursed: countsMap['Disbursed'] || 0,
       },
     });
   } catch (error: any) {

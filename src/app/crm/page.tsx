@@ -25,7 +25,6 @@ import {
   IndianRupee,
   AlertTriangle,
   Shield,
-  UserCheck,
   Lock,
 } from 'lucide-react';
 import './crm-theme.css';
@@ -137,7 +136,6 @@ export default function CrmDashboardPage() {
   // User Authentication & Roles
   const [authLoading, setAuthLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<{ id?: string; email?: string; role?: string; name?: string } | null>(null);
-  const [switchingRole, setSwitchingRole] = useState(false);
 
   const fetchUserAuth = useCallback(async () => {
     try {
@@ -165,36 +163,6 @@ export default function CrmDashboardPage() {
 
   const canEdit = currentUser?.role === 'crm_editor' || currentUser?.role === 'admin';
   const canEnter = currentUser?.role === 'crm_entry' || currentUser?.role === 'admin';
-
-  const handleQuickSwitchRole = async (targetRole: 'crm_entry' | 'crm_editor' | 'admin') => {
-    setSwitchingRole(true);
-    try {
-      const res = await fetch('/api/crm/quick-login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ role: targetRole }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setCurrentUser(data.user);
-        setStatusMessage(
-          `Logged in as: ${
-            targetRole === 'crm_entry'
-              ? 'Data Entry Operator (View Only)'
-              : targetRole === 'crm_editor'
-              ? 'CRM Editor (Manager Mode)'
-              : 'Super Admin'
-          }`
-        );
-        setTimeout(() => setStatusMessage(null), 3500);
-        fetchLeads();
-      }
-    } catch (err: any) {
-      alert('Failed to switch role: ' + err.message);
-    } finally {
-      setSwitchingRole(false);
-    }
-  };
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
@@ -377,89 +345,6 @@ export default function CrmDashboardPage() {
             {statusMessage}
           </div>
         )}
-
-        {/* Role Quick-Switcher Banner */}
-        <div style={{
-          backgroundColor: '#ffffff',
-          border: '1px solid #e2e8f0',
-          borderRadius: '10px',
-          padding: '10px 16px',
-          marginBottom: '1rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-          gap: '12px',
-          boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px', color: '#334155' }}>
-            <UserCheck size={16} className="text-green" />
-            <span>
-              <strong>Active Role:</strong>{' '}
-              {currentUser?.role === 'crm_editor'
-                ? 'CRM Editor (Can Edit Statuses & Delete, Cannot Enter Data)'
-                : currentUser?.role === 'crm_entry'
-                ? 'Data Entry Operator (Can Enter Data, View Only on CRM)'
-                : currentUser?.role === 'admin'
-                ? 'Super Admin (Full CRM & Entry Access)'
-                : 'Not Logged In'}
-            </span>
-          </div>
-          <div style={{ display: 'flex', gap: '6px', alignItems: 'center', flexWrap: 'wrap' }}>
-            <span style={{ fontSize: '12px', color: '#64748b', marginRight: '4px' }}>Quick Switch Demo Role:</span>
-            <button
-              onClick={() => handleQuickSwitchRole('crm_entry')}
-              disabled={switchingRole || currentUser?.role === 'crm_entry'}
-              className="crm-btn"
-              style={{
-                fontSize: '11px',
-                padding: '4px 10px',
-                backgroundColor: currentUser?.role === 'crm_entry' ? '#f59e0b' : '#f8fafc',
-                color: currentUser?.role === 'crm_entry' ? '#ffffff' : '#334155',
-                border: '1px solid #cbd5e1',
-                borderRadius: '6px',
-                cursor: currentUser?.role === 'crm_entry' ? 'default' : 'pointer',
-                fontWeight: currentUser?.role === 'crm_entry' ? 700 : 500
-              }}
-            >
-              1. Data Entry Operator
-            </button>
-            <button
-              onClick={() => handleQuickSwitchRole('crm_editor')}
-              disabled={switchingRole || currentUser?.role === 'crm_editor'}
-              className="crm-btn"
-              style={{
-                fontSize: '11px',
-                padding: '4px 10px',
-                backgroundColor: currentUser?.role === 'crm_editor' ? '#4f46e5' : '#f8fafc',
-                color: currentUser?.role === 'crm_editor' ? '#ffffff' : '#334155',
-                border: '1px solid #cbd5e1',
-                borderRadius: '6px',
-                cursor: currentUser?.role === 'crm_editor' ? 'default' : 'pointer',
-                fontWeight: currentUser?.role === 'crm_editor' ? 700 : 500
-              }}
-            >
-              2. CRM Editor
-            </button>
-            <button
-              onClick={() => handleQuickSwitchRole('admin')}
-              disabled={switchingRole || currentUser?.role === 'admin'}
-              className="crm-btn"
-              style={{
-                fontSize: '11px',
-                padding: '4px 10px',
-                backgroundColor: currentUser?.role === 'admin' ? '#16a34a' : '#f8fafc',
-                color: currentUser?.role === 'admin' ? '#ffffff' : '#334155',
-                border: '1px solid #cbd5e1',
-                borderRadius: '6px',
-                cursor: currentUser?.role === 'admin' ? 'default' : 'pointer',
-                fontWeight: currentUser?.role === 'admin' ? 700 : 500
-              }}
-            >
-              3. Super Admin
-            </button>
-          </div>
-        </div>
 
         {/* Header */}
         <div className="crm-header-card">

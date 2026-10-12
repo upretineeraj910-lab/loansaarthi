@@ -17,7 +17,9 @@ export async function GET(request: Request) {
     await connectToDatabase();
 
     const normalizedEmail = email.trim().toLowerCase();
-    const existingUser = await User.findOne({ email: normalizedEmail });
+    const existingUser = await User.findOne({ email: normalizedEmail })
+      .select("_id")
+      .lean();
 
     if (!existingUser) {
       return NextResponse.json({
@@ -49,7 +51,9 @@ export async function GET(request: Request) {
     // Find which candidates already exist in the database
     const foundUsers = await User.find({
       email: { $in: uniqueCandidates },
-    }).select("email");
+    })
+      .select("email")
+      .lean();
 
     const takenEmails = new Set(foundUsers.map((u) => u.email.toLowerCase()));
 

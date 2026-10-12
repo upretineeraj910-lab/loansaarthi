@@ -21,7 +21,7 @@ export async function GET(
       return NextResponse.json({ error: 'User ID is missing' }, { status: 400 });
     }
 
-    const user = await User.findById(userId).select('name email');
+    const user = await User.findById(userId).select('name email').lean();
 
     if (!user) {
       console.log("❌ Referrer not found in DB");

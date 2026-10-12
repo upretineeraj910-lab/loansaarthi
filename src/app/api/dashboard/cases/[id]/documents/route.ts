@@ -51,12 +51,13 @@ export async function GET(
       process.env.JWT_SECRET as string
     ) as TokenPayload;
 
-    // VERY IMPORTANT:
-    // Find case by BOTH case ID and logged-in user's ID
+    // Find case by BOTH case ID and logged-in user's ID (select only documents)
     const caseData = await FormSubmission.findOne({
       _id: caseId,
       referrerId: decoded.id,
-    }).lean();
+    })
+      .select('documents')
+      .lean();
 
     if (!caseData) {
       return NextResponse.json(
@@ -67,83 +68,32 @@ export async function GET(
 
     const documents = caseData.documents || {};
     const result: Record<string, unknown> = {};
+    const urlTasks: Promise<void>[] = [];
 
-    // PAN
-    if (documents.pan?.storagePath) {
-      result.pan = {
-        fileName: documents.pan.fileName,
-        mimeType: documents.pan.mimeType,
-        size: documents.pan.size,
-        uploadedAt: documents.pan.uploadedAt,
-        url: await getSignedUrl(
-          documents.pan.storagePath
-        ),
-      };
-    }
+    const singleDocKeys = [
+      'pan',
+      'aadhaar',
+      'bankStatement',
+      'itr',
+      'form16',
+      'businessProof',
+    ] as const;
 
-    // Aadhaar
-    if (documents.aadhaar?.storagePath) {
-      result.aadhaar = {
-        fileName: documents.aadhaar.fileName,
-        mimeType: documents.aadhaar.mimeType,
-        size: documents.aadhaar.size,
-        uploadedAt: documents.aadhaar.uploadedAt,
-        url: await getSignedUrl(
-          documents.aadhaar.storagePath
-        ),
-      };
-    }
-
-    // Bank Statement
-    if (documents.bankStatement?.storagePath) {
-      result.bankStatement = {
-        fileName: documents.bankStatement.fileName,
-        mimeType: documents.bankStatement.mimeType,
-        size: documents.bankStatement.size,
-        uploadedAt: documents.bankStatement.uploadedAt,
-        url: await getSignedUrl(
-          documents.bankStatement.storagePath
-        ),
-      };
-    }
-
-    // ITR
-    if (documents.itr?.storagePath) {
-      result.itr = {
-        fileName: documents.itr.fileName,
-        mimeType: documents.itr.mimeType,
-        size: documents.itr.size,
-        uploadedAt: documents.itr.uploadedAt,
-        url: await getSignedUrl(
-          documents.itr.storagePath
-        ),
-      };
-    }
-
-    // Form 16
-    if (documents.form16?.storagePath) {
-      result.form16 = {
-        fileName: documents.form16.fileName,
-        mimeType: documents.form16.mimeType,
-        size: documents.form16.size,
-        uploadedAt: documents.form16.uploadedAt,
-        url: await getSignedUrl(
-          documents.form16.storagePath
-        ),
-      };
-    }
-
-    // Business Proof
-    if (documents.businessProof?.storagePath) {
-      result.businessProof = {
-        fileName: documents.businessProof.fileName,
-        mimeType: documents.businessProof.mimeType,
-        size: documents.businessProof.size,
-        uploadedAt: documents.businessProof.uploadedAt,
-        url: await getSignedUrl(
-          documents.businessProof.storagePath
-        ),
-      };
+    for (const key of singleDocKeys) {
+      const doc = documents[key];
+      if (doc?.storagePath) {
+        urlTasks.push(
+          getSignedUrl(doc.storagePath).then((url) => {
+            result[key] = {
+              fileName: doc.fileName,
+              mimeType: doc.mimeType,
+              size: doc.size,
+              uploadedAt: doc.uploadedAt,
+              url,
+            };
+          })
+        );
+      }
     }
 
     // Salary Slips
@@ -151,16 +101,22 @@ export async function GET(
       Array.isArray(documents.salarySlips) &&
       documents.salarySlips.length > 0
     ) {
-      result.salarySlips = await Promise.all(
-        documents.salarySlips.map(async (file) => ({
-          fileName: file.fileName,
-          mimeType: file.mimeType,
-          size: file.size,
-          uploadedAt: file.uploadedAt,
-          url: await getSignedUrl(file.storagePath),
-        }))
+      urlTasks.push(
+        Promise.all(
+          documents.salarySlips.map(async (file) => ({
+            fileName: file.fileName,
+            mimeType: file.mimeType,
+            size: file.size,
+            uploadedAt: file.uploadedAt,
+            url: await getSignedUrl(file.storagePath),
+          }))
+        ).then((slips) => {
+          result.salarySlips = slips;
+        })
       );
     }
+
+    await Promise.all(urlTasks);
 
     return NextResponse.json({
       success: true,

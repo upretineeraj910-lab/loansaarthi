@@ -28,8 +28,13 @@ async function connectToDatabase(): Promise<typeof mongoose> {
   }
 
   if (!cached.promise) {
-    const opts = {
+    const opts: mongoose.ConnectOptions = {
       bufferCommands: false,
+      maxPoolSize: 10,
+      minPoolSize: 2,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+      family: 4, // Force IPv4 to avoid slow IPv6 DNS resolution on MongoDB Atlas
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
