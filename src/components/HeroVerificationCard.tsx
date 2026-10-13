@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -19,6 +18,33 @@ declare global {
 
 type Step = 1 | 2 | 3 | 4;
 
+// CHANGE 3: Firebase ke raw errors (auth/billing-not-enabled etc.) user ko mat dikhao,
+// unko simple message dikhao
+const getFriendlyError = (err: unknown, fallback: string): string => {
+  const code = (err as { code?: string } | null)?.code;
+
+  switch (code) {
+    case "auth/invalid-phone-number":
+      return "Please enter a valid mobile number.";
+    case "auth/too-many-requests":
+      return "Too many attempts. Please try again after some time.";
+    case "auth/network-request-failed":
+      return "Network issue. Please check your internet and try again.";
+    case "auth/captcha-check-failed":
+      return "Verification failed. Please refresh the page and try again.";
+    case "auth/billing-not-enabled":
+    case "auth/quota-exceeded":
+    case "auth/operation-not-allowed":
+      return "OTP service is temporarily unavailable. Please call us or try again later.";
+    case "auth/invalid-verification-code":
+      return "Wrong OTP. Please check and try again.";
+    case "auth/code-expired":
+      return "OTP expired. Please request a new one.";
+    default:
+      return fallback;
+  }
+};
+
 export default function HeroVerificationCard() {
   const [step, setStep] = useState<Step>(1);
   const [phone, setPhone] = useState<string>("");
@@ -36,23 +62,51 @@ export default function HeroVerificationCard() {
     income: "",
   });
 
-  useEffect(() => {
-    return () => {
-      if (window.recaptchaVerifier) {
-        try {
-          window.recaptchaVerifier.clear();
-        } catch (e) {
-          console.error(e);
-        }
-        window.recaptchaVerifier = null;
+  // CHANGE 1: reCAPTCHA banane ka kaam ek alag function mein.
+  // Pehle ye button click par banta tha, ab page load par hi ban jayega.
+  const setupRecaptcha = (): RecaptchaVerifier => {
+    if (window.recaptchaVerifier) return window.recaptchaVerifier;
+
+    const verifier = new RecaptchaVerifier(auth, "global-recaptcha-container", {
+      size: "invisible",
+      callback: () => {},
+      "expired-callback": () => {
+        setError("reCAPTCHA expired. Please try again.");
+      },
+    });
+
+    window.recaptchaVerifier = verifier;
+
+    // render() captcha ko pehle se ready kar deta hai
+    verifier.render().catch((e) => {
+      console.error("reCAPTCHA render error:", e);
+    });
+
+    return verifier;
+  };
+
+  const clearRecaptcha = () => {
+    if (window.recaptchaVerifier) {
+      try {
+        window.recaptchaVerifier.clear();
+      } catch (e) {
+        console.error("reCAPTCHA clear error:", e);
       }
+      window.recaptchaVerifier = null;
+    }
+  };
+
+  // CHANGE 2: page load par captcha pre-warm karo, unmount par saaf karo
+  useEffect(() => {
+    setupRecaptcha();
+    return () => {
+      clearRecaptcha();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // STEP 1: SEND OTP
-  const handleSendOtp = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSendOtp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
@@ -67,28 +121,11 @@ export default function HeroVerificationCard() {
     console.time("OTP Send Total");
 
     try {
-      // reCAPTCHA setup
-      if (!window.recaptchaVerifier) {
-        console.time("reCAPTCHA Initialization");
-
-        window.recaptchaVerifier = new RecaptchaVerifier(
-          auth,
-          "global-recaptcha-container",
-          {
-            size: "invisible",
-            callback: () => {},
-            "expired-callback": () => {
-              setError("reCAPTCHA expired. Please try again.");
-            },
-          }
-        );
-
-        console.timeEnd("reCAPTCHA Initialization");
-      }
+      // Pehle se bana hua verifier use hoga, nahi hai to naya ban jayega
+      const verifier = setupRecaptcha();
 
       const formattedPhone = `+91${cleanNumber}`;
 
-      // Firebase OTP request timing
       console.time("Firebase OTP Request");
 
       let confirmation: ConfirmationResult;
@@ -97,7 +134,7 @@ export default function HeroVerificationCard() {
         confirmation = await signInWithPhoneNumber(
           auth,
           formattedPhone,
-          window.recaptchaVerifier!
+          verifier
         );
       } finally {
         console.timeEnd("Firebase OTP Request");
@@ -110,20 +147,13 @@ export default function HeroVerificationCard() {
     } catch (err: unknown) {
       console.error("Number verification Error:", err);
 
-      if (window.recaptchaVerifier) {
-        try {
-          window.recaptchaVerifier.clear();
-        } catch (e) {
-          console.error("reCAPTCHA clear error:", e);
-        }
-        window.recaptchaVerifier = null;
-      }
+      // Error ke baad verifier reset karo aur turant naya ready kar do,
+      // taaki dobara try karne par wait na ho
+      clearRecaptcha();
+      setupRecaptcha();
 
-      if (err instanceof Error) {
-        setError(err.message || "Unable to send OTP.");
-      } else {
-        setError("Unable to send OTP.");
-      }
+      // CHANGE 3: friendly error
+      setError(getFriendlyError(err, "Unable to send OTP. Please try again."));
     } finally {
       console.timeEnd("OTP Send Total");
       setLoading(false);
@@ -131,9 +161,7 @@ export default function HeroVerificationCard() {
   };
 
   // STEP 2: VERIFY OTP
-  const handleVerifyOtp = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleVerifyOtp = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
@@ -164,7 +192,8 @@ export default function HeroVerificationCard() {
       console.log("OTP verified successfully");
     } catch (err) {
       console.error("OTP verification error:", err);
-      setError("Invalid or expired OTP.");
+      // CHANGE 3: galat OTP aur expired OTP ke alag messages
+      setError(getFriendlyError(err, "Invalid or expired OTP."));
     } finally {
       console.timeEnd("OTP Verification Total");
       setLoading(false);
@@ -172,9 +201,7 @@ export default function HeroVerificationCard() {
   };
 
   // STEP 3: SAVE DETAILS
-  const handleSaveDetails = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleSaveDetails = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError("");
 
@@ -241,9 +268,7 @@ export default function HeroVerificationCard() {
       </div>
 
       <div className="hero-card-body">
-        {error && (
-          <div className="hero-error-banner">{error}</div>
-        )}
+        {error && <div className="hero-error-banner">{error}</div>}
 
         {/* STEP 1: PHONE */}
         {step === 1 && (
@@ -421,10 +446,7 @@ export default function HeroVerificationCard() {
         {/* STEP 4: SUCCESS */}
         {step === 4 && (
           <div className="hero-success-state">
-            <CheckCircle2
-              size={44}
-              className="hero-success-icon"
-            />
+            <CheckCircle2 size={44} className="hero-success-icon" />
 
             <h4>Application Received</h4>
 
@@ -438,4 +460,3 @@ export default function HeroVerificationCard() {
     </div>
   );
 }
-
