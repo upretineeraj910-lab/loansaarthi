@@ -306,6 +306,37 @@ export default function HeroVerificationCard() {
               <ShieldCheck size={15} />
               Soft enquiry · No impact on credit score
             </div>
+
+            {/* Badge hide kiya hai, isliye Google ki policy ke hisaab se ye line dikhana zaroori hai */}
+            <p
+              style={{
+                fontSize: "11px",
+                color: "#888",
+                textAlign: "center",
+                marginTop: "8px",
+                lineHeight: 1.4,
+              }}
+            >
+              This site is protected by reCAPTCHA and the Google{" "}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: "underline" }}
+              >
+                Privacy Policy
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://policies.google.com/terms"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textDecoration: "underline" }}
+              >
+                Terms of Service
+              </a>{" "}
+              apply.
+            </p>
           </form>
         )}
 
