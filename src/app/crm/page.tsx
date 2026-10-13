@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import * as XLSX from 'xlsx';
 import {
+  ArrowLeft,
   Search,
   PlusCircle,
   RefreshCw,
@@ -345,6 +346,11 @@ export default function CrmDashboardPage() {
             {statusMessage}
           </div>
         )}
+
+        {/* Back button */}
+        <Link href="/dashboard" className="crm-back-btn">
+          <ArrowLeft size={14} /> Back to Dashboard
+        </Link>
 
         {/* Header */}
         <div className="crm-header-card">

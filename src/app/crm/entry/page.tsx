@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
 import {
+  ArrowLeft,
   FileSpreadsheet,
   UserPlus,
   ArrowRight,
@@ -378,6 +379,11 @@ export default function LeadEntryPage() {
     <div className="crm-page">
       {/* Header */}
       <div className="crm-shell crm-shell--narrow" style={{ marginBottom: '1.5rem' }}>
+        {/* Back button */}
+        <Link href="/dashboard" className="crm-back-btn">
+          <ArrowLeft size={14} /> Back to Dashboard
+        </Link>
+
         <div className="crm-header-card">
           <div>
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap', marginBottom: '6px' }}>

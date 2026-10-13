@@ -1375,3 +1375,33 @@
     background: #1a1a1a;
   }
 }
+
+
+
+.crm-back-btn {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 0.9rem;
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-charcoal);
+  text-decoration: none;
+  background: var(--brand-white);
+  border: 1px solid var(--color-paper-line);
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.crm-back-btn:hover {
+  color: var(--brand-green);
+  border-color: var(--brand-green);
+}
+
+@media (prefers-color-scheme: dark) {
+  .crm-back-btn {
+    background: #242424;
+  }
+}
