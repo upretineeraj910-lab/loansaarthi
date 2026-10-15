@@ -9,10 +9,10 @@ const hiddenPaths = [
   "/crm/entry",
   "/dashboard",
   "/lead",
-  "login",
-  "register-form",
-  "privacy-policy",
-  "register",
+  "/login",
+  "/register-form",
+  "/privacy-policy",
+  "/register",
 ];
 
 export default function ConditionalCreditCardModal() {

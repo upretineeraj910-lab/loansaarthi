@@ -1,0 +1,292 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: #f7f7f8;
+  color: #18181b;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 28px;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+}
+
+.card * {
+  box-sizing: border-box;
+}
+
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 6px 0 0;
+  font-size: 14px;
+  color: #71717a;
+}
+
+.link {
+  color: #18181b;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link:hover {
+  color: #52525b;
+}
+
+.form {
+  margin-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #3f3f46;
+}
+
+/* Email availability status */
+.status {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.checking {
+  color: #71717a;
+}
+
+.available {
+  color: #15803d;
+}
+
+.taken {
+  color: #b42318;
+}
+
+/* Inputs */
+.inputWrap {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #18181b;
+  background: #ffffff;
+  border: 1px solid #d4d4d8;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.input::placeholder {
+  color: #a1a1aa;
+}
+
+.input:focus {
+  border-color: #18181b;
+  box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.1);
+}
+
+.inputReadonly {
+  color: #52525b;
+  background: #f4f4f5;
+}
+
+.inputReadonly:focus {
+  border-color: #d4d4d8;
+  box-shadow: none;
+}
+
+.inputError,
+.inputError:focus {
+  border-color: #b42318;
+}
+
+.inputWithToggle {
+  padding-right: 44px;
+}
+
+/* Edge ka apna eye icon chhupata hai, taaki do icon na dikhe */
+.input::-ms-reveal,
+.input::-ms-clear {
+  display: none;
+}
+
+.toggle {
+  position: absolute;
+  top: 50%;
+  right: 6px;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #71717a;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggle:hover {
+  color: #18181b;
+  background: #f4f4f5;
+}
+
+.toggle:focus-visible {
+  outline: 2px solid #18181b;
+  outline-offset: 1px;
+}
+
+/* Messages */
+.errorText {
+  font-size: 13px;
+  color: #b42318;
+}
+
+.successText {
+  font-size: 13px;
+  color: #15803d;
+}
+
+.errorBox {
+  padding: 10px 12px;
+  font-size: 14px;
+  color: #b42318;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  border-radius: 8px;
+}
+
+/* Email suggestions */
+.suggestions {
+  margin-top: 4px;
+  padding: 12px;
+  background: #fafafa;
+  border: 1px solid #e4e4e7;
+  border-radius: 8px;
+}
+
+.suggestionsTitle {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #71717a;
+}
+
+.suggestionsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  padding: 5px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #18181b;
+  background: #ffffff;
+  border: 1px solid #d4d4d8;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.pill:hover {
+  background: #f4f4f5;
+  border-color: #a1a1aa;
+}
+
+.pill:focus-visible {
+  outline: 2px solid #18181b;
+  outline-offset: 2px;
+}
+
+/* Password strength */
+.strength {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.strengthItem {
+  font-size: 13px;
+}
+
+.valid {
+  color: #15803d;
+}
+
+.invalid {
+  color: #71717a;
+}
+
+/* Submit */
+.button {
+  height: 42px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #ffffff;
+  background: #18181b;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.button:hover:not(:disabled) {
+  background: #3f3f46;
+}
+
+.button:focus-visible {
+  outline: 2px solid #18181b;
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tagline {
+  margin: 20px 0 0;
+  text-align: center;
+  font-size: 13px;
+  color: #a1a1aa;
+}

@@ -1,9 +1,17 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback, ChangeEvent, FormEvent } from 'react';
+import {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  ChangeEvent,
+  ClipboardEvent,
+  FormEvent,
+} from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import './register.css';
+import styles from './register.module.css';
 
 interface IRegisterInput {
   name: string;
@@ -26,6 +34,17 @@ interface IFormErrors {
   submit?: string;
 }
 
+interface IPasswordInputProps {
+  id: string;
+  name: string;
+  show: boolean;
+  onToggle: () => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlockClipboard: (e: ClipboardEvent<HTMLInputElement>) => void;
+  autoComplete: string;
+  placeholder: string;
+}
+
 const formatEmailFromName = (name: string): string => {
   const sanitized = name
     .toLowerCase()
@@ -37,12 +56,80 @@ const formatEmailFromName = (name: string): string => {
   return `${sanitized}@loansaarthi.com`;
 };
 
+function EyeIcon({ hidden }: { hidden: boolean }) {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {hidden ? (
+        <>
+          <path d="M17.94 17.94A10.94 10.94 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+          <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+          <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+          <line x1="1" y1="1" x2="23" y2="23" />
+        </>
+      ) : (
+        <>
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+          <circle cx="12" cy="12" r="3" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+// Controlled nahi hai (value prop nahi), taaki password DOM ke value attribute me na likha jaye
+function PasswordInput({
+  id,
+  name,
+  show,
+  onToggle,
+  onChange,
+  onBlockClipboard,
+  autoComplete,
+  placeholder,
+}: IPasswordInputProps) {
+  return (
+    <div className={styles.inputWrap}>
+      <input
+        id={id}
+        name={name}
+        type={show ? 'text' : 'password'}
+        required
+        autoComplete={autoComplete}
+        onChange={onChange}
+        onCopy={onBlockClipboard}
+        onPaste={onBlockClipboard}
+        className={`${styles.input} ${styles.inputWithToggle}`}
+        placeholder={placeholder}
+      />
+      <button
+        type="button"
+        className={styles.toggle}
+        onClick={onToggle}
+        aria-label={show ? 'Hide password' : 'Show password'}
+        aria-pressed={show}
+      >
+        <EyeIcon hidden={show} />
+      </button>
+    </div>
+  );
+}
+
 export default function RegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
-  
+
   const [formData, setFormData] = useState<IRegisterInput>({
     name: '',
     email: '',
@@ -198,72 +285,72 @@ export default function RegisterPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // alert('Registration successful! Please login.');
         router.push('/');
       } else {
         setErrors({ submit: data.error || 'Registration failed' });
       }
-    } catch (error) {
+    } catch {
       setErrors({ submit: 'Network error. Please try again.' });
     } finally {
       setLoading(false);
     }
   };
 
-  const togglePasswordVisibility = (): void => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = (): void => {
-    setShowConfirmPassword(!showConfirmPassword);
-  };
-
-  const preventCopyPaste = (e: React.ClipboardEvent<HTMLInputElement>): void => {
+  const blockClipboard = (e: ClipboardEvent<HTMLInputElement>): void => {
     e.preventDefault();
   };
 
-  return (
-    <div className="auth-container">
-      <div className="auth-card">
-        {/* Logo */}
-        <div className="auth-logo-wrapper">
-          <div className="auth-logo-circle">₹</div>
-        </div>
+  const strengthRules = [
+    { ok: passwordStrength.length, label: 'At least 8 characters' },
+    { ok: passwordStrength.capital, label: 'At least 1 uppercase letter' },
+    { ok: passwordStrength.special, label: 'At least 1 special character (!@#$%^&*)' },
+  ];
 
-        <h2 className="auth-heading">Create your account</h2>
-        <p className="auth-sub-heading">
+  return (
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>Create your account</h1>
+        <p className={styles.subtitle}>
           Already have an account?{' '}
-          <Link href="/Login">Sign in</Link>
+          <Link href="/login" className={styles.link}>
+            Sign in
+          </Link>
         </p>
 
-        <form className="auth-form" onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           {/* Name */}
-          <div className="auth-form-group">
-            <label htmlFor="name">Full Name</label>
+          <div className={styles.field}>
+            <label htmlFor="name" className={styles.label}>
+              Full name
+            </label>
             <input
               id="name"
               name="name"
               type="text"
               required
+              autoComplete="name"
               value={formData.name}
               onChange={handleChange}
+              className={styles.input}
               placeholder="e.g. Neeraj Upreti"
             />
-            {errors.name && <span className="auth-error-text">{errors.name}</span>}
+            {errors.name && <span className={styles.errorText}>{errors.name}</span>}
           </div>
 
           {/* Email */}
-          <div className="auth-form-group">
-            <div className="auth-email-label-row">
-              <label htmlFor="email">Email Address (Auto-Generated)</label>
+          <div className={styles.field}>
+            <div className={styles.labelRow}>
+              <label htmlFor="email" className={styles.label}>
+                Email (auto-generated)
+              </label>
               {emailStatus === 'checking' && (
-                <span className="auth-email-status checking">⏳ Checking...</span>
+                <span className={`${styles.status} ${styles.checking}`}>Checking...</span>
               )}
               {emailStatus === 'available' && (
-                <span className="auth-email-status available">✓ Available</span>
+                <span className={`${styles.status} ${styles.available}`}>✓ Available</span>
               )}
               {emailStatus === 'taken' && (
-                <span className="auth-email-status taken">✗ Already Taken</span>
+                <span className={`${styles.status} ${styles.taken}`}>Already taken</span>
               )}
             </div>
             <input
@@ -273,24 +360,26 @@ export default function RegisterPage() {
               required
               readOnly
               value={formData.email}
-              className={`auth-email-readonly ${emailStatus === 'taken' ? 'input-error' : ''}`}
+              className={`${styles.input} ${styles.inputReadonly} ${
+                emailStatus === 'taken' ? styles.inputError : ''
+              }`}
               placeholder="e.g. neeraj_upreti@loansaarthi.com"
             />
-            {errors.email && <span className="auth-error-text">{errors.email}</span>}
+            {errors.email && <span className={styles.errorText}>{errors.email}</span>}
 
             {/* Suggestions if already taken */}
             {emailStatus === 'taken' && emailSuggestions.length > 0 && (
-              <div className="auth-suggestions-box">
-                <p className="auth-suggestions-title">Available Suggestions (Click to select):</p>
-                <div className="auth-suggestions-list">
+              <div className={styles.suggestions}>
+                <p className={styles.suggestionsTitle}>Available options, click to select:</p>
+                <div className={styles.suggestionsList}>
                   {emailSuggestions.map((suggestion) => (
                     <button
                       type="button"
                       key={suggestion}
-                      className="auth-suggestion-pill"
+                      className={styles.pill}
                       onClick={() => handleSelectSuggestion(suggestion)}
                     >
-                      + {suggestion}
+                      {suggestion}
                     </button>
                   ))}
                 </div>
@@ -299,108 +388,71 @@ export default function RegisterPage() {
           </div>
 
           {/* Password */}
-          <div className="auth-form-group">
-            <label htmlFor="password">Password</label>
-            <div className="auth-password-wrapper">
-              <input
-                id="password"
-                name="password"
-                type={showPassword ? 'text' : 'password'}
-                required
-                value={formData.password}
-                onChange={handleChange}
-                onCopy={preventCopyPaste}
-                onPaste={preventCopyPaste}
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                className="auth-password-toggle"
-                onClick={togglePasswordVisibility}
-                aria-label={showPassword ? 'Hide password' : 'Show password'}
-              >
-                {showPassword ? (
-                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                ) : (
-                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                  </svg>
-                )}
-              </button>
-            </div>
+          <div className={styles.field}>
+            <label htmlFor="password" className={styles.label}>
+              Password
+            </label>
+            <PasswordInput
+              id="password"
+              name="password"
+              show={showPassword}
+              onToggle={() => setShowPassword((prev) => !prev)}
+              onChange={handleChange}
+              onBlockClipboard={blockClipboard}
+              autoComplete="new-password"
+              placeholder="Create a password"
+            />
 
-            {/* Password Strength */}
             {formData.password && (
-              <div className="auth-password-strength">
-                <div className={`auth-strength-item ${passwordStrength.length ? 'valid' : 'invalid'}`}>
-                  {passwordStrength.length ? '✓' : '○'} At least 8 characters
-                </div>
-                <div className={`auth-strength-item ${passwordStrength.capital ? 'valid' : 'invalid'}`}>
-                  {passwordStrength.capital ? '✓' : '○'} At least 1 uppercase letter
-                </div>
-                <div className={`auth-strength-item ${passwordStrength.special ? 'valid' : 'invalid'}`}>
-                  {passwordStrength.special ? '✓' : '○'} At least 1 special character (!@#$%^&*)
-                </div>
-              </div>
+              <ul className={styles.strength}>
+                {strengthRules.map((rule) => (
+                  <li
+                    key={rule.label}
+                    className={`${styles.strengthItem} ${rule.ok ? styles.valid : styles.invalid}`}
+                  >
+                    {rule.ok ? '✓' : '○'} {rule.label}
+                  </li>
+                ))}
+              </ul>
             )}
-            {errors.password && <span className="auth-error-text">{errors.password}</span>}
+            {errors.password && <span className={styles.errorText}>{errors.password}</span>}
           </div>
 
           {/* Confirm Password */}
-          <div className="auth-form-group">
-            <label htmlFor="confirmPassword">Confirm Password</label>
-            <div className="auth-password-wrapper">
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type={showConfirmPassword ? 'text' : 'password'}
-                required
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                onCopy={preventCopyPaste}
-                onPaste={preventCopyPaste}
-                placeholder="••••••••"
-              />
-              <button
-                type="button"
-                className="auth-password-toggle"
-                onClick={toggleConfirmPasswordVisibility}
-                aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
-              >
-                {showConfirmPassword ? (
-                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                ) : (
-                  <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21" />
-                  </svg>
-                )}
-              </button>
-            </div>
-            {errors.confirmPassword && <span className="auth-error-text">{errors.confirmPassword}</span>}
+          <div className={styles.field}>
+            <label htmlFor="confirmPassword" className={styles.label}>
+              Confirm password
+            </label>
+            <PasswordInput
+              id="confirmPassword"
+              name="confirmPassword"
+              show={showConfirmPassword}
+              onToggle={() => setShowConfirmPassword((prev) => !prev)}
+              onChange={handleChange}
+              onBlockClipboard={blockClipboard}
+              autoComplete="new-password"
+              placeholder="Re-enter your password"
+            />
+            {errors.confirmPassword && (
+              <span className={styles.errorText}>{errors.confirmPassword}</span>
+            )}
             {formData.confirmPassword && formData.password === formData.confirmPassword && (
-              <span className="auth-success-text">✓ Passwords match</span>
+              <span className={styles.successText}>✓ Passwords match</span>
             )}
           </div>
 
-          {/* Submit Error */}
           {errors.submit && (
-            <div className="auth-error-box">{errors.submit}</div>
+            <div className={styles.errorBox} role="alert">
+              {errors.submit}
+            </div>
           )}
 
-          {/* Submit Button */}
-          <button type="submit" className="auth-btn-submit" disabled={loading}>
-            {loading ? 'Creating account...' : 'Create Account'}
+          <button type="submit" className={styles.button} disabled={loading}>
+            {loading ? 'Creating account...' : 'Create account'}
           </button>
-
-          {/* Brand Tagline */}
-          <div className="auth-brand-tagline">Your Loan. Your Saarthi. ✦</div>
         </form>
+
+        <p className={styles.tagline}>Your Loan. Your Saarthi.</p>
       </div>
     </div>
   );
