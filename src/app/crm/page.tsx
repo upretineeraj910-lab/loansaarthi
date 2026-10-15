@@ -162,8 +162,8 @@ export default function CrmDashboardPage() {
     fetchUserAuth();
   }, [fetchUserAuth]);
 
-  const canEdit = currentUser?.role === 'crm_editor' || currentUser?.role === 'admin';
-  const canEnter = currentUser?.role === 'crm_entry' || currentUser?.role === 'admin';
+  const canEdit = currentUser?.role === 'crm_editor' || currentUser?.role === 'superadmin';
+  const canEnter = currentUser?.role === 'crm_entry' || currentUser?.role === 'superadmin';
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);

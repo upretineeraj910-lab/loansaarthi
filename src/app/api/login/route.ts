@@ -54,7 +54,7 @@ export async function POST(request: Request): Promise<NextResponse<ILoginRespons
         role: user.role,
       },
       process.env.JWT_SECRET as string,
-      { expiresIn: '7d' }
+      { expiresIn: '1d' }
     );
 
     // Return success response with Cookie set

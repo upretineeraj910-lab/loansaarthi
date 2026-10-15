@@ -63,7 +63,7 @@ export async function POST(request: Request) {
       name,
       email: email.toLowerCase(),
       password: hashedPassword,
-      role: 'borrower', // 👈 Default role set kiya
+      role: 'borrower', 
     });
 
     await newUser.save();
