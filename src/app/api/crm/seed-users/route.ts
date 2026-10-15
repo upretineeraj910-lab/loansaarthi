@@ -24,9 +24,15 @@ export async function GET() {
       },
       {
         email: 'admin@loansaarthi.com',
-        name: 'CRM Super Admin',
+        name: 'Admin',
         rawPassword: 'Admin@12345',
         role: 'admin',
+      },
+      {
+        email: 'superadmin@loansaarthi.com',
+        name: 'Super Admin',
+        rawPassword: 'SuperAdmin@12345',
+        role: 'superadmin',
       },
     ];
 

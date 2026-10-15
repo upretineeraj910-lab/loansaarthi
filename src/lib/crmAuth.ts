@@ -4,7 +4,8 @@ import { jwtVerify } from 'jose';
 export interface AuthUser {
   id: string;
   email: string;
-  role: 'borrower' | 'lender' | 'admin' | 'crm_entry' | 'crm_editor';
+  name?: string;
+  role: 'borrower' | 'lender' | 'admin' | 'superadmin' | 'crm_entry' | 'crm_editor';
 }
 
 /**
@@ -53,6 +54,7 @@ export async function getAuthUser(req: NextRequest | Request): Promise<AuthUser 
     return {
       id: (payload.id as string) || (payload.sub as string),
       email: payload.email as string,
+      name: (payload.name as string) || undefined,
       role: (payload.role as AuthUser['role']) || 'borrower',
     };
   } catch (err) {
@@ -62,16 +64,16 @@ export async function getAuthUser(req: NextRequest | Request): Promise<AuthUser 
 
 /** Can this role submit / upload leads in /crm/entry? */
 export function canEnterLeads(role?: string): boolean {
-  return role === 'crm_entry' || role === 'admin';
+  return role === 'crm_entry' || role === 'superadmin';
 }
 
 /** Can this role update lead status or delete leads in /crm? */
 export function canEditLeads(role?: string): boolean {
-  return role === 'crm_editor' || role === 'admin';
+  return role === 'crm_editor' || role === 'superadmin';
 }
 
 /** Can this role view the leads in /crm? */
 export function canViewLeads(role?: string): boolean {
-  return role === 'crm_editor' || role === 'crm_entry' || role === 'admin';
+  return role === 'crm_editor' || role === 'crm_entry' || role === 'superadmin';
 }
 

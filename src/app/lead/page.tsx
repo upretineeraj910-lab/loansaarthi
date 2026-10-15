@@ -78,6 +78,31 @@ export default function LeadPage() {
   const [searchInput, setSearchInput] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
+  // User & Auth
+  const [currentUser, setCurrentUser] = useState<{
+    id?: string;
+    email?: string;
+    role?: string;
+    name?: string;
+  } | null>(null);
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.authenticated) {
+            setCurrentUser(data);
+          }
+        }
+      } catch (e) {
+        // Ignore
+      }
+    }
+    fetchUser();
+  }, []);
+
   // Actions
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [copiedText, setCopiedText] = useState<string | null>(null);
@@ -250,6 +275,41 @@ export default function LeadPage() {
           <div className="lead-title-row">
             <h1>Customer Leads</h1>
             <span className="lead-badge">{total} Total Leads</span>
+            {currentUser && (
+              <span
+                className="lead-badge"
+                style={{
+                  backgroundColor:
+                    currentUser.role === "superadmin"
+                      ? "#dcfce7"
+                      : currentUser.role === "admin"
+                      ? "#f1f5f9"
+                      : "#e0e7ff",
+                  color:
+                    currentUser.role === "superadmin"
+                      ? "#166534"
+                      : currentUser.role === "admin"
+                      ? "#334155"
+                      : "#3730a3",
+                  borderColor:
+                    currentUser.role === "superadmin"
+                      ? "#bbf7d0"
+                      : currentUser.role === "admin"
+                      ? "#cbd5e1"
+                      : "#c7d2fe",
+                }}
+              >
+                👤 {currentUser.name || currentUser.email?.split("@")[0]} (
+                {currentUser.role === "superadmin"
+                  ? "Role: Super Admin"
+                  : currentUser.role === "admin"
+                  ? "Role: Admin"
+                  : currentUser.role === "crm_editor"
+                  ? "Role: CRM Editor"
+                  : "Role: Data Entry Operator"}
+                )
+              </span>
+            )}
           </div>
           <p className="lead-subtitle">
             Real-time applications submitted through loan eligibility check & forms

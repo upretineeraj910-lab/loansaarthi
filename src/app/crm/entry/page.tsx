@@ -50,7 +50,7 @@ const POPULAR_BANKS = [
 export default function LeadEntryPage() {
   const router = useRouter();
   const [authLoading, setAuthLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState<{ id?: string; email?: string; role?: string } | null>(null);
+  const [currentUser, setCurrentUser] = useState<{ id?: string; email?: string; role?: string; name?: string } | null>(null);
 
   useEffect(() => {
     const verifyAccess = async () => {
@@ -335,8 +335,15 @@ export default function LeadEntryPage() {
     );
   }
 
-  // 3. CRM Editor blocked state
-  if (currentUser.role === 'crm_editor') {
+  // 3. Block roles other than crm_entry and superadmin
+  if (currentUser.role !== 'crm_entry' && currentUser.role !== 'superadmin') {
+    const roleLabel =
+      currentUser.role === 'crm_editor'
+        ? 'CRM Editor'
+        : currentUser.role === 'admin'
+        ? 'Admin'
+        : currentUser.role;
+
     return (
       <div className="crm-page">
         <div className="crm-shell crm-shell--narrow" style={{ marginTop: '3rem' }}>
@@ -358,7 +365,7 @@ export default function LeadEntryPage() {
               Access Denied: Data Entry Portal
             </h2>
             <p style={{ color: '#475569', maxWidth: '520px', margin: '0 auto 1.75rem auto', lineHeight: 1.6, fontSize: '14px' }}>
-              You are currently logged in as a <strong>CRM Editor ({currentUser.email})</strong>. As per your system permissions, CRM Editors are responsible for updating lead statuses and pipeline management, and are <strong>strictly restricted</strong> from accessing the Data Entry Portal.
+              You are currently logged in as <strong>{currentUser.name || currentUser.email?.split('@')[0]} (Role: {roleLabel})</strong>. Only Data Entry Operators and Super Admins can submit or upload leads to the system.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/crm" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
@@ -391,7 +398,7 @@ export default function LeadEntryPage() {
                 <Building2 size={13} /> LoanSaarthi Intake Portal
               </div>
               <div className="crm-badge" style={{ backgroundColor: '#fef3c7', color: '#92400e', borderColor: '#fde68a' }}>
-                <UserPlus size={12} /> {currentUser.role === 'admin' ? 'Super Admin' : 'Data Entry Operator'}: {currentUser.email}
+                <UserPlus size={12} /> {currentUser.name || currentUser.email?.split('@')[0]} ({currentUser.role === 'superadmin' ? 'Role: Super Admin' : 'Role: Data Entry Operator'})
               </div>
             </div>
             <h1 className="crm-title">Lead Data Entry Portal</h1>

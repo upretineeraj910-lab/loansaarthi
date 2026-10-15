@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     await connectToDatabase();
     const { role } = await req.json();
 
-    const allowedRoles = ['crm_entry', 'crm_editor', 'admin'];
+    const allowedRoles = ['crm_entry', 'crm_editor', 'admin', 'superadmin'];
     if (!allowedRoles.includes(role)) {
       return NextResponse.json({ success: false, message: 'Invalid role' }, { status: 400 });
     }
@@ -19,7 +19,8 @@ export async function POST(req: NextRequest) {
     const emailMap: Record<string, { email: string; name: string; pass: string }> = {
       crm_entry: { email: 'entry@loansaarthi.com', name: 'Data Entry Operator', pass: 'Entry@12345' },
       crm_editor: { email: 'editor@loansaarthi.com', name: 'CRM Manager Editor', pass: 'Editor@12345' },
-      admin: { email: 'admin@loansaarthi.com', name: 'CRM Super Admin', pass: 'Admin@12345' },
+      admin: { email: 'admin@loansaarthi.com', name: 'Admin', pass: 'Admin@12345' },
+      superadmin: { email: 'superadmin@loansaarthi.com', name: 'Super Admin', pass: 'SuperAdmin@12345' },
     };
 
     const target = emailMap[role];
@@ -35,15 +36,26 @@ export async function POST(req: NextRequest) {
         role,
         isActive: true,
       });
-    } else if (user.role !== role) {
-      user.role = role as any;
-      await user.save();
+    } else {
+      let needsSave = false;
+      if (user.role !== role) {
+        user.role = role as any;
+        needsSave = true;
+      }
+      if (user.name !== target.name) {
+        user.name = target.name;
+        needsSave = true;
+      }
+      if (needsSave) {
+        await user.save();
+      }
     }
 
     const token = jwt.sign(
       {
         id: user._id.toString(),
         email: user.email,
+        name: user.name,
         role: user.role,
       },
       process.env.JWT_SECRET as string,

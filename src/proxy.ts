@@ -110,8 +110,8 @@ export async function proxy(request: NextRequest) {
         );
       }
 
-      // Allowed intake roles: crm_entry, admin, superadmin, crm
-      const allowedEntryRoles = ['crm_entry', 'admin', 'superadmin', 'crm'];
+      // Allowed intake roles: crm_entry, superadmin, crm
+      const allowedEntryRoles = ['crm_entry', 'superadmin', 'crm'];
       if (!allowedEntryRoles.includes(role)) {
         return NextResponse.redirect(
           new URL('/dashboard', request.url)

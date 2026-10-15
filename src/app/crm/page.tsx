@@ -119,6 +119,7 @@ export default function CrmDashboardPage() {
   const [loanTypeFilter, setLoanTypeFilter] = useState('All');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [leadError, setLeadError] = useState<string | null>(null);
 
   const [approvalModalLead, setApprovalModalLead] = useState<Lead | null>(null);
   const [approvalForm, setApprovalForm] = useState({
@@ -167,6 +168,7 @@ export default function CrmDashboardPage() {
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
+    setLeadError(null);
     try {
       const params = new URLSearchParams();
       if (search.trim()) params.set('search', search.trim());
@@ -178,9 +180,13 @@ export default function CrmDashboardPage() {
       if (data.success) {
         setLeads(data.leads || []);
         if (data.stats) setStats(data.stats);
+      } else {
+        setLeadError(data.message || 'Failed to load leads');
+        setLeads([]);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Failed to load leads:', err);
+      setLeadError(err?.message || 'Failed to connect to server');
     } finally {
       setLoading(false);
     }
@@ -364,31 +370,43 @@ export default function CrmDashboardPage() {
                   className="crm-badge"
                   style={{
                     backgroundColor:
-                      currentUser.role === 'crm_editor'
+                      currentUser.role === 'superadmin'
+                        ? '#dcfce7'
+                        : currentUser.role === 'admin'
+                        ? '#f1f5f9'
+                        : currentUser.role === 'crm_editor'
                         ? '#e0e7ff'
-                        : currentUser.role === 'crm_entry'
-                        ? '#fef3c7'
-                        : '#dcfce7',
+                        : '#fef3c7',
                     color:
-                      currentUser.role === 'crm_editor'
+                      currentUser.role === 'superadmin'
+                        ? '#166534'
+                        : currentUser.role === 'admin'
+                        ? '#334155'
+                        : currentUser.role === 'crm_editor'
                         ? '#3730a3'
-                        : currentUser.role === 'crm_entry'
-                        ? '#92400e'
-                        : '#166534',
+                        : '#92400e',
                     borderColor:
-                      currentUser.role === 'crm_editor'
+                      currentUser.role === 'superadmin'
+                        ? '#bbf7d0'
+                        : currentUser.role === 'admin'
+                        ? '#cbd5e1'
+                        : currentUser.role === 'crm_editor'
                         ? '#c7d2fe'
-                        : currentUser.role === 'crm_entry'
-                        ? '#fde68a'
-                        : '#bbf7d0',
+                        : '#fde68a',
                   }}
                 >
                   <Shield size={12} />
-                  {currentUser.role === 'crm_editor'
-                    ? 'Role: CRM Editor (Manager Mode)'
-                    : currentUser.role === 'crm_entry'
-                    ? 'Role: Data Entry Operator (View Only)'
-                    : 'Role: Super Admin'}
+                  <span>
+                    {currentUser.name || currentUser.email?.split('@')[0]} (
+                    {currentUser.role === 'superadmin'
+                      ? 'Role: Super Admin'
+                      : currentUser.role === 'admin'
+                      ? 'Role: Admin'
+                      : currentUser.role === 'crm_editor'
+                      ? 'Role: CRM Editor'
+                      : 'Role: Data Entry Operator'}
+                    )
+                  </span>
                 </div>
               )}
             </div>
@@ -547,7 +565,14 @@ export default function CrmDashboardPage() {
                 </tr>
               </thead>
               <tbody>
-                {loading ? (
+                {leadError ? (
+                  <tr>
+                    <td colSpan={9} className="crm-table-empty" style={{ color: '#dc2626' }}>
+                      <AlertTriangle size={26} style={{ margin: '0 auto 0.5rem', color: '#dc2626' }} />
+                      {leadError}
+                    </td>
+                  </tr>
+                ) : loading ? (
                   <tr>
                     <td colSpan={9} className="crm-table-loading">
                       <RefreshCw size={22} className="animate-spin" style={{ margin: '0 auto 0.5rem', color: 'var(--brand-green)' }} />

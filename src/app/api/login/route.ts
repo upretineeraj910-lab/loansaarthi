@@ -51,6 +51,7 @@ export async function POST(request: Request): Promise<NextResponse<ILoginRespons
       {
         id: user._id.toString(),
         email: user.email,
+        name: user.name,
         role: user.role,
       },
       process.env.JWT_SECRET as string,
