@@ -6,6 +6,8 @@ export type LeadSource = 'Form' | 'Excel Upload';
 export interface ILeadDocument extends Document {
   name: string;
   phone: string;
+  panNumber?: string;
+  email?: string;
   loanType: string;
   loanAmount: number;
   city?: string;
@@ -30,8 +32,20 @@ const LeadSchema = new Schema<ILeadDocument>(
     phone: {
       type: String,
       required: [true, 'Phone number is required'],
-      unique: true, // Duplicate protection ab mobile number se
+      unique: true, // Duplicate protection mobile number se
       trim: true,
+    },
+    panNumber: {
+      type: String,
+      uppercase: true,
+      trim: true,
+      default: '',
+    },
+    email: {
+      type: String,
+      lowercase: true,
+      trim: true,
+      default: '',
     },
     loanType: {
       type: String,

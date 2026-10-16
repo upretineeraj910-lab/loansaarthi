@@ -37,6 +37,18 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Helper for flexible case-insensitive column matching
+    const getRowVal = (row: Record<string, any>, candidateKeys: string[]): any => {
+      const cleanCandidates = candidateKeys.map((c) => c.toLowerCase().replace(/[^a-z0-9]/g, ''));
+      for (const key of Object.keys(row)) {
+        const cleanKey = key.toLowerCase().replace(/[^a-z0-9]/g, '');
+        if (cleanCandidates.includes(cleanKey)) {
+          return row[key];
+        }
+      }
+      return undefined;
+    };
+
     const validLeadsToInsert: any[] = [];
     const seenPhonesInBatch = new Set<string>();
     const batchDuplicates: { rowNumber: number; phone: string; reason: string }[] = [];
@@ -47,61 +59,96 @@ export async function POST(request: NextRequest) {
       const rowNum = index + 1;
 
       // Smart column matching for Excel headers
-      const phone = (
-        row.phone ||
-        row.Phone ||
-        row.mobile ||
-        row.Mobile ||
-        row['Mobile Number'] ||
-        row['Phone Number'] ||
-        ''
-      )
-        .toString()
-        .trim()
-        .replace(/\D/g, '');
+      const rawName = getRowVal(row, [
+        'name',
+        'customer name',
+        'client name',
+        'applicant name',
+        'full name',
+        'borrower name',
+        'lead name',
+        'customer',
+        'client',
+        'borrower',
+      ]);
+      const name = (rawName ?? '').toString().trim();
 
-      const name = (
-        row.name ||
-        row.Name ||
-        row['Customer Name'] ||
-        row['Client Name'] ||
-        row['Applicant Name'] ||
-        ''
-      )
-        .toString()
-        .trim();
+      const rawPhone = getRowVal(row, [
+        'phone',
+        'mobile',
+        'contact',
+        'mobile number',
+        'phone number',
+        'contact number',
+        'mobile no',
+        'phone no',
+        'contact no',
+        'number',
+      ]);
+      let phone = (rawPhone ?? '').toString().trim().replace(/\D/g, '');
 
-      const loanAmount = Number(
-        row.loanAmount ||
-          row.amount ||
-          row.Amount ||
-          row['Loan Amount'] ||
-          row['Required Loan'] ||
-          0
-      );
+      // Normalize phone number (handling +91 or leading 0)
+      if (phone.length === 12 && phone.startsWith('91')) {
+        phone = phone.slice(2);
+      } else if (phone.length === 11 && phone.startsWith('0')) {
+        phone = phone.slice(1);
+      } else if (phone.length > 10) {
+        phone = phone.slice(-10);
+      }
 
-      const loanType = (
-        row.loanType ||
-        row['Loan Type'] ||
-        row.type ||
-        'Personal Loan'
-      )
-        .toString()
-        .trim();
+      const rawAmount = getRowVal(row, [
+        'loanamount',
+        'loan amount',
+        'amount',
+        'applied amount',
+        'applied amount (rs)',
+        'loan amount (rs)',
+        'amount (rs)',
+        'required loan',
+        'required amount',
+        'sanction amount',
+      ]);
+      const parsedAmount = rawAmount !== undefined && rawAmount !== null && rawAmount !== ''
+        ? Number(String(rawAmount).replace(/,/g, '').trim())
+        : 0;
+      const loanAmount = isNaN(parsedAmount) ? 0 : parsedAmount;
 
-      const city = (row.city || row.City || row.location || '').toString().trim();
-      const bankName = (
-        row.bankName ||
-        row.bank ||
-        row.Bank ||
-        row['Bank Name'] ||
-        row['Bank'] ||
-        row['Preferred Bank'] ||
-        ''
-      )
-        .toString()
-        .trim();
-      const notes = (row.notes || row.Notes || row.remarks || '').toString().trim();
+      const rawLoanType = getRowVal(row, [
+        'loantype',
+        'loan type',
+        'type',
+        'product',
+        'loan product',
+        'loan',
+      ]);
+      const loanType = (rawLoanType ?? 'Personal Loan').toString().trim() || 'Personal Loan';
+
+      const rawCity = getRowVal(row, ['city', 'location', 'branch', 'town', 'state']);
+      const city = (rawCity ?? '').toString().trim();
+
+      const rawBank = getRowVal(row, [
+        'bankname',
+        'bank name',
+        'bank',
+        'preferred bank',
+        'lender',
+        'bank / lender',
+      ]);
+      const bankName = (rawBank ?? '').toString().trim();
+
+      const rawNotes = getRowVal(row, ['notes', 'remarks', 'remark', 'comment', 'comments', 'requirement']);
+      const notes = (rawNotes ?? '').toString().trim();
+
+      const rawPan = getRowVal(row, ['pan', 'pannumber', 'pan number', 'pan card']);
+      const panNumber = (rawPan ?? '').toString().trim().toUpperCase();
+
+      const rawEmail = getRowVal(row, ['email', 'email address', 'mail']);
+      const email = (rawEmail ?? '').toString().trim().toLowerCase();
+
+      // Skip completely empty rows silently
+      if (!name && !phone && !rawAmount) {
+        return;
+      }
 
       if (!name) {
         invalidRows.push({ rowNumber: rowNum, reason: 'Customer Name is missing' });
@@ -125,17 +172,22 @@ export async function POST(request: NextRequest) {
 
       seenPhonesInBatch.add(phone);
 
-      validLeadsToInsert.push({
+      const leadItem: Record<string, any> = {
         name,
         phone,
         loanType: loanType || 'Personal Loan',
-        loanAmount: isNaN(loanAmount) ? 0 : loanAmount,
+        loanAmount,
         city,
         bankName,
         status: 'Login',
         source: 'Excel Upload',
         notes,
-      });
+      };
+
+      if (panNumber) leadItem.panNumber = panNumber;
+      if (email) leadItem.email = email;
+
+      validLeadsToInsert.push(leadItem);
     });
 
     if (validLeadsToInsert.length === 0) {
@@ -179,9 +231,17 @@ export async function POST(request: NextRequest) {
         const result = await Lead.insertMany(finalLeadsToInsert, { ordered: false });
         insertedCount = result.length;
       } catch (insertErr: any) {
-        // Race condition: some phones may have been inserted by someone else meanwhile
-        if (insertErr?.code === 11000 || insertErr?.writeErrors) {
-          insertedCount = insertErr.insertedDocs?.length || 0;
+        // Modern MongoDB driver bulk error handling
+        if (
+          insertErr?.name === 'MongoBulkWriteError' ||
+          insertErr?.code === 11000 ||
+          insertErr?.writeErrors
+        ) {
+          insertedCount =
+            insertErr.insertedCount ??
+            insertErr.result?.nInserted ??
+            insertErr.insertedDocs?.length ??
+            0;
         } else {
           throw insertErr;
         }
