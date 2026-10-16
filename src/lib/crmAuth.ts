@@ -64,12 +64,12 @@ export async function getAuthUser(req: NextRequest | Request): Promise<AuthUser 
 
 /** Can this role submit / upload leads in /crm/entry? */
 export function canEnterLeads(role?: string): boolean {
-  return role === 'crm_entry' || role === 'superadmin';
+  return role === 'crm_entry' /*|| role === 'superadmin'*/;
 }
 
 /** Can this role update lead status or delete leads in /crm? */
 export function canEditLeads(role?: string): boolean {
-  return role === 'crm_editor' || role === 'superadmin';
+  return role === 'crm_editor' /*|| role === 'superadmin'*/;
 }
 
 /** Can this role view the leads in /crm? */

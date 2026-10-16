@@ -37,10 +37,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
     const validLeadsToInsert: any[] = [];
-    const seenPansInBatch = new Set<string>();
-    const batchDuplicates: { rowNumber: number; pan: string; reason: string }[] = [];
+    const seenPhonesInBatch = new Set<string>();
+    const batchDuplicates: { rowNumber: number; phone: string; reason: string }[] = [];
     const invalidRows: { rowNumber: number; reason: string }[] = [];
 
     // Step 1: Pre-process and validate each row from client
@@ -48,20 +47,6 @@ export async function POST(request: NextRequest) {
       const rowNum = index + 1;
 
       // Smart column matching for Excel headers
-      const pan = (
-        row.panNumber ||
-        row.pan ||
-        row.PAN ||
-        row['PAN Number'] ||
-        row['Pan Number'] ||
-        row['PAN CARD'] ||
-        row['Pan Card'] ||
-        ''
-      )
-        .toString()
-        .trim()
-        .toUpperCase();
-
       const phone = (
         row.phone ||
         row.Phone ||
@@ -104,7 +89,6 @@ export async function POST(request: NextRequest) {
         .toString()
         .trim();
 
-      const email = (row.email || row.Email || '').toString().trim().toLowerCase();
       const city = (row.city || row.City || row.location || '').toString().trim();
       const bankName = (
         row.bankName ||
@@ -129,31 +113,21 @@ export async function POST(request: NextRequest) {
         return;
       }
 
-      if (!pan || !panRegex.test(pan)) {
-        invalidRows.push({
-          rowNumber: rowNum,
-          reason: `Invalid PAN format "${pan}". Must be 10 characters (e.g. ABCDE1234F)`,
-        });
-        return;
-      }
-
       // Check duplicate within the uploaded sheet itself
-      if (seenPansInBatch.has(pan)) {
+      if (seenPhonesInBatch.has(phone)) {
         batchDuplicates.push({
           rowNumber: rowNum,
-          pan,
-          reason: 'Duplicate PAN repeated within this same Excel sheet',
+          phone,
+          reason: 'Duplicate mobile number repeated within this same Excel sheet',
         });
         return;
       }
 
-      seenPansInBatch.add(pan);
+      seenPhonesInBatch.add(phone);
 
       validLeadsToInsert.push({
         name,
         phone,
-        panNumber: pan,
-        email,
         loanType: loanType || 'Personal Loan',
         loanAmount: isNaN(loanAmount) ? 0 : loanAmount,
         city,
@@ -176,21 +150,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Step 2: Query DB to find which PANs already exist in MongoDB
-    const incomingPans = validLeadsToInsert.map((l) => l.panNumber);
+    // Step 2: Query DB to find which phone numbers already exist in MongoDB
+    const incomingPhones = validLeadsToInsert.map((l) => l.phone);
     const existingInDb = await Lead.find({
-      panNumber: { $in: incomingPans },
-    }).select('panNumber name');
+      phone: { $in: incomingPhones },
+    }).select('phone name');
 
-    const existingPanSet = new Set(existingInDb.map((l) => l.panNumber));
-    const dbDuplicates: { pan: string; existingName: string }[] = [];
+    const existingPhoneSet = new Set(existingInDb.map((l) => l.phone));
+    const dbDuplicates: { phone: string; existingName: string }[] = [];
 
     // Filter out DB duplicates
     const finalLeadsToInsert = validLeadsToInsert.filter((lead) => {
-      if (existingPanSet.has(lead.panNumber)) {
-        const found = existingInDb.find((d) => d.panNumber === lead.panNumber);
+      if (existingPhoneSet.has(lead.phone)) {
+        const found = existingInDb.find((d) => d.phone === lead.phone);
         dbDuplicates.push({
-          pan: lead.panNumber,
+          phone: lead.phone,
           existingName: found ? found.name : 'Existing Client',
         });
         return false;
@@ -201,8 +175,17 @@ export async function POST(request: NextRequest) {
     // Step 3: Insert unique leads into MongoDB
     let insertedCount = 0;
     if (finalLeadsToInsert.length > 0) {
-      const result = await Lead.insertMany(finalLeadsToInsert, { ordered: false });
-      insertedCount = result.length;
+      try {
+        const result = await Lead.insertMany(finalLeadsToInsert, { ordered: false });
+        insertedCount = result.length;
+      } catch (insertErr: any) {
+        // Race condition: some phones may have been inserted by someone else meanwhile
+        if (insertErr?.code === 11000 || insertErr?.writeErrors) {
+          insertedCount = insertErr.insertedDocs?.length || 0;
+        } else {
+          throw insertErr;
+        }
+      }
     }
 
     return NextResponse.json({
@@ -223,4 +206,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

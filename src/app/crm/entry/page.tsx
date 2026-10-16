@@ -18,8 +18,6 @@ import {
   FileCheck,
   Building2,
   Phone,
-  CreditCard,
-  Mail,
   IndianRupee,
   MapPin,
   FileText,
@@ -81,8 +79,6 @@ export default function LeadEntryPage() {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
-    panNumber: '',
-    email: '',
     loanType: 'Personal Loan',
     loanAmount: '',
     city: '',
@@ -112,17 +108,13 @@ export default function LeadEntryPage() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-  const isPanValid = formData.panNumber.length === 10 && panRegex.test(formData.panNumber);
   const isPhoneValid = formData.phone.replace(/\D/g, '').length >= 10;
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    if (name === 'panNumber') {
-      setFormData((prev) => ({ ...prev, [name]: value.toUpperCase() }));
-    } else if (name === 'phone') {
+    if (name === 'phone') {
       setFormData((prev) => ({ ...prev, [name]: value.replace(/\D/g, '') }));
     } else {
       setFormData((prev) => ({ ...prev, [name]: value }));
@@ -134,12 +126,6 @@ export default function LeadEntryPage() {
     setFormLoading(true);
     setFormSuccess(null);
     setFormError(null);
-
-    if (!isPanValid) {
-      setFormError('Invalid PAN Card format. PAN must be 10 characters (e.g. ABCDE1234F).');
-      setFormLoading(false);
-      return;
-    }
 
     if (!isPhoneValid) {
       setFormError('Mobile number must be at least 10 digits.');
@@ -168,8 +154,6 @@ export default function LeadEntryPage() {
         setFormData({
           name: '',
           phone: '',
-          panNumber: '',
-          email: '',
           loanType: 'Personal Loan',
           loanAmount: '',
           city: '',
@@ -255,8 +239,6 @@ export default function LeadEntryPage() {
       {
         'Customer Name': 'Rahul Sharma',
         'Mobile Number': '9876543210',
-        'PAN Number': 'ABCDE1234F',
-        Email: 'rahul.sharma@example.com',
         'Loan Type': 'Personal Loan',
         'Loan Amount': 500000,
         'Bank Name': 'HDFC Bank',
@@ -266,8 +248,6 @@ export default function LeadEntryPage() {
       {
         'Customer Name': 'Pooja Verma',
         'Mobile Number': '9811223344',
-        'PAN Number': 'XYZAB5678C',
-        Email: 'pooja.verma@example.com',
         'Loan Type': 'Home Loan',
         'Loan Amount': 3500000,
         'Bank Name': 'State Bank of India (SBI)',
@@ -519,60 +499,9 @@ export default function LeadEntryPage() {
                       style={{ fontFamily: 'monospace' }}
                     />
                   </div>
-                </div>
-
-                <div className="crm-field">
-                  <div className="crm-field-label-row">
-                    <label className="crm-field-label">
-                      PAN Number (Unique Identity) <span className="crm-required">*</span>
-                    </label>
-                    {formData.panNumber && (
-                      <span
-                        className={`crm-valid-hint ${isPanValid ? 'is-valid' : 'is-invalid'}`}
-                        style={{ fontFamily: 'monospace' }}
-                      >
-                        {isPanValid ? '✓ Valid PAN Format' : 'Format: ABCDE1234F'}
-                      </span>
-                    )}
-                  </div>
-                  <div className="crm-input-icon-wrap">
-                    <span className="crm-input-icon">
-                      <CreditCard size={15} />
-                    </span>
-                    <input
-                      type="text"
-                      name="panNumber"
-                      required
-                      maxLength={10}
-                      value={formData.panNumber}
-                      onChange={handleInputChange}
-                      placeholder="ABCDE1234F"
-                      className={`crm-input-with-icon${
-                        formData.panNumber && !isPanValid ? ' is-warning' : ''
-                      }`}
-                      style={{ fontFamily: 'monospace', fontWeight: 700, textTransform: 'uppercase' }}
-                    />
-                  </div>
                   <p className="crm-field-hint">
-                    Duplicate protection: Duplicate PAN entries are automatically prevented.
+                    Duplicate protection: Duplicate mobile numbers are automatically prevented.
                   </p>
-                </div>
-
-                <div className="crm-field">
-                  <label className="crm-field-label">Email Address (Optional)</label>
-                  <div className="crm-input-icon-wrap">
-                    <span className="crm-input-icon">
-                      <Mail size={15} />
-                    </span>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      placeholder="e.g. rahul@example.com"
-                      className="crm-input-with-icon"
-                    />
-                  </div>
                 </div>
 
                 <div className="crm-field">
@@ -697,7 +626,7 @@ export default function LeadEntryPage() {
               <div className="crm-form-footer">
                 <button
                   type="submit"
-                  disabled={formLoading || !isPanValid || !isPhoneValid}
+                  disabled={formLoading || !isPhoneValid}
                   className="crm-btn crm-btn-primary"
                   style={{ padding: '0.85rem 1.5rem' }}
                 >
@@ -723,7 +652,7 @@ export default function LeadEntryPage() {
               <div>
                 <h2 className="crm-panel-title">Bulk Excel / CSV Upload</h2>
                 <p className="crm-panel-sub">
-                  Upload an Excel or CSV file. The system will validate records and filter duplicate PANs.
+                  Upload an Excel or CSV file. The system will validate records and filter duplicate mobile numbers.
                 </p>
               </div>
 
@@ -762,7 +691,7 @@ export default function LeadEntryPage() {
                 {excelFile ? excelFile.name : 'Click to select or drag and drop Excel sheet here'}
               </h3>
               <p className="crm-dropzone-hint">
-                Supports .XLSX, .XLS, or .CSV (Columns: Customer Name, Mobile Number, PAN Number, Loan Amount, etc.)
+                Supports .XLSX, .XLS, or .CSV (Columns: Customer Name, Mobile Number, Loan Amount, etc.)
               </p>
             </div>
 
@@ -787,7 +716,7 @@ export default function LeadEntryPage() {
                   <div className="crm-result-box">
                     <div className="crm-result-box-label">Total Rows</div>
                     <div className="crm-result-box-value">
-                      {excelResult.insertedCount! + (excelResult.skippedCount || 0)}
+                      {(excelResult.insertedCount || 0) + (excelResult.skippedCount || 0)}
                     </div>
                   </div>
                   <div className="crm-result-box crm-result-box--good">
@@ -808,12 +737,12 @@ export default function LeadEntryPage() {
                 {excelResult.dbDuplicates && excelResult.dbDuplicates.length > 0 && (
                   <div className="crm-dup-list">
                     <div className="crm-dup-list-title">
-                      Already in MongoDB (Skipped {excelResult.dbDuplicates.length} duplicate PANs):
+                      Already in MongoDB (Skipped {excelResult.dbDuplicates.length} duplicate numbers):
                     </div>
                     <div className="crm-dup-list-items">
                       {excelResult.dbDuplicates.map((dup, i) => (
                         <div key={i}>
-                          • PAN: <strong>{dup.pan}</strong> (Customer: {dup.existingName})
+                          • Mobile: <strong>{dup.phone}</strong> (Customer: {dup.existingName})
                         </div>
                       ))}
                     </div>
@@ -853,7 +782,6 @@ export default function LeadEntryPage() {
                         <th>#</th>
                         <th>Name</th>
                         <th>Mobile</th>
-                        <th>PAN Card</th>
                         <th>Bank Name</th>
                         <th>Loan Type</th>
                         <th>Amount</th>
@@ -862,8 +790,6 @@ export default function LeadEntryPage() {
                     </thead>
                     <tbody>
                       {parsedRows.slice(0, 10).map((row, idx) => {
-                        const pan =
-                          row.panNumber || row.pan || row.PAN || row['PAN Number'] || row['Pan Number'] || '--';
                         const phone =
                           row.phone || row.Phone || row.mobile || row.Mobile || row['Mobile Number'] || '--';
                         const name = row.name || row.Name || row['Customer Name'] || row['Client Name'] || '--';
@@ -878,9 +804,6 @@ export default function LeadEntryPage() {
                             <td>{idx + 1}</td>
                             <td style={{ fontWeight: 600, color: 'var(--color-ink)' }}>{name}</td>
                             <td>{phone}</td>
-                            <td>
-                              <span className="crm-pan-chip">{pan}</span>
-                            </td>
                             <td style={{ fontWeight: 600 }}>{bank}</td>
                             <td>{loanType}</td>
                             <td style={{ color: 'var(--color-brass-deep)', fontWeight: 700 }}>

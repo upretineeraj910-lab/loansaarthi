@@ -6,8 +6,6 @@ export type LeadSource = 'Form' | 'Excel Upload';
 export interface ILeadDocument extends Document {
   name: string;
   phone: string;
-  panNumber: string;
-  email?: string;
   loanType: string;
   loanAmount: number;
   city?: string;
@@ -32,22 +30,8 @@ const LeadSchema = new Schema<ILeadDocument>(
     phone: {
       type: String,
       required: [true, 'Phone number is required'],
+      unique: true, // Duplicate protection ab mobile number se
       trim: true,
-      index: true, // Indexed for super-fast search
-    },
-    panNumber: {
-      type: String,
-      required: [true, 'PAN number is required'],
-      unique: true, // MongoDB Unique Index to prevent duplicates
-      uppercase: true,
-      trim: true,
-      index: true,
-    },
-    email: {
-      type: String,
-      lowercase: true,
-      trim: true,
-      default: '',
     },
     loanType: {
       type: String,
@@ -73,7 +57,7 @@ const LeadSchema = new Schema<ILeadDocument>(
       type: String,
       enum: ['Login', 'Underwriting', 'Approved', 'Rejected', 'Disbursed'],
       default: 'Login',
-      index: true, // Indexed for fast filtering
+      index: true,
     },
     source: {
       type: String,
@@ -109,4 +93,3 @@ const Lead: Model<ILeadDocument> =
   mongoose.model<ILeadDocument>('CrmLead', LeadSchema, 'crmlead');
 
 export default Lead;
-

@@ -43,10 +43,9 @@ export async function GET(request: NextRequest) {
 
     if (search) {
       const safeSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      // Fast search targeting phone, PAN, or name
+      // Fast search targeting phone or name
       query.$or = [
         { phone: { $regex: safeSearch, $options: 'i' } },
-        { panNumber: { $regex: safeSearch, $options: 'i' } },
         { name: { $regex: safeSearch, $options: 'i' } },
       ];
     }
@@ -119,30 +118,17 @@ export async function POST(request: NextRequest) {
     await connectToDatabase();
 
     const body = await request.json();
-    const { name, phone, panNumber, email, loanType, loanAmount, city, bankName, notes } = body;
+    const { name, phone, loanType, loanAmount, city, bankName, notes } = body;
 
     // Basic Validations
-    if (!name || !phone || !panNumber || !loanAmount) {
+    if (!name || !phone || !loanAmount) {
       return NextResponse.json(
-        { success: false, message: 'Name, Phone, PAN Number and Loan Amount are required.' },
+        { success: false, message: 'Name, Phone and Loan Amount are required.' },
         { status: 400 }
       );
     }
 
-    const cleanPan = panNumber.trim().toUpperCase();
-    const cleanPhone = phone.trim().replace(/\D/g, '');
-
-    // Validate PAN Format (ABCDE1234F)
-    const panRegex = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
-    if (!panRegex.test(cleanPan)) {
-      return NextResponse.json(
-        {
-          success: false,
-          message: 'Invalid PAN format. PAN must be 10 characters (e.g. ABCDE1234F).',
-        },
-        { status: 400 }
-      );
-    }
+    const cleanPhone = phone.toString().trim().replace(/\D/g, '');
 
     // Validate Phone Number
     if (cleanPhone.length < 10) {
@@ -152,14 +138,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Duplicate Check: Check if PAN already exists in MongoDB
-    const existingLead = await Lead.findOne({ panNumber: cleanPan });
+    // Duplicate Check: Check if phone already exists in MongoDB
+    const existingLead = await Lead.findOne({ phone: cleanPhone });
     if (existingLead) {
       return NextResponse.json(
         {
           success: false,
           duplicate: true,
-          message: `PAN Card "${cleanPan}" already exists in database (Customer: ${existingLead.name}, Phone: ${existingLead.phone}, Status: ${existingLead.status}). Duplicate entry is not allowed.`,
+          message: `Mobile number "${cleanPhone}" already exists in database (Customer: ${existingLead.name}, Status: ${existingLead.status}). Duplicate entry is not allowed.`,
         },
         { status: 409 }
       );
@@ -169,8 +155,6 @@ export async function POST(request: NextRequest) {
     const newLead = await Lead.create({
       name: name.trim(),
       phone: cleanPhone,
-      panNumber: cleanPan,
-      email: email?.trim() || '',
       loanType: loanType || 'Personal Loan',
       loanAmount: Number(loanAmount),
       city: city?.trim() || '',
@@ -196,7 +180,7 @@ export async function POST(request: NextRequest) {
         {
           success: false,
           duplicate: true,
-          message: 'A lead with this PAN number already exists in the database.',
+          message: 'A lead with this mobile number already exists in the database.',
         },
         { status: 409 }
       );
@@ -208,4 +192,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-

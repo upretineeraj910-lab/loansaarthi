@@ -9,7 +9,6 @@ import {
   PlusCircle,
   RefreshCw,
   Phone,
-  CreditCard,
   Building2,
   Eye,
   Filter,
@@ -34,8 +33,6 @@ interface Lead {
   _id: string;
   name: string;
   phone: string;
-  panNumber: string;
-  email?: string;
   loanType: string;
   loanAmount: number;
   city?: string;
@@ -317,8 +314,6 @@ export default function CrmDashboardPage() {
       '#': idx + 1,
       'Customer Name': lead.name,
       'Phone Number': lead.phone,
-      'PAN Number': lead.panNumber,
-      Email: lead.email || '',
       'Loan Type': lead.loanType,
       'Applied Amount (Rs)': lead.loanAmount,
       Status: lead.status,
@@ -501,7 +496,7 @@ export default function CrmDashboardPage() {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search by Mobile Number, PAN, or Name..."
+              placeholder="Search by Mobile Number or Name..."
               className="crm-input"
             />
             {search && (
@@ -556,7 +551,6 @@ export default function CrmDashboardPage() {
                   <th>#</th>
                   <th>Customer</th>
                   <th>Mobile Number</th>
-                  <th>PAN Card (Unique)</th>
                   <th>Loan Applied</th>
                   <th className="is-strong">{canEdit ? 'Status (Click to Update) ⚡' : 'Status (View-Only 🔒)'}</th>
                   <th>Bank / Rejection Details</th>
@@ -567,21 +561,21 @@ export default function CrmDashboardPage() {
               <tbody>
                 {leadError ? (
                   <tr>
-                    <td colSpan={9} className="crm-table-empty" style={{ color: '#dc2626' }}>
+                    <td colSpan={8} className="crm-table-empty" style={{ color: '#dc2626' }}>
                       <AlertTriangle size={26} style={{ margin: '0 auto 0.5rem', color: '#dc2626' }} />
                       {leadError}
                     </td>
                   </tr>
                 ) : loading ? (
                   <tr>
-                    <td colSpan={9} className="crm-table-loading">
+                    <td colSpan={8} className="crm-table-loading">
                       <RefreshCw size={22} className="animate-spin" style={{ margin: '0 auto 0.5rem', color: 'var(--brand-green)' }} />
                       Loading leads from database...
                     </td>
                   </tr>
                 ) : leads.length === 0 ? (
                   <tr>
-                    <td colSpan={9} className="crm-table-empty">
+                    <td colSpan={8} className="crm-table-empty">
                       <Filter size={26} style={{ margin: '0 auto 0.5rem' }} />
                       No leads found matching your criteria.
                       {canEnter && (
@@ -612,13 +606,6 @@ export default function CrmDashboardPage() {
                           <Phone size={12} />
                           {lead.phone}
                         </a>
-                      </td>
-
-                      <td>
-                        <span className="crm-pan-chip">
-                          <CreditCard size={11} />
-                          {lead.panNumber}
-                        </span>
                       </td>
 
                       <td>
@@ -1004,13 +991,6 @@ export default function CrmDashboardPage() {
                   </a>
                 </div>
 
-                <div className="crm-detail-box crm-detail-box--pan">
-                  <div className="crm-detail-box-label">PAN Card (Unique)</div>
-                  <div className="crm-detail-box-value" style={{ fontFamily: 'monospace' }}>
-                    {selectedLead.panNumber}
-                  </div>
-                </div>
-
                 <div className="crm-detail-box">
                   <div className="crm-detail-box-label">Loan Type</div>
                   <div className="crm-detail-box-value">{selectedLead.loanType}</div>
@@ -1036,13 +1016,6 @@ export default function CrmDashboardPage() {
                   <div className="crm-detail-box-value">{selectedLead.source}</div>
                 </div>
               </div>
-
-              {selectedLead.email && (
-                <div className="crm-modal-note">
-                  <span className="crm-field-hint">Email:</span>{' '}
-                  <span style={{ fontFamily: 'monospace', fontWeight: 600 }}>{selectedLead.email}</span>
-                </div>
-              )}
 
               {selectedLead.notes && (
                 <div className="crm-modal-note">
