@@ -26,6 +26,11 @@ import {
   AlertTriangle,
   Shield,
   Lock,
+  Sparkles,
+  Ban,
+  BellRing,
+  PhoneForwarded,
+  Voicemail,
 } from 'lucide-react';
 import './crm-theme.css';
 
@@ -37,7 +42,17 @@ interface Lead {
   loanAmount: number;
   city?: string;
   bankName?: string;
-  status: 'Login' | 'Underwriting' | 'Approved' | 'Rejected' | 'Disbursed';
+  status:
+    | 'Fresh'
+    | 'Not Eligible'
+    | 'Ringing'
+    | 'Call Back'
+    | 'Voice Mail'
+    | 'Login'
+    | 'Underwriting'
+    | 'Approved'
+    | 'Rejected'
+    | 'Disbursed';
   source: 'Form' | 'Excel Upload';
   rejectionReason?: string;
   approvedBank?: string;
@@ -49,6 +64,11 @@ interface Lead {
 
 interface Stats {
   total: number;
+  fresh: number;
+  notEligible: number;
+  ringing: number;
+  callBack: number;
+  voiceMail: number;
   login: number;
   underwriting: number;
   approved: number;
@@ -92,6 +112,11 @@ const STATUS_OPTIONS: {
   label: string;
   className: string;
 }[] = [
+  { value: 'Fresh', label: 'Fresh', className: 'crm-status--fresh' },
+  { value: 'Not Eligible', label: 'Not Eligible', className: 'crm-status--not-eligible' },
+  { value: 'Ringing', label: 'Ringing', className: 'crm-status--ringing' },
+  { value: 'Call Back', label: 'Call Back', className: 'crm-status--call-back' },
+  { value: 'Voice Mail', label: 'Voice Mail', className: 'crm-status--voice-mail' },
   { value: 'Login', label: 'Login', className: 'crm-status--login' },
   { value: 'Underwriting', label: 'Underwriting', className: 'crm-status--underwriting' },
   { value: 'Approved', label: 'Approved', className: 'crm-status--approved' },
@@ -103,6 +128,11 @@ export default function CrmDashboardPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [stats, setStats] = useState<Stats>({
     total: 0,
+    fresh: 0,
+    notEligible: 0,
+    ringing: 0,
+    callBack: 0,
+    voiceMail: 0,
     login: 0,
     underwriting: 0,
     approved: 0,
@@ -335,8 +365,8 @@ export default function CrmDashboardPage() {
     );
   };
 
-  const metricClass = (key: string) =>
-    `crm-metric crm-metric--${key}${statusFilter.toLowerCase() === key ? ' is-active' : ''}`;
+  const metricClass = (filterVal: string, cssKey: string) =>
+    `crm-metric crm-metric--${cssKey}${statusFilter === filterVal ? ' is-active' : ''}`;
 
   return (
     <div className="crm-page">
@@ -445,43 +475,83 @@ export default function CrmDashboardPage() {
             <div className="crm-metric-hint">All pipelines</div>
           </div>
 
-          <div onClick={() => setStatusFilter('Login')} className={metricClass('login')}>
+          <div onClick={() => setStatusFilter('Fresh')} className={metricClass('Fresh', 'fresh')}>
             <div className="crm-metric-label">
-              <Clock size={12} /> 1. Login
+              <Sparkles size={12} /> 1. Fresh
             </div>
-            <div className="crm-metric-value">{stats.login}</div>
+            <div className="crm-metric-value">{stats.fresh || 0}</div>
+            <div className="crm-metric-hint">New incoming</div>
+          </div>
+
+          <div onClick={() => setStatusFilter('Not Eligible')} className={metricClass('Not Eligible', 'not-eligible')}>
+            <div className="crm-metric-label">
+              <Ban size={12} /> 2. Not Eligible
+            </div>
+            <div className="crm-metric-value">{stats.notEligible || 0}</div>
+            <div className="crm-metric-hint">Criteria mismatch</div>
+          </div>
+
+          <div onClick={() => setStatusFilter('Ringing')} className={metricClass('Ringing', 'ringing')}>
+            <div className="crm-metric-label">
+              <BellRing size={12} /> 3. Ringing
+            </div>
+            <div className="crm-metric-value">{stats.ringing || 0}</div>
+            <div className="crm-metric-hint">Call not answered</div>
+          </div>
+
+          <div onClick={() => setStatusFilter('Call Back')} className={metricClass('Call Back', 'call-back')}>
+            <div className="crm-metric-label">
+              <PhoneForwarded size={12} /> 4. Call Back
+            </div>
+            <div className="crm-metric-value">{stats.callBack || 0}</div>
+            <div className="crm-metric-hint">Follow-up requested</div>
+          </div>
+
+          <div onClick={() => setStatusFilter('Voice Mail')} className={metricClass('Voice Mail', 'voice-mail')}>
+            <div className="crm-metric-label">
+              <Voicemail size={12} /> 5. Voice Mail
+            </div>
+            <div className="crm-metric-value">{stats.voiceMail || 0}</div>
+            <div className="crm-metric-hint">Voicemail sent</div>
+          </div>
+
+          <div onClick={() => setStatusFilter('Login')} className={metricClass('Login', 'login')}>
+            <div className="crm-metric-label">
+              <Clock size={12} /> 6. Login
+            </div>
+            <div className="crm-metric-value">{stats.login || 0}</div>
             <div className="crm-metric-hint">Initial file logged</div>
           </div>
 
-          <div onClick={() => setStatusFilter('Underwriting')} className={metricClass('underwriting')}>
+          <div onClick={() => setStatusFilter('Underwriting')} className={metricClass('Underwriting', 'underwriting')}>
             <div className="crm-metric-label">
-              <Layers size={12} /> 2. Underwriting
+              <Layers size={12} /> 7. Underwriting
             </div>
-            <div className="crm-metric-value">{stats.underwriting}</div>
+            <div className="crm-metric-value">{stats.underwriting || 0}</div>
             <div className="crm-metric-hint">Checks &amp; eligibility</div>
           </div>
 
-          <div onClick={() => setStatusFilter('Approved')} className={metricClass('approved')}>
+          <div onClick={() => setStatusFilter('Approved')} className={metricClass('Approved', 'approved')}>
             <div className="crm-metric-label">
-              <CheckCircle2 size={12} /> 3. Approved
+              <CheckCircle2 size={12} /> 8. Approved
             </div>
-            <div className="crm-metric-value">{stats.approved}</div>
+            <div className="crm-metric-value">{stats.approved || 0}</div>
             <div className="crm-metric-hint">Bank sanctioned</div>
           </div>
 
-          <div onClick={() => setStatusFilter('Rejected')} className={metricClass('rejected')}>
+          <div onClick={() => setStatusFilter('Rejected')} className={metricClass('Rejected', 'rejected')}>
             <div className="crm-metric-label">
-              <XCircle size={12} /> 4. Rejected
+              <XCircle size={12} /> 9. Rejected
             </div>
-            <div className="crm-metric-value">{stats.rejected}</div>
+            <div className="crm-metric-value">{stats.rejected || 0}</div>
             <div className="crm-metric-hint">With reasons</div>
           </div>
 
-          <div onClick={() => setStatusFilter('Disbursed')} className={metricClass('disbursed')}>
+          <div onClick={() => setStatusFilter('Disbursed')} className={metricClass('Disbursed', 'disbursed')}>
             <div className="crm-metric-label">
-              <Briefcase size={12} /> 5. Disbursed
+              <Briefcase size={12} /> 10. Disbursed
             </div>
-            <div className="crm-metric-value">{stats.disbursed}</div>
+            <div className="crm-metric-value">{stats.disbursed || 0}</div>
             <div className="crm-metric-hint">Loan credited</div>
           </div>
         </div>
@@ -515,11 +585,16 @@ export default function CrmDashboardPage() {
                 className="crm-select"
               >
                 <option value="All">All Pipelines</option>
-                <option value="Login">1. Login</option>
-                <option value="Underwriting">2. Underwriting</option>
-                <option value="Approved">3. Approved</option>
-                <option value="Rejected">4. Rejected</option>
-                <option value="Disbursed">5. Disbursed</option>
+                <option value="Fresh">1. Fresh</option>
+                <option value="Not Eligible">2. Not Eligible</option>
+                <option value="Ringing">3. Ringing</option>
+                <option value="Call Back">4. Call Back</option>
+                <option value="Voice Mail">5. Voice Mail</option>
+                <option value="Login">6. Login</option>
+                <option value="Underwriting">7. Underwriting</option>
+                <option value="Approved">8. Approved</option>
+                <option value="Rejected">9. Rejected</option>
+                <option value="Disbursed">10. Disbursed</option>
               </select>
             </div>
 
@@ -624,11 +699,16 @@ export default function CrmDashboardPage() {
                                 STATUS_OPTIONS.find((s) => s.value === lead.status)?.className || ''
                               }${updatingId === lead._id ? ' is-updating' : ''}`}
                             >
-                              <option value="Login">🟡 1. Login</option>
-                              <option value="Underwriting">🔵 2. Underwriting</option>
-                              <option value="Approved">🟢 3. Approved</option>
-                              <option value="Rejected">🔴 4. Rejected</option>
-                              <option value="Disbursed">🟣 5. Disbursed</option>
+                              <option value="Fresh">✨ 1. Fresh</option>
+                              <option value="Not Eligible">🚫 2. Not Eligible</option>
+                              <option value="Ringing">🔔 3. Ringing</option>
+                              <option value="Call Back">📲 4. Call Back</option>
+                              <option value="Voice Mail">🎙️ 5. Voice Mail</option>
+                              <option value="Login">🟡 6. Login</option>
+                              <option value="Underwriting">🔵 7. Underwriting</option>
+                              <option value="Approved">🟢 8. Approved</option>
+                              <option value="Rejected">🔴 9. Rejected</option>
+                              <option value="Disbursed">🟣 10. Disbursed</option>
                             </select>
                             <span className="crm-status-chevron">
                               {updatingId === lead._id ? (
@@ -655,11 +735,16 @@ export default function CrmDashboardPage() {
                             }}
                           >
                             <span>
-                              {lead.status === 'Login' && '🟡 1. Login'}
-                              {lead.status === 'Underwriting' && '🔵 2. Underwriting'}
-                              {lead.status === 'Approved' && '🟢 3. Approved'}
-                              {lead.status === 'Rejected' && '🔴 4. Rejected'}
-                              {lead.status === 'Disbursed' && '🟣 5. Disbursed'}
+                              {lead.status === 'Fresh' && '✨ 1. Fresh'}
+                              {lead.status === 'Not Eligible' && '🚫 2. Not Eligible'}
+                              {lead.status === 'Ringing' && '🔔 3. Ringing'}
+                              {lead.status === 'Call Back' && '📲 4. Call Back'}
+                              {lead.status === 'Voice Mail' && '🎙️ 5. Voice Mail'}
+                              {lead.status === 'Login' && '🟡 6. Login'}
+                              {lead.status === 'Underwriting' && '🔵 7. Underwriting'}
+                              {lead.status === 'Approved' && '🟢 8. Approved'}
+                              {lead.status === 'Rejected' && '🔴 9. Rejected'}
+                              {lead.status === 'Disbursed' && '🟣 10. Disbursed'}
                             </span>
                             <Lock size={11} style={{ opacity: 0.7 }} />
                           </div>
@@ -921,11 +1006,16 @@ export default function CrmDashboardPage() {
                       className="crm-status-select"
                       style={{ background: 'var(--brand-white)', borderColor: 'var(--color-paper-line)' }}
                     >
-                      <option value="Login">🟡 1. Login</option>
-                      <option value="Underwriting">🔵 2. Underwriting</option>
-                      <option value="Approved">🟢 3. Approved</option>
-                      <option value="Rejected">🔴 4. Rejected</option>
-                      <option value="Disbursed">🟣 5. Disbursed</option>
+                      <option value="Fresh">✨ 1. Fresh</option>
+                      <option value="Not Eligible">🚫 2. Not Eligible</option>
+                      <option value="Ringing">🔔 3. Ringing</option>
+                      <option value="Call Back">📲 4. Call Back</option>
+                      <option value="Voice Mail">🎙️ 5. Voice Mail</option>
+                      <option value="Login">🟡 6. Login</option>
+                      <option value="Underwriting">🔵 7. Underwriting</option>
+                      <option value="Approved">🟢 8. Approved</option>
+                      <option value="Rejected">🔴 9. Rejected</option>
+                      <option value="Disbursed">🟣 10. Disbursed</option>
                     </select>
                   </div>
                 ) : (
@@ -943,11 +1033,16 @@ export default function CrmDashboardPage() {
                     }}
                   >
                     <span>
-                      {selectedLead.status === 'Login' && '🟡 1. Login'}
-                      {selectedLead.status === 'Underwriting' && '🔵 2. Underwriting'}
-                      {selectedLead.status === 'Approved' && '🟢 3. Approved'}
-                      {selectedLead.status === 'Rejected' && '🔴 4. Rejected'}
-                      {selectedLead.status === 'Disbursed' && '🟣 5. Disbursed'}
+                      {selectedLead.status === 'Fresh' && '✨ 1. Fresh'}
+                      {selectedLead.status === 'Not Eligible' && '🚫 2. Not Eligible'}
+                      {selectedLead.status === 'Ringing' && '🔔 3. Ringing'}
+                      {selectedLead.status === 'Call Back' && '📲 4. Call Back'}
+                      {selectedLead.status === 'Voice Mail' && '🎙️ 5. Voice Mail'}
+                      {selectedLead.status === 'Login' && '🟡 6. Login'}
+                      {selectedLead.status === 'Underwriting' && '🔵 7. Underwriting'}
+                      {selectedLead.status === 'Approved' && '🟢 8. Approved'}
+                      {selectedLead.status === 'Rejected' && '🔴 9. Rejected'}
+                      {selectedLead.status === 'Disbursed' && '🟣 10. Disbursed'}
                     </span>
                     <Lock size={12} style={{ opacity: 0.7 }} />
                   </div>
