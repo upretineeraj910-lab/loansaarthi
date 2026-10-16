@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/footer";
-import { GoogleAnalytics } from "@next/third-parties/google";
 // import CreditCardConsolidationModal from "@/components/CreditCardConsolidationModal";
 import ConditionalCreditCardModal from "@/components/ConditionalCreditCardModal";
 
@@ -84,20 +82,19 @@ export default function RootLayout({
       className={`${inter.variable} ${plusJakartaSans.variable} h-full antialiased`}
     >
       <head>
-        {/* Google Ads Tag (AW-18516545570) */}
-        <Script
-          strategy="afterInteractive"
+        {/* Google Ads (AW-18516545570) + Analytics (G-HH4G9YY3LC) */}
+        <script
+          async
           src="https://www.googletagmanager.com/gtag/js?id=AW-18516545570"
         />
-        <Script
-          id="google-ads-init"
-          strategy="afterInteractive"
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'AW-18516545570');
+              gtag('config', 'G-HH4G9YY3LC');
             `,
           }}
         />
@@ -106,7 +103,6 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
-        <GoogleAnalytics gaId="G-HH4G9YY3LC" />
         <ConditionalCreditCardModal />
       </body>
     </html>
