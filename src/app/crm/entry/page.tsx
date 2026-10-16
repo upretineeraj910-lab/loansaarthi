@@ -150,7 +150,7 @@ export default function LeadEntryPage() {
       if (!res.ok) {
         setFormError(data.message || 'Failed to submit lead.');
       } else {
-        setFormSuccess(`Lead for "${data.lead.name}" added successfully in "Login" stage!`);
+        setFormSuccess(`Lead for "${data.lead.name}" added successfully in "Fresh" stage!`);
         setFormData({
           name: '',
           phone: '',
@@ -419,7 +419,7 @@ export default function LeadEntryPage() {
             <div className="crm-panel-head">
               <h2 className="crm-panel-title">Manual Lead Information</h2>
               <p className="crm-panel-sub">
-                New submissions are automatically saved under the <span className="crm-tag-login">"Login"</span> stage.
+                New submissions are automatically saved under the <span className="crm-tag-fresh">"Fresh"</span> stage.
               </p>
             </div>
 
@@ -636,7 +636,7 @@ export default function LeadEntryPage() {
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 size={15} /> Submit Lead (Login Stage)
+                      <CheckCircle2 size={15} /> Submit Lead (Fresh Stage)
                     </>
                   )}
                 </button>
@@ -720,7 +720,7 @@ export default function LeadEntryPage() {
                     </div>
                   </div>
                   <div className="crm-result-box crm-result-box--good">
-                    <div className="crm-result-box-label">Inserted (Login)</div>
+                    <div className="crm-result-box-label">Inserted (Fresh)</div>
                     <div className="crm-result-box-value">+{excelResult.insertedCount || 0}</div>
                   </div>
                   <div className="crm-result-box crm-result-box--warn">

@@ -182,7 +182,7 @@ export async function proxy(request: NextRequest) {
       const { payload } = await jwtVerify(token, secret);
       const role = payload.role as string;
 
-      const allowedLeadRoles = ['admin', 'superadmin', 'crm', 'crm_editor'];
+      const allowedLeadRoles = ['admin', 'superadmin'];
       if (!allowedLeadRoles.includes(role)) {
         return NextResponse.redirect(
           new URL('/dashboard', request.url)

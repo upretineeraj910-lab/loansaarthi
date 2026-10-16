@@ -43,6 +43,26 @@
   --crm-purple-soft: #faf5ff;
   --crm-purple-line: #e3c9fb;
 
+  --crm-teal-text: #0f766e;
+  --crm-teal-soft: #f0fdfa;
+  --crm-teal-line: #99f6e4;
+
+  --crm-slate-text: #475569;
+  --crm-slate-soft: #f1f5f9;
+  --crm-slate-line: #cbd5e1;
+
+  --crm-sky-text: #0284c7;
+  --crm-sky-soft: #f0f9ff;
+  --crm-sky-line: #bae6fd;
+
+  --crm-orange-text: #c2410c;
+  --crm-orange-soft: #fff7ed;
+  --crm-orange-line: #fed7aa;
+
+  --crm-fuchsia-text: #a21caf;
+  --crm-fuchsia-soft: #fdf4ff;
+  --crm-fuchsia-line: #f5d0fe;
+
   --crm-toast-bg: #202020;
   --crm-toast-text: #ffffff;
   --crm-overlay: rgba(20, 20, 20, 0.5);
@@ -88,6 +108,26 @@
     --crm-purple-soft: rgba(168, 85, 247, 0.16);
     --crm-purple-line: rgba(180, 110, 250, 0.38);
 
+    --crm-teal-text: #5eead4;
+    --crm-teal-soft: rgba(20, 184, 166, 0.16);
+    --crm-teal-line: rgba(45, 212, 191, 0.38);
+
+    --crm-slate-text: #cbd5e1;
+    --crm-slate-soft: rgba(148, 163, 184, 0.16);
+    --crm-slate-line: rgba(203, 213, 225, 0.38);
+
+    --crm-sky-text: #38bdf8;
+    --crm-sky-soft: rgba(14, 165, 233, 0.16);
+    --crm-sky-line: rgba(56, 189, 248, 0.38);
+
+    --crm-orange-text: #fb923c;
+    --crm-orange-soft: rgba(249, 115, 22, 0.16);
+    --crm-orange-line: rgba(251, 146, 60, 0.38);
+
+    --crm-fuchsia-text: #e879f9;
+    --crm-fuchsia-soft: rgba(217, 70, 239, 0.16);
+    --crm-fuchsia-line: rgba(232, 121, 249, 0.38);
+
     --crm-toast-bg: #f1f3ef;
     --crm-toast-text: #151714;
     --crm-overlay: rgba(0, 0, 0, 0.65);
@@ -99,6 +139,42 @@
 /* ---------- tone groups ----------
    Har tone me teen variable: --tone (text/icon), --tone-soft (background), --tone-line (border).
    Niche ke components inhi ko use karte hain. */
+
+.crm-metric--fresh,
+.crm-status--fresh,
+.crm-tag-fresh {
+  --tone: var(--crm-teal-text);
+  --tone-soft: var(--crm-teal-soft);
+  --tone-line: var(--crm-teal-line);
+}
+
+.crm-metric--not-eligible,
+.crm-status--not-eligible {
+  --tone: var(--crm-slate-text);
+  --tone-soft: var(--crm-slate-soft);
+  --tone-line: var(--crm-slate-line);
+}
+
+.crm-metric--ringing,
+.crm-status--ringing {
+  --tone: var(--crm-sky-text);
+  --tone-soft: var(--crm-sky-soft);
+  --tone-line: var(--crm-sky-line);
+}
+
+.crm-metric--call-back,
+.crm-status--call-back {
+  --tone: var(--crm-orange-text);
+  --tone-soft: var(--crm-orange-soft);
+  --tone-line: var(--crm-orange-line);
+}
+
+.crm-metric--voice-mail,
+.crm-status--voice-mail {
+  --tone: var(--crm-fuchsia-text);
+  --tone-soft: var(--crm-fuchsia-soft);
+  --tone-line: var(--crm-fuchsia-line);
+}
 
 .crm-metric--login,
 .crm-status--login,
@@ -389,7 +465,7 @@
 
 @media (min-width: 1024px) {
   .crm-metrics {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   }
 }
 

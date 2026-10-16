@@ -145,6 +145,30 @@ export async function POST(request: NextRequest) {
       const rawEmail = getRowVal(row, ['email', 'email address', 'mail']);
       const email = (rawEmail ?? '').toString().trim().toLowerCase();
 
+      const rawStatus = getRowVal(row, ['status', 'lead status', 'stage', 'lead stage']);
+      let status: string = 'Fresh';
+      if (rawStatus) {
+        const cleanStatus = String(rawStatus).trim().toLowerCase();
+        const validStatuses = [
+          'Fresh',
+          'Not Eligible',
+          'Ringing',
+          'Call Back',
+          'Voice Mail',
+          'Login',
+          'Underwriting',
+          'Approved',
+          'Rejected',
+          'Disbursed',
+        ];
+        const match = validStatuses.find(
+          (s) =>
+            s.toLowerCase() === cleanStatus ||
+            s.toLowerCase().replace(/\s+/g, '') === cleanStatus.replace(/\s+/g, '')
+        );
+        if (match) status = match;
+      }
+
       // Skip completely empty rows silently
       if (!name && !phone && !rawAmount) {
         return;
@@ -179,7 +203,7 @@ export async function POST(request: NextRequest) {
         loanAmount,
         city,
         bankName,
-        status: 'Login',
+        status,
         source: 'Excel Upload',
         notes,
       };
@@ -250,7 +274,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Successfully imported ${insertedCount} leads into Login stage.`,
+      message: `Successfully imported ${insertedCount} leads into CRM.`,
       insertedCount,
       skippedCount: dbDuplicates.length + batchDuplicates.length + invalidRows.length,
       dbDuplicates,

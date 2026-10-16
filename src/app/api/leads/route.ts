@@ -78,6 +78,11 @@ export async function GET(request: NextRequest) {
       leads,
       stats: {
         total,
+        fresh: countsMap['Fresh'] || 0,
+        notEligible: countsMap['Not Eligible'] || 0,
+        ringing: countsMap['Ringing'] || 0,
+        callBack: countsMap['Call Back'] || 0,
+        voiceMail: countsMap['Voice Mail'] || 0,
         login: countsMap['Login'] || 0,
         underwriting: countsMap['Underwriting'] || 0,
         approved: countsMap['Approved'] || 0,
@@ -159,7 +164,7 @@ export async function POST(request: NextRequest) {
       loanAmount: Number(loanAmount),
       city: city?.trim() || '',
       bankName: bankName?.trim() || '',
-      status: 'Login', // Initial state
+      status: 'Fresh', // Initial state: Fresh
       source: 'Form',
       notes: notes?.trim() || '',
     });
@@ -167,7 +172,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         success: true,
-        message: 'Lead registered successfully in Login stage.',
+        message: 'Lead registered successfully in Fresh stage.',
         lead: newLead,
       },
       { status: 201 }

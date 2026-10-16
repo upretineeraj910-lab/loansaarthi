@@ -1,6 +1,16 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
-export type LeadStatus = 'Login' | 'Underwriting' | 'Approved' | 'Rejected' | 'Disbursed';
+export type LeadStatus =
+  | 'Fresh'
+  | 'Not Eligible'
+  | 'Ringing'
+  | 'Call Back'
+  | 'Voice Mail'
+  | 'Login'
+  | 'Underwriting'
+  | 'Approved'
+  | 'Rejected'
+  | 'Disbursed';
 export type LeadSource = 'Form' | 'Excel Upload';
 
 export interface ILeadDocument extends Document {
@@ -69,8 +79,19 @@ const LeadSchema = new Schema<ILeadDocument>(
     },
     status: {
       type: String,
-      enum: ['Login', 'Underwriting', 'Approved', 'Rejected', 'Disbursed'],
-      default: 'Login',
+      enum: [
+        'Fresh',
+        'Not Eligible',
+        'Ringing',
+        'Call Back',
+        'Voice Mail',
+        'Login',
+        'Underwriting',
+        'Approved',
+        'Rejected',
+        'Disbursed',
+      ],
+      default: 'Fresh',
       index: true,
     },
     source: {
