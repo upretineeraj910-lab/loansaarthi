@@ -5,7 +5,7 @@ export interface AuthUser {
   id: string;
   email: string;
   name?: string;
-  role: 'borrower' | 'lender' | 'admin' | 'superadmin' | 'crm_entry' | 'crm_editor';
+  role: 'borrower' | 'lender' | 'admin' | 'superadmin' | 'crm_entry' | 'crm_editor' | 'crm' | string;
 }
 
 /**
@@ -51,10 +51,28 @@ export async function getAuthUser(req: NextRequest | Request): Promise<AuthUser 
     const secret = new TextEncoder().encode(process.env.JWT_SECRET || 'default_secret');
     const { payload } = await jwtVerify(token, secret);
 
+    const userId = (payload.id as string) || (payload.sub as string);
+    let name = (payload.name as string) || undefined;
+
+    // If name is not in JWT payload, fetch from DB
+    if (!name && userId) {
+      try {
+        const connectToDatabase = (await import('@/lib/mongodb')).default;
+        const User = (await import('@/models/User')).default;
+        await connectToDatabase();
+        const userDoc = await User.findById(userId).select('name').lean();
+        if (userDoc?.name) {
+          name = userDoc.name;
+        }
+      } catch (err) {
+        // Fallback silently
+      }
+    }
+
     return {
-      id: (payload.id as string) || (payload.sub as string),
+      id: userId,
       email: payload.email as string,
-      name: (payload.name as string) || undefined,
+      name,
       role: (payload.role as AuthUser['role']) || 'borrower',
     };
   } catch (err) {
@@ -64,16 +82,19 @@ export async function getAuthUser(req: NextRequest | Request): Promise<AuthUser 
 
 /** Can this role submit / upload leads in /crm/entry? */
 export function canEnterLeads(role?: string): boolean {
-  return role === 'crm_entry' /*|| role === 'superadmin'*/;
+  const r = role?.toLowerCase();
+  return r === 'crm_entry' || r === 'superadmin' || r === 'admin' || r === 'crm';
 }
 
 /** Can this role update lead status or delete leads in /crm? */
 export function canEditLeads(role?: string): boolean {
-  return role === 'crm_editor' /*|| role === 'superadmin'*/;
+  const r = role?.toLowerCase();
+  return r === 'crm_editor' || r === 'superadmin' || r === 'admin' || r === 'crm';
 }
 
 /** Can this role view the leads in /crm? */
 export function canViewLeads(role?: string): boolean {
-  return role === 'crm_editor' || role === 'crm_entry' || role === 'superadmin';
+  const r = role?.toLowerCase();
+  return r === 'crm_editor' || r === 'crm_entry' || r === 'superadmin' || r === 'admin' || r === 'crm';
 }
 

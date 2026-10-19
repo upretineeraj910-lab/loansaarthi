@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Lead from '@/models/Lead';
-import { getAuthUser, canViewLeads, canEnterLeads } from '@/lib/crmAuth';
+import { getAuthUser, canViewLeads, canEnterLeads, canEditLeads } from '@/lib/crmAuth';
 
 export const dynamic = 'force-dynamic';
 
@@ -33,6 +33,37 @@ export async function GET(request: NextRequest) {
     // Build query
     const query: Record<string, any> = {};
 
+    // Check Role: Admin/Manager/Superadmin ko sabhi leads dikhengi.
+    // crm_entry (Data Entry) ko bhi CRM dashboard view karne ki full permission hai.
+    // crm_editor (agents) ko sirf unki assigned leads dikhengi.
+    const userRole = authUser.role?.toLowerCase();
+    const isFullAccessRole = ['admin', 'superadmin', 'manager', 'crm', 'crm_entry'].includes(
+      userRole
+    );
+
+    if (!isFullAccessRole) {
+      if (authUser.name) {
+        const safeName = authUser.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').trim();
+        query.assignedTo = { $regex: new RegExp(`^${safeName}$`, 'i') };
+      } else {
+        query.assignedTo = '__none__';
+      }
+    }
+
+    const assignedToFilter = searchParams.get('assignedTo')?.trim();
+    if (isFullAccessRole && assignedToFilter && assignedToFilter !== 'All') {
+      if (assignedToFilter === 'Unassigned') {
+        query.$or = [
+          { assignedTo: { $exists: false } },
+          { assignedTo: '' },
+          { assignedTo: null },
+        ];
+      } else {
+        const safeAssigned = assignedToFilter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        query.assignedTo = { $regex: new RegExp(`^${safeAssigned}$`, 'i') };
+      }
+    }
+
     if (status && status !== 'All') {
       query.status = status;
     }
@@ -50,10 +81,22 @@ export async function GET(request: NextRequest) {
       ];
     }
 
+    // Stats ke aggregate ke liye bhi filter
+    const statsMatchStage = !isFullAccessRole
+      ? {
+          assignedTo: authUser.name
+            ? { $regex: new RegExp(`^${authUser.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').trim()}$`, 'i') }
+            : '__none__',
+        }
+      : {};
+
     // Run leads query and status aggregation concurrently in 1 round-trip
     const [leads, statusCounts] = await Promise.all([
       Lead.find(query).sort({ createdAt: -1 }).lean(),
       Lead.aggregate([
+        {
+          $match: statsMatchStage,
+        },
         {
           $group: {
             _id: '$status',
@@ -114,7 +157,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Access Denied: Only Data Entry Operators (crm_entry) can submit leads. CRM Editors are not permitted to add leads.',
+          message:
+            'Access Denied: Only Data Entry Operators (crm_entry) can submit leads. CRM Editors are not permitted to add leads.',
         },
         { status: 403 }
       );
@@ -123,7 +167,7 @@ export async function POST(request: NextRequest) {
     await connectToDatabase();
 
     const body = await request.json();
-    const { name, phone, loanType, loanAmount, city, bankName, notes } = body;
+    const { name, phone, loanType, loanAmount, city, bankName, notes, assignedTo } = body;
 
     // Basic Validations
     if (!name || !phone || !loanAmount) {
@@ -164,8 +208,9 @@ export async function POST(request: NextRequest) {
       loanAmount: Number(loanAmount),
       city: city?.trim() || '',
       bankName: bankName?.trim() || '',
-      status: 'Fresh', // Initial state: Fresh
+      status: 'Fresh',
       source: 'Form',
+      assignedTo: assignedTo?.trim() || '',
       notes: notes?.trim() || '',
     });
 
@@ -179,7 +224,6 @@ export async function POST(request: NextRequest) {
     );
   } catch (error: any) {
     console.error('Error creating lead:', error);
-    // MongoDB duplicate key error code 11000
     if (error.code === 11000) {
       return NextResponse.json(
         {
@@ -193,6 +237,60 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { success: false, message: error.message || 'Server error creating lead' },
+      { status: 500 }
+    );
+  }
+}
+
+// PATCH: Bulk assign leads
+export async function PATCH(request: NextRequest) {
+  try {
+    const authUser = await getAuthUser(request);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: 'Authentication required. Please log in.' },
+        { status: 401 }
+      );
+    }
+
+    if (!canEditLeads(authUser.role)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: 'Access Denied: Only Admins and Editors can assign leads.',
+        },
+        { status: 403 }
+      );
+    }
+
+    await connectToDatabase();
+
+    const body = await request.json();
+    const { leadIds, assignedTo } = body;
+
+    if (!Array.isArray(leadIds) || leadIds.length === 0) {
+      return NextResponse.json(
+        { success: false, message: 'leadIds array is required and must not be empty.' },
+        { status: 400 }
+      );
+    }
+
+    const targetAgent = typeof assignedTo === 'string' ? assignedTo.trim() : '';
+
+    const result = await Lead.updateMany(
+      { _id: { $in: leadIds } },
+      { $set: { assignedTo: targetAgent } }
+    );
+
+    return NextResponse.json({
+      success: true,
+      message: `Successfully assigned ${result.modifiedCount} lead(s) to ${targetAgent || 'Unassigned'}.`,
+      modifiedCount: result.modifiedCount,
+    });
+  } catch (error: any) {
+    console.error('Error in bulk assign:', error);
+    return NextResponse.json(
+      { success: false, message: error.message || 'Failed to bulk assign leads' },
       { status: 500 }
     );
   }

@@ -169,6 +169,9 @@ export async function POST(request: NextRequest) {
         if (match) status = match;
       }
 
+      const rawAssignedTo = getRowVal(row, ['assignedto', 'assigned to', 'agent', 'assigned agent', 'telecaller', 'assigned']);
+      const assignedTo = (rawAssignedTo ?? '').toString().trim();
+
       // Skip completely empty rows silently
       if (!name && !phone && !rawAmount) {
         return;
@@ -210,6 +213,7 @@ export async function POST(request: NextRequest) {
 
       if (panNumber) leadItem.panNumber = panNumber;
       if (email) leadItem.email = email;
+      if (assignedTo) leadItem.assignedTo = assignedTo;
 
       validLeadsToInsert.push(leadItem);
     });

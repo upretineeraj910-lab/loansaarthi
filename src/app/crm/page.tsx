@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Link from 'next/link';
 import * as XLSX from 'xlsx';
 import {
@@ -17,7 +17,6 @@ import {
   Clock,
   Briefcase,
   Layers,
-  FileSpreadsheet,
   ChevronDown,
   Trash2,
   Check,
@@ -31,6 +30,10 @@ import {
   BellRing,
   PhoneForwarded,
   Voicemail,
+  UserCheck,
+  Users,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import './crm-theme.css';
 
@@ -57,6 +60,7 @@ interface Lead {
   rejectionReason?: string;
   approvedBank?: string;
   approvedAmount?: number;
+  assignedTo?: string;
   notes?: string;
   createdAt: string;
   updatedAt: string;
@@ -74,6 +78,14 @@ interface Stats {
   approved: number;
   rejected: number;
   disbursed: number;
+}
+
+interface AgentUser {
+  _id?: string;
+  id?: string;
+  name: string;
+  email: string;
+  role: string;
 }
 
 const COMMON_BANKS = [
@@ -124,6 +136,8 @@ const STATUS_OPTIONS: {
   { value: 'Disbursed', label: 'Disbursed', className: 'crm-status--disbursed' },
 ];
 
+const PAGE_SIZE = 10;
+
 export default function CrmDashboardPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [stats, setStats] = useState<Stats>({
@@ -147,6 +161,15 @@ export default function CrmDashboardPage() {
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [leadError, setLeadError] = useState<string | null>(null);
+
+  // Pagination State
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // Assignment Feature States
+  const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([]);
+  const [agentsList, setAgentsList] = useState<AgentUser[]>([]);
+  const [selectedAgentName, setSelectedAgentName] = useState<string>('');
+  const [assigningBatch, setAssigningBatch] = useState(false);
 
   const [approvalModalLead, setApprovalModalLead] = useState<Lead | null>(null);
   const [approvalForm, setApprovalForm] = useState({
@@ -190,8 +213,30 @@ export default function CrmDashboardPage() {
     fetchUserAuth();
   }, [fetchUserAuth]);
 
-  const canEdit = currentUser?.role === 'crm_editor' || currentUser?.role === 'superadmin';
-  const canEnter = currentUser?.role === 'crm_entry' || currentUser?.role === 'superadmin';
+  const isSuperAdmin = currentUser?.role === 'superadmin';
+  const isAdmin = currentUser?.role === 'superadmin' || currentUser?.role === 'admin';
+  const canEdit = currentUser?.role === 'crm_editor' || isAdmin;
+  const canEnter = currentUser?.role === 'crm_entry' || isAdmin;
+
+  // Fetch Agents (crm_editor) list for Admin / Super Admin
+  const fetchAgents = useCallback(async () => {
+    if (!isAdmin) return;
+    try {
+      const res = await fetch('/api/crm/agents');
+      if (res.ok) {
+        const data = await res.json();
+        const users: AgentUser[] = data.agents || data.users || [];
+        const editors = users.filter((u) => u.role === 'crm_editor');
+        setAgentsList(editors);
+      }
+    } catch (err) {
+      console.warn('Could not fetch agents directly, fallback can be handled:', err);
+    }
+  }, [isAdmin]);
+
+  useEffect(() => {
+    fetchAgents();
+  }, [fetchAgents]);
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
@@ -222,9 +267,18 @@ export default function CrmDashboardPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
       fetchLeads();
+      setCurrentPage(1);
+      setSelectedLeadIds([]);
     }, 200);
     return () => clearTimeout(timer);
   }, [fetchLeads]);
+
+  // Paginated leads calculation
+  const totalPages = Math.max(1, Math.ceil(leads.length / PAGE_SIZE));
+  const paginatedLeads = useMemo(() => {
+    const start = (currentPage - 1) * PAGE_SIZE;
+    return leads.slice(start, start + PAGE_SIZE);
+  }, [leads, currentPage]);
 
   const executeUpdate = async (leadId: string, payload: Record<string, any>) => {
     setUpdatingId(leadId);
@@ -247,7 +301,6 @@ export default function CrmDashboardPage() {
 
         setStatusMessage(`Lead status updated successfully!`);
         setTimeout(() => setStatusMessage(null), 3000);
-        fetchLeads();
       } else {
         alert(data.message || 'Failed to update lead');
       }
@@ -255,6 +308,74 @@ export default function CrmDashboardPage() {
       alert('Error updating lead: ' + err.message);
     } finally {
       setUpdatingId(null);
+    }
+  };
+
+  // Bulk Selection Handlers
+  const handleToggleSelectOne = (id: string) => {
+    setSelectedLeadIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  const handleSelectFirst10 = () => {
+    const first10Ids = paginatedLeads.slice(0, 10).map((l) => l._id);
+    setSelectedLeadIds(first10Ids);
+    setStatusMessage(`Selected top ${first10Ids.length} leads on this page`);
+    setTimeout(() => setStatusMessage(null), 2500);
+  };
+
+  const handleToggleSelectAllPage = () => {
+    const currentPageIds = paginatedLeads.map((l) => l._id);
+    const allSelected = currentPageIds.every((id) => selectedLeadIds.includes(id));
+    if (allSelected) {
+      setSelectedLeadIds((prev) => prev.filter((id) => !currentPageIds.includes(id)));
+    } else {
+      setSelectedLeadIds((prev) => Array.from(new Set([...prev, ...currentPageIds])));
+    }
+  };
+
+  const handleBulkAssign = async () => {
+    if (!selectedAgentName) {
+      alert('Kripya pehle ek Agent choose karein!');
+      return;
+    }
+    if (selectedLeadIds.length === 0) {
+      alert('Kam se kam ek case select karein!');
+      return;
+    }
+
+    setAssigningBatch(true);
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          leadIds: selectedLeadIds,
+          assignedTo: selectedAgentName,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        alert(data.message || 'Failed to assign leads. Please check permissions.');
+        return;
+      }
+
+      setLeads((prev) =>
+        prev.map((lead) =>
+          selectedLeadIds.includes(lead._id) ? { ...lead, assignedTo: selectedAgentName } : lead
+        )
+      );
+
+      setStatusMessage(`Successfully assigned ${selectedLeadIds.length} lead(s) to ${selectedAgentName}!`);
+      setSelectedLeadIds([]);
+      setTimeout(() => setStatusMessage(null), 3500);
+    } catch (err: any) {
+      alert('Error in assigning leads: ' + err.message);
+    } finally {
+      setAssigningBatch(false);
     }
   };
 
@@ -317,52 +438,6 @@ export default function CrmDashboardPage() {
     });
 
     setRejectionModalLead(null);
-  };
-
-  const handleDeleteLead = async (leadId: string, leadName: string) => {
-    if (!confirm(`Are you sure you want to delete the lead for "${leadName}"?`)) return;
-
-    try {
-      const res = await fetch(`/api/leads/${leadId}`, { method: 'DELETE' });
-      const data = await res.json();
-      if (data.success) {
-        setLeads((prev) => prev.filter((l) => l._id !== leadId));
-        if (selectedLead?._id === leadId) setSelectedLead(null);
-        fetchLeads();
-      } else {
-        alert(data.message || 'Failed to delete lead');
-      }
-    } catch (err: any) {
-      alert('Error deleting lead: ' + err.message);
-    }
-  };
-
-  const handleExportToExcel = () => {
-    if (leads.length === 0) return;
-
-    const exportRows = leads.map((lead, idx) => ({
-      '#': idx + 1,
-      'Customer Name': lead.name,
-      'Phone Number': lead.phone,
-      'Loan Type': lead.loanType,
-      'Applied Amount (Rs)': lead.loanAmount,
-      Status: lead.status,
-      'Bank Name': lead.approvedBank || lead.bankName || '--',
-      'Approved Amount (Rs)': lead.approvedAmount ? lead.approvedAmount : '--',
-      'Rejection Reason': lead.rejectionReason || '--',
-      City: lead.city || '',
-      Source: lead.source,
-      Notes: lead.notes || '',
-      'Created Date': new Date(lead.createdAt).toLocaleDateString('en-IN'),
-    }));
-
-    const worksheet = XLSX.utils.json_to_sheet(exportRows);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered_Leads');
-    XLSX.writeFile(
-      workbook,
-      `LoanSaarthi_Leads_${statusFilter}_${new Date().toISOString().slice(0, 10)}.xlsx`
-    );
   };
 
   const metricClass = (filterVal: string, cssKey: string) =>
@@ -441,26 +516,19 @@ export default function CrmDashboardPage() {
             </p>
           </div>
 
-          <div className="crm-header-actions">
+          <div className="crm-header-actions" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            {canEnter && (
+              <Link
+                href="/crm/entry"
+                className="crm-btn crm-btn-primary"
+                style={{ fontSize: '0.82rem', padding: '6px 12px', display: 'inline-flex', alignItems: 'center', gap: '5px' }}
+              >
+                <PlusCircle size={14} /> Add Leads / Entry
+              </Link>
+            )}
             <button onClick={() => fetchLeads()} className="crm-btn crm-btn-icon" title="Refresh Leads">
               <RefreshCw size={16} className={loading ? 'animate-spin' : ''} />
             </button>
-
-            <button
-              onClick={handleExportToExcel}
-              disabled={leads.length === 0}
-              className="crm-btn crm-btn-ghost"
-            >
-              <FileSpreadsheet size={15} className="text-green" />
-              Export to Excel
-            </button>
-
-            {canEnter && (
-              <Link href="/crm/entry" className="crm-btn crm-btn-primary crm-link-ml">
-                <PlusCircle size={16} />
-                + Add Lead / Excel
-              </Link>
-            )}
           </div>
         </div>
 
@@ -617,16 +685,118 @@ export default function CrmDashboardPage() {
           </div>
         </div>
 
+        {/* ADMIN & SUPER ADMIN: Batch Assignment Action Toolbar */}
+        {isAdmin && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '12px',
+              padding: '12px 16px',
+              marginBottom: '1rem',
+              borderRadius: '8px',
+              backgroundColor: '#f8fafc',
+              border: '1px solid #e2e8f0',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#334155' }}>
+                <Users size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: '-2px' }} />
+                Case Assignment ({selectedLeadIds.length} Selected):
+              </span>
+              <button
+                type="button"
+                onClick={handleSelectFirst10}
+                className="crm-btn crm-btn-ghost"
+                style={{ fontSize: '0.8rem', padding: '4px 8px' }}
+              >
+                Mark First 10
+              </button>
+              <button
+                type="button"
+                onClick={handleToggleSelectAllPage}
+                className="crm-btn crm-btn-ghost"
+                style={{ fontSize: '0.8rem', padding: '4px 8px' }}
+              >
+                {paginatedLeads.every((l) => selectedLeadIds.includes(l._id)) && paginatedLeads.length > 0
+                  ? 'Unselect Page'
+                  : 'Select Current Page'}
+              </button>
+              {selectedLeadIds.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setSelectedLeadIds([])}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    color: '#dc2626',
+                    cursor: 'pointer',
+                    fontSize: '0.8rem',
+                    textDecoration: 'underline',
+                  }}
+                >
+                  Clear All
+                </button>
+              )}
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+              <select
+                value={selectedAgentName}
+                onChange={(e) => setSelectedAgentName(e.target.value)}
+                className="crm-select"
+                style={{ fontSize: '0.85rem', padding: '6px 10px', minWidth: '180px' }}
+              >
+                <option value="">-- Choose Agent (Editor) --</option>
+                {agentsList.map((agent) => (
+                  <option key={agent._id || agent.id || agent.email} value={agent.name}>
+                    {agent.name}
+                  </option>
+                ))}
+              </select>
+
+              <button
+                type="button"
+                onClick={handleBulkAssign}
+                disabled={assigningBatch || selectedLeadIds.length === 0 || !selectedAgentName}
+                className="crm-btn crm-btn-primary"
+                style={{ fontSize: '0.85rem', padding: '6px 14px' }}
+              >
+                {assigningBatch ? (
+                  <RefreshCw size={14} className="animate-spin" />
+                ) : (
+                  <UserCheck size={14} />
+                )}
+                Assign Cases
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Table */}
         <div className="crm-table-card">
           <div className="crm-table-scroll">
             <table className="crm-table">
               <thead>
                 <tr>
+                  {isAdmin && (
+                    <th style={{ width: '40px', textAlign: 'center' }}>
+                      <input
+                        type="checkbox"
+                        checked={paginatedLeads.length > 0 && paginatedLeads.every((l) => selectedLeadIds.includes(l._id))}
+                        onChange={handleToggleSelectAllPage}
+                        style={{ cursor: 'pointer', accentColor: 'var(--brand-green, #16a34a)' }}
+                        title="Select / Unselect All on This Page"
+                      />
+                    </th>
+                  )}
                   <th>#</th>
                   <th>Customer</th>
                   <th>Mobile Number</th>
                   <th>Loan Applied</th>
+                  <th>Assigned To</th>
                   <th className="is-strong">{canEdit ? 'Status (Click to Update) ⚡' : 'Status (View-Only 🔒)'}</th>
                   <th>Bank / Rejection Details</th>
                   <th>Source</th>
@@ -636,36 +806,55 @@ export default function CrmDashboardPage() {
               <tbody>
                 {leadError ? (
                   <tr>
-                    <td colSpan={8} className="crm-table-empty" style={{ color: '#dc2626' }}>
+                    <td colSpan={isAdmin ? 10 : 9} className="crm-table-empty" style={{ color: '#dc2626' }}>
                       <AlertTriangle size={26} style={{ margin: '0 auto 0.5rem', color: '#dc2626' }} />
                       {leadError}
                     </td>
                   </tr>
                 ) : loading ? (
                   <tr>
-                    <td colSpan={8} className="crm-table-loading">
+                    <td colSpan={isAdmin ? 10 : 9} className="crm-table-loading">
                       <RefreshCw size={22} className="animate-spin" style={{ margin: '0 auto 0.5rem', color: 'var(--brand-green)' }} />
                       Loading leads from database...
                     </td>
                   </tr>
                 ) : leads.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="crm-table-empty">
+                    <td colSpan={isAdmin ? 10 : 9} className="crm-table-empty">
                       <Filter size={26} style={{ margin: '0 auto 0.5rem' }} />
-                      No leads found matching your criteria.
-                      {canEnter && (
-                        <div style={{ marginTop: '0.75rem' }}>
-                          <Link href="/crm/entry" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex' }}>
-                            <PlusCircle size={13} /> Add first lead
-                          </Link>
-                        </div>
-                      )}
+                      {!isAdmin && currentUser?.role === 'crm_editor'
+                        ? 'No leads currently assigned to you. Once an admin assigns cases, they will appear here.'
+                        : 'No leads found matching your criteria.'}
                     </td>
                   </tr>
                 ) : (
-                  leads.map((lead, idx) => (
-                    <tr key={lead._id} onClick={() => setSelectedLead(lead)}>
-                      <td className="crm-row-index">{idx + 1}</td>
+                  paginatedLeads.map((lead, idx) => (
+                    <tr
+                      key={lead._id}
+                      onClick={() => setSelectedLead(lead)}
+                      style={{
+                        backgroundColor: selectedLeadIds.includes(lead._id) ? '#f0fdf4' : undefined,
+                      }}
+                    >
+                      {/* Checkbox for Admin / Super Admin */}
+                      {isAdmin && (
+                        <td
+                          style={{ textAlign: 'center', cursor: 'pointer' }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleSelectOne(lead._id);
+                          }}
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedLeadIds.includes(lead._id)}
+                            onChange={() => {}}
+                            style={{ cursor: 'pointer', accentColor: 'var(--brand-green, #16a34a)', pointerEvents: 'none' }}
+                          />
+                        </td>
+                      )}
+
+                      <td className="crm-row-index">{(currentPage - 1) * PAGE_SIZE + idx + 1}</td>
 
                       <td>
                         <div className="crm-cell-name">{lead.name}</div>
@@ -686,6 +875,58 @@ export default function CrmDashboardPage() {
                       <td>
                         <div className="crm-loan-type">{lead.loanType}</div>
                         <div className="crm-loan-amount">₹{lead.loanAmount?.toLocaleString('en-IN')}</div>
+                      </td>
+
+                      {/* Assigned To Column */}
+                      <td onClick={(e) => e.stopPropagation()}>
+                        {isAdmin ? (
+                          <div className="crm-assign-wrap">
+                            <select
+                              value={lead.assignedTo || ''}
+                              onChange={async (e) => {
+                                const newAgent = e.target.value;
+                                await executeUpdate(lead._id, { assignedTo: newAgent });
+                              }}
+                              className="crm-select"
+                              style={{
+                                fontSize: '0.78rem',
+                                padding: '3px 8px',
+                                borderRadius: '6px',
+                                border: lead.assignedTo ? '1px solid #c7d2fe' : '1px dashed #cbd5e1',
+                                backgroundColor: lead.assignedTo ? '#eef2ff' : '#fff',
+                                color: lead.assignedTo ? '#3730a3' : '#64748b',
+                                fontWeight: lead.assignedTo ? 600 : 400,
+                                cursor: 'pointer',
+                                minWidth: '130px',
+                              }}
+                            >
+                              <option value="">Unassigned</option>
+                              {agentsList.map((ag) => (
+                                <option key={ag._id || ag.id || ag.name} value={ag.name}>
+                                  {ag.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        ) : lead.assignedTo ? (
+                          <span
+                            style={{
+                              display: 'inline-flex',
+                              alignItems: 'center',
+                              gap: '4px',
+                              padding: '2px 8px',
+                              borderRadius: '12px',
+                              fontSize: '0.75rem',
+                              backgroundColor: '#e0e7ff',
+                              color: '#3730a3',
+                              fontWeight: 500,
+                            }}
+                          >
+                            <Users size={11} /> {lead.assignedTo}
+                          </span>
+                        ) : (
+                          <span style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Unassigned</span>
+                        )}
                       </td>
 
                       <td className="crm-status-cell" onClick={(e) => e.stopPropagation()}>
@@ -800,15 +1041,6 @@ export default function CrmDashboardPage() {
                           >
                             <Eye size={14} />
                           </button>
-                          {canEdit && (
-                            <button
-                              onClick={() => handleDeleteLead(lead._id, lead.name)}
-                              className="crm-icon-btn crm-icon-btn--delete"
-                              title="Delete Lead"
-                            >
-                              <Trash2 size={14} />
-                            </button>
-                          )}
                         </div>
                       </td>
                     </tr>
@@ -818,12 +1050,85 @@ export default function CrmDashboardPage() {
             </table>
           </div>
 
-          <div className="crm-table-footer">
-            <div>
-              Showing <strong>{leads.length}</strong> records
+          {/* Table Footer with Pagination Controls */}
+          <div
+            className="crm-table-footer"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '12px 16px',
+              borderTop: '1px solid var(--color-paper-line, #e2e8f0)',
+              flexWrap: 'wrap',
+              gap: '12px',
+            }}
+          >
+            <div style={{ fontSize: '0.85rem', color: '#64748b' }}>
+              Showing{' '}
+              <strong>
+                {leads.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1}-
+                {Math.min(currentPage * PAGE_SIZE, leads.length)}
+              </strong>{' '}
+              of <strong>{leads.length}</strong> leads (Page {currentPage} of {totalPages})
             </div>
-            <div>
-              💡 Approving records the bank and sanctioned amount. Rejecting records the rejection reason.
+
+            {/* Pagination Button Group */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <button
+                type="button"
+                disabled={currentPage <= 1}
+                onClick={() => {
+                  setCurrentPage((p) => Math.max(1, p - 1));
+                  setSelectedLeadIds([]);
+                }}
+                className="crm-btn crm-btn-ghost"
+                style={{ padding: '6px 10px', fontSize: '0.8rem' }}
+              >
+                <ChevronLeft size={14} /> Prev
+              </button>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1)
+                .filter((p) => p === 1 || p === totalPages || Math.abs(p - currentPage) <= 1)
+                .map((pageNum, idx, arr) => {
+                  const showEllipsis = idx > 0 && pageNum - arr[idx - 1] > 1;
+                  return (
+                    <React.Fragment key={pageNum}>
+                      {showEllipsis && <span style={{ padding: '0 4px', color: '#94a3b8' }}>...</span>}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCurrentPage(pageNum);
+                          setSelectedLeadIds([]);
+                        }}
+                        style={{
+                          padding: '4px 10px',
+                          fontSize: '0.8rem',
+                          borderRadius: '4px',
+                          border: pageNum === currentPage ? '1px solid var(--brand-green, #16a34a)' : '1px solid #cbd5e1',
+                          backgroundColor: pageNum === currentPage ? 'var(--brand-green, #16a34a)' : '#fff',
+                          color: pageNum === currentPage ? '#fff' : '#334155',
+                          cursor: 'pointer',
+                          fontWeight: pageNum === currentPage ? 600 : 400,
+                        }}
+                      >
+                        {pageNum}
+                      </button>
+                    </React.Fragment>
+                  );
+                })}
+
+              <button
+                type="button"
+                disabled={currentPage >= totalPages}
+                onClick={() => {
+                  setCurrentPage((p) => Math.min(totalPages, p + 1));
+                  setSelectedLeadIds([]);
+                }}
+                className="crm-btn crm-btn-ghost"
+                style={{ padding: '6px 10px', fontSize: '0.8rem' }}
+              >
+                Next <ChevronRight size={14} />
+              </button>
             </div>
           </div>
         </div>
@@ -1058,7 +1363,7 @@ export default function CrmDashboardPage() {
                   <div className="crm-info-grid">
                     <div>
                       <span className="label">Sanctioned Bank:</span>{' '}
-                      <strong>{selectedLead.approvedBank || 'Not Set'}</strong>
+                      <strong>{selectedLead.approvedBank || selectedLead.bankName || 'Not Set'}</strong>
                     </div>
                     <div>
                       <span className="label">Approved Amount:</span>{' '}
@@ -1084,6 +1389,32 @@ export default function CrmDashboardPage() {
                   <a href={`tel:${selectedLead.phone}`} className="crm-phone-link" style={{ fontSize: '0.9rem' }}>
                     <Phone size={12} /> {selectedLead.phone}
                   </a>
+                </div>
+
+                <div className="crm-detail-box">
+                  <div className="crm-detail-box-label">Assigned Agent</div>
+                  {isAdmin ? (
+                    <select
+                      value={selectedLead.assignedTo || ''}
+                      onChange={(e) => {
+                        const newAgent = e.target.value;
+                        executeUpdate(selectedLead._id, { assignedTo: newAgent });
+                      }}
+                      className="crm-select"
+                      style={{ fontSize: '0.8rem', padding: '3px 8px', width: '100%' }}
+                    >
+                      <option value="">Unassigned</option>
+                      {agentsList.map((ag) => (
+                        <option key={ag._id || ag.id || ag.name} value={ag.name}>
+                          {ag.name}
+                        </option>
+                      ))}
+                    </select>
+                  ) : (
+                    <div className="crm-detail-box-value" style={{ color: selectedLead.assignedTo ? '#3730a3' : '#94a3b8' }}>
+                      {selectedLead.assignedTo || 'Unassigned'}
+                    </div>
+                  )}
                 </div>
 
                 <div className="crm-detail-box">
@@ -1118,15 +1449,6 @@ export default function CrmDashboardPage() {
                   <div>{selectedLead.notes}</div>
                 </div>
               )}
-
-              <div className="crm-modal-footer">
-                <span>Added: {new Date(selectedLead.createdAt).toLocaleString('en-IN')}</span>
-                {canEdit && (
-                  <button onClick={() => handleDeleteLead(selectedLead._id, selectedLead.name)} className="crm-delete-link">
-                    <Trash2 size={12} /> Delete Lead
-                  </button>
-                )}
-              </div>
             </div>
           </div>
         )}

@@ -24,7 +24,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Access Denied: Data Entry Operators cannot modify lead statuses or details. Only CRM Editors can edit leads.',
+          message: 'Access Denied: Data Entry Operators cannot modify lead statuses or details. Only CRM Editors and Admins can edit leads.',
         },
         { status: 403 }
       );
@@ -43,6 +43,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       'rejectionReason',
       'approvedBank',
       'approvedAmount',
+      'assignedTo',
     ];
     const updateData: Record<string, any> = {};
 
@@ -78,7 +79,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-// DELETE: Delete lead
+// DELETE: Delete lead (Admin and SuperAdmin only)
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const authUser = await getAuthUser(request);
@@ -89,11 +90,12 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    if (!canEditLeads(authUser.role)) {
+    const role = authUser.role?.toLowerCase();
+    if (role !== 'superadmin' && role !== 'admin') {
       return NextResponse.json(
         {
           success: false,
-          message: 'Access Denied: Only CRM Editors can delete leads.',
+          message: 'Access Denied: Only Admins can delete leads.',
         },
         { status: 403 }
       );

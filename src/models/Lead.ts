@@ -27,6 +27,7 @@ export interface ILeadDocument extends Document {
   rejectionReason?: string;
   approvedBank?: string;
   approvedAmount?: number;
+  assignedTo?: string;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -42,7 +43,7 @@ const LeadSchema = new Schema<ILeadDocument>(
     phone: {
       type: String,
       required: [true, 'Phone number is required'],
-      unique: true, // Duplicate protection mobile number se
+      unique: true,
       trim: true,
     },
     panNumber: {
@@ -110,6 +111,10 @@ const LeadSchema = new Schema<ILeadDocument>(
     approvedAmount: {
       type: Number,
       default: 0,
+    },
+    assignedTo: {
+      type: String,
+      default: '',
     },
     notes: {
       type: String,

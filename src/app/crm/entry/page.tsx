@@ -24,6 +24,7 @@ import {
   RefreshCw,
   LayoutDashboard,
   Landmark,
+  Users,
 } from 'lucide-react';
 import '@/app/crm/crm-theme.css';
 
@@ -49,6 +50,7 @@ export default function LeadEntryPage() {
   const router = useRouter();
   const [authLoading, setAuthLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState<{ id?: string; email?: string; role?: string; name?: string } | null>(null);
+  const [agentsList, setAgentsList] = useState<{ name: string; role: string }[]>([]);
 
   useEffect(() => {
     const verifyAccess = async () => {
@@ -71,7 +73,21 @@ export default function LeadEntryPage() {
       }
     };
 
+    const fetchAgents = async () => {
+      try {
+        const res = await fetch('/api/crm/agents');
+        if (res.ok) {
+          const data = await res.json();
+          const editors = (data.agents || []).filter((u: any) => u.role === 'crm_editor');
+          setAgentsList(editors);
+        }
+      } catch (err) {
+        console.warn('Failed to load agents list:', err);
+      }
+    };
+
     verifyAccess();
+    fetchAgents();
   }, []);
 
   const [activeTab, setActiveTab] = useState<'form' | 'excel'>('form');
@@ -83,6 +99,7 @@ export default function LeadEntryPage() {
     loanAmount: '',
     city: '',
     bankName: 'HDFC Bank',
+    assignedTo: '',
     notes: '',
   });
 
@@ -158,6 +175,7 @@ export default function LeadEntryPage() {
           loanAmount: '',
           city: '',
           bankName: 'HDFC Bank',
+          assignedTo: '',
           notes: '',
         });
         setCustomBank('');
@@ -315,13 +333,11 @@ export default function LeadEntryPage() {
     );
   }
 
-  // 3. Block roles other than crm_entry and superadmin
-  if (currentUser.role !== 'crm_entry' && currentUser.role !== 'superadmin') {
+  // 3. Block roles other than crm_entry, superadmin, and admin
+  if (currentUser.role !== 'crm_entry' && currentUser.role !== 'superadmin' && currentUser.role !== 'admin') {
     const roleLabel =
       currentUser.role === 'crm_editor'
         ? 'CRM Editor'
-        : currentUser.role === 'admin'
-        ? 'Admin'
         : currentUser.role;
 
     return (
@@ -604,6 +620,34 @@ export default function LeadEntryPage() {
                     />
                   </div>
                 )}
+
+                <div className="crm-field">
+                  <label className="crm-field-label">
+                    Assign To Agent (Optional)
+                  </label>
+                  <div className="crm-input-icon-wrap">
+                    <span className="crm-input-icon">
+                      <Users size={15} />
+                    </span>
+                    <select
+                      name="assignedTo"
+                      value={formData.assignedTo}
+                      onChange={handleInputChange}
+                      className="crm-select crm-input-with-icon"
+                      style={{ width: '100%' }}
+                    >
+                      <option value="">-- Leave Unassigned --</option>
+                      {agentsList.map((agent) => (
+                        <option key={agent.name} value={agent.name}>
+                          {agent.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <p className="crm-field-hint">
+                    Choose which telecaller or editor will handle this lead.
+                  </p>
+                </div>
 
                 <div className="crm-field crm-field--wide">
                   <label className="crm-field-label">Remarks / Requirement Notes</label>
