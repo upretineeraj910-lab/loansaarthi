@@ -15,6 +15,7 @@ import {
   CheckCircle2,
   XCircle,
   Clock,
+  Calendar,
   Briefcase,
   Layers,
   ChevronDown,
@@ -517,6 +518,27 @@ export default function CrmDashboardPage() {
           </div>
 
           <div className="crm-header-actions" style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+            {isSuperAdmin && (
+              <Link
+                href="/dashboard/appointments"
+                className="crm-btn"
+                style={{
+                  fontSize: '0.82rem',
+                  padding: '6px 12px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '5px',
+                  background: 'rgba(245, 197, 99, 0.15)',
+                  border: '1px solid rgba(245, 197, 99, 0.4)',
+                  color: '#f5c563',
+                  fontWeight: 600,
+                  borderRadius: '6px',
+                  textDecoration: 'none',
+                }}
+              >
+                <Calendar size={14} /> Expert Appointments
+              </Link>
+            )}
             {canEnter && (
               <Link
                 href="/crm/entry"

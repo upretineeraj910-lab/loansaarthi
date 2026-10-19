@@ -17,6 +17,7 @@ import "./main.css";
 import GoogleReviews from "@/components/GoogleReviews";
 import Image from "next/image";
 import WhyChooseUs from "@/components/Experience";
+import LuxuryHero from "@/components/LuxuryHero";
 
 export default function Home() {
   const structuredData = {
@@ -64,14 +65,43 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* ---------------- HERO ---------------- */}
-      <section id="home" className="container hero-section">
+      {/* ---------------- LUXURY HERO SECTION ---------------- */}
+      <LuxuryHero />
+
+      {/* ---------------- PARTNERS ---------------- */}
+      <section
+        className="bg-ink"
+        style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}
+      >
+        <div className="container">
+          <div className="bank-partners-label">Who we work with</div>
+          <div className="bank-tags flex flex-wrap items-center justify-center gap-6">
+            {BANKS.map((b) => (
+              <div
+                key={b.name}
+                className="bank-logo-wrapper relative h-12 w-32 flex items-center justify-center p-2 bg-white/5 rounded-lg"
+              >
+                <Image
+                  src={b.logo}
+                  alt={b.name}
+                  width={120}
+                  height={40}
+                  className="object-contain max-h-8 w-auto filter brightness-90 hover:brightness-100 transition-all"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ---------------- VERIFICATION & INSTANT DISTRIBUTION ---------------- */}
+      <section id="verification" className="container hero-section" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
         <div className="hero-grid">
           <Reveal>
-            <h1 className="hero-title">
-              India's Most Trusted Loan Distribution Partner.<br />
+            <h2 className="hero-title">
+              India&apos;s Most Trusted Loan Distribution Partner.<br />
               <strong style={{ fontWeight: "normal" }}>42+ Lenders, One Platform</strong>
-            </h1>
+            </h2>
             <p className="hero-text">
               We manage the entire digital distribution journey—from lender comparison and documentation to final disbursement.
             </p>
@@ -79,7 +109,7 @@ export default function Home() {
               <a href="#calculator" className="btn-primary">
                 Check your EMI
               </a>
-              <a href="#contact" className="btn-secondary">
+              <a href="/talk-to-expert" className="btn-secondary">
                 Free Consultation
                 <ArrowRight size={15} aria-hidden="true" />
               </a>
@@ -105,32 +135,6 @@ export default function Home() {
               <HeroVerificationCard />
             </div>
           </Reveal>
-        </div>
-      </section>
-
-      {/* ---------------- PARTNERS ---------------- */}
-      <section
-        className="bg-ink"
-        style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}
-      >
-        <div className="container">
-          <div className="bank-partners-label">Who we work with</div>
-          <div className="bank-tags flex flex-wrap items-center justify-center gap-6">
-            {BANKS.map((b) => (
-              <div
-                key={b.name}
-                className="bank-logo-wrapper relative h-12 w-32 flex items-center justify-center p-2 bg-white/5 rounded-lg"
-              >
-                <Image
-                  src={b.logo}
-                  alt={b.name}
-                  width={120}
-                  height={40}
-                  className="object-contain max-h-8 w-auto filter brightness-90 hover:brightness-100 transition-all"
-                />
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -160,6 +164,10 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
+        <GoogleReviews />
+      </div>
+
       {/* ---------------- TEAM ---------------- */}
       <Team />
 
@@ -179,9 +187,9 @@ export default function Home() {
       </section>
 
       {/* ---------------- TESTIMONIALS ---------------- */}
-      <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
+      {/* <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
         <GoogleReviews />
-      </div>
+      </div> */}
 
       {/* ---------------- FAQ ---------------- */}
       <section id="faq" className="faq-section">

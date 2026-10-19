@@ -50,13 +50,17 @@ export default function Dashboard() {
   const [documentsLoading, setDocumentsLoading] = useState(false);
   const [documentsError, setDocumentsError] = useState('');
 
+  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
+
   useEffect(() => {
     const userString = localStorage.getItem('user');
 
     if (userString) {
       try {
         const user = JSON.parse(userString);
-
+        if (user?.role === 'superadmin') {
+          setIsSuperAdmin(true);
+        }
         if (user?.id) {
           const origin = window.location.origin;
           setShareUrl(`${origin}/shared-form?ref=${user.id}`);
@@ -65,6 +69,15 @@ export default function Dashboard() {
         console.error('Error parsing user data:', err);
       }
     }
+
+    fetch('/api/auth/me')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data?.authenticated && data?.role === 'superadmin') {
+          setIsSuperAdmin(true);
+        }
+      })
+      .catch(() => {});
   }, []);
 
   useEffect(() => {
@@ -187,6 +200,16 @@ export default function Dashboard() {
           <Link href="/crm/entry" className={styles.navItem}>
             CRM Entries
           </Link>
+
+          {isSuperAdmin && (
+            <Link
+              href="/dashboard/appointments"
+              className={styles.navItem}
+              style={{ color: '#f5c563', fontWeight: 600 }}
+            >
+              📅 Expert Appointments
+            </Link>
+          )}
 
           {/* <a href="#" className={styles.navItem}>
             Settings

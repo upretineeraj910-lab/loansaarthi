@@ -290,7 +290,6 @@ export default function HeroVerificationCard() {
                 }
                 className="hero-input"
                 required
-                autoFocus
               />
             </div>
 

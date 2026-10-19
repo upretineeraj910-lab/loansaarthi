@@ -1,0 +1,297 @@
+/* Luxury Dark Green & Gold Hero Section */
+.page {
+  width: 100%;
+  background: radial-gradient(circle at 80% 20%, #0d3623 0%, #082116 45%, #04130c 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 3.5rem 1.5rem 4.5rem;
+  color: #ffffff;
+}
+
+/* Subtle background glowing ambient wave effect */
+.page::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -5%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(245, 197, 99, 0.08) 0%, rgba(13, 54, 35, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(111, 174, 69, 0.07) 0%, rgba(4, 19, 12, 0) 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero {
+  max-width: 74rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  align-items: center;
+  gap: 3.5rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Left Typography & CTAs */
+.left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-primary, "Inter", sans-serif);
+}
+
+.sub {
+  font-size: 1.08rem;
+  line-height: 1.6;
+  color: #cbd5e1;
+  margin-bottom: 2.25rem;
+  font-weight: 400;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  flex-wrap: wrap;
+}
+
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5c563;
+  color: #081a12;
+  font-weight: 700;
+  font-size: 0.98rem;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 18px rgba(245, 197, 99, 0.28);
+}
+
+.btnPrimary:hover {
+  background-color: #eab34b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(245, 197, 99, 0.38);
+}
+
+.btnGhost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(9, 32, 23, 0.5);
+  border: 1px solid rgba(245, 197, 99, 0.45);
+  color: #f5c563;
+  font-weight: 600;
+  font-size: 0.98rem;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+
+.btnGhost:hover {
+  background-color: rgba(245, 197, 99, 0.12);
+  border-color: #f5c563;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Right Card & Badges */
+.cardWrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 490px;
+  background: rgba(10, 34, 23, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 197, 99, 0.22);
+  border-radius: 22px;
+  padding: 2.75rem 2rem 2.25rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+/* Luxury Golden Corner Accents (Matching image) */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid #f5c563;
+  border-right: 2px solid #f5c563;
+  border-top-right-radius: 6px;
+  pointer-events: none;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid #f5c563;
+  border-left: 2px solid #f5c563;
+  border-bottom-left-radius: 6px;
+  pointer-events: none;
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #f5c563;
+  color: #071911;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 5px 18px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* 2x2 Grid Features */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.25rem 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+
+.icon svg {
+  width: 44px;
+  height: 44px;
+  stroke: #f5c563;
+  stroke-width: 2.2;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.25s ease;
+}
+
+.feature:hover .icon svg {
+  transform: scale(1.08);
+}
+
+.feature h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.35rem;
+  line-height: 1.32;
+  font-family: var(--font-primary, "Inter", sans-serif);
+}
+
+.feature p {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 968px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .left {
+    align-items: center;
+  }
+
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .cardWrap {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 540px) {
+  .page {
+    padding: 2.5rem 1rem 3.5rem;
+  }
+
+  .title {
+    font-size: 2.1rem;
+  }
+
+  .sub {
+    font-size: 0.95rem;
+  }
+
+  .actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btnPrimary,
+  .btnGhost {
+    width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .card {
+    padding: 2.5rem 1.25rem 2rem;
+  }
+}

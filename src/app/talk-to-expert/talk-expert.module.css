@@ -1,0 +1,433 @@
+/* Talk to Expert Page Styles - Luxury Dark Green & Gold */
+.container {
+  min-height: 100vh;
+  width: 100%;
+  background: radial-gradient(circle at 75% 15%, #0e3b26 0%, #071f15 45%, #03100a 100%);
+  color: #ffffff;
+  padding: 3rem 1.25rem 5rem;
+  position: relative;
+  overflow: hidden;
+  font-family: var(--font-primary, "Inter", sans-serif);
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(245, 197, 99, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.shell {
+  max-width: 52rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  transition: color 0.2s;
+}
+
+.backLink:hover {
+  color: #f5c563;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(245, 197, 99, 0.15);
+  border: 1px solid rgba(245, 197, 99, 0.35);
+  color: #f5c563;
+  padding: 0.35rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.title {
+  font-size: 2.6rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  font-size: 1.05rem;
+  color: #94a3b8;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.55;
+}
+
+/* Card Panel */
+.panel {
+  background: rgba(10, 34, 23, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(245, 197, 99, 0.25);
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.fieldFull {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin-bottom: 0.45rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.required {
+  color: #f5c563;
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 14px;
+  color: #f5c563;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  background: rgba(5, 20, 14, 0.7);
+  border: 1px solid rgba(245, 197, 99, 0.22);
+  border-radius: 8px;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  font-size: 0.95rem;
+  color: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.input:focus {
+  border-color: #f5c563;
+  box-shadow: 0 0 0 3px rgba(245, 197, 99, 0.15);
+  background: rgba(8, 28, 19, 0.85);
+}
+
+.input::placeholder {
+  color: #64748b;
+}
+
+.select {
+  width: 100%;
+  background: rgba(5, 20, 14, 0.85);
+  border: 1px solid rgba(245, 197, 99, 0.22);
+  border-radius: 8px;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  font-size: 0.95rem;
+  color: #ffffff;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  transition: all 0.2s ease;
+}
+
+.select:focus {
+  border-color: #f5c563;
+  box-shadow: 0 0 0 3px rgba(245, 197, 99, 0.15);
+}
+
+.select option {
+  background: #081e14;
+  color: #ffffff;
+}
+
+.textarea {
+  width: 100%;
+  background: rgba(5, 20, 14, 0.7);
+  border: 1px solid rgba(245, 197, 99, 0.22);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  color: #ffffff;
+  outline: none;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.textarea:focus {
+  border-color: #f5c563;
+  box-shadow: 0 0 0 3px rgba(245, 197, 99, 0.15);
+}
+
+/* Date Pills & Time Slots */
+.datePillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.datePill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.65rem 0.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  background: rgba(6, 23, 16, 0.6);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.datePill:hover {
+  border-color: #f5c563;
+  background: rgba(245, 197, 99, 0.08);
+}
+
+.datePillActive {
+  border-color: #f5c563;
+  background: #f5c563;
+  color: #081a12;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(245, 197, 99, 0.35);
+}
+
+.datePillDay {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.datePillNum {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* Time Slots (Strictly 3 PM to 5 PM) */
+.timeSlotsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.timeSlotPill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  background: rgba(6, 23, 16, 0.6);
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.timeSlotPill:hover {
+  border-color: #f5c563;
+  background: rgba(245, 197, 99, 0.08);
+}
+
+.timeSlotPillActive {
+  border-color: #f5c563;
+  background: #f5c563;
+  color: #081a12;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(245, 197, 99, 0.35);
+}
+
+.noticeBox {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: 8px;
+  background: rgba(245, 197, 99, 0.08);
+  border: 1px dashed rgba(245, 197, 99, 0.3);
+  font-size: 0.84rem;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.errorBanner {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid #ef4444;
+  color: #fca5a5;
+  padding: 0.85rem 1.15rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.submitBtn {
+  margin-top: 2rem;
+  width: 100%;
+  background: #f5c563;
+  color: #081a12;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 20px rgba(245, 197, 99, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: #eab34b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(245, 197, 99, 0.45);
+}
+
+.submitBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Success Card */
+.successCard {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.successIconWrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(245, 197, 99, 0.15);
+  border: 2px solid #f5c563;
+  color: #f5c563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.successTitle {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.successSub {
+  font-size: 0.98rem;
+  color: #cbd5e1;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  line-height: 1.5;
+}
+
+.summaryBox {
+  background: rgba(6, 23, 16, 0.7);
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 480px;
+  margin: 0 auto 2rem;
+  text-align: left;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.9rem;
+}
+
+.summaryRow:last-child {
+  border-bottom: none;
+}
+
+.summaryLabel {
+  color: #94a3b8;
+}
+
+.summaryValue {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.actionsWrap {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+  }
+  .fieldFull {
+    grid-column: span 1;
+  }
+  .timeSlotsGrid {
+    grid-template-columns: 1fr;
+  }
+  .panel {
+    padding: 1.75rem 1.25rem;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}

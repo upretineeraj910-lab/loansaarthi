@@ -10,6 +10,33 @@ export async function proxy(request: NextRequest) {
   const pathname = request.nextUrl.pathname.toLowerCase();
 
   // ============================================
+  // SUPERADMIN ONLY - APPOINTMENTS (/dashboard/appointments, /crm/appointments)
+  // ============================================
+  if (
+    pathname.startsWith('/dashboard/appointments') ||
+    pathname.startsWith('/crm/appointments')
+  ) {
+    if (!token) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    try {
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+      const { payload } = await jwtVerify(token, secret);
+      const role = (payload.role as string)?.toLowerCase();
+
+      if (role !== 'superadmin') {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+      }
+
+      return NextResponse.next();
+    } catch (error) {
+      console.error('Superadmin Appointments Proxy Error:', error);
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+  }
+
+  // ============================================
   // PROTECTED ROUTES
   // ============================================
 
