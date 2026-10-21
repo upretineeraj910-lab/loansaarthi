@@ -36,8 +36,8 @@ const FEATURES = [
     ),
   },
   {
-    title: "Guidance as per Eligibility",
-    sub: "Personalized recommendations",
+    title: "Consolidate Today, Celebrate Tomorrow",
+    sub: "Convert Your Multiple High-interest App Loan, Credit Card Outstanding Loans into One Low EMI",
     icon: (
       <svg viewBox="0 0 48 48" aria-hidden="true">
         <path d="M24 4l16 6v12c0 10-7 18-16 22C15 40 8 32 8 22V10l16-6z" />

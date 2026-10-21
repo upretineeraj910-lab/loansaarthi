@@ -6,7 +6,7 @@ import "../app/Contact_Us/Contact.css"; // Import contact-specific CSS
 export default function ContactInfo() {
   return (
     <div className="contact-info-wrapper">
-      <h2 className="contact-info-title">Get in Touch</h2>
+      <h2 className="contact-info-title">Let's Get started</h2>
 
       <div className="contact-info-item">
         <div className="contact-info-icon">

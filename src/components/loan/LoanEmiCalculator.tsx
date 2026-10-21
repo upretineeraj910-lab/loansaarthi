@@ -476,7 +476,7 @@ export default function LoanEmiCalculator({
             BREAKDOWN LABELS
         ========================= */}
 
-        <div className="calc-breakdown-labels">
+        {/* <div className="calc-breakdown-labels">
 
           <span>
             Principal {principalShare}%
@@ -486,7 +486,7 @@ export default function LoanEmiCalculator({
             Interest {100 - principalShare}%
           </span>
 
-        </div>
+        </div> */}
 
         {/* =========================
             LEDGER
