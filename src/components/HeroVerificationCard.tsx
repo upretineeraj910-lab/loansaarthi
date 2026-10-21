@@ -62,8 +62,6 @@ export default function HeroVerificationCard() {
     income: "",
   });
 
-  // CHANGE 1: reCAPTCHA banane ka kaam ek alag function mein.
-  // Pehle ye button click par banta tha, ab page load par hi ban jayega.
   const setupRecaptcha = (): RecaptchaVerifier => {
     if (window.recaptchaVerifier) return window.recaptchaVerifier;
 
@@ -77,7 +75,6 @@ export default function HeroVerificationCard() {
 
     window.recaptchaVerifier = verifier;
 
-    // render() captcha ko pehle se ready kar deta hai
     verifier.render().catch((e) => {
       console.error("reCAPTCHA render error:", e);
     });
@@ -301,12 +298,11 @@ export default function HeroVerificationCard() {
               {loading ? "Sending OTP..." : "Get Verification Code"}
             </button>
 
-            <div className="hero-trust-indicator">
+            {/* <div className="hero-trust-indicator">
               <ShieldCheck size={15} />
               Soft enquiry · No impact on credit score
-            </div>
+            </div> */}
 
-            {/* Badge hide kiya hai, isliye Google ki policy ke hisaab se ye line dikhana zaroori hai */}
             <p
               style={{
                 fontSize: "11px",

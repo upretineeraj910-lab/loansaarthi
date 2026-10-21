@@ -53,16 +53,17 @@ export default function LuxuryHero() {
       <div className={styles.hero}>
         <div className={styles.left}>
           <h1 className={styles.title}>
-            One Platform.
+            {/* One Platform.
             <br />
             42+ Lenders.
             <br />
-            Infinite Possibilities.
+            Infinite Possibilities. */}
+            Your Loan.
+            <br />Your Eligiblity.
+            <br />Our Expertise
           </h1>
           <p className={styles.sub}>
-            We give you loan according to your need and eligibility -
-            <br />
-            Best guidance according to your profile
+           We match your profile with 42+ Banks & NBFCs to get you the right loan,<br /> not just any loan.
           </p>
           <div className={styles.actions}>
             <Link href="#loan-eligibility-form" className={styles.btnPrimary}>

@@ -392,3 +392,24 @@
     transform: translateY(-50%);
   }
 }
+
+
+.expert-image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;   /* portrait, sab cards ek jaise */
+  flex-shrink: 0;        /* Kavita wala height bug fix */
+  overflow: hidden;
+  background-color: var(--color-paper-light);
+}
+
+
+
+.expert-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;  
+  object-position: center;
+  display: block;
+  transition: transform 0.4s ease;
+}

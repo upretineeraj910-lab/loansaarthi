@@ -24,28 +24,52 @@ const expertTeam: Expert[] = [
     alt: "Ganesh Jyala - CEO and Founder",
   },
   {
+    name: "Kavita",
+    title: "Founder",
+    image: "/team/KavitaFounder.png",
+    alt: "Kavita - Founder",
+  },
+  {
+    name: "Krishan Kumar Panday",
+    title: "Group Head",
+    image: "/team/KrishanKumarPandayGroupHead.png",
+    alt: "Krishan Kumar Panday - Group Head",
+  },
+  {
     name: "Meenakshi Bisht",
     title: "Loan Advisor",
-    image: "/team/meenakshi-bhist.png",
+    image: "/team/MeenakshiVerticalHead.PNG",
     alt: "Meenakshi Bisht - Loan Advisor",
+  },
+  {
+    name: "Naina Singh",
+    title: "Business Head",
+    image: "/team/NainaSinghBusinessHead.png",
+    alt: "Naina Singh - Business Head",
   },
   {
     name: "Priyanka",
     title: "Financial Consultant",
-    image: "/team/priyanka.png",
+    image: "/team/Priyanka_Singh_verticalHeadInbound.png",
     alt: "Priyanka - Financial Consultant",
+  },
+  {
+    name: "Rajeev Kaushal",
+    title: "Vertical Head",
+    image: "/team/RajeevKaushalVerticalHead.png",
+    alt: "Rajeev Kaushal - Vertical Head",
   },
   {
     name: "Rambha",
     title: "Senior Loan Specialist",
-    image: "/team/rambha.png",
+    image: "/team/Rambha-vertical-head- channel business.png",
     alt: "Rambha - Senior Loan Specialist",
   },
   {
-    name: "Ranjeet",
+    name: "Ranjeet Jaishwal",
     title: "Relationship Manager",
-    image: "/team/ranjeet-j.png",
-    alt: "Ranjeet - Relationship Manager",
+    image: "/team/RanjeetJaishwalVerticalHead.png",
+    alt: "Ranjeet Jaishwal - Relationship Manager",
   },
 ];
 
@@ -69,10 +93,6 @@ const Team = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  /*
-   * Keep enough cloned slides to fill the visible viewport.
-   * This prevents gaps when the number of visible cards changes.
-   */
   const cloneCount = Math.min(visibleCards, expertTeam.length);
 
   const sliderItems = [
@@ -82,9 +102,6 @@ const Team = () => {
 
   const cardWidthPercent = 100 / visibleCards;
 
-  /*
-   * Detect reduced-motion preference.
-   */
   useEffect(() => {
     const mediaQuery = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -95,7 +112,6 @@ const Team = () => {
     };
 
     updateMotionPreference();
-
     mediaQuery.addEventListener("change", updateMotionPreference);
 
     return () => {
@@ -103,10 +119,6 @@ const Team = () => {
     };
   }, []);
 
-  /*
-   * Responsive visible-card calculation.
-   * Only update state when the value actually changes.
-   */
   useEffect(() => {
     const updateVisibleCards = () => {
       const nextVisibleCards = getVisibleCards(window.innerWidth);
@@ -139,20 +151,13 @@ const Team = () => {
     };
   }, []);
 
-  /*
-   * Keep the current position valid after responsive changes.
-   */
   useEffect(() => {
     setCurrentIndex((previous) => {
       const maxIndex = expertTeam.length;
-
       return Math.min(previous, maxIndex);
     });
   }, [visibleCards]);
 
-  /*
-   * Only activate carousel behavior while the section is near/in viewport.
-   */
   useEffect(() => {
     const section = sectionRef.current;
 
@@ -174,18 +179,11 @@ const Team = () => {
     };
   }, []);
 
-  /*
-   * Move to next slide.
-   */
   const nextSlide = useCallback(() => {
     setWithTransition(true);
-
     setCurrentIndex((previous) => previous + 1);
   }, []);
 
-  /*
-   * Move to previous slide.
-   */
   const prevSlide = useCallback(() => {
     setCurrentIndex((previous) => {
       if (previous > 0) {
@@ -193,10 +191,6 @@ const Team = () => {
         return previous - 1;
       }
 
-      /*
-       * Jump to the cloned end without animation,
-       * then animate back to the previous real slide.
-       */
       setWithTransition(false);
 
       if (resetFrameRef.current !== null) {
@@ -214,12 +208,6 @@ const Team = () => {
     });
   }, []);
 
-  /*
-   * Autoplay:
-   * - Only while visible
-   * - Disabled when user interacts
-   * - Disabled for reduced-motion users
-   */
   useEffect(() => {
     if (!isVisible || isPaused || prefersReducedMotion) {
       return;
@@ -239,9 +227,6 @@ const Team = () => {
     nextSlide,
   ]);
 
-  /*
-   * Reset infinite-loop position after the cloned slides.
-   */
   const handleTransitionEnd = useCallback(() => {
     if (currentIndex >= expertTeam.length) {
       setWithTransition(false);
@@ -256,9 +241,6 @@ const Team = () => {
     }
   }, [currentIndex]);
 
-  /*
-   * Keyboard support for carousel navigation.
-   */
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
       if (event.key === "ArrowLeft") {
@@ -274,9 +256,6 @@ const Team = () => {
     [nextSlide, prevSlide]
   );
 
-  /*
-   * Cleanup pending animation frames.
-   */
   useEffect(() => {
     return () => {
       if (resetFrameRef.current !== null) {

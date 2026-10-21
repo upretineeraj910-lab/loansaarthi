@@ -139,4 +139,8 @@ export const BANKS = [
   { name: "Piramal Finance", logo: "/banks/PIRAMAL FINANCE.svg" },
   { name: "L&T Finance", logo: "/banks/L&T.png" },
   { name: "Poonawalla", logo: "/banks/Poonawalla_Fincorp.svg" },
+    { name: "incred", logo: "/banks/incred.png" },
+  { name: "DMI", logo: "/banks/DMI_Finance.svg" },
+
+
 ];
