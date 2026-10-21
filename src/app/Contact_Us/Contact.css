@@ -572,3 +572,22 @@
   color: white;
   margin: 4px;
 }
+
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.contact-grid > * {
+  min-width: 0; 
+}

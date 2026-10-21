@@ -52,9 +52,10 @@ export default function ContactPage() {
       </section>
 
       {/* Form + Info */}
+            {/* Form + Info */}
       <section className="contact-section">
         <div className="container contact-grid">
-          <div className="contact-grid-full">
+          <div>
             <ContactForm />
           </div>
           <div>

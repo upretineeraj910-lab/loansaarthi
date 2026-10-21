@@ -83,6 +83,8 @@ export default function Navbar() {
           </div>
           <Link href="/#calculator" prefetch={false}>EMI Calculator</Link>
           <Link href="/about-us" prefetch={false}>About Us</Link>
+          <Link href="/Contact-Us" prefetch={false}>Contact Us</Link>
+
         </div>
 
         {/* Hamburger Button */}
