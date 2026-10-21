@@ -1413,7 +1413,7 @@ export default function CrmDashboardPage() {
                   </a>
                 </div>
 
-                <div className="crm-detail-box">
+                {/* <div className="crm-detail-box">
                   <div className="crm-detail-box-label">Assigned Agent</div>
                   {isAdmin ? (
                     <select
@@ -1433,11 +1433,11 @@ export default function CrmDashboardPage() {
                       ))}
                     </select>
                   ) : (
-                    <div className="crm-detail-box-value" style={{ color: selectedLead.assignedTo ? '#3730a3' : '#94a3b8' }}>
-                      {selectedLead.assignedTo || 'Unassigned'}
-                    </div>
+                     <div className="crm-detail-box-value" style={{ color: selectedLead.assignedTo ? '#3730a3' : '#94a3b8' }}>
+                       {selectedLead.assignedTo || 'Unassigned'}
+                     </div>
                   )}
-                </div>
+                </div> */}
 
                 <div className="crm-detail-box">
                   <div className="crm-detail-box-label">Loan Type</div>

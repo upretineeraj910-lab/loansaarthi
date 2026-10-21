@@ -207,7 +207,7 @@ export default function Dashboard() {
               className={styles.navItem}
               style={{ color: '#f5c563', fontWeight: 600 }}
             >
-              📅 Expert Appointments
+             Expert Appointments 
             </Link>
           )}
 
