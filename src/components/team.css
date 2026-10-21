@@ -215,7 +215,7 @@
 
 .slider-btn:hover {
   background-color: var(--color-brass);
-  color: #ffffff;
+  color: #082317;
   border-color: var(--color-brass);
 
   transform: translateY(-50%) scale(1.06);

@@ -4,8 +4,8 @@
   align-items: center;
   justify-content: center;
   padding: 24px 16px;
-  background: #f7f7f8;
-  color: #18181b;
+  background: #082317;
+  color: #ffffff;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
 }
 
@@ -13,9 +13,10 @@
   width: 100%;
   max-width: 420px;
   padding: 32px 28px;
-  background: #ffffff;
-  border: 1px solid #e4e4e7;
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.25);
   border-radius: 12px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
 }
 
 .card * {
@@ -25,25 +26,26 @@
 .title {
   margin: 0;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #ffffff;
   letter-spacing: -0.01em;
 }
 
 .subtitle {
   margin: 6px 0 0;
   font-size: 14px;
-  color: #71717a;
+  color: #cbd5e1;
 }
 
 .link {
-  color: #18181b;
-  font-weight: 500;
+  color: #f5c563;
+  font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
 .link:hover {
-  color: #52525b;
+  color: #ffffff;
 }
 
 .form {
@@ -69,7 +71,7 @@
 .label {
   font-size: 14px;
   font-weight: 500;
-  color: #3f3f46;
+  color: #cbd5e1;
 }
 
 /* Email availability status */
@@ -79,15 +81,15 @@
 }
 
 .checking {
-  color: #71717a;
+  color: #94a3b8;
 }
 
 .available {
-  color: #15803d;
+  color: #4ade80;
 }
 
 .taken {
-  color: #b42318;
+  color: #f87171;
 }
 
 /* Inputs */
@@ -101,43 +103,42 @@
   padding: 0 12px;
   font-size: 15px;
   font-family: inherit;
-  color: #18181b;
-  background: #ffffff;
-  border: 1px solid #d4d4d8;
+  color: #ffffff;
+  background: #082317;
+  border: 1px solid rgba(245, 197, 99, 0.25);
   border-radius: 8px;
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 .input::placeholder {
-  color: #a1a1aa;
+  color: #64748b;
 }
 
 .input:focus {
-  border-color: #18181b;
-  box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.1);
+  border-color: #f5c563;
+  box-shadow: 0 0 0 3px rgba(245, 197, 99, 0.2);
 }
 
 .inputReadonly {
-  color: #52525b;
-  background: #f4f4f5;
+  color: #94a3b8;
+  background: rgba(8, 35, 23, 0.6);
 }
 
 .inputReadonly:focus {
-  border-color: #d4d4d8;
+  border-color: rgba(245, 197, 99, 0.25);
   box-shadow: none;
 }
 
 .inputError,
 .inputError:focus {
-  border-color: #b42318;
+  border-color: #ef4444;
 }
 
 .inputWithToggle {
   padding-right: 44px;
 }
 
-/* Edge ka apna eye icon chhupata hai, taaki do icon na dikhe */
 .input::-ms-reveal,
 .input::-ms-clear {
   display: none;
@@ -154,7 +155,7 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  color: #71717a;
+  color: #94a3b8;
   background: transparent;
   border: none;
   border-radius: 6px;
@@ -162,32 +163,32 @@
 }
 
 .toggle:hover {
-  color: #18181b;
-  background: #f4f4f5;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .toggle:focus-visible {
-  outline: 2px solid #18181b;
+  outline: 2px solid #f5c563;
   outline-offset: 1px;
 }
 
 /* Messages */
 .errorText {
   font-size: 13px;
-  color: #b42318;
+  color: #fca5a5;
 }
 
 .successText {
   font-size: 13px;
-  color: #15803d;
+  color: #4ade80;
 }
 
 .errorBox {
   padding: 10px 12px;
   font-size: 14px;
-  color: #b42318;
-  background: #fef3f2;
-  border: 1px solid #fecdca;
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.35);
   border-radius: 8px;
 }
 
@@ -195,15 +196,15 @@
 .suggestions {
   margin-top: 4px;
   padding: 12px;
-  background: #fafafa;
-  border: 1px solid #e4e4e7;
+  background: #061a11;
+  border: 1px solid rgba(245, 197, 99, 0.2);
   border-radius: 8px;
 }
 
 .suggestionsTitle {
   margin: 0 0 8px;
   font-size: 13px;
-  color: #71717a;
+  color: #94a3b8;
 }
 
 .suggestionsList {
@@ -216,21 +217,22 @@
   padding: 5px 12px;
   font-size: 13px;
   font-family: inherit;
-  color: #18181b;
-  background: #ffffff;
-  border: 1px solid #d4d4d8;
+  color: #ffffff;
+  background: #082317;
+  border: 1px solid rgba(245, 197, 99, 0.25);
   border-radius: 999px;
   cursor: pointer;
   transition: background 0.15s, border-color 0.15s;
 }
 
 .pill:hover {
-  background: #f4f4f5;
-  border-color: #a1a1aa;
+  background: rgba(245, 197, 99, 0.15);
+  border-color: #f5c563;
+  color: #f5c563;
 }
 
 .pill:focus-visible {
-  outline: 2px solid #18181b;
+  outline: 2px solid #f5c563;
   outline-offset: 2px;
 }
 
@@ -249,33 +251,36 @@
 }
 
 .valid {
-  color: #15803d;
+  color: #4ade80;
 }
 
 .invalid {
-  color: #71717a;
+  color: #94a3b8;
 }
 
 /* Submit */
 .button {
   height: 42px;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: 700;
   font-family: inherit;
-  color: #ffffff;
-  background: #18181b;
+  color: #081a12;
+  background: #f5c563;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.15s;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(245, 197, 99, 0.3);
 }
 
 .button:hover:not(:disabled) {
-  background: #3f3f46;
+  background: #eab34b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(245, 197, 99, 0.45);
 }
 
 .button:focus-visible {
-  outline: 2px solid #18181b;
+  outline: 2px solid #f5c563;
   outline-offset: 2px;
 }
 
@@ -288,5 +293,5 @@
   margin: 20px 0 0;
   text-align: center;
   font-size: 13px;
-  color: #a1a1aa;
+  color: #94a3b8;
 }

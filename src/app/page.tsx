@@ -95,6 +95,85 @@ export default function Home() {
       </section>
 
       {/* ---------------- VERIFICATION & INSTANT DISTRIBUTION ---------------- */}
+      {/* <section id="verification" className="container hero-section" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
+        <div className="hero-grid">
+          <Reveal>
+            <h2 className="hero-title">
+              India&apos;s Most Trusted Loan Distribution Partner.<br />
+              <strong style={{ fontWeight: "normal" }}>42+ Lenders, One Platform</strong>
+            </h2>
+            <p className="hero-text">
+              We manage the entire digital distribution journey—from lender comparison and documentation to final disbursement.
+            </p>
+            <div className="hero-actions">
+              <a href="#calculator" className="btn-primary">
+                Check your EMI
+              </a>
+              <a href="/talk-to-expert" className="btn-secondary">
+                Free Consultation
+                <ArrowRight size={15} aria-hidden="true" />
+              </a>
+            </div>
+            <div className="hero-stats">
+              <div>
+                <div className="stat-number">1,200+</div>
+                <div className="stat-label">loans placed</div>
+              </div>
+              <div>
+                <div className="stat-number">4–7 days</div>
+                <div className="stat-label">avg. sanction</div>
+              </div>
+              <div>
+                <div className="stat-number">42+</div>
+                <div className="stat-label">partner lenders</div>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={150}>
+            <div className="hero-card-wrapper">
+              <HeroVerificationCard />
+            </div>
+          </Reveal>
+        </div>
+      </section> */}
+
+
+        <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
+        <GoogleReviews />
+      </div>
+
+
+      {/* ---------------- LOAN TYPES ---------------- */}
+      <div id="Loan">
+        <LoanTypes />
+      </div>
+
+      {/* ---------------- OUR OFFERINGS ---------------- */}
+      <OurOfferings />
+
+      {/* ---------------- WHY ---------------- */}
+      <section className="bg-paper-dark section-spacing">
+        <div className="container">
+          <Reveal>
+            <Eyebrow>Why clients sign with us</Eyebrow>
+          </Reveal>
+          <div className="why-grid">
+            {WHY.map((w, i) => (
+              <Reveal key={w.title} delay={i * 80}>
+                <w.icon className="why-icon" aria-hidden="true" />
+                <h3 className="why-title">{w.title}</h3>
+                <p className="why-text">{w.text}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
+        <GoogleReviews />
+      </div> */}
+
       <section id="verification" className="container hero-section" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
         <div className="hero-grid">
           <Reveal>
@@ -137,36 +216,6 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
-
-      {/* ---------------- LOAN TYPES ---------------- */}
-      <div id="Loan">
-        <LoanTypes />
-      </div>
-
-      {/* ---------------- OUR OFFERINGS ---------------- */}
-      <OurOfferings />
-
-      {/* ---------------- WHY ---------------- */}
-      <section className="bg-paper-dark section-spacing">
-        <div className="container">
-          <Reveal>
-            <Eyebrow>Why clients sign with us</Eyebrow>
-          </Reveal>
-          <div className="why-grid">
-            {WHY.map((w, i) => (
-              <Reveal key={w.title} delay={i * 80}>
-                <w.icon className="why-icon" aria-hidden="true" />
-                <h3 className="why-title">{w.title}</h3>
-                <p className="why-text">{w.text}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
-        <GoogleReviews />
-      </div>
 
       {/* ---------------- TEAM ---------------- */}
       <Team />

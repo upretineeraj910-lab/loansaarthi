@@ -11,25 +11,25 @@
    ========================================================= */
 
 :root {
-  --ls-primary: #6fae45;
-  --ls-primary-dark: #5d9a39;
-  --ls-primary-light: #eaf4e4;
+  --ls-primary: #f5c563;
+  --ls-primary-dark: #e0b04c;
+  --ls-primary-light: rgba(245, 197, 99, 0.15);
 
-  --ls-secondary: #6fae45;
-  --ls-accent: #ffab00;
+  --ls-secondary: #f5c563;
+  --ls-accent: #f5c563;
 
-  --ls-text-main: #202020;
-  --ls-text-muted: #6a6a6a;
-  --ls-text-light: #b0b0b0;
+  --ls-text-main: #ffffff;
+  --ls-text-muted: #cbd5e1;
+  --ls-text-light: #94a3b8;
 
-  --ls-bg: #f5f6f4;
-  --ls-bg-light: #fafbf9;
-  --ls-bg-dark: #e8eae6;
+  --ls-bg: #082317;
+  --ls-bg-light: #0d3623;
+  --ls-bg-dark: #061a11;
 
-  --ls-card-bg: #ffffff;
+  --ls-card-bg: #0e3524;
 
-  --ls-border: rgba(32, 32, 32, 0.1);
-  --ls-border-hover: rgba(111, 174, 69, 0.45);
+  --ls-border: rgba(245, 197, 99, 0.2);
+  --ls-border-hover: #f5c563;
 
   --ls-success: #6fae45;
   --ls-danger: #a13d2c;

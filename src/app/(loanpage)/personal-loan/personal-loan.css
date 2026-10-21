@@ -1,21 +1,21 @@
 
 :root {
-  --ls-green: #6fae45;
-  --ls-green-dark: #4f8f2f;
-  --ls-green-light: #edf7e9;
-  --ls-green-soft: #f5faF2;
+  --ls-green: #f5c563;
+  --ls-green-dark: #e0b04c;
+  --ls-green-light: rgba(245, 197, 99, 0.15);
+  --ls-green-soft: #0e3524;
 
-  --ls-black: #111513;
-  --ls-charcoal: #252a27;
+  --ls-black: #ffffff;
+  --ls-charcoal: #cbd5e1;
 
-  --ls-gray-50: #f8faf8;
-  --ls-gray-100: #edf1ed;
-  --ls-gray-200: #e2e7e2;
-  --ls-gray-300: #cbd2cc;
-  --ls-gray-500: #68716a;
-  --ls-gray-700: #3f4741;
+  --ls-gray-50: #061a11;
+  --ls-gray-100: #0a2b1c;
+  --ls-gray-200: rgba(245, 197, 99, 0.15);
+  --ls-gray-300: rgba(245, 197, 99, 0.25);
+  --ls-gray-500: #94a3b8;
+  --ls-gray-700: #cbd5e1;
 
-  --ls-white: #ffffff;
+  --ls-white: #0e3524;
 
   --ls-radius-xs: 8px;
   --ls-radius-sm: 12px;
@@ -67,9 +67,9 @@
 
   /* Updated: Soft vibrant pastel fintech gradient */
   background:
-    radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
-    radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.07) 0%, transparent 45%),
-    linear-gradient(180deg, #f0f7ec 0%, #f7fbf5 40%, #f4f8f3 100%);
+    radial-gradient(circle at 10% 15%, rgba(245, 197, 99, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 90% 65%, rgba(245, 197, 99, 0.06) 0%, transparent 45%),
+    #082317;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -135,10 +135,10 @@
   background:
     linear-gradient(
       90deg,
-      rgba(240, 247, 236, 0.98) 0%,
-      rgba(240, 247, 236, 0.94) 42%,
-      rgba(240, 247, 236, 0.25) 75%,
-      rgba(240, 247, 236, 0) 100%
+      rgba(8, 35, 23, 0.96) 0%,
+      rgba(8, 35, 23, 0.90) 42%,
+      rgba(8, 35, 23, 0.50) 75%,
+      rgba(8, 35, 23, 0.15) 100%
     );
 
   pointer-events: none;
@@ -168,8 +168,8 @@
   padding: 7px 13px;
 
   /* Updated: Rich frosted-mint badge */
-  background: rgba(220, 245, 212, 0.85);
-  border: 1px solid rgba(111, 174, 69, 0.35);
+  background: rgba(245, 197, 99, 0.15);
+  border: 1px solid rgba(245, 197, 99, 0.35);
 
   /* color: var(--ls-green-dark); */
   color: var(--ls-black);
@@ -247,9 +247,9 @@
   padding: 13px 14px;
 
   /* Updated: Soft glass card */
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(14, 53, 36, 0.85);
 
-  border: 1px solid rgba(111, 174, 69, 0.16);
+  border: 1px solid rgba(245, 197, 99, 0.25);
 
   border-radius: var(--ls-radius-sm);
 
@@ -271,7 +271,7 @@
   border-radius: 50%;
 
   /* Updated: Vibrant gradient icon bg */
-  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
+  background: #f5c563;
 
   color: var(--ls-white);
 
@@ -518,7 +518,7 @@
   transform: translateY(-3px);
 
   /* Updated: Soft warm highlight */
-  background: #f5fbf2;
+  background: #134630;
 
   border-color: rgba(111, 174, 69, 0.55);
 
@@ -549,7 +549,7 @@
   color: var(--ls-green-dark);
 
   /* Updated: Fresh pill tone */
-  background: #e4f5de;
+  background: rgba(245, 197, 99, 0.15);
 
   border: 1px solid rgba(111, 174, 69, 0.25);
 
@@ -746,9 +746,9 @@
   padding: 13px 15px;
 
   /* Updated: Soft pale mint item bg */
-  background: #f8fbf6;
+  background: #0a2b1c;
 
-  border: 1px solid rgba(111, 174, 69, 0.10);
+  border: 1px solid rgba(245, 197, 99, 0.08);
 
   border-radius: var(--ls-radius-sm);
 }
@@ -765,7 +765,7 @@
 
   color: var(--ls-white);
 
-  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
+  background: #f5c563;
 
   border-radius: 50%;
 
@@ -1720,22 +1720,22 @@
    ========================================================= */
 
 :root {
-  --ls-green: #6fae45;
-  --ls-green-dark: #4f8f2f;
-  --ls-green-light: #edf7e9;
-  --ls-green-soft: #f5faF2;
+  --ls-green: #f5c563;
+  --ls-green-dark: #e0b04c;
+  --ls-green-light: rgba(245, 197, 99, 0.15);
+  --ls-green-soft: #0e3524;
 
-  --ls-black: #111513;
-  --ls-charcoal: #252a27;
+  --ls-black: #ffffff;
+  --ls-charcoal: #cbd5e1;
 
-  --ls-gray-50: #f8faf8;
-  --ls-gray-100: #edf1ed;
-  --ls-gray-200: #e2e7e2;
-  --ls-gray-300: #cbd2cc;
-  --ls-gray-500: #68716a;
-  --ls-gray-700: #3f4741;
+  --ls-gray-50: #061a11;
+  --ls-gray-100: #0a2b1c;
+  --ls-gray-200: rgba(245, 197, 99, 0.15);
+  --ls-gray-300: rgba(245, 197, 99, 0.25);
+  --ls-gray-500: #94a3b8;
+  --ls-gray-700: #cbd5e1;
 
-  --ls-white: #ffffff;
+  --ls-white: #0e3524;
 
   --ls-radius-xs: 8px;
   --ls-radius-sm: 12px;
@@ -1771,9 +1771,9 @@
   font-family: var(--ls-font);
   color: var(--ls-charcoal);
   background:
-    radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
-    radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.07) 0%, transparent 45%),
-    linear-gradient(180deg, #f0f7ec 0%, #f7fbf5 40%, #f4f8f3 100%);
+    radial-gradient(circle at 10% 15%, rgba(245, 197, 99, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 90% 65%, rgba(245, 197, 99, 0.06) 0%, transparent 45%),
+    #082317;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
@@ -1827,10 +1827,10 @@
   inset: 0;
   background: linear-gradient(
     90deg,
-    rgba(240, 247, 236, 0.98) 0%,
-    rgba(240, 247, 236, 0.94) 42%,
-    rgba(240, 247, 236, 0.25) 75%,
-    rgba(240, 247, 236, 0) 100%
+    rgba(8, 35, 23, 0.96) 0%,
+    rgba(8, 35, 23, 0.90) 42%,
+    rgba(8, 35, 23, 0.50) 75%,
+    rgba(8, 35, 23, 0.15) 100%
   );
   pointer-events: none;
 }
@@ -1847,8 +1847,8 @@
   align-items: center;
   gap: 7px;
   padding: 7px 13px;
-  background: rgba(220, 245, 212, 0.85);
-  border: 1px solid rgba(111, 174, 69, 0.35);
+  background: rgba(245, 197, 99, 0.15);
+  border: 1px solid rgba(245, 197, 99, 0.35);
   color: var(--ls-black);
   font-size: 11px;
   font-weight: 750;
@@ -1890,8 +1890,8 @@
   align-items: flex-start;
   gap: 10px;
   padding: 13px 14px;
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(111, 174, 69, 0.16);
+  background: rgba(14, 53, 36, 0.85);
+  border: 1px solid rgba(245, 197, 99, 0.25);
   border-radius: var(--ls-radius-sm);
   box-shadow: var(--ls-shadow-xs);
   backdrop-filter: blur(8px);
@@ -1905,7 +1905,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
+  background: #f5c563;
   color: var(--ls-white);
   font-size: 11px;
   font-weight: 800;
@@ -2093,7 +2093,7 @@
 
 .apply_box:hover {
   transform: translateY(-3px);
-  background: #f5fbf2;
+  background: #134630;
   border-color: rgba(111, 174, 69, 0.55);
   box-shadow: var(--ls-shadow-md);
 }
@@ -2111,7 +2111,7 @@
   height: 30px;
   padding: 0 8px;
   color: var(--ls-green-dark);
-  background: #e4f5de;
+  background: rgba(245, 197, 99, 0.15);
   border: 1px solid rgba(111, 174, 69, 0.25);
   border-radius: 999px;
   font-size: 11px;
@@ -2233,8 +2233,8 @@
   align-items: flex-start;
   gap: 12px;
   padding: 13px 15px;
-  background: #f8fbf6;
-  border: 1px solid rgba(111, 174, 69, 0.10);
+  background: #0a2b1c;
+  border: 1px solid rgba(245, 197, 99, 0.08);
   border-radius: var(--ls-radius-sm);
 }
 
@@ -2246,7 +2246,7 @@
   align-items: center;
   justify-content: center;
   color: var(--ls-white);
-  background: linear-gradient(135deg, #7ec44f 0%, #5b9b37 100%);
+  background: #f5c563;
   border-radius: 50%;
   font-size: 11px;
   font-weight: 800;
@@ -2775,11 +2775,11 @@
    ========================= */
 @media (prefers-color-scheme: light) {
   .personal-loan-page {
-    color: #252a27;
+    color: #cbd5e1;
     background:
-      radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
-      radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.07) 0%, transparent 45%),
-      linear-gradient(180deg, #f0f7ec 0%, #f7fbf5 40%, #f4f8f3 100%);
+      radial-gradient(circle at 10% 15%, rgba(245, 197, 99, 0.08) 0%, transparent 45%),
+      radial-gradient(circle at 90% 65%, rgba(245, 197, 99, 0.06) 0%, transparent 45%),
+      #082317;
   }
 }
 
@@ -2790,12 +2790,12 @@
 
   /* ---------- THEME TOKENS ---------- */
   :root {
-    --ls-green: #82c341;
-    --ls-green-dark: #9bd65d;
+    --ls-green: #f5c563;
+    --ls-green-dark: #e0b04c;
     --ls-green-light: #1d2a1d;
     --ls-green-soft: #182219;
 
-    --ls-black: #f4f7f4;
+    --ls-black: #ffffff;
     --ls-charcoal: #d9e1db;
 
     --ls-gray-50: #111713;
@@ -2805,7 +2805,7 @@
     --ls-gray-500: #a6b1a9;
     --ls-gray-700: #c4cdc6;
 
-    --ls-white: #171d19;
+    --ls-white: #0e3524;
 
     --ls-shadow-xs: 0 1px 4px rgba(0, 0, 0, 0.28);
     --ls-shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.30);
@@ -2817,7 +2817,7 @@
   .personal-loan-page {
     color: #d9e1db;
     background:
-      radial-gradient(circle at 10% 15%, rgba(111, 174, 69, 0.10) 0%, transparent 45%),
+      radial-gradient(circle at 10% 15%, rgba(245, 197, 99, 0.08) 0%, transparent 45%),
       radial-gradient(circle at 90% 65%, rgba(111, 174, 69, 0.08) 0%, transparent 45%),
       linear-gradient(180deg, #0d120f 0%, #111713 42%, #0f1411 100%);
   }
@@ -2826,21 +2826,21 @@
   .personal-loan-hero::before {
     background: linear-gradient(
       90deg,
-      rgba(13, 18, 15, 0.98) 0%,
-      rgba(13, 18, 15, 0.94) 42%,
-      rgba(13, 18, 15, 0.35) 75%,
-      rgba(13, 18, 15, 0) 100%
+      rgba(8, 35, 23, 0.96) 0%,
+      rgba(8, 35, 23, 0.90) 42%,
+      rgba(8, 35, 23, 0.50) 75%,
+      rgba(8, 35, 23, 0.15) 100%
     );
   }
 
   .hero-badge {
-    background: rgba(53, 82, 42, 0.78);
-    border-color: rgba(130, 195, 65, 0.34);
-    color: #e9f5e7;
+    background: rgba(245, 197, 99, 0.15);
+    border-color: rgba(245, 197, 99, 0.35);
+    color: #f5c563;
   }
 
   .personal-loan-hero h1 {
-    color: #f5f8f5;
+    color: #ffffff;
   }
 
   .hero-description {
@@ -2848,8 +2848,8 @@
   }
 
   .hero-point {
-    background: rgba(23, 29, 25, 0.94);
-    border-color: rgba(130, 195, 65, 0.20);
+    background: rgba(14, 53, 36, 0.85);
+    border-color: rgba(245, 197, 99, 0.25);
     box-shadow: var(--ls-shadow-xs);
   }
 
@@ -2864,9 +2864,9 @@
   .ls-seo-benefit-card,
   .ls-faq-item,
   .ls-calc-seo-box {
-    background: #171d19;
+    background: #0e3524;
     color: #d9e1db;
-    border-color: #2b362e;
+    border-color: rgba(245, 197, 99, 0.18);
     box-shadow: var(--ls-shadow-sm);
   }
 
@@ -2880,7 +2880,7 @@
   .ls-faq-heading h2,
   .ls-faq-item summary,
   .ls-calc-seo-box h3 {
-    color: #f1f5f2;
+    color: #ffffff;
   }
 
   .loan-info-text p,
@@ -2893,7 +2893,7 @@
   .ls-seo-benefit-card p,
   .ls-faq-item p,
   .ls-calc-seo-box p {
-    color: #b9c4bc;
+    color: #cbd5e1;
   }
 
   .loan-info-text strong {
@@ -2913,7 +2913,7 @@
 
   /* ---------- CATEGORY CARDS ---------- */
   .apply_box {
-    background: #171d19;
+    background: #0e3524;
     border-color: rgba(130, 195, 65, 0.18);
     box-shadow: var(--ls-shadow-xs);
   }
@@ -2931,7 +2931,7 @@
   }
 
   .apply_box_content h3 {
-    color: #f1f5f2;
+    color: #ffffff;
   }
 
   .apply_box_content p {
@@ -2966,7 +2966,7 @@
   }
 
   .requirements-note p {
-    color: #b9c4bc;
+    color: #cbd5e1;
   }
 
   /* ---------- BUTTONS ---------- */
@@ -3000,8 +3000,8 @@
   }
 
   .ls-seo-benefit-card {
-    background: #171d19;
-    border-color: #2b362e;
+    background: #0e3524;
+    border-color: rgba(245, 197, 99, 0.18);
   }
 
   .ls-seo-benefit-card:hover {
@@ -3014,12 +3014,12 @@
 
   /* ---------- FAQ ---------- */
   .ls-faq-item {
-    background: #171d19;
-    border-color: #2b362e;
+    background: #0e3524;
+    border-color: rgba(245, 197, 99, 0.18);
   }
 
   .ls-faq-item summary {
-    color: #f1f5f2;
+    color: #ffffff;
   }
 
   .ls-faq-item summary::after {
@@ -3042,12 +3042,12 @@
   }
 
   .loan-disclaimer p {
-    color: #b9c4bc;
+    color: #cbd5e1;
   }
 
   /* ---------- CALCULATOR SEO CARD ---------- */
   .ls-calc-seo-box {
-    background: #171d19;
+    background: #0e3524;
     border-color: rgba(130, 195, 65, 0.18);
   }
 

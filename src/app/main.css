@@ -6,24 +6,24 @@
 
 :root {
   /* ----- Brand Colors ----- */
-  --brand-green: #6fae45;
-  --brand-green-light: #eaf4e4;
-  --brand-black: #202020;
-  --brand-neutral: #f5f6f4;
-  --brand-white: #ffffff;
+  --brand-green: #f5c563;
+  --brand-green-light: rgba(245, 197, 99, 0.15);
+  --brand-black: #082317;
+  --brand-neutral: #0e3524;
+  --brand-white: #0e3524;
 
   /* ----- Extended Palette ----- */
-  --color-ink: #202020;
-  --color-paper: #f5f6f4;
-  --color-paper-light: #fafbf9;
-  --color-paper-dark: #e8eae6;
-  --color-paper-line: rgba(32, 32, 32, 0.1);
-  --color-brass: #6fae45;
-  --color-brass-deep: #5d9a39;
-  --color-stamp: #a13d2c;
-  --color-charcoal: #2a2720;
-  --color-text-muted: #6a6a6a;
-  --color-text-light: #b0b0b0;
+  --color-ink: #ffffff;
+  --color-paper: #082317;
+  --color-paper-light: #0e3524;
+  --color-paper-dark: #061a11;
+  --color-paper-line: rgba(245, 197, 99, 0.2);
+  --color-brass: #f5c563;
+  --color-brass-deep: #e0b04c;
+  --color-stamp: #f5c563;
+  --color-charcoal: #cbd5e1;
+  --color-text-muted: #94a3b8;
+  --color-text-light: #64748b;
 
   /* ----- Typography ----- */
   --font-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -111,7 +111,7 @@ body {
 }
 
 .bg-ink {
-  background-color: var(--color-ink);
+  background-color: #061a11;
 }
 
 .bg-paper-dark {
@@ -192,7 +192,7 @@ body {
   padding: 0.4rem 1rem 0.4rem 0.75rem;
   border-radius: 50px;
   background: var(--brand-green-light);
-  border: 1px solid rgba(111, 174, 69, 0.2);
+  border: 1px solid rgba(245, 197, 99, 0.3);
 }
 
 .eyebrow-line {
@@ -217,7 +217,8 @@ body {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--brand-white);
+  color: #081a12;
+  font-weight: 700;
   background-color: var(--brand-green);
   border: none;
   cursor: pointer;
@@ -225,13 +226,13 @@ body {
   display: inline-block;
   transition: all 0.25s ease;
   font-family: var(--font-primary);
-  box-shadow: 0 2px 8px rgba(111, 174, 69, 0.25);
+  box-shadow: 0 4px 18px rgba(245, 197, 99, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  background-color: #5d9a39;
-  box-shadow: 0 6px 20px rgba(111, 174, 69, 0.3);
+  background-color: #eab34b;
+  box-shadow: 0 8px 25px rgba(245, 197, 99, 0.45);
 }
 
 .btn-secondary {
@@ -249,8 +250,8 @@ body {
 }
 
 .btn-secondary:hover {
-  color: var(--brand-black);
-  border-color: var(--brand-black);
+  color: #ffffff;
+  border-color: #ffffff;
 }
 
 /* =========================================================
@@ -279,7 +280,7 @@ body {
   width: 500px;
   height: 500px;
   background: radial-gradient(circle,
-      rgba(111, 174, 69, 0.05) 0%,
+      rgba(245, 197, 99, 0.08) 0%,
       transparent 70%);
   border-radius: 50%;
   pointer-events: none;
@@ -466,7 +467,7 @@ body {
   box-shadow:
     0 20px 30px -5px rgba(0, 0, 0, 0.05),
     0 10px 15px -5px rgba(0, 0, 0, 0.02);
-  border-color: rgba(111, 174, 69, 0.3);
+  border-color: #f5c563;
 }
 
 .loan-header {
@@ -516,7 +517,7 @@ body {
 }
 
 .loan-item:hover .loan-arrow {
-  color: var(--brand-white);
+  color: #081a12;
   transform: translateX(2px) scale(1.1);
 }
 
@@ -1146,17 +1147,18 @@ body {
   border-radius: 0.5rem;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--brand-white);
+  color: #081a12;
+  font-weight: 700;
   background-color: var(--brand-green);
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 2px 8px rgba(111, 174, 69, 0.25);
+  box-shadow: 0 4px 18px rgba(245, 197, 99, 0.3);
 }
 
 .btn-call:hover {
   transform: translateY(-2px);
-  background-color: #5d9a39;
-  box-shadow: 0 6px 20px rgba(111, 174, 69, 0.3);
+  background-color: #eab34b;
+  box-shadow: 0 8px 25px rgba(245, 197, 99, 0.45);
 }
 
 .btn-whatsapp {
@@ -1229,14 +1231,15 @@ body {
   padding: 0.875rem 0;
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--brand-white);
+  color: #081a12;
+  font-weight: 700;
   background-color: var(--brand-green);
   text-decoration: none;
   transition: all 0.2s ease;
 }
 
 .mobile-cta-call:hover {
-  background-color: #5d9a39;
+  background-color: #eab34b;
 }
 
 .mobile-cta-whatsapp {

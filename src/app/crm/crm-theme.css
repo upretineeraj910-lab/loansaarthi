@@ -8,19 +8,19 @@
 /* ---------- theme tokens: light ---------- */
 
 :root {
-  --crm-bg: #f6f7f5;
-  --crm-surface: #ffffff;
-  --crm-surface-2: #f6f7f5;
-  --crm-surface-3: #eceee9;
-  --crm-border: #e3e5df;
+  --crm-bg: #082317;
+  --crm-surface: #0e3524;
+  --crm-surface-2: #082317;
+  --crm-surface-3: #123f2b;
+  --crm-border: rgba(245, 197, 99, 0.2);
 
-  --crm-text: #202020;
-  --crm-text-2: #3a3d38;
-  --crm-muted: #6b6f68;
-  --crm-faint: #8c9088;
+  --crm-text: #ffffff;
+  --crm-text-2: #cbd5e1;
+  --crm-muted: #94a3b8;
+  --crm-faint: #64748b;
 
-  --crm-green: var(--brand-green, #6fae45);
-  --crm-on-green: #ffffff;
+  --crm-green: #f5c563;
+  --crm-on-green: #081a12;
 
   --crm-green-text: #3f7a22;
   --crm-green-soft: #eaf4e2;
@@ -74,16 +74,16 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --crm-bg: #121411;
-    --crm-surface: #1b1e1a;
-    --crm-surface-2: #151714;
-    --crm-surface-3: #262a25;
-    --crm-border: #2f342d;
+    --crm-bg: #082317;
+    --crm-surface: #0e3524;
+    --crm-surface-2: #082317;
+    --crm-surface-3: #123f2b;
+    --crm-border: rgba(245, 197, 99, 0.2);
 
-    --crm-text: #f1f3ef;
-    --crm-text-2: #d3d6cf;
-    --crm-muted: #9aa094;
-    --crm-faint: #7b8076;
+    --crm-text: #ffffff;
+    --crm-text-2: #cbd5e1;
+    --crm-muted: #94a3b8;
+    --crm-faint: #64748b;
 
     --crm-on-green: #0f1d07;
 

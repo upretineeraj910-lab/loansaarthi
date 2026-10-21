@@ -1,8 +1,8 @@
 .contact-map-section {
   width: 100%;
   padding: 40px 0;
-  background-color: #ffffff;
-  color: #111827;
+  background-color: #082317;
+  color: #ffffff;
   box-sizing: border-box;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -29,7 +29,7 @@
   font-weight: 700;
   margin-bottom: 24px;
   text-align: center;
-  color: inherit;
+  color: #ffffff;
 }
 
 .contact-map-wrapper {
@@ -47,15 +47,14 @@
 
 @media (prefers-color-scheme: dark) {
   .contact-map-section {
-    background-color: #0f172a; 
-    color: #f8fafc;
+    background-color: #082317; 
+    color: #ffffff;
   }
 }
 
-.dark .contact-map-section,
 .dark .contact-map-section {
-  background-color: #0f172a;
-  color: #f8fafc;
+  background-color: #082317;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {

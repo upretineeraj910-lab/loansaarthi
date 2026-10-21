@@ -3,15 +3,15 @@
    ========================================================================== */
 
 :root {
-  --ls-primary: #10b981;        /* Brand Green */
-  --ls-primary-dark: #059669;
-  --ls-primary-light: #ecfdf5;
-  --ls-dark: #111827;           /* Header & Heading Dark */
-  --ls-text: #374151;           /* Main readable body */
-  --ls-muted: #6b7280;          /* Secondary metadata */
-  --ls-bg: #f9fafb;
-  --ls-surface: #ffffff;
-  --ls-border: #e5e7eb;
+  --ls-primary: #f5c563;        /* Brand Green */
+  --ls-primary-dark: #e0b04c;
+  --ls-primary-light: rgba(245, 197, 99, 0.15);
+  --ls-dark: #ffffff;           /* Header & Heading Dark */
+  --ls-text: #cbd5e1;           /* Main readable body */
+  --ls-muted: #94a3b8;          /* Secondary metadata */
+  --ls-bg: #082317;
+  --ls-surface: #0e3524;
+  --ls-border: rgba(245, 197, 99, 0.2);
 }
 
 .single-blog-page {

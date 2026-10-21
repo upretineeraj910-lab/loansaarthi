@@ -5,22 +5,22 @@
    ========================================================= */
 
 :root {
-  --hls-green: #6fae45;
-  --hls-green-dark: #4f8f2f;
-  --hls-green-light: #edf7e9;
-  --hls-green-soft: #f5faf2;
+  --hls-green: #f5c563;
+  --hls-green-dark: #e0b04c;
+  --hls-green-light: rgba(245, 197, 99, 0.15);
+  --hls-green-soft: #0e3524;
 
-  --hls-black: #111513;
-  --hls-charcoal: #252a27;
+  --hls-black: #ffffff;
+  --hls-charcoal: #cbd5e1;
 
-  --hls-gray-50: #f8faf8;
-  --hls-gray-100: #edf1ed;
-  --hls-gray-200: #e2e7e2;
-  --hls-gray-300: #cbd2cc;
-  --hls-gray-500: #68716a;
-  --hls-gray-700: #3f4741;
+  --hls-gray-50: #061a11;
+  --hls-gray-100: #0a2b1c;
+  --hls-gray-200: rgba(245, 197, 99, 0.15);
+  --hls-gray-300: rgba(245, 197, 99, 0.25);
+  --hls-gray-500: #94a3b8;
+  --hls-gray-700: #cbd5e1;
 
-  --hls-white: #ffffff;
+  --hls-white: #0e3524;
 
   --hls-radius-xs: 8px;
   --hls-radius-sm: 12px;
@@ -66,20 +66,15 @@
   background:
     radial-gradient(
       circle at 10% 15%,
-      rgba(111, 174, 69, 0.10) 0%,
+      rgba(245, 197, 99, 0.08) 0%,
       transparent 45%
     ),
     radial-gradient(
       circle at 90% 65%,
-      rgba(111, 174, 69, 0.07) 0%,
+      rgba(245, 197, 99, 0.06) 0%,
       transparent 45%
     ),
-    linear-gradient(
-      180deg,
-      #f0f7ec 0%,
-      #f7fbf5 40%,
-      #f4f8f3 100%
-    );
+    #082317;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -185,9 +180,9 @@
     ),
     linear-gradient(
       135deg,
-      #eef7e9 0%,
-      #f7fbf5 55%,
-      #edf6e9 100%
+      #0a2b1c 0%,
+      #0e3524 55%,
+      #082317 100%
     );
 
   overflow: hidden;
@@ -202,10 +197,10 @@
   background:
     linear-gradient(
       90deg,
-      rgba(240, 247, 236, 0.98) 0%,
-      rgba(240, 247, 236, 0.94) 42%,
-      rgba(240, 247, 236, 0.35) 78%,
-      rgba(240, 247, 236, 0) 100%
+      rgba(8, 35, 23, 0.96) 0%,
+      rgba(8, 35, 23, 0.90) 42%,
+      rgba(8, 35, 23, 0.50) 78%,
+      rgba(8, 35, 23, 0.15) 100%
     );
 
   pointer-events: none;
@@ -232,11 +227,11 @@
 
   padding: 7px 13px;
 
-  background: rgba(220, 245, 212, 0.85);
+  background: rgba(245, 197, 99, 0.15);
 
-  border: 1px solid rgba(111, 174, 69, 0.35);
+  border: 1px solid rgba(245, 197, 99, 0.35);
 
-  color: var(--hls-black);
+  color: var(--hls-green);
 
   font-size: 11px;
   font-weight: 750;
@@ -260,7 +255,7 @@
 
   margin: 0 0 14px;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: clamp(30px, 3.5vw, 44px);
   line-height: 1.08;
@@ -309,9 +304,9 @@
 
   padding: 13px 14px;
 
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(14, 53, 36, 0.85);
 
-  border: 1px solid rgba(111, 174, 69, 0.14);
+  border: 1px solid rgba(245, 197, 99, 0.25);
 
   border-radius: var(--hls-radius-sm);
 
@@ -343,9 +338,9 @@
 
   border-radius: 8px;
 
-  background: var(--hls-green-light);
+  background: #f5c563;
 
-  color: var(--hls-green-dark);
+  color: #081a12;
 
   font-size: 10px;
   font-weight: 800;
@@ -399,10 +394,10 @@
 
   padding: 28px;
 
-  background: rgba(255, 255, 255, 0.94);
+  background: #0e3524;
 
   border:
-    1px solid rgba(111, 174, 69, 0.14);
+    1px solid rgba(245, 197, 99, 0.18);
 
   border-radius: var(--hls-radius-lg);
 
@@ -414,7 +409,7 @@
 .loan-info-text h2 {
   margin: 0 0 11px;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: 23px;
   line-height: 1.22;
@@ -442,7 +437,7 @@
 }
 
 .loan-info-text strong {
-  color: var(--hls-green-dark);
+  color: #ffffff;
   font-weight: 750;
 }
 
@@ -491,10 +486,10 @@
 
   padding: 20px;
 
-  background: rgba(255, 255, 255, 0.92);
+  background: #0e3524;
 
   border:
-    1px solid rgba(111, 174, 69, 0.14);
+    1px solid rgba(245, 197, 99, 0.18);
 
   border-radius: var(--hls-radius-md);
 
@@ -512,7 +507,7 @@
   letter-spacing: 1.2px;
   text-transform: uppercase;
 
-  color: var(--hls-green-dark);
+  color: #081a12;
 
   opacity: 0.9;
 }
@@ -520,7 +515,7 @@
 .ls-calc-seo-box h3 {
   margin: 0 0 8px;
 
-  color: var(--hls-black);
+  color: var(--hls-green);
 
   font-size: 19px;
   line-height: 1.25;
@@ -559,7 +554,7 @@
   border:
     1px solid rgba(111, 174, 69, 0.16);
 
-  color: var(--hls-green-dark);
+  color: #081a12;
 
   font-size: 11px;
   font-weight: 650;
@@ -587,7 +582,7 @@
 .section-heading h2 {
   margin: 0 0 10px;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: clamp(24px, 3vw, 32px);
 
@@ -655,10 +650,10 @@
 
   padding: 18px;
 
-  background: rgba(255, 255, 255, 0.94);
+  background: #0e3524;
 
   border:
-    1px solid rgba(111, 174, 69, 0.13);
+    1px solid rgba(245, 197, 99, 0.18);
 
   border-radius: var(--hls-radius-md);
 
@@ -681,7 +676,7 @@
 
   box-shadow: var(--hls-shadow-md);
 
-  background: #ffffff;
+  background: #134630;
 }
 
 .apply_box_number {
@@ -694,9 +689,9 @@
 
   border-radius: 11px;
 
-  background: var(--hls-green-light);
+  background: #f5c563;
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 11px;
   font-weight: 800;
@@ -709,7 +704,7 @@
 .apply_box_content h3 {
   margin: 0 0 5px;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: 15px;
   line-height: 1.25;
@@ -734,7 +729,7 @@
   align-items: center;
   justify-content: center;
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 18px;
   font-weight: 600;
@@ -785,7 +780,7 @@
 
   padding: 28px;
 
-  background: rgba(255, 255, 255, 0.96);
+  background: #0e3524;
 
   border:
     1px solid rgba(111, 174, 69, 0.15);
@@ -814,7 +809,7 @@
 
   background: var(--hls-green-soft);
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 12px;
   font-weight: 700;
@@ -827,7 +822,7 @@
 }
 
 .back-button:hover {
-  background: var(--hls-green-light);
+  background: #f5c563;
 
   border-color:
     rgba(111, 174, 69, 0.32);
@@ -845,7 +840,7 @@
 .section-label {
   margin-bottom: 7px;
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 10px;
   font-weight: 800;
@@ -858,7 +853,7 @@
 .requirements-header h2 {
   margin: 0 0 8px;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: clamp(22px, 3vw, 30px);
 
@@ -920,9 +915,9 @@
 
   border-radius: 9px;
 
-  background: var(--hls-green-light);
+  background: #f5c563;
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 10px;
   font-weight: 800;
@@ -958,7 +953,7 @@
 
   margin-bottom: 5px;
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 12px;
   font-weight: 800;
@@ -995,7 +990,7 @@
 
   background: transparent;
 
-  color: var(--hls-green-dark);
+  color: #081a12;
 
   font-size: inherit;
   font-weight: 800;
@@ -1050,7 +1045,7 @@
 .verification-address h4 {
   margin: 0 0 9px;
 
-  color: var(--hls-black);
+  color: var(--hls-green);
 
   font-size: 15px;
   font-weight: 800;
@@ -1103,7 +1098,7 @@
 .ls-seo-benefits-heading h2 {
   margin: 0 0 10px;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: clamp(23px, 3vw, 32px);
 
@@ -1143,10 +1138,10 @@
 
   padding: 21px;
 
-  background: rgba(255, 255, 255, 0.94);
+  background: #0e3524;
 
   border:
-    1px solid rgba(111, 174, 69, 0.13);
+    1px solid rgba(245, 197, 99, 0.18);
 
   border-radius: var(--hls-radius-md);
 
@@ -1172,7 +1167,7 @@
 
   margin-bottom: 17px;
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 11px;
   font-weight: 800;
@@ -1183,7 +1178,7 @@
 .ls-seo-benefit-card h3 {
   margin: 0 0 8px;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: 16px;
 
@@ -1230,7 +1225,7 @@
 .ls-faq-heading h2 {
   margin: 0;
 
-  color: var(--hls-black);
+  color: #ffffff;
 
   font-size: clamp(23px, 3vw, 32px);
 
@@ -1248,10 +1243,10 @@
 }
 
 .ls-faq-item {
-  background: rgba(255, 255, 255, 0.94);
+  background: #0e3524;
 
   border:
-    1px solid rgba(111, 174, 69, 0.13);
+    1px solid rgba(245, 197, 99, 0.18);
 
   border-radius: var(--hls-radius-sm);
 
@@ -1276,7 +1271,7 @@
 
   padding: 17px 48px 17px 18px;
 
-  color: var(--hls-black);
+  color: var(--hls-green);
 
   font-size: 14px;
   font-weight: 750;
@@ -1302,7 +1297,7 @@
 
   transform: translateY(-50%);
 
-  color: var(--hls-green-dark);
+  color: #f5c563;
 
   font-size: 20px;
   font-weight: 500;
@@ -1420,9 +1415,9 @@
 .verification-form select {
   max-width: 100%;
 
-  color: var(--hls-black);
+  color: var(--hls-green);
 
-  background: #ffffff;
+  background: #134630;
 
   border-color:
     var(--hls-gray-300);
@@ -1490,7 +1485,7 @@
     background:
       linear-gradient(
         180deg,
-        #eef7e9 0%,
+        #0a2b1c 0%,
         #f4f8f3 100%
       );
   }
@@ -1499,7 +1494,7 @@
     background:
       linear-gradient(
         180deg,
-        rgba(240, 247, 236, 0.98) 0%,
+        rgba(8, 35, 23, 0.96) 0%,
         rgba(244, 248, 243, 0.98) 100%
       );
   }
@@ -1802,13 +1797,13 @@
 @media (prefers-color-scheme: dark) {
 
   :root {
-    --hls-green: #82c341;
-    --hls-green-dark: #9bd65d;
+    --hls-green: #f5c563;
+    --hls-green-dark: #e0b04c;
 
     --hls-green-light: #1d2a1d;
     --hls-green-soft: #182219;
 
-    --hls-black: #f4f7f4;
+    --hls-black: #ffffff;
     --hls-charcoal: #d9e1db;
 
     --hls-gray-50: #111713;
@@ -1819,7 +1814,7 @@
     --hls-gray-500: #a6b1a9;
     --hls-gray-700: #c4cdc6;
 
-    --hls-white: #171d19;
+    --hls-white: #0e3524;
 
     --hls-shadow-xs:
       0 1px 4px rgba(0, 0, 0, 0.28);
@@ -1881,10 +1876,10 @@
     background:
       linear-gradient(
         90deg,
-        rgba(13, 18, 15, 0.98) 0%,
-        rgba(13, 18, 15, 0.94) 42%,
-        rgba(13, 18, 15, 0.38) 78%,
-        rgba(13, 18, 15, 0) 100%
+        rgba(8, 35, 23, 0.96) 0%,
+        rgba(8, 35, 23, 0.90) 42%,
+        rgba(8, 35, 23, 0.50) 78%,
+        rgba(8, 35, 23, 0.15) 100%
       );
   }
 
@@ -1908,7 +1903,7 @@
   }
 
   .hero-point {
-    background: #171d19;
+    background: #0e3524;
 
     border-color:
       rgba(130, 195, 65, 0.14);
@@ -1962,7 +1957,7 @@
   }
 
   .ls-calc-seo-box {
-    background: #171d19;
+    background: #0e3524;
 
     border-color:
       rgba(130, 195, 65, 0.18);
@@ -2003,7 +1998,7 @@
   /* Category */
 
   .apply_box {
-    background: #171d19;
+    background: #0e3524;
 
     border-color:
       #2b362e;
@@ -2071,7 +2066,7 @@
   }
 
   .requirement-item {
-    background: #171d19;
+    background: #0e3524;
 
     border-color:
       #2b362e;
@@ -2161,7 +2156,7 @@
   /* Benefits */
 
   .ls-seo-benefit-card {
-    background: #171d19;
+    background: #0e3524;
 
     border-color:
       #2b362e;
@@ -2196,7 +2191,7 @@
   /* FAQ */
 
   .ls-faq-item {
-    background: #171d19;
+    background: #0e3524;
 
     border-color:
       #2b362e;

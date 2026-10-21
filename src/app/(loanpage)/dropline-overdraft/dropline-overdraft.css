@@ -1,31 +1,31 @@
 
 .dlo-page {
-  --dlo-page-bg: #f4f8f3;
-  --dlo-page-bg-soft: #f7fbf5;
+  --dlo-page-bg: #082317;
+  --dlo-page-bg-soft: #0a2b1c;
 
-  --dlo-surface: #ffffff;
-  --dlo-surface-soft: #f8fbf6;
-  --dlo-surface-green: #eaf6e6;
-  --dlo-surface-green-2: #e4f5de;
+  --dlo-surface: #0e3524;
+  --dlo-surface-soft: #0b2e1f;
+  --dlo-surface-green: rgba(245, 197, 99, 0.15);
+  --dlo-surface-green-2: rgba(245, 197, 99, 0.2);
 
-  --dlo-heading: #14161a;
-  --dlo-text: #30352f;
-  --dlo-text-muted: #687068;
-  --dlo-text-soft: #8a928a;
+  --dlo-heading: #ffffff;
+  --dlo-text: #cbd5e1;
+  --dlo-text-muted: #94a3b8;
+  --dlo-text-soft: #64748b;
 
-  --dlo-border: #dfe7dd;
+  --dlo-border: rgba(245, 197, 99, 0.2);
   --dlo-border-soft: rgba(111, 174, 69, 0.14);
   --dlo-border-green: rgba(111, 174, 69, 0.30);
 
-  --dlo-green: #6fae45;
-  --dlo-green-dark: #478426;
-  --dlo-green-light: #eaf6e6;
+  --dlo-green: #f5c563;
+  --dlo-green-dark: #e0b04c;
+  --dlo-green-light: rgba(245, 197, 99, 0.15);
 
-  --dlo-hero-start: rgba(240, 247, 236, 0.98);
-  --dlo-hero-mid: rgba(240, 247, 236, 0.94);
-  --dlo-hero-soft: rgba(240, 247, 236, 0.25);
+  --dlo-hero-start: rgba(8, 35, 23, 0.96);
+  --dlo-hero-mid: rgba(8, 35, 23, 0.90);
+  --dlo-hero-soft: rgba(8, 35, 23, 0.50);
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 
@@ -60,12 +60,7 @@
       rgba(111, 174, 69, 0.07) 0%,
       transparent 45%
     ),
-    linear-gradient(
-      180deg,
-      #f0f7ec 0%,
-      #f7fbf5 40%,
-      #f4f8f3 100%
-    );
+    #082317;
 
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -125,7 +120,7 @@
     var(--dlo-hero-start) 0%,
     var(--dlo-hero-mid) 42%,
     var(--dlo-hero-soft) 75%,
-    rgba(240, 247, 236, 0) 100%
+    rgba(8, 35, 23, 0.15) 100%
   );
 
   pointer-events: none;
@@ -146,10 +141,10 @@
 
   padding: 7px 13px;
 
-  background: rgba(220, 245, 212, 0.85);
-  border: 1px solid rgba(111, 174, 69, 0.35);
+  background: rgba(245, 197, 99, 0.15);
+  border: 1px solid rgba(245, 197, 99, 0.35);
 
-  color: var(--dlo-heading);
+  color: #f5c563;
 
   font-size: 11px;
   font-weight: 750;
@@ -202,8 +197,8 @@
 
   padding: 13px 14px;
 
-  background: rgba(255, 255, 255, 0.92);
-  border: 1px solid rgba(111, 174, 69, 0.16);
+  background: rgba(14, 53, 36, 0.85);
+  border: 1px solid rgba(245, 197, 99, 0.25);
   border-radius: var(--ls-radius-sm);
 
   box-shadow: var(--ls-shadow-xs);
@@ -223,13 +218,9 @@
 
   border-radius: 50%;
 
-  background: linear-gradient(
-    135deg,
-    #7ec44f 0%,
-    #5b9b37 100%
-  );
+  background: #f5c563;
 
-  color: var(--ls-white);
+  color: #081a12;
 
   font-size: 11px;
   font-weight: 800;

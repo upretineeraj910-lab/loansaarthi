@@ -13,7 +13,7 @@
   background:
     radial-gradient(
       circle at 15% 45%,
-      rgba(130, 195, 65, 0.08),
+      rgba(245, 197, 99, 0.08),
       transparent 35%
     ),
     var(--color-paper);
@@ -78,7 +78,7 @@
 
 .offerings-grid {
   width: 100%;
-background-color: var(--color-paper-light);
+background-color: transparent;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
@@ -96,7 +96,8 @@ background-color: var(--color-paper-light);
   height: 185px;
 
   padding: 18px 17px 16px;
- background-color: #6fae45;
+ background-color: #0e3524;
+  border-radius: 12px;
   box-sizing: border-box;
 
   display: flex;
@@ -123,7 +124,8 @@ background-color: var(--color-paper-light);
 
   background: var(--color-paper-dark);
 
-  border-color: rgba(111, 174, 69, 0.25);
+  border-color: #f5c563;
+  background: #0c2e1f;
 
   box-shadow:
     0 14px 30px rgba(0, 0, 0, 0.10);
@@ -153,8 +155,8 @@ background-color: var(--color-paper-light);
 
   object-fit: contain;
 
-  filter: brightness(0);
-  opacity: 0.85;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
 }
 
 
@@ -187,7 +189,7 @@ background-color: var(--color-paper-light);
   line-height: 1.55;
   font-weight: 500;
 
-  /* color: var(--color-text-muted); */
+  color: #cbd5e1;
 }
 
 

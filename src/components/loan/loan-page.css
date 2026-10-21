@@ -7,10 +7,10 @@
   width: 130px;
   height: 38px;
   padding: 6px 10px;
-  border: 1px solid #d8ded9;
+  border: 1px solid rgba(245, 197, 99, 0.25);
   border-radius: 7px;
-  background: #fff;
-  color: #202020;
+  background: #082317;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 600;
   outline: none;
@@ -19,8 +19,8 @@
 
 .lp-number-input:focus,
 .calc-number-input:focus {
-  border-color: #6fae45;
-  box-shadow: 0 0 0 2px rgba(111, 174, 69, 0.12);
+  border-color: #f5c563;
+  box-shadow: 0 0 0 2px rgba(245, 197, 99, 0.25);
 }
 
 /* Remove browser number arrows */

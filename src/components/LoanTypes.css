@@ -76,8 +76,8 @@
 
 .loan-type-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(111, 174, 69, 0.35);
-  background-color: #6fae45;
+  border-color: #f5c563;
+  background-color: #0c2e1f;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 

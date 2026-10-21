@@ -17,41 +17,36 @@
   --bl-page-bg:
     radial-gradient(
       circle at 10% 15%,
-      rgba(111, 174, 69, 0.10) 0%,
+      rgba(245, 197, 99, 0.08) 0%,
       transparent 45%
     ),
     radial-gradient(
       circle at 90% 65%,
-      rgba(111, 174, 69, 0.07) 0%,
+      rgba(245, 197, 99, 0.06) 0%,
       transparent 45%
     ),
-    linear-gradient(
-      180deg,
-      #f0f7ec 0%,
-      #f7fbf5 40%,
-      #f4f8f3 100%
-    );
+    #082317;
 
-  --bl-surface: var(--ls-white);
-  --bl-surface-soft: #f8fbf6;
-  --bl-surface-green: #eaf6e6;
-  --bl-surface-green-2: #e4f5de;
+  --bl-surface: #0e3524;
+  --bl-surface-soft: #0b2e1f;
+  --bl-surface-green: rgba(245, 197, 99, 0.15);
+  --bl-surface-green-2: rgba(245, 197, 99, 0.2);
 
-  --bl-heading: var(--ls-black);
-  --bl-text: var(--ls-charcoal);
-  --bl-text-muted: var(--ls-gray-700);
-  --bl-text-soft: var(--ls-gray-500);
+  --bl-heading: #ffffff;
+  --bl-text: #cbd5e1;
+  --bl-text-muted: #94a3b8;
+  --bl-text-soft: #64748b;
 
-  --bl-border: rgba(111, 174, 69, 0.14);
-  --bl-border-soft: rgba(111, 174, 69, 0.10);
-  --bl-border-green: rgba(111, 174, 69, 0.25);
+  --bl-border: rgba(245, 197, 99, 0.2);
+  --bl-border-soft: rgba(245, 197, 99, 0.15);
+  --bl-border-green: rgba(245, 197, 99, 0.35);
 
   --bl-green: var(--ls-green);
   --bl-green-dark: var(--ls-green-dark);
 
-  --bl-hero-overlay-start: rgba(240, 247, 236, 0.98);
-  --bl-hero-overlay-mid: rgba(240, 247, 236, 0.94);
-  --bl-hero-overlay-end: rgba(240, 247, 236, 0);
+  --bl-hero-overlay-start: rgba(8, 35, 23, 0.96);
+  --bl-hero-overlay-mid: rgba(8, 35, 23, 0.90);
+  --bl-hero-overlay-end: rgba(8, 35, 23, 0.15);
 
   width: 100%;
   max-width: 100%;
@@ -68,7 +63,7 @@
 
   overflow-x: hidden;
 
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 
@@ -130,7 +125,7 @@
     90deg,
     var(--bl-hero-overlay-start) 0%,
     var(--bl-hero-overlay-mid) 42%,
-    rgba(240, 247, 236, 0.25) 75%,
+    rgba(8, 35, 23, 0.50) 75%,
     var(--bl-hero-overlay-end) 100%
   );
 
@@ -157,11 +152,11 @@
 
   padding: 7px 13px;
 
-  background: rgba(220, 245, 212, 0.85);
+  background: rgba(245, 197, 99, 0.15);
 
-  border: 1px solid rgba(111, 174, 69, 0.35);
+  border: 1px solid rgba(245, 197, 99, 0.35);
 
-  color: var(--bl-heading);
+  color: #f5c563;
 
   font-size: 11px;
   font-weight: 750;
@@ -232,9 +227,9 @@
 
   padding: 13px 14px;
 
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(14, 53, 36, 0.85);
 
-  border: 1px solid rgba(111, 174, 69, 0.16);
+  border: 1px solid rgba(245, 197, 99, 0.25);
 
   border-radius: var(--ls-radius-sm);
 
@@ -255,13 +250,9 @@
 
   border-radius: 50%;
 
-  background: linear-gradient(
-    135deg,
-    #7ec44f 0%,
-    #5b9b37 100%
-  );
+  background: #f5c563;
 
-  color: var(--ls-white);
+  color: #081a12;
 
   font-size: 11px;
   font-weight: 800;
@@ -1308,7 +1299,7 @@
     --bl-page-bg:
       radial-gradient(
         circle at 10% 15%,
-        rgba(111, 174, 69, 0.10) 0%,
+        rgba(245, 197, 99, 0.08) 0%,
         transparent 45%
       ),
       radial-gradient(
@@ -1323,26 +1314,26 @@
         #0d120f 100%
       );
 
-    --bl-surface: #151b17;
+    --bl-surface: #0e3524;
     --bl-surface-soft: #18201b;
     --bl-surface-green: #1b2b1d;
     --bl-surface-green-2: #203322;
 
-    --bl-heading: #f2f6f3;
-    --bl-text: #e1e8e3;
+    --bl-heading: #ffffff;
+    --bl-text: #cbd5e1;
     --bl-text-muted: #b4beb8;
     --bl-text-soft: #98a39c;
 
-    --bl-border: rgba(130, 195, 79, 0.20);
+    --bl-border: rgba(245, 197, 99, 0.20);
     --bl-border-soft: rgba(130, 195, 79, 0.13);
     --bl-border-green: rgba(130, 195, 79, 0.30);
 
-    --bl-green: #82c34f;
-    --bl-green-dark: #78b94b;
+    --bl-green: #f5c563;
+    --bl-green-dark: #e0b04c;
 
-    --bl-hero-overlay-start: rgba(10, 16, 12, 0.97);
-    --bl-hero-overlay-mid: rgba(10, 16, 12, 0.91);
-    --bl-hero-overlay-end: rgba(10, 16, 12, 0);
+    --bl-hero-overlay-start: rgba(8, 35, 23, 0.96);
+    --bl-hero-overlay-mid: rgba(8, 35, 23, 0.90);
+    --bl-hero-overlay-end: rgba(8, 35, 23, 0.15);
 
     color-scheme: dark;
 

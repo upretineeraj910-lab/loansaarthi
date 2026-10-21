@@ -1,85 +1,79 @@
 /* ==========================================
-   CSS Variables (Theme Support - LoanSaarthi)
+   CSS Variables (Theme Support - LoanSaarthi Luxury Theme)
    ========================================== */
 
 :root {
-  --hvc-bg: #ffffff;
-  --hvc-border: #e2e8f0;
-  --hvc-shadow: rgba(0, 0, 0, 0.06);
-  --hvc-header-bg: #fbfbfb;
-  --hvc-title: #111827;
-  --hvc-badge: #6fae45;
-  --hvc-desc: #4b5563;
-  --hvc-input-bg: #ffffff;
-  --hvc-input-border: #d1d5db;
-  --hvc-input-text: #111827;
-  --hvc-input-focus: #6fae45;
-  --hvc-prefix-bg: #f9fafb;
-  --hvc-btn-bg: #6fae45;
-  --hvc-btn-hover: #5d9639;
-  --hvc-btn-text: #ffffff;
-  --hvc-link-color: #6fae45;
-  --hvc-error-bg: #fef2f2;
-  --hvc-error-border: #fecaca;
-  --hvc-error-text: #dc2626;
-  --hvc-success: #6fae45;
+  --hvc-bg: #0e3524;
+  --hvc-border: rgba(245, 197, 99, 0.25);
+  --hvc-shadow: rgba(0, 0, 0, 0.45);
+  --hvc-header-bg: #061a11;
+  --hvc-title: #ffffff;
+  --hvc-badge: #f5c563;
+  --hvc-desc: #cbd5e1;
+  --hvc-input-bg: #082317;
+  --hvc-input-border: rgba(245, 197, 99, 0.3);
+  --hvc-input-text: #ffffff;
+  --hvc-input-focus: #f5c563;
+  --hvc-prefix-bg: #082317;
+  --hvc-btn-bg: #f5c563;
+  --hvc-btn-hover: #e0b04c;
+  --hvc-btn-text: #081a12;
+  --hvc-link-color: #f5c563;
+  --hvc-error-bg: rgba(239, 68, 68, 0.15);
+  --hvc-error-border: rgba(239, 68, 68, 0.4);
+  --hvc-error-text: #fca5a5;
+  --hvc-success: #10b981;
 }
 
-/* ==========================================
-   Dark Mode - System Preference
-   ========================================== */
-
+/* Dark Mode - System Preference */
 @media (prefers-color-scheme: dark) {
   :root {
-    --hvc-bg: #111827;
-    --hvc-border: #1f2937;
-    --hvc-shadow: rgba(0, 0, 0, 0.4);
-    --hvc-header-bg: #0b0f17;
-    --hvc-title: #f9fafb;
-    --hvc-badge: #86efac;
-    --hvc-desc: #9ca3af;
-    --hvc-input-bg: #0b0f17;
-    --hvc-input-border: #374151;
-    --hvc-input-text: #f9fafb;
-    --hvc-input-focus: #6fae45;
-    --hvc-prefix-bg: #1f2937;
-    --hvc-btn-bg: #6fae45;
-    --hvc-btn-hover: #5d9639;
-    --hvc-btn-text: #ffffff;
-    --hvc-link-color: #86efac;
-    --hvc-error-bg: #450a0a;
-    --hvc-error-border: #7f1d1d;
+    --hvc-bg: #0e3524;
+    --hvc-border: rgba(245, 197, 99, 0.25);
+    --hvc-shadow: rgba(0, 0, 0, 0.45);
+    --hvc-header-bg: #061a11;
+    --hvc-title: #ffffff;
+    --hvc-badge: #f5c563;
+    --hvc-desc: #cbd5e1;
+    --hvc-input-bg: #082317;
+    --hvc-input-border: rgba(245, 197, 99, 0.3);
+    --hvc-input-text: #ffffff;
+    --hvc-input-focus: #f5c563;
+    --hvc-prefix-bg: #082317;
+    --hvc-btn-bg: #f5c563;
+    --hvc-btn-hover: #e0b04c;
+    --hvc-btn-text: #081a12;
+    --hvc-link-color: #f5c563;
+    --hvc-error-bg: rgba(239, 68, 68, 0.15);
+    --hvc-error-border: rgba(239, 68, 68, 0.4);
     --hvc-error-text: #fca5a5;
-    --hvc-success: #4ade80;
+    --hvc-success: #10b981;
   }
 }
 
-/* ==========================================
-   Manual Dark Theme
-   ========================================== */
-
+/* Manual Dark Theme */
 [data-theme="dark"],
 .dark {
-  --hvc-bg: #111827;
-  --hvc-border: #1f2937;
-  --hvc-shadow: rgba(0, 0, 0, 0.4);
-  --hvc-header-bg: #0b0f17;
-  --hvc-title: #f9fafb;
-  --hvc-badge: #86efac;
-  --hvc-desc: #9ca3af;
-  --hvc-input-bg: #0b0f17;
-  --hvc-input-border: #374151;
-  --hvc-input-text: #f9fafb;
-  --hvc-input-focus: #6fae45;
-  --hvc-prefix-bg: #1f2937;
-  --hvc-btn-bg: #6fae45;
-  --hvc-btn-hover: #5d9639;
-  --hvc-btn-text: #ffffff;
-  --hvc-link-color: #86efac;
-  --hvc-error-bg: #450a0a;
-  --hvc-error-border: #7f1d1d;
+  --hvc-bg: #0e3524;
+  --hvc-border: rgba(245, 197, 99, 0.25);
+  --hvc-shadow: rgba(0, 0, 0, 0.45);
+  --hvc-header-bg: #061a11;
+  --hvc-title: #ffffff;
+  --hvc-badge: #f5c563;
+  --hvc-desc: #cbd5e1;
+  --hvc-input-bg: #082317;
+  --hvc-input-border: rgba(245, 197, 99, 0.3);
+  --hvc-input-text: #ffffff;
+  --hvc-input-focus: #f5c563;
+  --hvc-prefix-bg: #082317;
+  --hvc-btn-bg: #f5c563;
+  --hvc-btn-hover: #e0b04c;
+  --hvc-btn-text: #081a12;
+  --hvc-link-color: #f5c563;
+  --hvc-error-bg: rgba(239, 68, 68, 0.15);
+  --hvc-error-border: rgba(239, 68, 68, 0.4);
   --hvc-error-text: #fca5a5;
-  --hvc-success: #4ade80;
+  --hvc-success: #10b981;
 }
 
 /* ==========================================
@@ -96,7 +90,7 @@
   border-radius: 12px;
   box-shadow:
     0 10px 30px var(--hvc-shadow),
-    0 1px 3px rgba(0, 0, 0, 0.05);
+    0 1px 3px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   position: relative;
@@ -224,7 +218,7 @@
 
 .hero-input:focus {
   border-color: var(--hvc-input-focus);
-  box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
+  box-shadow: 0 0 0 3px rgba(245, 197, 99, 0.25);
 }
 
 /* ==========================================
@@ -240,8 +234,6 @@
 
 /* ==========================================
    STEP 3 FIELD LAYOUT
-   Occupation + Income
-   Loan Type below
    ========================================== */
 
 .hero-select-row {
@@ -274,7 +266,12 @@
 
 .hero-select:focus {
   border-color: var(--hvc-input-focus);
-  box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
+  box-shadow: 0 0 0 3px rgba(245, 197, 99, 0.25);
+}
+
+.hero-select option {
+  background-color: #082317;
+  color: #ffffff;
 }
 
 /* ==========================================
@@ -309,11 +306,10 @@
 
 .hero-select-row .income input:focus {
   border-color: var(--hvc-input-focus);
-  box-shadow: 0 0 0 3px rgba(111, 174, 69, 0.15);
+  box-shadow: 0 0 0 3px rgba(245, 197, 99, 0.25);
 }
 
 /* Remove number arrows */
-
 .hero-select-row .income input::-webkit-outer-spin-button,
 .hero-select-row .income input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -331,8 +327,7 @@
 
 .hero-select-row > .hero-select:last-child {
   grid-column: 1 / -1;
-  width: 50%;
-  justify-self: center;
+  width: 100%;
 }
 
 /* ==========================================
@@ -347,18 +342,20 @@
   border: 1px solid transparent;
   border-radius: 6px;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 8px;
   transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(245, 197, 99, 0.3);
 }
 
 .hero-submit-btn:hover:not(:disabled) {
   background-color: var(--hvc-btn-hover);
   transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(245, 197, 99, 0.45);
 }
 
 .hero-submit-btn:disabled {
@@ -456,7 +453,6 @@
   grid-column: 1 / -1;
   width: 100%;
 }
-
 
 .grecaptcha-badge {
   visibility: hidden;

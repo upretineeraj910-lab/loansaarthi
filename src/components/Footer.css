@@ -2,15 +2,15 @@
    CSS Variables for Theming (Matched with LoanSaarthi Theme)
    ========================================== */
 :root {
-  --footer-bg: #0d1411;
+  --footer-bg: #082317;
   --footer-text: #9ca3af;
-  --footer-title: #f9fafb;
-  --footer-link: #d1d5db;
-  --footer-link-hover: #6fae45;
+  --footer-title: #ffffff;
+  --footer-link: #cbd5e1;
+  --footer-link-hover: #f5c563;
   --footer-logo-main: #ffffff;
-  --footer-logo-accent: #6fae45;
-  --footer-border: #1e2d27;
-  --footer-bottom-bg: #080c0a;
+  --footer-logo-accent: #f5c563;
+  --footer-border: rgba(245, 197, 99, 0.2);
+  --footer-bottom-bg: #051810;
   --footer-bottom-text: #6b7280;
   --footer-logout-hover: #ef4444;
 }
@@ -18,15 +18,15 @@
 /* Dark Mode - Explicit & Preference */
 @media (prefers-color-scheme: dark) {
   :root {
-    --footer-bg: #0d1411;
+    --footer-bg: #082317;
     --footer-text: #9ca3af;
-    --footer-title: #f9fafb;
-    --footer-link: #d1d5db;
-    --footer-link-hover: #6fae45;
+    --footer-title: #ffffff;
+    --footer-link: #cbd5e1;
+    --footer-link-hover: #f5c563;
     --footer-logo-main: #ffffff;
-    --footer-logo-accent: #6fae45;
-    --footer-border: #1e2d27;
-    --footer-bottom-bg: #080c0a;
+    --footer-logo-accent: #f5c563;
+    --footer-border: rgba(245, 197, 99, 0.2);
+    --footer-bottom-bg: #051810;
     --footer-bottom-text: #6b7280;
     --footer-logout-hover: #f87171;
   }
@@ -34,15 +34,15 @@
 
 [data-theme="dark"],
 .dark {
-  --footer-bg: #0d1411;
+  --footer-bg: #082317;
   --footer-text: #9ca3af;
-  --footer-title: #f9fafb;
-  --footer-link: #d1d5db;
-  --footer-link-hover: #6fae45;
+  --footer-title: #ffffff;
+  --footer-link: #cbd5e1;
+  --footer-link-hover: #f5c563;
   --footer-logo-main: #ffffff;
-  --footer-logo-accent: #6fae45;
-  --footer-border: #1e2d27;
-  --footer-bottom-bg: #080c0a;
+  --footer-logo-accent: #f5c563;
+  --footer-border: rgba(245, 197, 99, 0.2);
+  --footer-bottom-bg: #051810;
   --footer-bottom-text: #6b7280;
   --footer-logout-hover: #f87171;
 }
@@ -98,22 +98,22 @@
    Columns, Headings & Links
    ========================================== */
 .ls-footer-column h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: var(--footer-title);
+  font-size: 1rem;
+  font-weight: 600;
   margin-top: 0;
   margin-bottom: 1.25rem;
+  letter-spacing: 0.02em;
 }
 
 .ls-footer-column ul {
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
+}
+
+.ls-footer-column ul li {
+  margin-bottom: 0.8rem;
 }
 
 .ls-footer-column ul li a {
@@ -126,73 +126,88 @@
 
 .ls-footer-column ul li a:hover {
   color: var(--footer-link-hover);
-  transform: translateX(4px);
+  transform: translateX(2px);
 }
 
 /* ==========================================
-   Logout Button
+   Auth Actions (Login / Logout)
    ========================================== */
+.ls-footer-auth {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--footer-border);
+}
+
+.ls-footer-login-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--footer-title);
+  background: rgba(245, 197, 99, 0.15);
+  border: 1px solid rgba(245, 197, 99, 0.35);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.ls-footer-login-btn:hover {
+  background: #f5c563;
+  color: #082317;
+  border-color: #f5c563;
+}
+
 .ls-footer-logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background: none;
   border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  font-size: 0.9rem;
   color: var(--footer-link);
+  font-size: 0.85rem;
+  font-weight: 500;
   cursor: pointer;
-  text-align: left;
-  display: inline-block;
-  transition: color 0.2s ease, transform 0.2s ease;
+  padding: 0;
+  font-family: inherit;
+  transition: color 0.2s ease;
 }
 
 .ls-footer-logout-btn:hover {
   color: var(--footer-logout-hover);
-  transform: translateX(4px);
 }
 
 /* ==========================================
-   Contact Details
+   Contact / Address Column
    ========================================== */
-.ls-footer-contact {
-  display: flex;
-  flex-direction: column;
-  /* gap: 1rem; */
-}
-
-.ls-contact-item {
+.ls-footer-contact-item {
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
+  margin-bottom: 1rem;
   font-size: 0.9rem;
+  line-height: 1.5;
 }
 
-.ls-contact-icon {
-  font-size: 1rem;
-  line-height: 1.4;
+.ls-footer-icon {
   flex-shrink: 0;
-  color: var(--footer-logo-accent);
+  margin-top: 0.2rem;
+  color: var(--footer-link-hover);
 }
 
-.ls-contact-item p {
-  margin: 0;
-  line-height: 1.55;
-  color: var(--footer-text);
-}
-
-.ls-contact-item a {
+.ls-footer-contact-item a {
   color: var(--footer-link);
   text-decoration: none;
   transition: color 0.2s ease;
-  word-break: break-all;
 }
 
-.ls-contact-item a:hover {
+.ls-footer-contact-item a:hover {
   color: var(--footer-link-hover);
 }
 
 /* ==========================================
-   Footer Bottom Bar
+   Bottom Sub-Footer
    ========================================== */
 .ls-footer-bottom {
   background-color: var(--footer-bottom-bg);

@@ -6,7 +6,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 1.25rem;
-  background-color: var(--color-paper, #f5f6f4);
+  background-color: var(--color-paper, #082317);
   text-align: center;
 }
 
@@ -20,7 +20,7 @@
   font-size: 6rem;
   line-height: 1;
   font-weight: 700;
-  color: var(--brand-green, #6fae45);
+  color: var(--brand-green, #f5c563);
   margin-bottom: 0.5rem;
 }
 
@@ -34,7 +34,7 @@
   font-family: var(--font-serif, Georgia, serif);
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--color-ink, #202020);
+  color: var(--color-ink, #ffffff);
   margin-bottom: 0.75rem;
 }
 
@@ -47,7 +47,7 @@
 .nf-text {
   font-size: 0.95rem;
   line-height: 1.65;
-  color: var(--color-text-muted, #6a6a6a);
+  color: var(--color-text-muted, #cbd5e1);
   margin-bottom: 1.75rem;
 }
 
@@ -80,7 +80,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   color: #ffffff;
-  background-color: var(--brand-green, #6fae45);
+  background-color: var(--brand-green, #f5c563);
   text-decoration: none;
   border: none;
   cursor: pointer;
@@ -110,7 +110,7 @@
   border-radius: 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--color-ink, #202020);
+  color: var(--color-ink, #ffffff);
   background-color: transparent;
   border: 1px solid rgba(32, 32, 32, 0.15);
   text-decoration: none;
@@ -127,8 +127,8 @@
 }
 
 .nf-btn-secondary:hover {
-  border-color: var(--brand-green, #6fae45);
-  color: var(--brand-green, #6fae45);
+  border-color: var(--brand-green, #f5c563);
+  color: var(--brand-green, #f5c563);
 }
 
 .nf-links {
@@ -136,11 +136,11 @@
   padding-top: 1.5rem;
   border-top: 1px solid rgba(32, 32, 32, 0.08);
   font-size: 0.85rem;
-  color: var(--color-text-muted, #6a6a6a);
+  color: var(--color-text-muted, #cbd5e1);
 }
 
 .nf-links a {
-  color: var(--brand-green, #6fae45);
+  color: var(--brand-green, #f5c563);
   text-decoration: none;
   font-weight: 600;
   margin: 0 0.4rem;
