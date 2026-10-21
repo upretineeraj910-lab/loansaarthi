@@ -1,6 +1,3 @@
-/* =========================================
-   OUR OFFERINGS
-========================================= */
 
 .offerings-section {
   width: 100%;
@@ -197,7 +194,7 @@ background-color: transparent;
    BOTTOM WAVE
 ========================================= */
 
-.offerings-wave {
+/* .offerings-wave {
   position: absolute;
 
   left: -5%;
@@ -243,7 +240,7 @@ background-color: transparent;
   width: 55%;
 
   transform: rotate(-2deg);
-}
+} */
 
 
 /* =========================================

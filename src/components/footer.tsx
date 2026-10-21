@@ -188,10 +188,10 @@ export default function Footer() {
           <h3>Contact Us</h3>
 
           <div className="ls-contact-item">
-            <span className="ls-contact-icon">📍</span>
+            {/* <span className="ls-contact-icon">📍</span> */}
 
             <p>
-              2151/9B Goswami Girdhari Lal Marg,
+              📍 2151/9B Goswami Girdhari Lal Marg,
               <br />
               New Patel Nagar, Shadipur,
               <br />

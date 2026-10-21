@@ -68,7 +68,7 @@ export default function OurOfferings() {
 
         {/* HEADING */}
         <div className="offerings-heading">
-          <span>OUR OFFERINGS</span>
+          <span>WHAT WE OFFER</span>
 
           <h2>
             <strong>Explore Our Range</strong>{" "}

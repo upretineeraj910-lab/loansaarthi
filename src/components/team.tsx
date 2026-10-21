@@ -69,7 +69,7 @@ const expertTeam: Expert[] = [
     name: "Ranjeet Jaishwal",
     title: "Vertical Head",
     image: "/team/RanjeetJaishwalVerticalHead.png",
-    alt: "Ranjeet Jaishwal - Vertical Head",
+    alt: "Ranjeet Jaishwal - Vertical Head,Channel Business ",
   },
 ];
 
@@ -275,7 +275,7 @@ const Team = () => {
           <span>OUR TEAM</span>
 
           <h2 id="expert-team-title">
-            Meet Our Expert People
+            Meet The Expert behind LoanSaarthi
           </h2>
 
           <p>

@@ -41,7 +41,7 @@ export default function ContactPage() {
           <span className="contact-hero-badge">Contact Us</span>
 
           <h1 className="contact-hero-title">
-            We're Here To Help
+            We're Happy To Help
           </h1>
 
           <p className="contact-hero-text">
