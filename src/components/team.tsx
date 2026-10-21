@@ -19,9 +19,9 @@ type Expert = {
 const expertTeam: Expert[] = [
   {
     name: "Ganesh Jyala",
-    title: "CEO & Founder",
+    title: "CEO",
     image: "/team/ganesh-ceo.png",
-    alt: "Ganesh Jyala - CEO and Founder",
+    alt: "Ganesh Jyala - CEO",
   },
   {
     name: "Kavita",
@@ -37,9 +37,9 @@ const expertTeam: Expert[] = [
   },
   {
     name: "Meenakshi Bisht",
-    title: "Loan Advisor",
+    title: "Vertical Head",
     image: "/team/MeenakshiVerticalHead.PNG",
-    alt: "Meenakshi Bisht - Loan Advisor",
+    alt: "Meenakshi Bisht - Vertical Head",
   },
   {
     name: "Naina Singh",
@@ -49,9 +49,9 @@ const expertTeam: Expert[] = [
   },
   {
     name: "Priyanka",
-    title: "Financial Consultant",
+    title: "Vertical Head - Inbound",
     image: "/team/Priyanka_Singh_verticalHeadInbound.png",
-    alt: "Priyanka - Financial Consultant",
+    alt: "Priyanka - Vertical Head, Inbound",
   },
   {
     name: "Rajeev Kaushal",
@@ -61,15 +61,15 @@ const expertTeam: Expert[] = [
   },
   {
     name: "Rambha",
-    title: "Senior Loan Specialist",
+    title: "Vertical Head - Channel Business",
     image: "/team/Rambha-vertical-head- channel business.png",
-    alt: "Rambha - Senior Loan Specialist",
+    alt: "Rambha - Vertical Head, Channel Business",
   },
   {
     name: "Ranjeet Jaishwal",
-    title: "Relationship Manager",
+    title: "Vertical Head",
     image: "/team/RanjeetJaishwalVerticalHead.png",
-    alt: "Ranjeet Jaishwal - Relationship Manager",
+    alt: "Ranjeet Jaishwal - Vertical Head",
   },
 ];
 
