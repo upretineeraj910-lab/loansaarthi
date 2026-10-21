@@ -32,7 +32,7 @@ const expertTeam: Expert[] = [
   {
     name: "Krishan Kumar Panday",
     title: "Group Head",
-    image: "/team/KrishanKumarPandayGroupHead.png",
+    image: "/team/KrishanKumarPandayGroupHead.jpeg",
     alt: "Krishan Kumar Panday - Group Head",
   },
   {
@@ -56,7 +56,7 @@ const expertTeam: Expert[] = [
   {
     name: "Rajeev Kaushal",
     title: "Vertical Head",
-    image: "/team/RajeevKaushalVerticalHead.png",
+    image: "/team/RajeevKaushalVerticalHead.jpeg",
     alt: "Rajeev Kaushal - Vertical Head",
   },
   {
