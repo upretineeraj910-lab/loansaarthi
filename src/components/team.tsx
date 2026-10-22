@@ -38,7 +38,7 @@ const expertTeam: Expert[] = [
   {
     name: "Meenakshi Bisht",
     title: "Vertical Head",
-    image: "/team/MeenakshiVerticalHead.PNG",
+    image: "/team/MeenakshiVerticalHead.jpeg",
     alt: "Meenakshi Bisht - Vertical Head",
   },
   {
