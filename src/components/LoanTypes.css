@@ -85,7 +85,7 @@
   color: aliceblue;
 }
 
-.loan-card-top-shape {
+/* .loan-card-top-shape {
   position: absolute;
   top: 0;
   left: 0;
@@ -96,7 +96,7 @@
   background: var(--color-brass);
 
   border-bottom-right-radius: 55px;
-}
+} */
 
 .loan-card-dots {
   position: absolute;

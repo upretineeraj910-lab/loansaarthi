@@ -116,11 +116,11 @@ export default function Home() {
             </div>
             <div className="hero-stats">
               <div>
-                <div className="stat-number">1,200+</div>
+                <div className="stat-number">30,000+</div>
                 <div className="stat-label">loans placed</div>
               </div>
               <div>
-                <div className="stat-number">4–7 days</div>
+                <div className="stat-number">1–2 days</div>
                 <div className="stat-label">avg. sanction</div>
               </div>
               <div>
@@ -195,11 +195,11 @@ export default function Home() {
             </div>
             <div className="hero-stats">
               <div>
-                <div className="stat-number">1,200+</div>
+                <div className="stat-number">30,000+</div>
                 <div className="stat-label">loans placed</div>
               </div>
               <div>
-                <div className="stat-number">4–7 days</div>
+                <div className="stat-number">1–2 days</div>
                 <div className="stat-label">avg. sanction</div>
               </div>
               <div>

@@ -26,7 +26,7 @@ export const WHY: WhyItem[] = [
   {
     icon: Clock3,
     title: "Days, not months",
-    text: "Most sanctions come through in 4–7 working days because your file reaches the right desk the first time.",
+    text: "Most sanctions come through in 1–2 working days because your file reaches the right desk the first time.",
   },
   {
     icon: Landmark,

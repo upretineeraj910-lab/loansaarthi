@@ -223,3 +223,13 @@
     padding: 12px 14px;
   }
 }
+
+
+.asterisk {
+  color: #ef4444;          
+  font-size: 0.55em;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 2px;
+  font-weight: 700;
+}

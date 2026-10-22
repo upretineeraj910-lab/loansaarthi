@@ -21,7 +21,7 @@ import "../main.css"; // same stylesheet as the home page — keeps theme identi
 export const metadata = {
   title: "About Us | LoanSaarthi — Loan Comparison Experts in Delhi",
   description:
-    "LoanSaarthi helps you compare and apply for Personal, Business, and Home loans across 42+ banks and NBFCs. Learn about our story, our team, and why 1,200+ clients trust us for fast, transparent loan approvals.",
+    "LoanSaarthi helps you compare and apply for Personal, Business, and Home loans across 42+ banks and NBFCs. Learn about our story, our team, and why 30,000+ clients trust us for fast, transparent loan approvals.",
   keywords: [
     "LoanSaarthi",
     "about LoanSaarthi",
@@ -43,7 +43,7 @@ export const metadata = {
   openGraph: {
     title: "About Us | LoanSaarthi",
     description:
-      "1,200+ loans placed, 42+ partner banks & NBFCs, 4–7 day average sanction. Meet the team behind LoanSaarthi.",
+      "30,000+ loans placed, 42+ partner banks & NBFCs, 1–2 day average sanction. Meet the team behind LoanSaarthi.",
     url: "https://www.loansaarthi.com/about-us",
     siteName: "LoanSaarthi",
     images: [
@@ -152,11 +152,11 @@ export default function AboutUs() {
           </p>
           <div className="hero-stats">
             <div>
-              <div className="stat-number">1,200+</div>
+              <div className="stat-number">30,000+</div>
               <div className="stat-label">loans placed</div>
             </div>
             <div>
-              <div className="stat-number">4–7 days</div>
+              <div className="stat-number">1–2 days</div>
               <div className="stat-label">avg. sanction</div>
             </div>
             <div>
@@ -186,9 +186,9 @@ export default function AboutUs() {
           <Reveal delay={100}>
             <div style={{ marginTop: "1.5rem" }}>
               <LedgerRow label="Founded :- " value=" New Delhi" />
-              <LedgerRow label="Loans placed:- " value=" 1,200+" />
+              <LedgerRow label="Loans placed:- " value=" 30,000+" />
               <LedgerRow label="Partner banks & NBFCs :- " value=" 42+" />
-              <LedgerRow label="Average sanction time :- " value=" 4–7 days" />
+              <LedgerRow label="Average sanction time :- " value=" 1–2 days" />
             </div>
           </Reveal>
         </div>
