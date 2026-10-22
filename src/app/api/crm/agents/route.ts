@@ -27,7 +27,6 @@ export async function GET(request: NextRequest) {
 
     await connectToDatabase();
 
-    // Sirf 'crm_editor' role wale telecallers / agents fetch karein
     const agents = await User.find(
       { role: 'crm_editor' },
       'name email role'

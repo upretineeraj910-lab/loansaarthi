@@ -34,7 +34,7 @@ async function connectToDatabase(): Promise<typeof mongoose> {
       minPoolSize: 2,
       serverSelectionTimeoutMS: 5000,
       socketTimeoutMS: 45000,
-      family: 4, // Force IPv4 to avoid slow IPv6 DNS resolution on MongoDB Atlas
+      family: 4, 
     };
 
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {

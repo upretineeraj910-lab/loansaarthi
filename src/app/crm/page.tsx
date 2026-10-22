@@ -57,7 +57,7 @@ interface Lead {
     | 'Approved'
     | 'Rejected'
     | 'Disbursed';
-  source: 'Form' | 'Excel Upload' | 'Appointment';
+  source: 'Form' | 'Excel Upload';
   rejectionReason?: string;
   approvedBank?: string;
   approvedAmount?: number;
@@ -756,7 +756,6 @@ export default function CrmDashboardPage() {
                 className="crm-select"
               >
                 <option value="All">All Sources</option>
-                <option value="Appointment">📅 Appointment (Consultation)</option>
                 <option value="Form">Form</option>
                 <option value="Excel Upload">Excel Upload</option>
               </select>
@@ -1218,25 +1217,7 @@ export default function CrmDashboardPage() {
                       <td className="crm-row-index">{(currentPage - 1) * pageSize + idx + 1}</td>
 
                       <td>
-                        <div className="crm-cell-name" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <span>{lead.name}</span>
-                          {lead.source === 'Appointment' && (
-                            <span
-                              style={{
-                                fontSize: '0.65rem',
-                                padding: '1px 6px',
-                                borderRadius: '4px',
-                                background: 'rgba(245, 197, 99, 0.15)',
-                                color: '#f5c563',
-                                border: '1px solid rgba(245, 197, 99, 0.4)',
-                                fontWeight: 600,
-                              }}
-                              title="Booked Expert Video Consultation"
-                            >
-                              📅 Appointment
-                            </span>
-                          )}
-                        </div>
+                        <div className="crm-cell-name">{lead.name}</div>
                         <div className="crm-cell-sub">{lead.city || 'City: --'}</div>
                       </td>
 
@@ -1405,12 +1386,10 @@ export default function CrmDashboardPage() {
                           className={`crm-source-pill ${
                             lead.source === 'Excel Upload'
                               ? 'crm-source-pill--excel'
-                              : lead.source === 'Appointment'
-                              ? 'crm-source-pill--appointment'
                               : 'crm-source-pill--form'
                           }`}
                         >
-                          {lead.source === 'Appointment' ? '📅 Appointment' : lead.source}
+                          {lead.source}
                         </span>
                       </td>
 

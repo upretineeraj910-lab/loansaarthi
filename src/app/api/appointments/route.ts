@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Appointment from '@/models/Appointment';
-import Lead from '@/models/Lead';
 import { getAuthUser } from '@/lib/crmAuth';
 
 export const dynamic = 'force-dynamic';
@@ -117,30 +116,7 @@ export async function POST(request: NextRequest) {
       notes: notes?.trim() || '',
     });
 
-    // Also auto-register or tag in Lead database so telecallers see it in CRM
-    try {
-      const existingLead = await Lead.findOne({ phone: cleanPhone });
-      if (!existingLead) {
-        await Lead.create({
-          name: name.trim(),
-          phone: cleanPhone,
-          loanType: loanType || 'Personal Loan',
-          loanAmount: numAmount,
-          status: 'Fresh',
-          source: 'Appointment',
-          notes: `📅 [Expert Video Consultation Booked] Date: ${appointmentDate} | Time: ${appointmentTime} | Salary: ₹${numSalary.toLocaleString('en-IN')}${notes?.trim() ? ` | Notes: ${notes.trim()}` : ''}`,
-        });
-      } else {
-        existingLead.source = 'Appointment';
-        existingLead.loanType = loanType || existingLead.loanType;
-        existingLead.loanAmount = numAmount || existingLead.loanAmount;
-        existingLead.notes = `📅 [New Consultation: ${appointmentDate} ${appointmentTime} | Salary: ₹${numSalary.toLocaleString('en-IN')}]\n${existingLead.notes || ''}`.trim();
-        await existingLead.save();
-      }
-    } catch (leadErr) {
-      console.warn('Could not auto-sync appointment to leads:', leadErr);
-    }
-
+    
     return NextResponse.json(
       {
         success: true,
