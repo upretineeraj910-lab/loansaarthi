@@ -7,7 +7,6 @@ import Team from "@/components/team";
 
 import Reveal from "@/components/Reveal";
 import Eyebrow from "@/components/Eyebrow";
-import LedgerRow from "@/components/LedgerRow";
 
 import { Phone, MessageCircle, ShieldCheck, Users, Building2, Handshake } from "lucide-react";
 
@@ -136,215 +135,194 @@ export default function AboutUs() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* ---------------- HERO ---------------- */}
-      <section className="container hero-section">
-        <Reveal>
-          <Eyebrow>About LoanSaarthi</Eyebrow>
-          <h1 className="hero-title">
-            We make loan approvals feel <br />
-            less like paperwork, more like progress.
-          </h1>
-          <p className="hero-text">
-            LoanSaarthi was built on a simple idea: comparing loans across
-            banks shouldn&apos;t take weeks of running between branches. We
-            do the comparing, the paperwork, and the follow-up — so you only
-            show up to sign the sanction letter.
-          </p>
-          <div className="hero-stats">
-            <div>
-              <div className="stat-number">30,000+</div>
-              <div className="stat-label">loans placed</div>
-            </div>
-            <div>
-              <div className="stat-number">1–2 days</div>
-              <div className="stat-label">avg. sanction</div>
-            </div>
-            <div>
-              <div className="stat-number">42+</div>
-              <div className="stat-label">partner lenders</div>
-            </div>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ---------------- STORY / LEDGER ---------------- */}
+      {/* ---------------- HERO + STORY (merged) ---------------- */}
       <section
-  style={{
-    minHeight: "80vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "4rem 1.5rem",
-    boxSizing: "border-box",
-    position: "relative",
-    background: "transparent",
-  }}
->
-  <div
-    style={{
-      maxWidth: "1140px",
-      width: "100%",
-      margin: "0 auto",
-      display: "flex",
-      flexDirection: "column",
-      gap: "2.5rem",
-    }}
-  >
-    {/* Text Section */}
-    <div style={{ maxWidth: "880px" }}>
-      {/* Pill Eyebrow */}
-      <span
         style={{
-          display: "inline-flex",
-          alignItems: "center",
-          gap: "6px",
-          padding: "4px 14px",
-          borderRadius: "50px",
-          fontSize: "0.75rem",
-          fontWeight: 600,
-          letterSpacing: "0.08em",
-          textTransform: "uppercase",
-          color: "#4ade80",
-          backgroundColor: "rgba(74, 222, 128, 0.1)",
-          border: "1px solid rgba(74, 222, 128, 0.25)",
-          marginBottom: "1.2rem",
-        }}
-      >
-        Debt Consolidation &amp; Our Story
-      </span>
-
-      {/* Main H1 Heading */}
-      <h1
-        style={{
-          fontSize: "clamp(2rem, 3.8vw, 2.75rem)",
-          fontWeight: 700,
-          color: "#ffffff",
-          lineHeight: 1.25,
-          letterSpacing: "-0.02em",
-          marginBottom: "0.75rem",
-        }}
-      >
-        Simplify Your Finances with Debt Consolidation
-      </h1>
-
-      {/* Story Subhead */}
-      <h2
-        style={{
-          fontSize: "clamp(1.15rem, 2vw, 1.4rem)",
-          fontWeight: 500,
-          color: "#93c5fd",
-          lineHeight: 1.4,
-          marginBottom: "1.5rem",
-        }}
-      >
-        Started in Delhi, built for borrowers everywhere.
-      </h2>
-
-      {/* Paragraphs */}
-      <div
-        style={{
-          fontSize: "1rem",
-          color: "#cbd5e1",
-          lineHeight: 1.7,
           display: "flex",
-          flexDirection: "column",
-          gap: "0.9rem",
-          fontWeight: 300,
+          justifyContent: "center",
+          padding: "clamp(3rem, 8vw, 5.5rem) 1.5rem clamp(2.5rem, 6vw, 4rem)",
+          boxSizing: "border-box",
+          position: "relative",
+          background: "transparent",
         }}
       >
-        <p style={{ margin: 0 }}>
-          LoanSaarthi started as a small team helping neighbours and friends navigate confusing loan paperwork. Today we work with 42+ banks and NBFCs, but the job hasn&apos;t changed: get you the best sanction, as fast as honestly possible.
-        </p>
+        <div
+          style={{
+            maxWidth: "1140px",
+            width: "100%",
+            margin: "0 auto",
+            display: "flex",
+            flexDirection: "column",
+            gap: "3rem",
+          }}
+        >
+          <Reveal>
+            {/* Text wrapper: har child ke beech 1.25rem gap */}
+            <div
+              style={{
+                maxWidth: "880px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "1.25rem",
+              }}
+            >
+              {/* Pill Eyebrow */}
+              <span
+                style={{
+                  alignSelf: "flex-start",
+                  padding: "4px 14px",
+                  borderRadius: "50px",
+                  fontSize: "0.75rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  color: "#4ade80",
+                  backgroundColor: "rgba(74, 222, 128, 0.1)",
+                  border: "1px solid rgba(74, 222, 128, 0.25)",
+                }}
+              >
+                About LoanSaarthi
+              </span>
 
-        <p style={{ margin: 0 }}>
-          Loan Saarthi helps you explore debt consolidation solutions by combining multiple eligible debts into one manageable repayment plan. Simplify your finances with a clearer view of your monthly obligations.
-        </p>
+              {/* H1 */}
+              <h1
+                style={{
+                  fontSize: "clamp(2rem, 3.8vw, 2.75rem)",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  lineHeight: 1.25,
+                  letterSpacing: "-0.02em",
+                  margin: 0,
+                }}
+              >
+                Started in Delhi, built for borrowers everywhere in India.
+              </h1>
 
-        <p style={{ margin: 0 }}>
-          Our experts guide you in understanding suitable options based on your financial profile and eligibility. Take a step towards better financial management with Loan Saarthi — <span style={{ color: "#facc15", fontWeight: 600 }}>Right Guidance. Better Decisions.</span>
-        </p>
-      </div>
-    </div>
+              {/* Story paragraph */}
+              <p
+                style={{
+                  fontSize: "1rem",
+                  color: "#d5dde8",
+                  lineHeight: 1.75,
+                  margin: 0,
+                }}
+              >
+                Our journey started in 2020, during Covid, with just 20 people
+                and one idea — to make loans honest, fast, and fully digital.
+                Today, we are a team of 165+ dedicated professionals, backed by
+                people with over 22 years of industry experience. At
+                LoanSaarthi, we don&apos;t just forward your application. We
+                analyse your current situation, find the real reason for
+                rejection, and match you with banks and NBFCs that actually suit
+                your profile — so you don&apos;t have to apply everywhere.
+              </p>
 
-    {/* 4 Cards in 1 Row */}
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-        gap: "1rem",
-        paddingTop: "2rem",
-        borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-      }}
-    >
-      <div
-        style={{
-          padding: "1.25rem 1.5rem",
-          background: "rgba(255, 255, 255, 0.04)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.4rem",
-        }}
-      >
-        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Founded</span>
-        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>New Delhi</span>
-      </div>
+              {/* ISO highlight */}
+              <p
+                style={{
+                  fontSize: "1.05rem",
+                  fontWeight: 600,
+                  color: "#facc15",
+                  lineHeight: 1.6,
+                  margin: 0,
+                }}
+              >
+                LoanSaarthi is ISO 9001:2015 and ISO 27001:2022 certified,
+                tested and verified. Our credibility is validated by thousands
+                of genuine reviews on Google.
+              </p>
 
-      <div
-        style={{
-          padding: "1.25rem 1.5rem",
-          background: "rgba(255, 255, 255, 0.04)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.4rem",
-        }}
-      >
-        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Loans Placed</span>
-        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>30,000+</span>
-      </div>
+              {/* H3 — upar thoda extra gap taaki naya block alag dikhe */}
+              <h3
+                style={{
+                  fontSize: "clamp(1.8rem, 3.4vw, 2.4rem)",
+                  fontWeight: 700,
+                  color: "#ffffff",
+                  lineHeight: 1.25,
+                  letterSpacing: "-0.02em",
+                  margin: "1.5rem 0 0 0",
+                }}
+              >
+                Debt Consolidation
+              </h3>
 
-      <div
-        style={{
-          padding: "1.25rem 1.5rem",
-          background: "rgba(255, 255, 255, 0.04)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.4rem",
-        }}
-      >
-        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Partner Banks &amp; NBFCs</span>
-        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>42+</span>
-      </div>
+              {/* Para heading line */}
+              <p
+                style={{
+                  fontSize: "1.05rem",
+                  fontWeight: 600,
+                  color: "#facc15",
+                  lineHeight: 1.5,
+                  margin: 0,
+                }}
+              >
+                Simplify Your Finance with Debt Consolidation
+              </p>
 
-      <div
-        style={{
-          padding: "1.25rem 1.5rem",
-          background: "rgba(255, 255, 255, 0.04)",
-          backdropFilter: "blur(10px)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.08)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.4rem",
-        }}
-      >
-        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Avg. Sanction Time</span>
-        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>1–2 Days</span>
-      </div>
-    </div>
-  </div>
-</section>
+              {/* Para body */}
+              <p
+                style={{
+                  fontSize: "1rem",
+                  color: "#d5dde8",
+                  lineHeight: 1.75,
+                  margin: 0,
+                }}
+              >
+                Loan Saarthi helps you explore debt consolidation solutions by
+                combining multiple eligible debts like personal loan, app loan
+                and credit card outstanding into one manageable single EMI with
+                tenure up to 96 months *. Simplify your finances with a clearer
+                view of your monthly obligations. Our experts guide you in
+                understanding suitable options based on your financial profile
+                and eligibility. Take a step towards better financial
+                management with Loan Saarthi —{" "}
+                <span style={{ color: "#facc15", fontWeight: 600 }}>
+                  Right Guidance. Better Decisions.
+                </span>
+              </p>
+            </div>
+          </Reveal>
 
-
-
+          {/* 4 Stat Cards */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+              gap: "1rem",
+              paddingTop: "2rem",
+              borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+            }}
+          >
+            {[
+              { label: "Founded", value: "New Delhi" },
+              { label: "Loans Placed", value: "30,000+" },
+              { label: "Partner Banks & NBFCs", value: "42+" },
+              { label: "Avg. Sanction Time", value: "1–2 Days" },
+            ].map((s) => (
+              <div
+                key={s.label}
+                style={{
+                  padding: "1.25rem 1.5rem",
+                  background: "rgba(255, 255, 255, 0.04)",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: "12px",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.4rem",
+                }}
+              >
+                <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>
+                  {s.label}
+                </span>
+                <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>
+                  {s.value}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* ---------------- VALUES ---------------- */}
       <section className="container section-spacing">
@@ -409,11 +387,31 @@ export default function AboutUs() {
       <section className="bg-ink" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
         <div className="container">
           <div className="bank-partners-label">Lenders in our network</div>
-          <div className="bank-tags flex flex-wrap items-center justify-center gap-6">
+          <div
+            className="bank-tags"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "1.5rem",
+            }}
+          >
             {BANKS.map((b) => (
               <div
                 key={b.name}
-                className="bank-logo-wrapper relative h-12 w-32 flex items-center justify-center p-2 bg-white/5 rounded-lg"
+                className="bank-logo-wrapper"
+                style={{
+                  position: "relative",
+                  height: "3rem",
+                  width: "8rem",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  padding: "0.5rem",
+                  background: "rgba(255, 255, 255, 0.05)",
+                  borderRadius: "8px",
+                }}
               >
                 <img
                   src={b.logo}
@@ -428,9 +426,11 @@ export default function AboutUs() {
 
       {/* ---------------- CONTACT CTA ---------------- */}
       <section className="bg-dark contact-section">
-        <div className="container text-center">
+        <div className="container" style={{ textAlign: "center" }}>
           <Reveal>
-            <h2 className="contact-title text-white">Ready to compare your loan offers?</h2>
+            <h2 className="contact-title" style={{ color: "#ffffff" }}>
+              Ready to compare your loan offers?
+            </h2>
             <p className="contact-text">
               Talk to a relationship manager today — no charge for the first
               consultation.

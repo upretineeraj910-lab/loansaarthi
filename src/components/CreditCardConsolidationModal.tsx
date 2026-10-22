@@ -73,7 +73,7 @@ export default function CreditCardConsolidationModal() {
         <div className={styles.metricsGrid}>
           {/* Box 1: Lower Monthly EMI (Top) -> Up to 45% (Bottom) */}
           <div className={styles.metricItem}>
-            <span className={styles.metricLabel}>Lower Monthly EMI</span>
+            <span className={styles.metricLabel}>Save your Monthly EMI</span>
             <span className={styles.metricValueGreen}>Up to 45%</span>
           </div>
 

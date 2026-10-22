@@ -168,7 +168,7 @@ export default function CrmDashboardPage() {
   const [pageSize, setPageSize] = useState<number>(25);
 
   // Assignment Feature States
-  const [assignmentTab, setAssignmentTab] = useState<'unassigned' | 'assigned' | 'all'>('unassigned');
+  const [assignmentTab, setAssignmentTab] = useState<'unassigned' | 'assigned' | 'all'>('all');
   const [assignedAgentFilter, setAssignedAgentFilter] = useState<string>('All');
   const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([]);
   const [agentsList, setAgentsList] = useState<AgentUser[]>([]);
@@ -288,6 +288,7 @@ export default function CrmDashboardPage() {
 
   // Filter leads based on active assignment tab & superadmin agent filter
   const filteredLeads = useMemo(() => {
+    if (!isAdmin) return leads;
     return leads.filter((lead) => {
       const isLeadAssigned = Boolean(lead.assignedTo && lead.assignedTo.trim() !== '' && lead.assignedTo !== 'Unassigned');
 
@@ -305,7 +306,7 @@ export default function CrmDashboardPage() {
       }
       return true;
     });
-  }, [leads, assignmentTab, assignedAgentFilter]);
+  }, [leads, isAdmin, assignmentTab, assignedAgentFilter]);
 
   // Paginated leads calculation
   const totalPages = Math.max(1, Math.ceil(filteredLeads.length / pageSize));
@@ -1164,7 +1165,7 @@ export default function CrmDashboardPage() {
                       Loading leads from database...
                     </td>
                   </tr>
-                ) : leads.length === 0 ? (
+                ) : filteredLeads.length === 0 ? (
                   <tr>
                     <td colSpan={isAdmin ? 10 : 9} className="crm-table-empty">
                       <Filter size={26} style={{ margin: '0 auto 0.5rem' }} />

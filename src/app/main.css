@@ -1507,3 +1507,235 @@ input:focus-visible {
 }
 
 
+/* =========================================================================
+   =========================================================================
+   SMOOTH SPACING + READABILITY OVERRIDES
+   (Upar ka koi CSS hataya nahi gaya. Ye block file ke end me hai, isliye
+    sirf wahi cheezein badalta hai jo yahan likhi hain. Isko hata do to
+    sab pehle jaisa ho jayega.)
+   =========================================================================
+========================================================================= */
+
+/* ---- Readability: halke text colors thode saaf (theme same) ---- */
+:root {
+  --color-charcoal: #d5dde8;
+  --color-text-muted: #a9b6c8;
+  --color-text-light: #94a3b8;
+  --section-y: clamp(2rem, 4vw, 3.25rem);
+}
+
+/* ---- Headings / paragraphs ki lines achhe se tootein ---- */
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* ---- Mobile pe sticky CTA footer ko na dhake ---- */
+@media (max-width: 767px) {
+  body {
+    padding-bottom: 3.5rem;
+  }
+}
+
+/* ---- Section spacing: ek jaisi ---- */
+.section-spacing {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+.hero-section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+.faq-section {
+  padding-top: var(--section-y);
+  padding-bottom: var(--section-y);
+}
+
+.contact-section {
+  padding-top: calc(var(--section-y) + 0.5rem);
+  padding-bottom: calc(var(--section-y) + 0.5rem);
+}
+
+/* ---- Heading ke neeche gap ---- */
+.eyebrow {
+  margin-bottom: 1rem;
+}
+
+.section-header {
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.section-subheader {
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero-text {
+  margin-bottom: 1.5rem;
+}
+
+.hero-actions {
+  margin-bottom: 1.5rem;
+}
+
+/* ---- Grids: upar se barabar gap ---- */
+.why-grid,
+.process-grid,
+.testimonial-grid,
+.calculator-wrapper {
+  margin-top: 1.5rem;
+}
+
+/* loan-grid: pehle chaaro taraf 2rem margin tha, ab sirf upar se */
+.loan-grid {
+  margin: 1.5rem 0 0;
+}
+
+@media (min-width: 640px) {
+  .loan-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .loan-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .testimonial-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---- Hero / process stats labels ka conflict (do jagah .stat-label) ---- */
+.hero-stats {
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+
+.hero-stats .stat-label {
+  font-size: 0.8rem;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+/* ---- Loan cards ---- */
+.loan-item {
+  border: 1px solid var(--color-paper-line);
+}
+
+.loan-item:hover {
+  border-color: var(--brand-green);
+}
+
+.loan-desc {
+  color: var(--color-charcoal);
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+}
+
+.loan-desc strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.feature-pill {
+  background-color: var(--brand-green-light);
+}
+
+/* Footer: pehle light (#f8fafc) tha, uspe gold text padhna mushkil tha */
+.loan-stats-footer {
+  background-color: var(--color-paper-dark);
+  border-top: 1px solid var(--color-paper-line);
+}
+
+/* ---- Contact text: pehle bahut dim tha (#64748b + opacity) ---- */
+.contact-text {
+  color: var(--color-text-muted);
+  opacity: 1;
+  max-width: 36rem;
+  margin: 0 auto 1.5rem;
+  line-height: 1.7;
+}
+
+/* ---- Cards ke andar text ---- */
+.why-text,
+.process-detail {
+  font-size: 0.92rem;
+  line-height: 1.65;
+}
+
+.why-title,
+.process-title {
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+/* ---- FAQ: lambe answers clip na hon ---- */
+.faq-answer.open {
+  max-height: 480px;
+}
+
+.faq-answer-text {
+  line-height: 1.7;
+  padding-bottom: 1.1rem;
+}
+
+.faq-item {
+  margin-bottom: 0.6rem;
+  border: 1px solid var(--color-paper-line);
+}
+
+/* ---- Mobile WhatsApp button ka text color missing tha ---- */
+.mobile-cta-whatsapp {
+  color: #081a12;
+  font-weight: 700;
+}
+
+/* ---- Calculator slider thumb purane green ki jagah gold ---- */
+.calc-slider::-webkit-slider-thumb {
+  box-shadow: 0 2px 8px rgba(245, 197, 99, 0.35);
+}
+
+/* ---- Reduced motion: content kabhi hidden na rahe ---- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---- Optional helper classes (about page ke text ke liye) ---- */
+.about-text {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-charcoal);
+  margin-bottom: 1rem;
+  max-width: 62ch;
+}
+
+.about-highlight {
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--brand-green);
+  margin-bottom: 2rem;
+  max-width: 62ch;
+}
