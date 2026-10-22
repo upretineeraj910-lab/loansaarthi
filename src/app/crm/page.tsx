@@ -137,7 +137,7 @@ const STATUS_OPTIONS: {
   { value: 'Disbursed', label: 'Disbursed', className: 'crm-status--disbursed' },
 ];
 
-const PAGE_SIZE = 10;
+const DEFAULT_PAGE_SIZE = 25;
 
 export default function CrmDashboardPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
@@ -165,8 +165,11 @@ export default function CrmDashboardPage() {
 
   // Pagination State
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState<number>(25);
 
   // Assignment Feature States
+  const [assignmentTab, setAssignmentTab] = useState<'unassigned' | 'assigned' | 'all'>('unassigned');
+  const [assignedAgentFilter, setAssignedAgentFilter] = useState<string>('All');
   const [selectedLeadIds, setSelectedLeadIds] = useState<string[]>([]);
   const [agentsList, setAgentsList] = useState<AgentUser[]>([]);
   const [selectedAgentName, setSelectedAgentName] = useState<string>('');
@@ -274,12 +277,49 @@ export default function CrmDashboardPage() {
     return () => clearTimeout(timer);
   }, [fetchLeads]);
 
+  // Computed counts for Assignment tabs
+  const unassignedCount = useMemo(() => {
+    return leads.filter((l) => !l.assignedTo || l.assignedTo.trim() === '' || l.assignedTo === 'Unassigned').length;
+  }, [leads]);
+
+  const assignedCount = useMemo(() => {
+    return leads.filter((l) => Boolean(l.assignedTo && l.assignedTo.trim() !== '' && l.assignedTo !== 'Unassigned')).length;
+  }, [leads]);
+
+  // Filter leads based on active assignment tab & superadmin agent filter
+  const filteredLeads = useMemo(() => {
+    return leads.filter((lead) => {
+      const isLeadAssigned = Boolean(lead.assignedTo && lead.assignedTo.trim() !== '' && lead.assignedTo !== 'Unassigned');
+
+      if (assignmentTab === 'unassigned') {
+        if (isLeadAssigned) return false;
+      } else if (assignmentTab === 'assigned') {
+        if (!isLeadAssigned) return false;
+        if (assignedAgentFilter !== 'All' && lead.assignedTo?.toLowerCase() !== assignedAgentFilter.toLowerCase()) {
+          return false;
+        }
+      } else if (assignmentTab === 'all') {
+        if (assignedAgentFilter !== 'All' && lead.assignedTo?.toLowerCase() !== assignedAgentFilter.toLowerCase()) {
+          return false;
+        }
+      }
+      return true;
+    });
+  }, [leads, assignmentTab, assignedAgentFilter]);
+
   // Paginated leads calculation
-  const totalPages = Math.max(1, Math.ceil(leads.length / PAGE_SIZE));
+  const totalPages = Math.max(1, Math.ceil(filteredLeads.length / pageSize));
   const paginatedLeads = useMemo(() => {
-    const start = (currentPage - 1) * PAGE_SIZE;
-    return leads.slice(start, start + PAGE_SIZE);
-  }, [leads, currentPage]);
+    const start = (currentPage - 1) * pageSize;
+    return filteredLeads.slice(start, start + pageSize);
+  }, [filteredLeads, currentPage, pageSize]);
+
+  // Auto-adjust page if current page exceeds totalPages
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      setCurrentPage(totalPages);
+    }
+  }, [totalPages, currentPage]);
 
   const executeUpdate = async (leadId: string, payload: Record<string, any>) => {
     setUpdatingId(leadId);
@@ -319,16 +359,16 @@ export default function CrmDashboardPage() {
     );
   };
 
-  const handleSelectFirst10 = () => {
-    const first10Ids = paginatedLeads.slice(0, 10).map((l) => l._id);
-    setSelectedLeadIds(first10Ids);
-    setStatusMessage(`Selected top ${first10Ids.length} leads on this page`);
+  const handleSelectCount = (count: number) => {
+    const targetIds = filteredLeads.slice(0, count).map((l) => l._id);
+    setSelectedLeadIds(targetIds);
+    setStatusMessage(`Selected top ${targetIds.length} case(s) for assignment`);
     setTimeout(() => setStatusMessage(null), 2500);
   };
 
   const handleToggleSelectAllPage = () => {
     const currentPageIds = paginatedLeads.map((l) => l._id);
-    const allSelected = currentPageIds.every((id) => selectedLeadIds.includes(id));
+    const allSelected = currentPageIds.length > 0 && currentPageIds.every((id) => selectedLeadIds.includes(id));
     if (allSelected) {
       setSelectedLeadIds((prev) => prev.filter((id) => !currentPageIds.includes(id)));
     } else {
@@ -472,28 +512,28 @@ export default function CrmDashboardPage() {
                   style={{
                     backgroundColor:
                       currentUser.role === 'superadmin'
-                        ? '#dcfce7'
+                        ? 'rgba(245, 197, 99, 0.15)'
                         : currentUser.role === 'admin'
-                        ? '#f1f5f9'
+                        ? 'rgba(255, 255, 255, 0.08)'
                         : currentUser.role === 'crm_editor'
-                        ? '#e0e7ff'
-                        : '#fef3c7',
+                        ? 'rgba(99, 102, 241, 0.15)'
+                        : 'rgba(245, 197, 99, 0.12)',
                     color:
                       currentUser.role === 'superadmin'
-                        ? '#166534'
+                        ? '#f5c563'
                         : currentUser.role === 'admin'
-                        ? '#334155'
+                        ? '#ffffff'
                         : currentUser.role === 'crm_editor'
-                        ? '#3730a3'
-                        : '#92400e',
+                        ? '#a5b4fc'
+                        : '#f5c563',
                     borderColor:
                       currentUser.role === 'superadmin'
-                        ? '#bbf7d0'
+                        ? 'rgba(245, 197, 99, 0.4)'
                         : currentUser.role === 'admin'
-                        ? '#cbd5e1'
+                        ? 'rgba(255, 255, 255, 0.2)'
                         : currentUser.role === 'crm_editor'
-                        ? '#c7d2fe'
-                        : '#fde68a',
+                        ? 'rgba(99, 102, 241, 0.35)'
+                        : 'rgba(245, 197, 99, 0.3)',
                   }}
                 >
                   <Shield size={12} />
@@ -707,6 +747,171 @@ export default function CrmDashboardPage() {
           </div>
         </div>
 
+        {/* ADMIN & SUPER ADMIN: Assignment View Tabs & Filter */}
+        {isAdmin && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: '12px',
+              padding: '6px',
+              marginBottom: '0.85rem',
+              borderRadius: '10px',
+              backgroundColor: 'rgba(14, 53, 36, 0.75)',
+              border: '1px solid rgba(245, 197, 99, 0.22)',
+            }}
+          >
+            <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setAssignmentTab('unassigned');
+                  setCurrentPage(1);
+                  setSelectedLeadIds([]);
+                }}
+                style={{
+                  padding: '7px 14px',
+                  fontSize: '0.84rem',
+                  fontWeight: 700,
+                  borderRadius: '7px',
+                  cursor: 'pointer',
+                  border: assignmentTab === 'unassigned' ? '1px solid #f5c563' : '1px solid transparent',
+                  background: assignmentTab === 'unassigned' ? '#f5c563' : 'transparent',
+                  color: assignmentTab === 'unassigned' ? '#081a12' : '#cbd5e1',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <span>⚡ Pending Assignment</span>
+                <span
+                  style={{
+                    padding: '2px 8px',
+                    borderRadius: '999px',
+                    fontSize: '0.74rem',
+                    fontWeight: 800,
+                    background: assignmentTab === 'unassigned' ? '#081a12' : 'rgba(245, 197, 99, 0.2)',
+                    color: assignmentTab === 'unassigned' ? '#f5c563' : '#f5c563',
+                  }}
+                >
+                  {unassignedCount}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setAssignmentTab('assigned');
+                  setCurrentPage(1);
+                  setSelectedLeadIds([]);
+                }}
+                style={{
+                  padding: '7px 14px',
+                  fontSize: '0.84rem',
+                  fontWeight: 700,
+                  borderRadius: '7px',
+                  cursor: 'pointer',
+                  border: assignmentTab === 'assigned' ? '1px solid #f5c563' : '1px solid transparent',
+                  background: assignmentTab === 'assigned' ? '#f5c563' : 'transparent',
+                  color: assignmentTab === 'assigned' ? '#081a12' : '#cbd5e1',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <span>👤 Assigned Cases</span>
+                <span
+                  style={{
+                    padding: '2px 8px',
+                    borderRadius: '999px',
+                    fontSize: '0.74rem',
+                    fontWeight: 800,
+                    background: assignmentTab === 'assigned' ? '#081a12' : 'rgba(245, 197, 99, 0.2)',
+                    color: assignmentTab === 'assigned' ? '#f5c563' : '#f5c563',
+                  }}
+                >
+                  {assignedCount}
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setAssignmentTab('all');
+                  setCurrentPage(1);
+                  setSelectedLeadIds([]);
+                }}
+                style={{
+                  padding: '7px 14px',
+                  fontSize: '0.84rem',
+                  fontWeight: 700,
+                  borderRadius: '7px',
+                  cursor: 'pointer',
+                  border: assignmentTab === 'all' ? '1px solid #f5c563' : '1px solid transparent',
+                  background: assignmentTab === 'all' ? '#f5c563' : 'transparent',
+                  color: assignmentTab === 'all' ? '#081a12' : '#cbd5e1',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <span>📋 All Cases</span>
+                <span
+                  style={{
+                    padding: '2px 8px',
+                    borderRadius: '999px',
+                    fontSize: '0.74rem',
+                    fontWeight: 800,
+                    background: assignmentTab === 'all' ? '#081a12' : 'rgba(255, 255, 255, 0.12)',
+                    color: assignmentTab === 'all' ? '#f5c563' : '#cbd5e1',
+                  }}
+                >
+                  {leads.length}
+                </span>
+              </button>
+            </div>
+
+            {/* Super Admin filter by specific agent */}
+            {isSuperAdmin && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', paddingRight: '6px' }}>
+                <span style={{ fontSize: '0.8rem', color: '#94a3b8', fontWeight: 600 }}>
+                  Filter by Agent:
+                </span>
+                <select
+                  value={assignedAgentFilter}
+                  onChange={(e) => {
+                    setAssignedAgentFilter(e.target.value);
+                    setCurrentPage(1);
+                    setSelectedLeadIds([]);
+                  }}
+                  className="crm-select"
+                  style={{
+                    fontSize: '0.8rem',
+                    padding: '5px 10px',
+                    background: '#082317',
+                    border: '1px solid rgba(245, 197, 99, 0.35)',
+                    color: '#ffffff',
+                    borderRadius: '6px',
+                    minWidth: '160px',
+                  }}
+                >
+                  <option value="All">All Assigned Agents</option>
+                  {agentsList.map((agent) => (
+                    <option key={agent._id || agent.id || agent.name} value={agent.name}>
+                      {agent.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* ADMIN & SUPER ADMIN: Batch Assignment Action Toolbar */}
         {isAdmin && (
           <div
@@ -716,36 +921,131 @@ export default function CrmDashboardPage() {
               justifyContent: 'space-between',
               flexWrap: 'wrap',
               gap: '12px',
-              padding: '12px 16px',
+              padding: '12px 18px',
               marginBottom: '1rem',
-              borderRadius: '8px',
-              backgroundColor: '#f8fafc',
-              border: '1px solid #e2e8f0',
+              borderRadius: '10px',
+              backgroundColor: 'rgba(14, 53, 36, 0.85)',
+              border: '1px solid rgba(245, 197, 99, 0.25)',
+              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
             }}
           >
+            {/* Left: Quick Select Controls */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '0.85rem', fontWeight: 600, color: '#334155' }}>
-                <Users size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: '-2px' }} />
-                Case Assignment ({selectedLeadIds.length} Selected):
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#ffffff', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Users size={16} color="#f5c563" />
+                <span>Assignment:</span>
+                <span
+                  style={{
+                    padding: '2px 8px',
+                    borderRadius: '6px',
+                    background: selectedLeadIds.length > 0 ? '#f5c563' : 'rgba(255, 255, 255, 0.1)',
+                    color: selectedLeadIds.length > 0 ? '#081a12' : '#94a3b8',
+                    fontWeight: 800,
+                    fontSize: '0.8rem',
+                  }}
+                >
+                  {selectedLeadIds.length} Selected
+                </span>
               </span>
+
+              <span style={{ color: 'rgba(245, 197, 99, 0.3)', margin: '0 4px' }}>|</span>
+
+              {/* Quick Select Count Buttons */}
               <button
                 type="button"
-                onClick={handleSelectFirst10}
-                className="crm-btn crm-btn-ghost"
-                style={{ fontSize: '0.8rem', padding: '4px 8px' }}
+                onClick={() => handleSelectCount(10)}
+                className="crm-btn"
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '4px 10px',
+                  background: 'rgba(245, 197, 99, 0.12)',
+                  border: '1px solid rgba(245, 197, 99, 0.3)',
+                  color: '#f5c563',
+                  fontWeight: 600,
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                }}
+                title="Select top 10 cases"
               >
-                Mark First 10
+                Select 10
               </button>
+
+              <button
+                type="button"
+                onClick={() => handleSelectCount(25)}
+                className="crm-btn"
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '4px 10px',
+                  background: 'rgba(245, 197, 99, 0.12)',
+                  border: '1px solid rgba(245, 197, 99, 0.3)',
+                  color: '#f5c563',
+                  fontWeight: 600,
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                }}
+                title="Select top 25 cases"
+              >
+                Select 25
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSelectCount(50)}
+                className="crm-btn"
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '4px 10px',
+                  background: 'rgba(245, 197, 99, 0.12)',
+                  border: '1px solid rgba(245, 197, 99, 0.3)',
+                  color: '#f5c563',
+                  fontWeight: 600,
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                }}
+                title="Select top 50 cases"
+              >
+                Select 50
+              </button>
+
+              <button
+                type="button"
+                onClick={() => handleSelectCount(100)}
+                className="crm-btn"
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '4px 10px',
+                  background: 'rgba(245, 197, 99, 0.18)',
+                  border: '1px solid rgba(245, 197, 99, 0.45)',
+                  color: '#f5c563',
+                  fontWeight: 700,
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                }}
+                title="Select top 100 cases"
+              >
+                Select 100
+              </button>
+
               <button
                 type="button"
                 onClick={handleToggleSelectAllPage}
-                className="crm-btn crm-btn-ghost"
-                style={{ fontSize: '0.8rem', padding: '4px 8px' }}
+                className="crm-btn"
+                style={{
+                  fontSize: '0.78rem',
+                  padding: '4px 10px',
+                  background: 'rgba(255, 255, 255, 0.08)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  color: '#cbd5e1',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                }}
               >
                 {paginatedLeads.every((l) => selectedLeadIds.includes(l._id)) && paginatedLeads.length > 0
                   ? 'Unselect Page'
-                  : 'Select Current Page'}
+                  : 'Select Page'}
               </button>
+
               {selectedLeadIds.length > 0 && (
                 <button
                   type="button"
@@ -753,9 +1053,11 @@ export default function CrmDashboardPage() {
                   style={{
                     background: 'none',
                     border: 'none',
-                    color: '#dc2626',
+                    color: '#f87171',
                     cursor: 'pointer',
-                    fontSize: '0.8rem',
+                    fontSize: '0.78rem',
+                    fontWeight: 600,
+                    padding: '4px 8px',
                     textDecoration: 'underline',
                   }}
                 >
@@ -764,14 +1066,23 @@ export default function CrmDashboardPage() {
               )}
             </div>
 
+            {/* Right: Agent selector + CTA button */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
               <select
                 value={selectedAgentName}
                 onChange={(e) => setSelectedAgentName(e.target.value)}
                 className="crm-select"
-                style={{ fontSize: '0.85rem', padding: '6px 10px', minWidth: '180px' }}
+                style={{
+                  fontSize: '0.85rem',
+                  padding: '7px 12px',
+                  minWidth: '200px',
+                  background: '#082317',
+                  border: '1px solid rgba(245, 197, 99, 0.35)',
+                  color: '#ffffff',
+                  borderRadius: '7px',
+                }}
               >
-                <option value="">-- Choose Agent (Editor) --</option>
+                <option value="">-- Choose Agent (CRM Editor) --</option>
                 {agentsList.map((agent) => (
                   <option key={agent._id || agent.id || agent.email} value={agent.name}>
                     {agent.name}
@@ -783,15 +1094,28 @@ export default function CrmDashboardPage() {
                 type="button"
                 onClick={handleBulkAssign}
                 disabled={assigningBatch || selectedLeadIds.length === 0 || !selectedAgentName}
-                className="crm-btn crm-btn-primary"
-                style={{ fontSize: '0.85rem', padding: '6px 14px' }}
+                className="crm-btn"
+                style={{
+                  fontSize: '0.85rem',
+                  padding: '7px 16px',
+                  fontWeight: 700,
+                  background: selectedLeadIds.length === 0 || !selectedAgentName ? 'rgba(245, 197, 99, 0.25)' : '#f5c563',
+                  color: '#081a12',
+                  border: 'none',
+                  borderRadius: '7px',
+                  cursor: selectedLeadIds.length === 0 || !selectedAgentName ? 'not-allowed' : 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                  transition: 'all 0.2s ease',
+                }}
               >
                 {assigningBatch ? (
                   <RefreshCw size={14} className="animate-spin" />
                 ) : (
                   <UserCheck size={14} />
                 )}
-                Assign Cases
+                Assign {selectedLeadIds.length > 0 ? `(${selectedLeadIds.length}) Cases` : 'Cases'}
               </button>
             </div>
           </div>
@@ -809,7 +1133,7 @@ export default function CrmDashboardPage() {
                         type="checkbox"
                         checked={paginatedLeads.length > 0 && paginatedLeads.every((l) => selectedLeadIds.includes(l._id))}
                         onChange={handleToggleSelectAllPage}
-                        style={{ cursor: 'pointer', accentColor: 'var(--brand-green, #16a34a)' }}
+                        style={{ cursor: 'pointer', accentColor: '#f5c563', width: '16px', height: '16px' }}
                         title="Select / Unselect All on This Page"
                       />
                     </th>
@@ -854,9 +1178,7 @@ export default function CrmDashboardPage() {
                     <tr
                       key={lead._id}
                       onClick={() => setSelectedLead(lead)}
-                      style={{
-                        backgroundColor: selectedLeadIds.includes(lead._id) ? '#f0fdf4' : undefined,
-                      }}
+                      className={selectedLeadIds.includes(lead._id) ? 'is-selected' : ''}
                     >
                       {/* Checkbox for Admin / Super Admin */}
                       {isAdmin && (
@@ -871,12 +1193,12 @@ export default function CrmDashboardPage() {
                             type="checkbox"
                             checked={selectedLeadIds.includes(lead._id)}
                             onChange={() => {}}
-                            style={{ cursor: 'pointer', accentColor: 'var(--brand-green, #16a34a)', pointerEvents: 'none' }}
+                            style={{ cursor: 'pointer', accentColor: '#f5c563', pointerEvents: 'none', width: '16px', height: '16px' }}
                           />
                         </td>
                       )}
 
-                      <td className="crm-row-index">{(currentPage - 1) * PAGE_SIZE + idx + 1}</td>
+                      <td className="crm-row-index">{(currentPage - 1) * pageSize + idx + 1}</td>
 
                       <td>
                         <div className="crm-cell-name">{lead.name}</div>
@@ -936,12 +1258,13 @@ export default function CrmDashboardPage() {
                               display: 'inline-flex',
                               alignItems: 'center',
                               gap: '4px',
-                              padding: '2px 8px',
-                              borderRadius: '12px',
+                              padding: '3px 8px',
+                              borderRadius: '6px',
                               fontSize: '0.75rem',
-                              backgroundColor: '#e0e7ff',
-                              color: '#3730a3',
-                              fontWeight: 500,
+                              backgroundColor: 'rgba(245, 197, 99, 0.15)',
+                              color: '#f5c563',
+                              border: '1px solid rgba(245, 197, 99, 0.3)',
+                              fontWeight: 600,
                             }}
                           >
                             <Users size={11} /> {lead.assignedTo}
@@ -1072,26 +1395,57 @@ export default function CrmDashboardPage() {
             </table>
           </div>
 
-          {/* Table Footer with Pagination Controls */}
+          {/* Table Footer with Pagination & Page Size Controls */}
           <div
             className="crm-table-footer"
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '12px 16px',
-              borderTop: '1px solid var(--color-paper-line, #e2e8f0)',
+              padding: '12px 18px',
+              borderTop: '1px solid rgba(245, 197, 99, 0.18)',
+              background: 'var(--crm-surface-2)',
               flexWrap: 'wrap',
               gap: '12px',
             }}
           >
-            <div style={{ fontSize: '0.85rem', color: '#64748b' }}>
-              Showing{' '}
-              <strong>
-                {leads.length === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1}-
-                {Math.min(currentPage * PAGE_SIZE, leads.length)}
-              </strong>{' '}
-              of <strong>{leads.length}</strong> leads (Page {currentPage} of {totalPages})
+            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }}>
+              <div style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
+                Showing{' '}
+                <strong style={{ color: '#ffffff' }}>
+                  {filteredLeads.length === 0 ? 0 : (currentPage - 1) * pageSize + 1}-
+                  {Math.min(currentPage * pageSize, filteredLeads.length)}
+                </strong>{' '}
+                of <strong style={{ color: '#ffffff' }}>{filteredLeads.length}</strong> cases (Page {currentPage} of {totalPages})
+              </div>
+
+              {/* Rows Per Page Selector */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Rows:</span>
+                <select
+                  value={pageSize}
+                  onChange={(e) => {
+                    setPageSize(Number(e.target.value));
+                    setCurrentPage(1);
+                    setSelectedLeadIds([]);
+                  }}
+                  className="crm-select"
+                  style={{
+                    padding: '3px 8px',
+                    fontSize: '0.8rem',
+                    background: '#082317',
+                    border: '1px solid rgba(245, 197, 99, 0.25)',
+                    color: '#ffffff',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                  }}
+                >
+                  <option value={10}>10 per page</option>
+                  <option value={25}>25 per page</option>
+                  <option value={50}>50 per page</option>
+                  <option value={100}>100 per page</option>
+                </select>
+              </div>
             </div>
 
             {/* Pagination Button Group */}
@@ -1103,8 +1457,19 @@ export default function CrmDashboardPage() {
                   setCurrentPage((p) => Math.max(1, p - 1));
                   setSelectedLeadIds([]);
                 }}
-                className="crm-btn crm-btn-ghost"
-                style={{ padding: '6px 10px', fontSize: '0.8rem' }}
+                className="crm-btn"
+                style={{
+                  padding: '5px 12px',
+                  fontSize: '0.8rem',
+                  background: '#0e3524',
+                  border: '1px solid rgba(245, 197, 99, 0.25)',
+                  color: currentPage <= 1 ? '#64748b' : '#cbd5e1',
+                  cursor: currentPage <= 1 ? 'not-allowed' : 'pointer',
+                  borderRadius: '6px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}
               >
                 <ChevronLeft size={14} /> Prev
               </button>
@@ -1125,12 +1490,13 @@ export default function CrmDashboardPage() {
                         style={{
                           padding: '4px 10px',
                           fontSize: '0.8rem',
-                          borderRadius: '4px',
-                          border: pageNum === currentPage ? '1px solid var(--brand-green, #16a34a)' : '1px solid #cbd5e1',
-                          backgroundColor: pageNum === currentPage ? 'var(--brand-green, #16a34a)' : '#fff',
-                          color: pageNum === currentPage ? '#fff' : '#334155',
+                          borderRadius: '5px',
+                          border: pageNum === currentPage ? '1px solid #f5c563' : '1px solid rgba(245, 197, 99, 0.2)',
+                          backgroundColor: pageNum === currentPage ? '#f5c563' : '#0e3524',
+                          color: pageNum === currentPage ? '#081a12' : '#cbd5e1',
                           cursor: 'pointer',
-                          fontWeight: pageNum === currentPage ? 600 : 400,
+                          fontWeight: pageNum === currentPage ? 700 : 500,
+                          transition: 'all 0.15s ease',
                         }}
                       >
                         {pageNum}
@@ -1146,8 +1512,19 @@ export default function CrmDashboardPage() {
                   setCurrentPage((p) => Math.min(totalPages, p + 1));
                   setSelectedLeadIds([]);
                 }}
-                className="crm-btn crm-btn-ghost"
-                style={{ padding: '6px 10px', fontSize: '0.8rem' }}
+                className="crm-btn"
+                style={{
+                  padding: '5px 12px',
+                  fontSize: '0.8rem',
+                  background: '#0e3524',
+                  border: '1px solid rgba(245, 197, 99, 0.25)',
+                  color: currentPage >= totalPages ? '#64748b' : '#cbd5e1',
+                  cursor: currentPage >= totalPages ? 'not-allowed' : 'pointer',
+                  borderRadius: '6px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}
               >
                 Next <ChevronRight size={14} />
               </button>

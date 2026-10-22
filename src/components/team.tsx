@@ -50,7 +50,7 @@ const expertTeam: Expert[] = [
   {
     name: "Priyanka",
     title: "Vertical Head - Inbound",
-    image: "/team/Priyanka_Singh_verticalHeadInbound.png",
+    image: "/team/Priyanka_Singh_verticalHeadInBound.jpeg",
     alt: "Priyanka - Vertical Head, Inbound",
   },
   {

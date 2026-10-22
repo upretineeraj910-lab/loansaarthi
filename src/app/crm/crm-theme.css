@@ -687,6 +687,15 @@
   background: var(--crm-surface-2);
 }
 
+.crm-table tbody tr.is-selected {
+  background: rgba(245, 197, 99, 0.12) !important;
+  box-shadow: inset 4px 0 0 #f5c563;
+}
+
+.crm-table tbody tr.is-selected:hover {
+  background: rgba(245, 197, 99, 0.18) !important;
+}
+
 .crm-table-empty,
 .crm-table-loading {
   padding: 3.5rem 1rem;

@@ -168,31 +168,183 @@ export default function AboutUs() {
       </section>
 
       {/* ---------------- STORY / LEDGER ---------------- */}
-      <section className="bg-paper-dark section-spacing">
-        <div className="container">
-          <Reveal>
-            <Eyebrow>Our story</Eyebrow>
-            <h2 className="section-header">
-              Started in Delhi, built for borrowers everywhere.
-            </h2>
-            <p className="section-subheader">
-              LoanSaarthi started as a small team helping neighbours and
-              friends navigate confusing loan paperwork. Today we work with
-              42+ banks and NBFCs, but the job hasn&apos;t changed: get you
-              the best sanction, as fast as honestly possible.
-            </p>
-          </Reveal>
+      <section
+  style={{
+    minHeight: "80vh",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "4rem 1.5rem",
+    boxSizing: "border-box",
+    position: "relative",
+    background: "transparent",
+  }}
+>
+  <div
+    style={{
+      maxWidth: "1140px",
+      width: "100%",
+      margin: "0 auto",
+      display: "flex",
+      flexDirection: "column",
+      gap: "2.5rem",
+    }}
+  >
+    {/* Text Section */}
+    <div style={{ maxWidth: "880px" }}>
+      {/* Pill Eyebrow */}
+      <span
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "6px",
+          padding: "4px 14px",
+          borderRadius: "50px",
+          fontSize: "0.75rem",
+          fontWeight: 600,
+          letterSpacing: "0.08em",
+          textTransform: "uppercase",
+          color: "#4ade80",
+          backgroundColor: "rgba(74, 222, 128, 0.1)",
+          border: "1px solid rgba(74, 222, 128, 0.25)",
+          marginBottom: "1.2rem",
+        }}
+      >
+        Debt Consolidation &amp; Our Story
+      </span>
 
-          <Reveal delay={100}>
-            <div style={{ marginTop: "1.5rem" }}>
-              <LedgerRow label="Founded :- " value=" New Delhi" />
-              <LedgerRow label="Loans placed:- " value=" 30,000+" />
-              <LedgerRow label="Partner banks & NBFCs :- " value=" 42+" />
-              <LedgerRow label="Average sanction time :- " value=" 1–2 days" />
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* Main H1 Heading */}
+      <h1
+        style={{
+          fontSize: "clamp(2rem, 3.8vw, 2.75rem)",
+          fontWeight: 700,
+          color: "#ffffff",
+          lineHeight: 1.25,
+          letterSpacing: "-0.02em",
+          marginBottom: "0.75rem",
+        }}
+      >
+        Simplify Your Finances with Debt Consolidation
+      </h1>
+
+      {/* Story Subhead */}
+      <h2
+        style={{
+          fontSize: "clamp(1.15rem, 2vw, 1.4rem)",
+          fontWeight: 500,
+          color: "#93c5fd",
+          lineHeight: 1.4,
+          marginBottom: "1.5rem",
+        }}
+      >
+        Started in Delhi, built for borrowers everywhere.
+      </h2>
+
+      {/* Paragraphs */}
+      <div
+        style={{
+          fontSize: "1rem",
+          color: "#cbd5e1",
+          lineHeight: 1.7,
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.9rem",
+          fontWeight: 300,
+        }}
+      >
+        <p style={{ margin: 0 }}>
+          LoanSaarthi started as a small team helping neighbours and friends navigate confusing loan paperwork. Today we work with 42+ banks and NBFCs, but the job hasn&apos;t changed: get you the best sanction, as fast as honestly possible.
+        </p>
+
+        <p style={{ margin: 0 }}>
+          Loan Saarthi helps you explore debt consolidation solutions by combining multiple eligible debts into one manageable repayment plan. Simplify your finances with a clearer view of your monthly obligations.
+        </p>
+
+        <p style={{ margin: 0 }}>
+          Our experts guide you in understanding suitable options based on your financial profile and eligibility. Take a step towards better financial management with Loan Saarthi — <span style={{ color: "#facc15", fontWeight: 600 }}>Right Guidance. Better Decisions.</span>
+        </p>
+      </div>
+    </div>
+
+    {/* 4 Cards in 1 Row */}
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+        gap: "1rem",
+        paddingTop: "2rem",
+        borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+      }}
+    >
+      <div
+        style={{
+          padding: "1.25rem 1.5rem",
+          background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.4rem",
+        }}
+      >
+        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Founded</span>
+        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>New Delhi</span>
+      </div>
+
+      <div
+        style={{
+          padding: "1.25rem 1.5rem",
+          background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.4rem",
+        }}
+      >
+        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Loans Placed</span>
+        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>30,000+</span>
+      </div>
+
+      <div
+        style={{
+          padding: "1.25rem 1.5rem",
+          background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.4rem",
+        }}
+      >
+        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Partner Banks &amp; NBFCs</span>
+        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>42+</span>
+      </div>
+
+      <div
+        style={{
+          padding: "1.25rem 1.5rem",
+          background: "rgba(255, 255, 255, 0.04)",
+          backdropFilter: "blur(10px)",
+          borderRadius: "12px",
+          border: "1px solid rgba(255, 255, 255, 0.08)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.4rem",
+        }}
+      >
+        <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>Avg. Sanction Time</span>
+        <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>1–2 Days</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 
       {/* ---------------- VALUES ---------------- */}
       <section className="container section-spacing">
