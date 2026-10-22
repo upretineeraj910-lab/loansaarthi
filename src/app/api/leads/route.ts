@@ -29,6 +29,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search')?.trim() || '';
     const status = searchParams.get('status')?.trim() || '';
     const loanType = searchParams.get('loanType')?.trim() || '';
+    const source = searchParams.get('source')?.trim() || '';
 
     // Build query
     const query: Record<string, any> = {};
@@ -70,6 +71,10 @@ export async function GET(request: NextRequest) {
 
     if (loanType && loanType !== 'All') {
       query.loanType = loanType;
+    }
+
+    if (source && source !== 'All') {
+      query.source = source;
     }
 
     if (search) {

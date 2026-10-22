@@ -25,13 +25,13 @@ export const WHY: WhyItem[] = [
   },
   {
     icon: Clock3,
-    title: "Days, not months",
-    text: "Most sanctions come through in 1–2 working days because your file reaches the right desk the first time.",
+    title: "Fully Digital Loan Process",
+    text: "Powered by our alliances with leading banks and NBFCs, we process your case in hours, not days or months.",
   },
   {
     icon: Landmark,
-    title: "One advisor, start to finish",
-    text: "The person you speak to on day one is the person who hands you the sanction letter.",
+    title: "One Dedicated Advisor",
+    text: "Experienced, polished, and equipped to match you with the right bank — from day one to your loan disbursement.",
   },
 ];
 

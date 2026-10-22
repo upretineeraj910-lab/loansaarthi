@@ -127,11 +127,14 @@ export async function POST(request: NextRequest) {
           loanType: loanType || 'Personal Loan',
           loanAmount: numAmount,
           status: 'Fresh',
-          source: 'Form',
-          notes: `[Expert Video Consultancy Booked] Date: ${appointmentDate}, Time: ${appointmentTime}. Salary: ₹${numSalary.toLocaleString('en-IN')}. ${notes?.trim() || ''}`,
+          source: 'Appointment',
+          notes: `📅 [Expert Video Consultation Booked] Date: ${appointmentDate} | Time: ${appointmentTime} | Salary: ₹${numSalary.toLocaleString('en-IN')}${notes?.trim() ? ` | Notes: ${notes.trim()}` : ''}`,
         });
       } else {
-        existingLead.notes = `[New Consultation: ${appointmentDate} ${appointmentTime}] ${existingLead.notes || ''}`.trim();
+        existingLead.source = 'Appointment';
+        existingLead.loanType = loanType || existingLead.loanType;
+        existingLead.loanAmount = numAmount || existingLead.loanAmount;
+        existingLead.notes = `📅 [New Consultation: ${appointmentDate} ${appointmentTime} | Salary: ₹${numSalary.toLocaleString('en-IN')}]\n${existingLead.notes || ''}`.trim();
         await existingLead.save();
       }
     } catch (leadErr) {

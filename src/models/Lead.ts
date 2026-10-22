@@ -11,7 +11,7 @@ export type LeadStatus =
   | 'Approved'
   | 'Rejected'
   | 'Disbursed';
-export type LeadSource = 'Form' | 'Excel Upload';
+export type LeadSource = 'Form' | 'Excel Upload' | 'Appointment';
 
 export interface ILeadDocument extends Document {
   name: string;
@@ -97,7 +97,7 @@ const LeadSchema = new Schema<ILeadDocument>(
     },
     source: {
       type: String,
-      enum: ['Form', 'Excel Upload'],
+      enum: ['Form', 'Excel Upload', 'Appointment'],
       default: 'Form',
     },
     rejectionReason: {

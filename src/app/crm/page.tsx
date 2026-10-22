@@ -57,7 +57,7 @@ interface Lead {
     | 'Approved'
     | 'Rejected'
     | 'Disbursed';
-  source: 'Form' | 'Excel Upload';
+  source: 'Form' | 'Excel Upload' | 'Appointment';
   rejectionReason?: string;
   approvedBank?: string;
   approvedAmount?: number;
@@ -159,6 +159,7 @@ export default function CrmDashboardPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
   const [loanTypeFilter, setLoanTypeFilter] = useState('All');
+  const [sourceFilter, setSourceFilter] = useState('All');
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [leadError, setLeadError] = useState<string | null>(null);
@@ -250,6 +251,7 @@ export default function CrmDashboardPage() {
       if (search.trim()) params.set('search', search.trim());
       if (statusFilter !== 'All') params.set('status', statusFilter);
       if (loanTypeFilter !== 'All') params.set('loanType', loanTypeFilter);
+      if (sourceFilter !== 'All') params.set('source', sourceFilter);
 
       const res = await fetch(`/api/leads?${params.toString()}`);
       const data = await res.json();
@@ -266,7 +268,7 @@ export default function CrmDashboardPage() {
     } finally {
       setLoading(false);
     }
-  }, [search, statusFilter, loanTypeFilter]);
+  }, [search, statusFilter, loanTypeFilter, sourceFilter]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -745,6 +747,20 @@ export default function CrmDashboardPage() {
                 <option value="Car Loan">Car Loan</option>
               </select>
             </div>
+
+            <div className="crm-filter">
+              <span className="crm-filter-label">Source:</span>
+              <select
+                value={sourceFilter}
+                onChange={(e) => setSourceFilter(e.target.value)}
+                className="crm-select"
+              >
+                <option value="All">All Sources</option>
+                <option value="Appointment">📅 Appointment (Consultation)</option>
+                <option value="Form">Form</option>
+                <option value="Excel Upload">Excel Upload</option>
+              </select>
+            </div>
           </div>
         </div>
 
@@ -1202,7 +1218,25 @@ export default function CrmDashboardPage() {
                       <td className="crm-row-index">{(currentPage - 1) * pageSize + idx + 1}</td>
 
                       <td>
-                        <div className="crm-cell-name">{lead.name}</div>
+                        <div className="crm-cell-name" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <span>{lead.name}</span>
+                          {lead.source === 'Appointment' && (
+                            <span
+                              style={{
+                                fontSize: '0.65rem',
+                                padding: '1px 6px',
+                                borderRadius: '4px',
+                                background: 'rgba(245, 197, 99, 0.15)',
+                                color: '#f5c563',
+                                border: '1px solid rgba(245, 197, 99, 0.4)',
+                                fontWeight: 600,
+                              }}
+                              title="Booked Expert Video Consultation"
+                            >
+                              📅 Appointment
+                            </span>
+                          )}
+                        </div>
                         <div className="crm-cell-sub">{lead.city || 'City: --'}</div>
                       </td>
 
@@ -1371,10 +1405,12 @@ export default function CrmDashboardPage() {
                           className={`crm-source-pill ${
                             lead.source === 'Excel Upload'
                               ? 'crm-source-pill--excel'
+                              : lead.source === 'Appointment'
+                              ? 'crm-source-pill--appointment'
                               : 'crm-source-pill--form'
                           }`}
                         >
-                          {lead.source}
+                          {lead.source === 'Appointment' ? '📅 Appointment' : lead.source}
                         </span>
                       </td>
 

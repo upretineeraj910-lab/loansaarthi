@@ -118,7 +118,7 @@ export default function AboutUs() {
     {
       icon: Building2,
       title: "42+ lender network",
-      text: "Banks and NBFCs compete for your file behind the scenes, so you see the best rate they're willing to offer — not just the first one.",
+      text: "Banks and NBFCs compete for your file behind the scenes, and trained relationship managers guide you to the best offer for your profile and needs.",
     },
     {
       icon: Handshake,
@@ -207,14 +207,9 @@ export default function AboutUs() {
                   margin: 0,
                 }}
               >
-                Our journey started in 2020, during Covid, with just 20 people
-                and one idea — to make loans honest, fast, and fully digital.
-                Today, we are a team of 165+ dedicated professionals, backed by
-                people with over 22 years of industry experience. At
-                LoanSaarthi, we don&apos;t just forward your application. We
-                analyse your current situation, find the real reason for
-                rejection, and match you with banks and NBFCs that actually suit
-                your profile — so you don&apos;t have to apply everywhere.
+                Our journey started in 2020, during Covid, with just 20 people and one idea — to make loans honest, fast, and fully digital. Today, we are a team of 165+ dedicated professionals. Many of our core members have been working together for over 22 years, long before LoanSaarthi was founded.
+
+                At LoanSaarthi, we don't just forward your application. We analyse your current situation, find the real reason for rejection, and match you with banks and NBFCs that actually suit your profile — so you don't have to apply everywhere.
               </p>
 
               {/* ISO highlight */}
@@ -228,8 +223,7 @@ export default function AboutUs() {
                 }}
               >
                 LoanSaarthi is ISO 9001:2015 and ISO 27001:2022 certified,
-                tested and verified. Our credibility is validated by thousands
-                of genuine reviews on Google.
+                tested and verified. Our credibility is validated by genuine reviews on Google.
               </p>
 
               {/* H3 — upar thoda extra gap taaki naya block alag dikhe */}
@@ -280,6 +274,20 @@ export default function AboutUs() {
                   Right Guidance. Better Decisions.
                 </span>
               </p>
+
+              <div className="digital" style={{
+                fontSize: "clamp(1.8rem, 3.4vw, 2.4rem)",
+                fontWeight: 700,
+                color: "#ffffff",
+                lineHeight: 1.25,
+                letterSpacing: "-0.02em",
+                margin: "1.5rem 0 0 0",
+              }}><h3>Digital Journey</h3>
+                <p>
+                  Login to Disbursal — Fully Digital Loan Process.
+                  Powered by our alliances with leading banks and NBFCs, we process your case in hours, not days or months.
+                </p>
+              </div>
             </div>
           </Reveal>
 

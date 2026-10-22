@@ -211,6 +211,12 @@
   --tone-line: var(--crm-green-line);
 }
 
+.crm-source-pill--appointment {
+  --tone: #f5c563;
+  --tone-soft: rgba(245, 197, 99, 0.16);
+  --tone-line: rgba(245, 197, 99, 0.45);
+}
+
 .crm-metric--rejected,
 .crm-status--rejected,
 .crm-detail-chip--rejected,
