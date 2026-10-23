@@ -1,7 +1,15 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import styles from "@/app/home.module.css";
 
-const FEATURES = [
+type Feature = {
+  title: string;
+  sub: string;
+  href?: string;
+  icon: ReactNode;
+};
+
+const FEATURES: Feature[] = [
   {
     title: "100% Digital Process",
     sub: "End-to-end online, paperless",
@@ -15,6 +23,7 @@ const FEATURES = [
   {
     title: "Free Video Consultancy",
     sub: "Expert advice on video call",
+    href: "/talk-to-expert",
     icon: (
       <svg viewBox="0 0 48 48" aria-hidden="true">
         <rect x="5" y="12" width="26" height="24" rx="4" />
@@ -54,12 +63,16 @@ export default function LuxuryHero() {
         <div className={styles.left}>
           <h1 className={styles.title}>
             Your Loan.
-            <br />Your Eligiblity.
+            <br />Your Eligibility.
             <br />Our Expertise
           </h1>
           <p className={styles.sub}>
-           We match your profile with 42+ Banks & NBFCs to get you the right loan,<br /> not just any loan. <br/>
-           LoanSaarthi is <span className={styles.goldText}>ISO 9001:2015</span> and <span className={styles.goldText}>ISO 27001:2022</span> certified, tested and verified. Our credibility is validated by <span className={styles.goldText}>genuine reviews on Google</span>.
+            We match your profile with 42+ Banks & NBFCs to get you the right loan,
+            <br /> not just any loan. <br />
+            LoanSaarthi is <span className={styles.goldText}>ISO 9001:2015</span> and{" "}
+            <span className={styles.goldText}>ISO 27001:2022</span> certified, tested
+            and verified. Our credibility is validated by{" "}
+            <span className={styles.goldText}>genuine reviews on Google</span>.
           </p>
           <div className={styles.actions}>
             <Link href="#loan-eligibility-form" className={styles.btnPrimary}>
@@ -75,13 +88,29 @@ export default function LuxuryHero() {
           <div className={styles.card}>
             <span className={styles.badge}>Why Choose Loan Saarthi</span>
             <div className={styles.grid}>
-              {FEATURES.map((f) => (
-                <div key={f.title} className={styles.feature}>
-                  <div className={styles.icon}>{f.icon}</div>
-                  <h3>{f.title}</h3>
-                  <p>{f.sub}</p>
-                </div>
-              ))}
+              {FEATURES.map((f) => {
+                const content = (
+                  <>
+                    <div className={styles.icon}>{f.icon}</div>
+                    <h3>{f.title}</h3>
+                    <p>{f.sub}</p>
+                  </>
+                );
+
+                return f.href ? (
+                  <Link
+                    key={f.title}
+                    href={f.href}
+                    className={`${styles.feature} ${styles.featureLink}`}
+                  >
+                    {content}
+                  </Link>
+                ) : (
+                  <div key={f.title} className={styles.feature}>
+                    {content}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
