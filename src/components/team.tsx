@@ -36,41 +36,43 @@ const expertTeam: Expert[] = [
     alt: "Krishan Kumar Panday - Group Head",
   },
   {
-    name: "Meenakshi Bisht",
-    title: "Vertical Head",
-    image: "/team/MeenakshiVerticalHead.jpeg",
-    alt: "Meenakshi Bisht - Personal Loan & Cards Vertical Head",
-  },
-  {
     name: "Naina Singh",
     title: "Business Head",
     image: "/team/NainaSinghBusinessHead.png",
     alt: "Naina Singh - Business Head",
   },
   {
-    name: "Priyanka",
-    title: "Vertical Head - Inbound",
-    image: "/team/Priyanka_Singh_verticalHeadInBound.jpeg",
-    alt: "Priyanka -  Inbound & Digital Team",
-  },
-  {
     name: "Rajeev Kaushal",
-    title: "Vertical Head",
+    title: "Vertical Head-Outbound Process",
     image: "/team/RajeevKaushalVerticalHead.jpeg",
     alt: "Rajeev Kaushal - Vertical Head-Outbound Process",
   },
-  {
-    name: "Rambha",
-    title: "Vertical Head - Channel Business",
-    image: "/team/Rambha-vertical-head- channel business.png",
-    alt: "Rambha - Zone Head-Distribution",
+   {
+    name: "Priyanka Singh",
+    title: "Vertical Head- Inbound & Digital Team",
+    image: "/team/Priyanka_Singh_verticalHeadInBound.jpeg",
+    alt: "Priyanka -  Inbound & Digital Team Vertical Head",
   },
   {
     name: "Ranjeet Jaishwal",
-    title: "Vertical Head",
+    title: "Marketing Head ",
     image: "/team/RanjeetJaishwalVerticalHead.png",
     alt: "Ranjeet Jaishwal - Head Marketing ",
   },
+   {
+    name: "Rambha",
+    title: "Zonal Head-Distribution",
+    image: "/team/Rambha-vertical-head- channel business.png",
+    alt: "Rambha - Zonal Head-Distribution",
+  },
+  {
+    name: "Meenakshi Bisht",
+    title: "Vertical Head- Personal Loan & Cards",
+    image: "/team/MeenakshiVerticalHead.jpeg",
+    alt: "Meenakshi Bisht - Personal Loan & Cards Vertical Head",
+  },
+
+  
 ];
 
 const AUTOPLAY_DELAY = 3000;
