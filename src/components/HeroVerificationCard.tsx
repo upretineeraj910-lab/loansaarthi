@@ -18,8 +18,8 @@ declare global {
 
 type Step = 1 | 2 | 3 | 4;
 
-// CHANGE 3: Firebase ke raw errors (auth/billing-not-enabled etc.) user ko mat dikhao,
-// unko simple message dikhao
+// Map Firebase authentication error codes to friendly customer-facing messages
+
 const getFriendlyError = (err: unknown, fallback: string): string => {
   const code = (err as { code?: string } | null)?.code;
 
@@ -118,7 +118,7 @@ export default function HeroVerificationCard() {
     console.time("OTP Send Total");
 
     try {
-      // Pehle se bana hua verifier use hoga, nahi hai to naya ban jayega
+      // Use existing reCAPTCHA verifier instance or initialize a fresh one
       const verifier = setupRecaptcha();
 
       const formattedPhone = `+91${cleanNumber}`;
@@ -144,12 +144,12 @@ export default function HeroVerificationCard() {
     } catch (err: unknown) {
       console.error("Number verification Error:", err);
 
-      // Error ke baad verifier reset karo aur turant naya ready kar do,
-      // taaki dobara try karne par wait na ho
+      // Reset verifier on failure and immediately warm up a new instance for retry
+
       clearRecaptcha();
       setupRecaptcha();
 
-      // CHANGE 3: friendly error
+      // Return customer-friendly error message
       setError(getFriendlyError(err, "Unable to send OTP. Please try again."));
     } finally {
       console.timeEnd("OTP Send Total");

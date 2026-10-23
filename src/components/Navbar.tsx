@@ -12,7 +12,7 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
-  // Helper function: Cookie se value read karne ke liye
+  // Helper utility: Read browser cookie value by key
   const getCookie = (name: string) => {
     if (typeof document === "undefined") return null;
     const match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));

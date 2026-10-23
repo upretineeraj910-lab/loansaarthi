@@ -1,24 +1,27 @@
 import Script from "next/script";
+import Image from "next/image";
+import { Phone, MessageCircle, ArrowRight } from "lucide-react";
+
 import HeroVerificationCard from "../components/HeroVerificationCard";
 import Team from "@/components/team";
 import LoanTypes from "@/components/LoanTypes";
 import OurOfferings from "@/components/OurOfferings";
-
-import { Phone, MessageCircle, ArrowRight } from "lucide-react";
-
 import Reveal from "@/components/Reveal";
 import Eyebrow from "@/components/Eyebrow";
 import EmiCalculator from "@/components/loan/LoanEmiCalculator";
 import Faq from "@/components/Faq";
-
+import GoogleReviews from "@/components/GoogleReviews";
+import WhyChooseUs from "@/components/Experience";
+import LuxuryHero from "@/components/LuxuryHero";
 import { WHY, BANKS, FAQS } from "@/components/content";
 
 import "./main.css";
-import GoogleReviews from "@/components/GoogleReviews";
-import Image from "next/image";
-import WhyChooseUs from "@/components/Experience";
-import LuxuryHero from "@/components/LuxuryHero";
 
+/**
+ * LoanSaarthi Home Page
+ * Central portal featuring luxury hero, lender network, loan comparison engine,
+ * interactive EMI calculator, customer testimonials, and verified loan application flow.
+ */
 export default function Home() {
   const structuredData = {
     "@context": "https://schema.org",
@@ -68,11 +71,8 @@ export default function Home() {
       {/* ---------------- LUXURY HERO SECTION ---------------- */}
       <LuxuryHero />
 
-      {/* ---------------- PARTNERS ---------------- */}
-      <section
-        className="bg-ink"
-        style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}
-      >
+      {/* ---------------- PARTNERS NETWORK ---------------- */}
+      <section className="bg-ink bank-partners-section">
         <div className="container">
           <div className="bank-partners-label">Who we work with</div>
           <div className="bank-tags flex flex-wrap items-center justify-center gap-6">
@@ -94,65 +94,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- VERIFICATION & INSTANT DISTRIBUTION ---------------- */}
-      {/* <section id="verification" className="container hero-section" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
-        <div className="hero-grid">
-          <Reveal>
-            <h2 className="hero-title">
-              India&apos;s Most Trusted Loan Distribution Partner.<br />
-              <strong style={{ fontWeight: "normal" }}>42+ Lenders, One Platform</strong>
-            </h2>
-            <p className="hero-text">
-              We manage the entire digital distribution journey—from lender comparison and documentation to final disbursement.
-            </p>
-            <div className="hero-actions">
-              <a href="#calculator" className="btn-primary">
-                Check your EMI
-              </a>
-              <a href="/talk-to-expert" className="btn-secondary">
-                Free Consultation
-                <ArrowRight size={15} aria-hidden="true" />
-              </a>
-            </div>
-            <div className="hero-stats">
-              <div>
-                <div className="stat-number">30,000+</div>
-                <div className="stat-label">loans placed</div>
-              </div>
-              <div>
-                <div className="stat-number">1–2 days</div>
-                <div className="stat-label">avg. sanction</div>
-              </div>
-              <div>
-                <div className="stat-number">42+</div>
-                <div className="stat-label">partner lenders</div>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={150}>
-            <div className="hero-card-wrapper">
-              <HeroVerificationCard />
-            </div>
-          </Reveal>
-        </div>
-      </section> */}
-
-
-        <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
+      {/* ---------------- CUSTOMER REVIEWS & TESTIMONIALS ---------------- */}
+      <div className="testimonials testimonials-container">
         <GoogleReviews />
       </div>
 
-
-      {/* ---------------- LOAN TYPES ---------------- */}
+      {/* ---------------- LOAN PRODUCTS & CATEGORIES ---------------- */}
       <div id="Loan">
         <LoanTypes />
       </div>
 
-      {/* ---------------- OUR OFFERINGS ---------------- */}
+      {/* ---------------- OUR OFFERINGS & POLICIES ---------------- */}
       <OurOfferings />
 
-      {/* ---------------- WHY ---------------- */}
+      {/* ---------------- VALUE PROPOSITIONS ---------------- */}
       <section className="bg-paper-dark section-spacing">
         <div className="container">
           <Reveal>
@@ -170,11 +125,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
-        <GoogleReviews />
-      </div> */}
-
-      <section id="verification" className="container hero-section" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
+      {/* ---------------- VERIFICATION & INSTANT DISTRIBUTION ---------------- */}
+      <section id="verification" className="container hero-section verification-section">
         <div className="hero-grid">
           <Reveal>
             <h2 className="hero-title">
@@ -217,12 +169,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- TEAM ---------------- */}
+      {/* ---------------- LEADERSHIP & TEAM ---------------- */}
       <Team />
 
+      {/* ---------------- CLIENT EXPERIENCE & TESTIMONIALS ---------------- */}
       <WhyChooseUs />
 
-      {/* ---------------- CALCULATOR ---------------- */}
+      {/* ---------------- INTERACTIVE EMI CALCULATOR ---------------- */}
       <section id="calculator" className="container section-spacing">
         <Reveal>
           <Eyebrow>Run the numbers</Eyebrow>
@@ -235,12 +188,7 @@ export default function Home() {
         </Reveal>
       </section>
 
-      {/* ---------------- TESTIMONIALS ---------------- */}
-      {/* <div className="testimonials" style={{ height: "600px", minHeight: '600px' }} >
-        <GoogleReviews />
-      </div> */}
-
-      {/* ---------------- FAQ ---------------- */}
+      {/* ---------------- FREQUENTLY ASKED QUESTIONS ---------------- */}
       <section id="faq" className="faq-section">
         <div className="faq-container">
           <Reveal>
@@ -253,7 +201,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------- MOBILE STICKY CTA ---------------- */}
+      {/* ---------------- MOBILE STICKY CALL-TO-ACTION ---------------- */}
       <div className="mobile-cta">
         <a href="tel:919810168635" className="mobile-cta-call">
           <Phone size={15} aria-hidden="true" /> Call

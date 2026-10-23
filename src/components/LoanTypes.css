@@ -175,51 +175,6 @@
 
 
 /* =========================================
-   DARK MODE
-   Same system as global CSS
-========================================= */
-
-@media (prefers-color-scheme: dark) {
-
-  .loan-types-section {
-    background: var(--color-paper);
-  }
-
-  .loan-type-card {
-    background: var(--color-paper-light);
-    border-color: var(--color-paper-line);
-    color: var(--color-ink);
-  }
-
-  .loan-type-heading {
-    color: var(--color-ink);
-  }
-
-  .loan-type-card h3 {
-    color: var(--color-ink);
-  }
-
-  .loan-type-card p {
-    color: var(--color-text-muted);
-  }
-
-  .loan-type-card:hover {
-    border-color: rgba(111, 174, 69, 0.45);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
-  }
-
-  .loan-card-top-shape,
-  .loan-card-bottom-shape {
-    background: var(--color-brass);
-  }
-
-  .loan-card-dots {
-    color: rgba(255, 255, 255, 0.28);
-  }
-}
-
-
-/* =========================================
    TABLET
 ========================================= */
 

@@ -3,7 +3,7 @@ import { Storage } from '@google-cloud/storage';
 const projectId = process.env.GOOGLE_CLOUD_PROJECT_ID;
 const clientEmail = process.env.GOOGLE_CLOUD_CLIENT_EMAIL;
 
-// Private key me se extra double quotes aur escaped newlines (\n) clean karne ke liye
+// Clean enclosing double quotes and escaped newlines (\n) from service account private key
 const privateKey = process.env.GOOGLE_CLOUD_PRIVATE_KEY
   ?.replace(/^"(.*)"$/, '$1')
   ?.replace(/\\n/g, '\n');
@@ -49,7 +49,7 @@ export async function uploadToGoogleCloud(
 
     console.log('Before save()');
 
-    // FIX: validation: false add kiya gaya hai stream error rokne ke liye
+    // Disable stream hash validation to prevent chunk buffer stream mismatches on small payloads
     await cloudFile.save(buffer, {
       resumable: false,
       validation: false, 

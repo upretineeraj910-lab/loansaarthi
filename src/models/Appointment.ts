@@ -1,3 +1,7 @@
+/**
+ * Appointment Model & Schema
+ * Manages video/phone expert consultations with specific weekday 3:00 PM - 5:00 PM time windows.
+ */
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export type AppointmentStatus = 'Scheduled' | 'Completed' | 'Cancelled' | 'Rescheduled';

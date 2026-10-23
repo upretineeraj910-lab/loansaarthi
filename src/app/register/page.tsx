@@ -86,7 +86,7 @@ function EyeIcon({ hidden }: { hidden: boolean }) {
   );
 }
 
-// Controlled nahi hai (value prop nahi), taaki password DOM ke value attribute me na likha jaye
+// Uncontrolled input (no value prop) to prevent password leakage into the DOM attribute tree
 function PasswordInput({
   id,
   name,

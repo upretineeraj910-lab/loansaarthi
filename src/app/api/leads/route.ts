@@ -34,9 +34,9 @@ export async function GET(request: NextRequest) {
     // Build query
     const query: Record<string, any> = {};
 
-    // Check Role: Admin/Manager/Superadmin ko sabhi leads dikhengi.
-    // crm_entry (Data Entry) ko bhi CRM dashboard view karne ki full permission hai.
-    // crm_editor (agents) ko sirf unki assigned leads dikhengi.
+    // Role-based Access Control:
+    // Admin, Superadmin, Manager, and Data Entry (crm_entry) have access to view all pipeline leads.
+    // CRM Editors (calling agents) are strictly scoped to leads assigned to them.
     const userRole = authUser.role?.toLowerCase();
     const isFullAccessRole = ['admin', 'superadmin', 'manager', 'crm', 'crm_entry'].includes(
       userRole
@@ -86,7 +86,7 @@ export async function GET(request: NextRequest) {
       ];
     }
 
-    // Stats ke aggregate ke liye bhi filter
+    // Scoped matching criteria for pipeline status aggregations
     const statsMatchStage = !isFullAccessRole
       ? {
           assignedTo: authUser.name

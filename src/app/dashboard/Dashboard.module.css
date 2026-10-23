@@ -45,26 +45,6 @@
    DARK MODE — OVERRIDE
 ========================================================= */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-main: #082317;
-    --bg-card: #0e3524;
-    --bg-sidebar: #061a11;
-    --border-color: rgba(245, 197, 99, 0.2);
-    --text-main: #ffffff;
-    --text-muted: #cbd5e1;
-    --text-light: #94a3b8;
-    --primary-color: #f5c563;
-    --primary-hover: #e0b04c;
-    --accent-light: rgba(245, 197, 99, 0.15);
-    --badge-green-bg: rgba(245, 197, 99, 0.15);
-    --badge-green-text: #f5c563;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25);
-    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.3);
-  }
-}
-
 /* =========================================================
    RESET & BASE
 ========================================================= */
@@ -1060,40 +1040,6 @@
    DARK MODE SPECIFIC OVERRIDES
 ========================================================= */
 
-@media (prefers-color-scheme: dark) {
-  .badgeWarning {
-    background: rgba(217, 119, 6, 0.2);
-    color: #F59E0B;
-  }
-
-  .badgeDanger {
-    background: rgba(220, 38, 38, 0.2);
-    color: #EF4444;
-  }
-
-  .badgeInfo {
-    background: rgba(37, 99, 235, 0.2);
-    color: #60A5FA;
-  }
-
-  .documentsError {
-    background: rgba(220, 38, 38, 0.15);
-    color: #EF4444;
-  }
-
-  .noDocuments {
-    background: #1A1A1A;
-  }
-
-  .statChange.positive {
-    background: rgba(111, 174, 69, 0.15);
-  }
-
-  .statChange.negative {
-    background: rgba(220, 38, 38, 0.15);
-  }
-}
-
 /* =========================================================
    UTILITY — SCROLLBAR
 ========================================================= */
@@ -1114,4 +1060,34 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-light);
+}
+
+
+.navItemGold {
+  color: #f5c563 !important;
+  font-weight: 600;
+}
+
+.welcomeEmail {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.sectionCardTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.sectionCardMuted {
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.errorMuted {
+  color: #ef4444;
+  margin: 0;
+  font-size: 0.9rem;
 }

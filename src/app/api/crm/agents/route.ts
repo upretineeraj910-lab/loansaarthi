@@ -1,3 +1,7 @@
+/**
+ * CRM Agents API Route
+ * Supplies the list of active telecalling agents (crm_editor) for assignment dropdowns.
+ */
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import User from '@/models/User';

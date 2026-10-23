@@ -1,0 +1,238 @@
+/* ==========================================================================
+   ABOUT US - DEDICATED MODULE STYLES
+   Responsive, clean, industry-standard CSS without inline style dependencies.
+   ========================================================================== */
+
+.aboutHero {
+  display: flex;
+  justify-content: center;
+  padding: clamp(3rem, 7vw, 5.5rem) 1.5rem clamp(2.5rem, 5vw, 4rem);
+  box-sizing: border-box;
+  position: relative;
+  background: transparent;
+  width: 100%;
+}
+
+.aboutContainer {
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.storyBlock {
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pillEyebrow {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 4px 14px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4ade80;
+  background-color: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+}
+
+.mainTitle {
+  font-size: clamp(2rem, 3.8vw, 2.75rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.storyParagraph {
+  font-size: 1rem;
+  color: #d5dde8;
+  line-height: 1.75;
+  margin: 0;
+}
+
+.isoHighlight {
+  font-size: 1.05rem;
+  fontWeight: 600;
+  color: #f5c563;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.sectionHeading {
+  font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 1.5rem 0 0 0;
+}
+
+.sectionLead {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f5c563;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.goldSpan {
+  color: #f5c563;
+  font-weight: 600;
+}
+
+.digitalBox {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.digitalHeading {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem 0;
+}
+
+.digitalText {
+  font-size: 1rem;
+  color: #d5dde8;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* 4 Stat Cards Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statCard {
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 197, 99, 0.3);
+}
+
+.statLabel {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.statValue {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Bank Partners Grid in About Page */
+.partnersSection {
+  padding-top: 3.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.partnersGrid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.partnerLogoWrap {
+  position: relative;
+  height: 3rem;
+  width: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.partnerLogoWrap:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.contactCenter {
+  text-align: center;
+}
+
+.contactHeading {
+  color: #ffffff;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .aboutHero {
+    padding: 2.5rem 1rem 2rem;
+  }
+
+  .aboutContainer {
+    gap: 2rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .statCard {
+    padding: 1rem 1.1rem;
+  }
+
+  .statValue {
+    font-size: 1.25rem;
+  }
+
+  .partnerLogoWrap {
+    width: 6.5rem;
+    height: 2.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .partnersGrid {
+    gap: 0.75rem;
+  }
+
+  .partnerLogoWrap {
+    width: 5.8rem;
+    height: 2.5rem;
+  }
+}

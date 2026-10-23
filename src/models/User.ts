@@ -1,4 +1,7 @@
-// models/User.ts
+/**
+ * User Model & Schema
+ * Authentication entity defining credentials and role-based permissions (admin, superadmin, crm_editor, etc.).
+ */
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export interface IUserDocument extends Document {

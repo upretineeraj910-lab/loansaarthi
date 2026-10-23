@@ -15,23 +15,6 @@
   --footer-logout-hover: #ef4444;
 }
 
-/* Dark Mode - Explicit & Preference */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --footer-bg: #082317;
-    --footer-text: #9ca3af;
-    --footer-title: #ffffff;
-    --footer-link: #cbd5e1;
-    --footer-link-hover: #f5c563;
-    --footer-logo-main: #ffffff;
-    --footer-logo-accent: #f5c563;
-    --footer-border: rgba(245, 197, 99, 0.2);
-    --footer-bottom-bg: #051810;
-    --footer-bottom-text: #6b7280;
-    --footer-logout-hover: #f87171;
-  }
-}
-
 [data-theme="dark"],
 .dark {
   --footer-bg: #082317;

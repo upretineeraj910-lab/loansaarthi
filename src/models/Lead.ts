@@ -1,3 +1,7 @@
+/**
+ * Lead Model & Schema
+ * Represents customer leads in the CRM pipeline from initial intake through final bank disbursal.
+ */
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 export type LeadStatus =

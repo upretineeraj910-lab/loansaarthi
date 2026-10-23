@@ -187,9 +187,9 @@ export default function SuperAdminAppointmentsPage() {
   // Auth Loading Screen
   if (authLoading) {
     return (
-      <div className={styles.page} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ textAlign: 'center', color: '#94a3b8' }}>
-          <RefreshCw size={32} className="crm-spin" style={{ marginBottom: '1rem', color: '#f5c563' }} />
+      <div className={`${styles.page} ${styles.centerLoader}`}>
+        <div className={styles.centerLoaderContent}>
+          <RefreshCw size={32} className={`crm-spin ${styles.centerLoaderIcon}`} />
           <p>Verifying Super Admin Credentials...</p>
         </div>
       </div>
@@ -201,17 +201,17 @@ export default function SuperAdminAppointmentsPage() {
     return (
       <main className={styles.page}>
         <div className={styles.restrictedCard}>
-          <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(239, 68, 68, 0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#ef4444' }}>
+          <div className={styles.lockIconCircle}>
             <Lock size={32} />
           </div>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>
+          <h2 className={styles.restrictedTitle}>
             Access Restricted: Super Admin Only
           </h2>
-          <p style={{ color: '#94a3b8', fontSize: '0.92rem', lineHeight: 1.5, marginBottom: '2rem' }}>
+          <p className={styles.restrictedDesc}>
             This appointments directory contains confidential customer consultation bookings and is strictly reserved for the <strong>Super Administrator</strong>.
           </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <Link href="/crm" className={styles.backBtn} style={{ color: '#f5c563', borderColor: 'rgba(245, 197, 99, 0.4)' }}>
+          <div className={styles.restrictedActions}>
+            <Link href="/crm" className={`${styles.backBtn} ${styles.backBtnGold}`}>
               Back to CRM
             </Link>
             <Link href="/dashboard" className={styles.backBtn}>
@@ -229,7 +229,7 @@ export default function SuperAdminAppointmentsPage() {
       <div className={styles.topBar}>
         <div className={styles.titleArea}>
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+            <div className={styles.headerRow}>
               <h1 className={styles.heading}>Expert Consultation Appointments</h1>
               <span className={styles.superBadge}>Super Admin</span>
             </div>
@@ -239,7 +239,7 @@ export default function SuperAdminAppointmentsPage() {
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+        <div className={styles.headerActions}>
           <Link href="/crm" className={styles.backBtn}>
             <ArrowLeft size={16} />
             <span>CRM Console</span>
@@ -257,7 +257,7 @@ export default function SuperAdminAppointmentsPage() {
             <span className={styles.statLabel}>Total Bookings</span>
             <span className={styles.statValue}>{stats.total}</span>
           </div>
-          <div className={styles.statIcon} style={{ background: 'rgba(245, 197, 99, 0.15)', color: '#f5c563' }}>
+          <div className={`${styles.statIcon} ${styles.statTotalIcon}`}>
             <Calendar size={22} />
           </div>
         </div>
@@ -265,11 +265,11 @@ export default function SuperAdminAppointmentsPage() {
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statLabel}>Scheduled / Pending</span>
-            <span className={styles.statValue} style={{ color: '#93c5fd' }}>
+            <span className={`${styles.statValue} ${styles.statScheduled}`}>
               {stats.scheduled}
             </span>
           </div>
-          <div className={styles.statIcon} style={{ background: 'rgba(59, 130, 246, 0.15)', color: '#93c5fd' }}>
+          <div className={`${styles.statIcon} ${styles.statScheduledIcon}`}>
             <Clock size={22} />
           </div>
         </div>
@@ -277,11 +277,11 @@ export default function SuperAdminAppointmentsPage() {
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statLabel}>Completed Calls</span>
-            <span className={styles.statValue} style={{ color: '#6ee7b7' }}>
+            <span className={`${styles.statValue} ${styles.statCompleted}`}>
               {stats.completed}
             </span>
           </div>
-          <div className={styles.statIcon} style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#6ee7b7' }}>
+          <div className={`${styles.statIcon} ${styles.statCompletedIcon}`}>
             <CheckCircle size={22} />
           </div>
         </div>
@@ -289,11 +289,11 @@ export default function SuperAdminAppointmentsPage() {
         <div className={styles.statCard}>
           <div className={styles.statInfo}>
             <span className={styles.statLabel}>Cancelled</span>
-            <span className={styles.statValue} style={{ color: '#fca5a5' }}>
+            <span className={`${styles.statValue} ${styles.statCancelled}`}>
               {stats.cancelled}
             </span>
           </div>
-          <div className={styles.statIcon} style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#fca5a5' }}>
+          <div className={`${styles.statIcon} ${styles.statCancelledIcon}`}>
             <XCircle size={22} />
           </div>
         </div>
@@ -352,10 +352,10 @@ export default function SuperAdminAppointmentsPage() {
                   <td colSpan={8}>
                     <div className={styles.emptyState}>
                       <Calendar size={48} className={styles.emptyIcon} />
-                      <p style={{ fontSize: '1.05rem', fontWeight: 600, color: '#e2e8f0', margin: '0 0 0.5rem' }}>
+                      <p className={styles.emptyStateTitle}>
                         No appointments found
                       </p>
-                      <p style={{ fontSize: '0.88rem', margin: 0 }}>
+                      <p className={styles.emptyStateSub}>
                         {search || statusFilter !== 'All'
                           ? 'Try adjusting your search query or status filter.'
                           : 'Bookings scheduled through the /talk-to-expert page will appear here.'}
@@ -445,7 +445,7 @@ export default function SuperAdminAppointmentsPage() {
                       </div>
                     </td>
 
-                    <td style={{ fontSize: '0.8rem', color: '#64748b', whiteSpace: 'nowrap' }}>
+                    <td className={styles.dateCell}>
                       {item.createdAt
                         ? new Date(item.createdAt).toLocaleDateString('en-IN', {
                             day: 'numeric',

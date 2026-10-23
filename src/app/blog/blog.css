@@ -1018,100 +1018,54 @@
 }
 
 /* =========================================================
-   DARK MODE SUPPORT
-========================================================= */
+   SEARCH & ADMIN ACTION STYLES
+   ========================================================= */
 
-@media (prefers-color-scheme: dark) {
-  .blog-page {
-    --cream: #1A1A1A;
-    --cream-light: #242424;
-    --cream-dark: #2A2A2A;
-    --navy: #E8E8E8;
-    --navy-light: #D0D0D0;
-    --gray: #B0B0B0;
-    --gray-light: #7A7A7A;
-    --white: #242424;
-    --border: rgba(255, 255, 255, 0.08);
-    background: #1A1A1A;
-  }
+.blog-clear-search-btn {
+  margin-right: 12px;
+  color: #64748b;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-  .blog-hero {
-    background: #1A1A1A;
-  }
+.blog-admin-link-wrapper {
+  margin-top: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
 
-  .blog-hero::before {
-    background: radial-gradient(circle, rgba(111, 174, 69, 0.08) 0%, transparent 70%);
-  }
+.blog-admin-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
 
-  .blog-categories {
-    background: #1A1A1A;
-  }
+.blog-admin-link:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
 
-  .blog-featured {
-    background: #1A1A1A;
-  }
+.blog-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
 
-  .featured-article {
-    background: #242424;
-  }
+.blog-empty-title {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
 
-  .featured-content {
-    background: #242424;
-  }
-
-  .featured-image-placeholder {
-    background: linear-gradient(135deg, #2A3A24, #1A2A14);
-  }
-
-  .blog-latest {
-    background: #1A1A1A;
-  }
-
-  .article-grid {
-    background: #242424;
-  }
-
-  .article-card {
-    background: #242424;
-  }
-
-  .article-card:hover {
-    background: #2A2A2A;
-  }
-
-  .article-image-placeholder {
-    background: linear-gradient(135deg, #2A3A24, #1A2A14);
-  }
-
-  .blog-topics {
-    background: #1A1A1A;
-  }
-
-  .topic-grid {
-    background: #242424;
-  }
-
-  .topic-card {
-    background: #242424;
-  }
-
-  .topic-card:hover {
-    background: #2A2A2A;
-  }
-
-  .blog-search input {
-    color: #E8E8E8;
-  }
-
-  .blog-search input::placeholder {
-    color: #7A7A7A;
-  }
-
-  .blog-cta {
-    background: #6FAE45;
-  }
-
-  .blog-disclaimer{
-    background-color: #1A1A1A;
-  }
+.blog-empty-text {
+  color: #94a3b8;
+  margin-bottom: 20px;
 }

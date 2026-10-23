@@ -231,7 +231,7 @@ export default function BlogListingPage() {
                 <button
                   type="button"
                   onClick={() => setSearchQuery("")}
-                  style={{ marginRight: "12px", color: "#64748b" }}
+                  className="blog-clear-search-btn"
                 >
                   ✕ Clear
                 </button>
@@ -240,23 +240,10 @@ export default function BlogListingPage() {
             </div>
 
             {/* QUICK LINK TO PUBLISH BLOG FORM */}
-            <div style={{ marginTop: "18px", display: "flex", gap: "12px", alignItems: "center" }}>
+            <div className="blog-admin-link-wrapper">
               <Link
                 href="/admin/blogs/new"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  backgroundColor: "rgba(255, 255, 255, 0.15)",
-                  color: "#181717",
-                  padding: "8px 16px",
-                  borderRadius: "20px",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  textDecoration: "none",
-                  border: "1px solid rgba(255, 255, 255, 0.3)",
-                  transition: "all 0.2s ease",
-                }}
+                className="blog-admin-link"
               >
                 ✍️ Write & Publish New Article →
               </Link>
@@ -348,12 +335,12 @@ export default function BlogListingPage() {
           </div>
 
           {filteredBlogs.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "60px 20px" }}>
-              <h3 style={{ fontSize: "22px", marginBottom: "10px", color: "var(--navy)" }}>
+            <div className="blog-empty-state">
+              <h3 className="blog-empty-title">
                 No articles found
               </h3>
-              <p style={{ color: "var(--gray)", marginBottom: "20px" }}>
-                We couldn't find any articles matching your search query or filter.
+              <p className="blog-empty-text">
+                We couldn&apos;t find any articles matching your search query or filter.
               </p>
               <button
                 type="button"

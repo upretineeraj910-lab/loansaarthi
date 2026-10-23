@@ -1,3 +1,8 @@
+/**
+ * CRM Leads Pipeline Dashboard
+ * Provides end-to-end management of loan files across statuses (Fresh to Disbursed),
+ * batch case assignment (Select 10/25/50/100), RBAC access scoping, and telecaller metrics.
+ */
 'use client';
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';

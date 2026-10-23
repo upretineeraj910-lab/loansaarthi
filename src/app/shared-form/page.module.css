@@ -345,3 +345,30 @@
     font-size: 0.75rem;
   }
 }
+
+
+/* Layout Helper Classes */
+.formSection {
+  margin-bottom: 2rem;
+}
+
+.formMainTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.refBoxMargin {
+  margin-bottom: 1rem;
+}
+
+.gridTopMargin {
+  margin-top: 1rem;
+}
+
+.formGroupFull {
+  grid-column: 1 / -1;
+}
+
+.helperTextMargin {
+  margin-bottom: 1.25rem;
+}

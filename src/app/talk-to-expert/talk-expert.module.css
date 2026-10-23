@@ -407,6 +407,22 @@
   font-weight: 600;
 }
 
+.summaryTimeValue {
+  color: #f5c563;
+  font-weight: 600;
+}
+
+.returnHomeBtn {
+  text-decoration: none;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.bookAnotherBtn {
+  padding: 0.9rem 1.5rem;
+  background: transparent;
+}
+
 .actionsWrap {
   display: flex;
   gap: 1rem;

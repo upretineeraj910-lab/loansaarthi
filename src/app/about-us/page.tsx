@@ -1,22 +1,16 @@
-// app/about-us/page.js
-// Drop this file at: app/about-us/page.js  (adjust import paths if your
-// project structure differs from the home page you shared)
-
 import Script from "next/script";
 import Team from "@/components/team";
-
 import Reveal from "@/components/Reveal";
 import Eyebrow from "@/components/Eyebrow";
-
 import { Phone, MessageCircle, ShieldCheck, Users, Building2, Handshake } from "lucide-react";
-
 import { WHY, STEPS, BANKS } from "@/components/content";
+import "../main.css"; // Global design system styles
+import styles from "./about-us.module.css";
 
-import "../main.css"; // same stylesheet as the home page — keeps theme identical
-
-// ---------------------------------------------------------------------------
-// SEO METADATA (Next.js App Router — this replaces <head> meta tags)
-// ---------------------------------------------------------------------------
+/**
+ * SEO Metadata for the About Us page
+ * Optimizes ranking for loan distribution, company background, and brand authority.
+ */
 export const metadata = {
   title: "About Us | LoanSaarthi — Loan Comparison Experts in Delhi",
   description:
@@ -69,6 +63,10 @@ export const metadata = {
   },
 };
 
+/**
+ * AboutUs Page Component
+ * Renders company background, debt consolidation capabilities, key stats, corporate values, and lender alliances.
+ */
 export default function AboutUs() {
   const structuredData = {
     "@context": "https://schema.org",
@@ -135,133 +133,45 @@ export default function AboutUs() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* ---------------- HERO + STORY (merged) ---------------- */}
-      <section
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          padding: "clamp(3rem, 8vw, 5.5rem) 1.5rem clamp(2.5rem, 6vw, 4rem)",
-          boxSizing: "border-box",
-          position: "relative",
-          background: "transparent",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1140px",
-            width: "100%",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: "3rem",
-          }}
-        >
+      {/* ---------------- HERO + STORY SECTION ---------------- */}
+      <section className={styles.aboutHero}>
+        <div className={styles.aboutContainer}>
           <Reveal>
-            {/* Text wrapper: har child ke beech 1.25rem gap */}
-            <div
-              style={{
-                maxWidth: "880px",
-                display: "flex",
-                flexDirection: "column",
-                gap: "1.25rem",
-              }}
-            >
-              {/* Pill Eyebrow */}
-              <span
-                style={{
-                  alignSelf: "flex-start",
-                  padding: "4px 14px",
-                  borderRadius: "50px",
-                  fontSize: "0.75rem",
-                  fontWeight: 600,
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  color: "#4ade80",
-                  backgroundColor: "rgba(74, 222, 128, 0.1)",
-                  border: "1px solid rgba(74, 222, 128, 0.25)",
-                }}
-              >
+            <div className={styles.storyBlock}>
+              {/* Eyebrow Badge */}
+              <span className={styles.pillEyebrow}>
                 About LoanSaarthi
               </span>
 
-              {/* H1 */}
-              <h1
-                style={{
-                  fontSize: "clamp(2rem, 3.8vw, 2.75rem)",
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  lineHeight: 1.25,
-                  letterSpacing: "-0.02em",
-                  margin: 0,
-                }}
-              >
+              {/* Main Headline */}
+              <h1 className={styles.mainTitle}>
                 Started in Delhi, built for borrowers everywhere in India.
               </h1>
 
-              {/* Story paragraph */}
-              <p
-                style={{
-                  fontSize: "1rem",
-                  color: "#d5dde8",
-                  lineHeight: 1.75,
-                  margin: 0,
-                }}
-              >
+              {/* Company Story */}
+              <p className={styles.storyParagraph}>
                 Our journey started in 2020, during Covid, with just 20 people and one idea — to make loans honest, fast, and fully digital. Today, we are a team of 165+ dedicated professionals. Many of our core members have been working together for over 22 years, long before LoanSaarthi was founded.
-
-                At LoanSaarthi, we don't just forward your application. We analyse your current situation, find the real reason for rejection, and match you with banks and NBFCs that actually suit your profile — so you don't have to apply everywhere.
+              </p>
+              <p className={styles.storyParagraph}>
+                At LoanSaarthi, we don&apos;t just forward your application. We analyse your current situation, find the real reason for rejection, and match you with banks and NBFCs that actually suit your profile — so you don&apos;t have to apply everywhere.
               </p>
 
-              {/* ISO highlight */}
-              <p
-                style={{
-                  fontSize: "1.05rem",
-                  fontWeight: 600,
-                  color: "#facc15",
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
+              {/* ISO Certification Badge */}
+              <p className={styles.isoHighlight}>
                 LoanSaarthi is ISO 9001:2015 and ISO 27001:2022 certified,
                 tested and verified. Our credibility is validated by genuine reviews on Google.
               </p>
 
-              {/* H3 — upar thoda extra gap taaki naya block alag dikhe */}
-              <h3
-                style={{
-                  fontSize: "clamp(1.8rem, 3.4vw, 2.4rem)",
-                  fontWeight: 700,
-                  color: "#ffffff",
-                  lineHeight: 1.25,
-                  letterSpacing: "-0.02em",
-                  margin: "1.5rem 0 0 0",
-                }}
-              >
+              {/* Debt Consolidation Feature */}
+              <h3 className={styles.sectionHeading}>
                 Debt Consolidation
               </h3>
 
-              {/* Para heading line */}
-              <p
-                style={{
-                  fontSize: "1.05rem",
-                  fontWeight: 600,
-                  color: "#facc15",
-                  lineHeight: 1.5,
-                  margin: 0,
-                }}
-              >
+              <p className={styles.sectionLead}>
                 Simplify Your Finance with Debt Consolidation
               </p>
 
-              {/* Para body */}
-              <p
-                style={{
-                  fontSize: "1rem",
-                  color: "#d5dde8",
-                  lineHeight: 1.75,
-                  margin: 0,
-                }}
-              >
+              <p className={styles.storyParagraph}>
                 Loan Saarthi helps you explore debt consolidation solutions by
                 combining multiple eligible debts like personal loan, app loan
                 and credit card outstanding into one manageable single EMI with
@@ -270,20 +180,15 @@ export default function AboutUs() {
                 understanding suitable options based on your financial profile
                 and eligibility. Take a step towards better financial
                 management with Loan Saarthi —{" "}
-                <span style={{ color: "#facc15", fontWeight: 600 }}>
+                <span className={styles.goldSpan}>
                   Right Guidance. Better Decisions.
                 </span>
               </p>
 
-              <div className="digital" style={{
-                fontSize: "clamp(1.8rem, 3.4vw, 2.4rem)",
-                fontWeight: 700,
-                color: "#ffffff",
-                lineHeight: 1.25,
-                letterSpacing: "-0.02em",
-                margin: "1.5rem 0 0 0",
-              }}><h3>Digital Journey</h3>
-                <p>
+              {/* Digital Journey Card */}
+              <div className={styles.digitalBox}>
+                <h3 className={styles.digitalHeading}>Digital Journey</h3>
+                <p className={styles.digitalText}>
                   Login to Disbursal — Fully Digital Loan Process.
                   Powered by our alliances with leading banks and NBFCs, we process your case in hours, not days or months.
                 </p>
@@ -291,39 +196,19 @@ export default function AboutUs() {
             </div>
           </Reveal>
 
-          {/* 4 Stat Cards */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-              gap: "1rem",
-              paddingTop: "2rem",
-              borderTop: "1px solid rgba(255, 255, 255, 0.1)",
-            }}
-          >
+          {/* ---------------- 4 KEY METRIC CARDS ---------------- */}
+          <div className={styles.statsGrid}>
             {[
               { label: "Founded", value: "New Delhi" },
               { label: "Loans Placed", value: "30,000+" },
               { label: "Partner Banks & NBFCs", value: "42+" },
               { label: "Avg. Sanction Time", value: "1–2 Days" },
             ].map((s) => (
-              <div
-                key={s.label}
-                style={{
-                  padding: "1.25rem 1.5rem",
-                  background: "rgba(255, 255, 255, 0.04)",
-                  backdropFilter: "blur(10px)",
-                  borderRadius: "12px",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0.4rem",
-                }}
-              >
-                <span style={{ fontSize: "0.78rem", color: "#94a3b8", fontWeight: 500, letterSpacing: "0.02em" }}>
+              <div key={s.label} className={styles.statCard}>
+                <span className={styles.statLabel}>
                   {s.label}
                 </span>
-                <span style={{ fontSize: "1.4rem", fontWeight: 700, color: "#ffffff" }}>
+                <span className={styles.statValue}>
                   {s.value}
                 </span>
               </div>
@@ -332,7 +217,7 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ---------------- VALUES ---------------- */}
+      {/* ---------------- CORE VALUES ---------------- */}
       <section className="container section-spacing">
         <Reveal>
           <Eyebrow>What we stand for</Eyebrow>
@@ -349,7 +234,7 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ---------------- WHY CLIENTS SIGN WITH US (reused from home) ---------------- */}
+      {/* ---------------- WHY CLIENTS SIGN WITH US ---------------- */}
       <section className="bg-paper-dark section-spacing">
         <div className="container">
           <Reveal>
@@ -367,7 +252,7 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ---------------- PROCESS ---------------- */}
+      {/* ---------------- PROCESS STEPS ---------------- */}
       <section className="container section-spacing">
         <Reveal>
           <Eyebrow>How we work</Eyebrow>
@@ -388,39 +273,16 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ---------------- TEAM ---------------- */}
+      {/* ---------------- EXPERT TEAM ---------------- */}
       <Team />
 
       {/* ---------------- BANK PARTNERS ---------------- */}
-      <section className="bg-ink" style={{ paddingTop: "3.5rem", paddingBottom: "3.5rem" }}>
+      <section className={`bg-ink ${styles.partnersSection}`}>
         <div className="container">
           <div className="bank-partners-label">Lenders in our network</div>
-          <div
-            className="bank-tags"
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "1.5rem",
-            }}
-          >
+          <div className={styles.partnersGrid}>
             {BANKS.map((b) => (
-              <div
-                key={b.name}
-                className="bank-logo-wrapper"
-                style={{
-                  position: "relative",
-                  height: "3rem",
-                  width: "8rem",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  padding: "0.5rem",
-                  background: "rgba(255, 255, 255, 0.05)",
-                  borderRadius: "8px",
-                }}
-              >
+              <div key={b.name} className={styles.partnerLogoWrap}>
                 <img
                   src={b.logo}
                   alt={b.name}
@@ -432,11 +294,11 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ---------------- CONTACT CTA ---------------- */}
+      {/* ---------------- CONTACT CALL-TO-ACTION ---------------- */}
       <section className="bg-dark contact-section">
-        <div className="container" style={{ textAlign: "center" }}>
+        <div className={`container ${styles.contactCenter}`}>
           <Reveal>
-            <h2 className="contact-title" style={{ color: "#ffffff" }}>
+            <h2 className={`contact-title ${styles.contactHeading}`}>
               Ready to compare your loan offers?
             </h2>
             <p className="contact-text">
@@ -455,7 +317,7 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* ---------------- MOBILE STICKY CTA (same as home) ---------------- */}
+      {/* ---------------- MOBILE STICKY CTA ---------------- */}
       <div className="mobile-cta">
         <a href="tel:917669486600" className="mobile-cta-call">
           <Phone size={15} aria-hidden="true" /> Call

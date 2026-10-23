@@ -1,4 +1,7 @@
-// lib/mongodb.ts
+/**
+ * MongoDB Connection Manager (Singleton Pattern)
+ * Maintains connection caching across serverless invocations and hot reloads in Next.js.
+ */
 import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.MONGODB_URI as string;

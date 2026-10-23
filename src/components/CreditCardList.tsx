@@ -41,7 +41,7 @@ export default function CreditCardList({ cards }: CreditCardListProps) {
           />
 
           <div className="cc-type-toggle">
-            <span style={{ padding: '0 8px', color: 'var(--ls-text-muted)' }}>Issuer:</span>
+            <span className="cc-issuer-label">Issuer:</span>
             {['All', 'Private Bank', 'NBFC'].map((type) => (
               <button
                 key={type}
@@ -120,7 +120,7 @@ export default function CreditCardList({ cards }: CreditCardListProps) {
                   <span className="cc-fee-label">Annual Fee</span>
                   <span className="cc-fee-val">{card.annualFee === 0 ? 'FREE' : `₹${card.annualFee}`}</span>
                 </div>
-                <div style={{ textAlign: 'right' }}>
+                <div className="cc-fee-right">
                   <span className="cc-fee-label">Waiver</span>
                   <span className="cc-fee-waiver">{card.feeWaiverText}</span>
                 </div>

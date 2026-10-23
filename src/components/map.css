@@ -45,13 +45,6 @@
   display: block;
 }
 
-@media (prefers-color-scheme: dark) {
-  .contact-map-section {
-    background-color: #082317; 
-    color: #ffffff;
-  }
-}
-
 .dark .contact-map-section {
   background-color: #082317;
   color: #ffffff;

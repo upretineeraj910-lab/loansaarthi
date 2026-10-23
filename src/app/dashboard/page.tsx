@@ -204,8 +204,7 @@ export default function Dashboard() {
           {isSuperAdmin && (
             <Link
               href="/dashboard/appointments"
-              className={styles.navItem}
-              style={{ color: '#f5c563', fontWeight: 600 }}
+              className={`${styles.navItem} ${styles.navItemGold}`}
             >
              Expert Appointments 
             </Link>
@@ -223,12 +222,7 @@ export default function Dashboard() {
           <div>
             <h1 className={styles.title}>Partner Dashboard</h1>
 
-            <p
-              style={{
-                color: 'var(--text-muted)',
-                fontSize: '0.875rem',
-              }}
-            >
+            <p className={styles.welcomeEmail}>
               Overview of your leads and referral links
             </p>
           </div>
@@ -273,22 +267,11 @@ export default function Dashboard() {
 
         {/* Referral Link */}
         <div className={styles.shareCard}>
-          <h3
-            style={{
-              fontSize: '1.125rem',
-              fontWeight: 600,
-            }}
-          >
+          <h3 className={styles.sectionCardTitle}>
             Your Referral Link
           </h3>
 
-          <p
-            style={{
-              color: 'var(--text-muted)',
-              fontSize: '0.875rem',
-              marginTop: '0.25rem',
-            }}
-          >
+          <p className={styles.sectionCardMuted}>
             Share this link with customers. Form entries will
             automatically be tagged to your partner ID.
           </p>
@@ -312,23 +295,12 @@ export default function Dashboard() {
 
         {/* Cases Table */}
         <div className={styles.tableCard}>
-          <h3
-            style={{
-              fontSize: '1.125rem',
-              fontWeight: 600,
-              marginBottom: '1rem',
-            }}
-          >
+          <h3 className={styles.sectionCardTitle}>
             Recent Lead Applications
           </h3>
 
           {error && (
-            <p
-              style={{
-                color: 'red',
-                marginBottom: '1rem',
-              }}
-            >
+            <p className={styles.errorMuted}>
               {error}
             </p>
           )}

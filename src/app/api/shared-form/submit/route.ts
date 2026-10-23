@@ -6,7 +6,7 @@ import { NextResponse } from 'next/server';
 
 export const runtime = 'nodejs';
 
-// File ko immediately Buffer me convert karta hai
+// Converts incoming uploaded file into a memory Buffer for cloud persistence
 async function fileToBuffer(file: unknown) {
   if (file instanceof File && file.size > 0) {
     const arrayBuffer = await file.arrayBuffer();

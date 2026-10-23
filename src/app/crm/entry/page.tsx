@@ -313,7 +313,7 @@ export default function LeadEntryPage() {
             }}>
               <Lock size={28} />
             </div>
-            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.5rem' }}>
+            <h2 style={{ fontSize: '1.4rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.5rem' }}>
               Authentication Required
             </h2>
             <p style={{ color: '#64748b', maxWidth: '440px', margin: '0 auto 1.5rem auto', lineHeight: 1.5, fontSize: '14px' }}>
@@ -357,10 +357,10 @@ export default function LeadEntryPage() {
             }}>
               <ShieldAlert size={34} />
             </div>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#0f172a', marginBottom: '0.75rem' }}>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.75rem' }}>
               Access Denied: Data Entry Portal
             </h2>
-            <p style={{ color: '#475569', maxWidth: '520px', margin: '0 auto 1.75rem auto', lineHeight: 1.6, fontSize: '14px' }}>
+            <p style={{ color: '#94a3b8', maxWidth: '520px', margin: '0 auto 1.75rem auto', lineHeight: 1.6, fontSize: '14px' }}>
               You are currently logged in as <strong>{currentUser.name || currentUser.email?.split('@')[0]} (Role: {roleLabel})</strong>. Only Data Entry Operators and Super Admins can submit or upload leads to the system.
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>

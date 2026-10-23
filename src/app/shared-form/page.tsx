@@ -397,7 +397,7 @@ function SharedFormContent() {
         </div>
 
         <div className={styles.formDivider}>
-          <h2 className={styles.sectionTitle} style={{ fontSize: '1.5rem', fontWeight: '700' }}>
+          <h2 className={`${styles.sectionTitle} ${styles.formMainTitle}`}>
             Loan Application Form
           </h2>
           <p className="text-gray-500 mt-1">Please provide your details and required documents.</p>
@@ -412,7 +412,7 @@ function SharedFormContent() {
 
         <form onSubmit={handleSubmit}>
           {/* PERSONAL DETAILS */}
-          <section style={{ marginBottom: '2rem' }}>
+          <section className={styles.formSection}>
             <h3 className={styles.sectionTitle}>
               <span className={styles.sectionNumber}>1</span>
               Personal Details
@@ -556,7 +556,7 @@ function SharedFormContent() {
           </section>
 
           {/* KYC DETAILS */}
-          <section style={{ marginBottom: '2rem' }}>
+          <section className={styles.formSection}>
             <h3 className={styles.sectionTitle}>
               <span className={styles.sectionNumber}>2</span>
               KYC Details
@@ -603,7 +603,7 @@ function SharedFormContent() {
           </section>
 
           {/* ADDRESS DETAILS */}
-          <section style={{ marginBottom: '2rem' }}>
+          <section className={styles.formSection}>
             <h3 className={styles.sectionTitle}>
               <span className={styles.sectionNumber}>3</span>
               Address Details
@@ -735,7 +735,7 @@ function SharedFormContent() {
           </section>
 
           {/* EMPLOYMENT DETAILS */}
-          <section style={{ marginBottom: '2rem' }}>
+          <section className={styles.formSection}>
             <h3 className={styles.sectionTitle}>
               <span className={styles.sectionNumber}>4</span>
               Employment Details
@@ -908,7 +908,7 @@ function SharedFormContent() {
 
             {/* Self Employed */}
             {formData.employmentType === 'self-employed' && (
-              <div className={styles.grid2} style={{ marginTop: '1rem' }}>
+              <div className={`${styles.grid2} ${styles.gridTopMargin}`}>
                 <div className={styles.formGroup}>
                   <label className={`${styles.formLabel} ${styles.formLabelRequired}`}>
                     Business Name
@@ -966,7 +966,7 @@ function SharedFormContent() {
                   />
                 </div>
 
-                <div className={styles.formGroup} style={{ gridColumn: '1 / -1' }}>
+                <div className={`${styles.formGroup} ${styles.formGroupFull}`}>
                   <label className={`${styles.formLabel} ${styles.formLabelRequired}`}>
                     Business Address
                   </label>
@@ -984,14 +984,14 @@ function SharedFormContent() {
           </section>
 
           {/* REFERENCES */}
-          <section style={{ marginBottom: '2rem' }}>
+          <section className={styles.formSection}>
             <h3 className={styles.sectionTitle}>
               <span className={styles.sectionNumber}>5</span>
               References
             </h3>
 
             {/* Reference 1 */}
-            <div className={styles.refBox} style={{ marginBottom: '1rem' }}>
+            <div className={`${styles.refBox} ${styles.refBoxMargin}`}>
               <h4 className={styles.refBoxTitle}>Reference 1 *</h4>
               <div className={styles.grid2}>
                 <div className={styles.formGroup}>
@@ -1122,7 +1122,7 @@ function SharedFormContent() {
           </section>
 
           {/* LOAN DETAILS */}
-          <section style={{ marginBottom: '2rem' }}>
+          <section className={styles.formSection}>
             <h3 className={styles.sectionTitle}>
               <span className={styles.sectionNumber}>6</span>
               Loan Details
@@ -1225,13 +1225,13 @@ function SharedFormContent() {
           </section>
 
           {/* DOCUMENTS */}
-          <section style={{ marginBottom: '2rem' }}>
+          <section className={styles.formSection}>
             <h3 className={styles.sectionTitle}>
               <span className={styles.sectionNumber}>7</span>
               Documents
             </h3>
 
-            <p className={styles.helperText} style={{ marginBottom: '1.25rem' }}>
+            <p className={`${styles.helperText} ${styles.helperTextMargin}`}>
               Upload clear PDF, JPG or PNG documents. Maximum size: 10 MB per file.
             </p>
 

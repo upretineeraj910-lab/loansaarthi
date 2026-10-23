@@ -45,12 +45,12 @@
 
 @media (min-width: 768px) {
   .widgetWrapper {
-    /* Desktop: Grid ya horizontal slider ke hisaab se height */
+    /* Desktop: Layout height according to horizontal reviews grid */
     min-height: 380px; 
   }
 }
 
-/* Elfsight ke card ki inner height ko lock karein taaki 1 line review me card pichke nahi */
+/* Standardize review card height across variable length feedback */
 .widgetWrapper :global([class*="ReviewCard__Container"]),
 .widgetWrapper :global([class*="ReviewCard"]),
 .widgetWrapper :global([class*="CardContainer"]) {
@@ -60,7 +60,7 @@
   justify-content: space-between !important;
 }
 
-/* Badge ko DOM se gayab hone se pehle hi instantly hide rakhega */
+/* Keep third-party widget badges visually hidden */
 .widgetWrapper :global(a[href*="elfsight.com"]) {
   display: none !important;
 }

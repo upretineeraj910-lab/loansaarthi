@@ -53,18 +53,13 @@ export default function LuxuryHero() {
       <div className={styles.hero}>
         <div className={styles.left}>
           <h1 className={styles.title}>
-            {/* One Platform.
-            <br />
-            42+ Lenders.
-            <br />
-            Infinite Possibilities. */}
             Your Loan.
             <br />Your Eligiblity.
             <br />Our Expertise
           </h1>
           <p className={styles.sub}>
            We match your profile with 42+ Banks & NBFCs to get you the right loan,<br /> not just any loan. <br/>
-           LoanSaarthi is <span style={{ color: "#facc15" }}> ISO 9001:2015</span> and <span style={{ color: "#facc15" }}> ISO 27001:2022 </span> certified, tested and verified. Our credibility is validated by <span style={{ color: "#facc15" }}> genuine reviews on Google</span>.
+           LoanSaarthi is <span className={styles.goldText}>ISO 9001:2015</span> and <span className={styles.goldText}>ISO 27001:2022</span> certified, tested and verified. Our credibility is validated by <span className={styles.goldText}>genuine reviews on Google</span>.
           </p>
           <div className={styles.actions}>
             <Link href="#loan-eligibility-form" className={styles.btnPrimary}>

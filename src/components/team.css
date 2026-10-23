@@ -241,66 +241,6 @@
 
 
 /* ==========================================
-   DARK MODE
-   Same pattern as rest of your website
-========================================== */
-
-@media (prefers-color-scheme: dark) {
-
-  .expert-team {
-    background-color: var(--color-paper);
-    color: var(--color-ink);
-  }
-
-  .expert-team-heading span {
-    color: var(--color-brass);
-  }
-
-  .expert-team-heading h2 {
-    color: var(--color-ink);
-  }
-
-  .expert-team-heading p {
-    color: var(--color-text-muted);
-  }
-
-  .expert-image-wrapper {
-    background-color: var(--color-paper-light);
-  }
-
-  .expert-info {
-    background-color: var(--color-paper-light);
-    border-color: var(--color-paper-line);
-
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30);
-  }
-
-  .expert-info h3 {
-    color: var(--color-ink);
-  }
-
-  .expert-info p {
-    color: var(--color-brass);
-  }
-
-  .slider-btn {
-    background-color: var(--color-paper-light);
-    color: var(--color-ink);
-    border-color: var(--color-paper-line);
-
-    box-shadow:
-      0 4px 8px rgba(0, 0, 0, 0.35);
-  }
-
-  .slider-btn:hover {
-    background-color: var(--color-brass);
-    color: #ffffff;
-    border-color: var(--color-brass);
-  }
-}
-
-
-/* ==========================================
    TABLET
 ========================================== */
 

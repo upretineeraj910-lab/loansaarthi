@@ -13,23 +13,6 @@
   --lp-track: rgba(245, 197, 99, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --lp-bg: #082317;
-    --lp-card: #0e3524;
-    --lp-border: rgba(245, 197, 99, 0.2);
-    --lp-title: #ffffff;
-    --lp-desc: #94a3b8;
-    --lp-text: #cbd5e1;
-    --lp-green: #f5c563;
-    --lp-box: #061a11;
-    --lp-btn: #f5c563;
-    --lp-btn-text: #081a12;
-    --lp-thumb: #f5c563;
-    --lp-track: rgba(245, 197, 99, 0.2);
-  }
-}
-
 [data-theme="dark"], .dark {
   --lp-bg: #082317;
   --lp-card: #0e3524;

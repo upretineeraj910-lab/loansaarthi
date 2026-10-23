@@ -212,7 +212,7 @@ export default function TalkToExpertPage() {
                 </div>
                 <div className={styles.summaryRow}>
                   <span className={styles.summaryLabel}>Time Window</span>
-                  <span className={styles.summaryValue} style={{ color: '#f5c563' }}>
+                  <span className={styles.summaryTimeValue}>
                     {successData.appointmentTime}
                   </span>
                 </div>
@@ -221,8 +221,7 @@ export default function TalkToExpertPage() {
               <div className={styles.actionsWrap}>
                 <Link
                   href="/"
-                  className={styles.submitBtn}
-                  style={{ textDecoration: 'none', maxWidth: '240px', margin: '0 auto' }}
+                  className={`${styles.submitBtn} ${styles.returnHomeBtn}`}
                 >
                   Return to Home
                 </Link>
@@ -240,8 +239,7 @@ export default function TalkToExpertPage() {
                       notes: '',
                     });
                   }}
-                  className={styles.timeSlotPill}
-                  style={{ padding: '0.9rem 1.5rem', background: 'transparent' }}
+                  className={`${styles.timeSlotPill} ${styles.bookAnotherBtn}`}
                 >
                   Book Another Call
                 </button>

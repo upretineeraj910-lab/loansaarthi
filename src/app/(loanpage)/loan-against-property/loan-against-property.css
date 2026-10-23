@@ -1177,134 +1177,6 @@
    Automatically follows DEVICE theme
    ========================================================= */
 
-@media (prefers-color-scheme: dark) {
-
-  :root {
-    --ls-black: #f3f7f3;
-    --ls-charcoal: #e4ebe5;
-
-    --ls-gray-50: #101511;
-    --ls-gray-100: #171d18;
-    --ls-gray-200: #283129;
-    --ls-gray-300: #465048;
-    --ls-gray-500: #9ca79e;
-    --ls-gray-700: #c3ccc5;
-
-    --ls-white: #171c18;
-
-    --ls-card-bg: #171c18;
-    --ls-soft-bg: #1d241e;
-    --ls-hover-bg: #202a20;
-
-    --ls-note-bg: rgba(14, 53, 36, 0.7);
-
-    --ls-page-bg:
-      radial-gradient(
-        circle at 10% 15%,
-        rgba(111, 174, 69, 0.12) 0%,
-        transparent 45%
-      ),
-      radial-gradient(
-        circle at 90% 65%,
-        rgba(111, 174, 69, 0.08) 0%,
-        transparent 45%
-      ),
-      linear-gradient(
-        180deg,
-        #0d120e 0%,
-        #111711 40%,
-        #0e130f 100%
-      );
-
-    --ls-hero-overlay:
-      linear-gradient(
-        90deg,
-        rgba(13, 18, 14, 0.98) 0%,
-        rgba(13, 18, 14, 0.94) 42%,
-        rgba(13, 18, 14, 0.45) 75%,
-        rgba(13, 18, 14, 0) 100%
-      );
-
-    --ls-shadow-xs:
-      0 1px 4px rgba(0, 0, 0, 0.20);
-
-    --ls-shadow-sm:
-      0 4px 16px rgba(0, 0, 0, 0.25);
-
-    --ls-shadow-md:
-      0 12px 30px rgba(0, 0, 0, 0.30);
-
-    --ls-shadow-lg:
-      0 20px 50px rgba(0, 0, 0, 0.35);
-  }
-
-
-  .lap-page {
-    color-scheme: dark;
-  }
-
-
-  /* HERO */
-
-  .lap-page .hero-badge {
-    background: rgba(111, 174, 69, 0.16);
-
-    border-color: rgba(111, 174, 69, 0.35);
-
-    color: #eaf5e8;
-  }
-
-  .lap-page .hero-point {
-    background: rgba(23, 28, 24, 0.90);
-
-    border-color: rgba(111, 174, 69, 0.20);
-  }
-
-
-  /* APPLY */
-
-  .lap-page .apply_box_number {
-    color: #b9e19f;
-
-    background: rgba(111, 174, 69, 0.16);
-
-    border-color: rgba(111, 174, 69, 0.30);
-  }
-
-  .lap-page .apply_box:hover {
-    background: var(--ls-hover-bg);
-  }
-
-
-  /* REQUIREMENTS */
-
-  .lap-page .requirement-item {
-    background: var(--ls-soft-bg);
-
-    border-color: rgba(111, 174, 69, 0.16);
-  }
-
-
-  /* FAQ */
-
-  .lap-page .ls-faq-item summary {
-    color: var(--ls-black);
-  }
-
-
-  /* DISCLAIMER */
-
-  .lap-page .loan-disclaimer {
-    background:
-      linear-gradient(
-        135deg,
-        #080d09 0%,
-        #111811 100%
-      );
-  }
-}
-
-
 /* =========================================================
    RESPONSIVE
    ========================================================= */
@@ -1384,18 +1256,7 @@
 
   /* Mobile dark-mode hero */
 
-  @media (prefers-color-scheme: dark) {
-
-    .lap-page .personal-loan-hero::before {
-      background:
-        linear-gradient(
-          180deg,
-          #0d120e 0%,
-          #111711 100%
-        );
-    }
   }
-}
 
 
 @media (max-width: 600px) {
@@ -1487,14 +1348,3 @@
 }
 
 /* Dark mode */
-@media (prefers-color-scheme: dark) {
-  .loan-back-button {
-    background: #6fae45;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
-  }
-
-  .loan-back-button:hover {
-    background: #7fc653;
-  }
-}

@@ -1,9 +1,4 @@
-/* ==========================================================================
-   CRM styles
-   - Light screen = light theme, dark screen = dark theme (prefers-color-scheme)
-   - Saare colors neeche ke --crm-* tokens se aate hain, koi hardcoded color nahi
-   - Class names purane wahi hain, isliye JSX me kuch badalna nahi padega
-   ========================================================================== */
+
 
 /* ---------- theme tokens: light ---------- */
 
@@ -71,70 +66,6 @@
 }
 
 /* ---------- theme tokens: dark ---------- */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --crm-bg: #082317;
-    --crm-surface: #0e3524;
-    --crm-surface-2: #082317;
-    --crm-surface-3: #123f2b;
-    --crm-border: rgba(245, 197, 99, 0.2);
-
-    --crm-text: #ffffff;
-    --crm-text-2: #cbd5e1;
-    --crm-muted: #94a3b8;
-    --crm-faint: #64748b;
-
-    --crm-on-green: #0f1d07;
-
-    --crm-green-text: #8fd05f;
-    --crm-green-soft: rgba(111, 174, 69, 0.14);
-    --crm-green-line: rgba(111, 174, 69, 0.38);
-
-    --crm-red-solid: #c9553f;
-    --crm-red-text: #f19482;
-    --crm-red-soft: rgba(224, 102, 80, 0.14);
-    --crm-red-line: rgba(224, 102, 80, 0.38);
-
-    --crm-amber-text: #f0c35a;
-    --crm-amber-soft: rgba(240, 180, 41, 0.14);
-    --crm-amber-line: rgba(240, 180, 41, 0.36);
-
-    --crm-blue-text: #7db0ff;
-    --crm-blue-soft: rgba(59, 130, 246, 0.16);
-    --crm-blue-line: rgba(96, 150, 250, 0.38);
-
-    --crm-purple-text: #cfa2ff;
-    --crm-purple-soft: rgba(168, 85, 247, 0.16);
-    --crm-purple-line: rgba(180, 110, 250, 0.38);
-
-    --crm-teal-text: #5eead4;
-    --crm-teal-soft: rgba(20, 184, 166, 0.16);
-    --crm-teal-line: rgba(45, 212, 191, 0.38);
-
-    --crm-slate-text: #cbd5e1;
-    --crm-slate-soft: rgba(148, 163, 184, 0.16);
-    --crm-slate-line: rgba(203, 213, 225, 0.38);
-
-    --crm-sky-text: #38bdf8;
-    --crm-sky-soft: rgba(14, 165, 233, 0.16);
-    --crm-sky-line: rgba(56, 189, 248, 0.38);
-
-    --crm-orange-text: #fb923c;
-    --crm-orange-soft: rgba(249, 115, 22, 0.16);
-    --crm-orange-line: rgba(251, 146, 60, 0.38);
-
-    --crm-fuchsia-text: #e879f9;
-    --crm-fuchsia-soft: rgba(217, 70, 239, 0.16);
-    --crm-fuchsia-line: rgba(232, 121, 249, 0.38);
-
-    --crm-toast-bg: #f1f3ef;
-    --crm-toast-text: #151714;
-    --crm-overlay: rgba(0, 0, 0, 0.65);
-    --crm-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    --crm-shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
-  }
-}
 
 /* ---------- tone groups ----------
    Har tone me teen variable: --tone (text/icon), --tone-soft (background), --tone-line (border).
@@ -519,7 +450,7 @@
   margin-top: 0.25rem;
 }
 
-/* status wale metric cards ka text unke tone ka */
+/* Dynamic tone color mapping for status-specific metric cards */
 .crm-metric[class*='crm-metric--'] .crm-metric-label,
 .crm-metric[class*='crm-metric--'] .crm-metric-value {
   color: var(--tone);

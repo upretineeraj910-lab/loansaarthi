@@ -447,3 +447,120 @@
     max-width: 100%;
   }
 }
+
+
+/* Utility & State Classes (Replaces inline styles) */
+.centerLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.centerLoaderContent {
+  text-align: center;
+  color: #94a3b8;
+}
+
+.centerLoaderIcon {
+  margin-bottom: 1rem;
+  color: #f5c563;
+}
+
+.lockIconCircle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: #ef4444;
+}
+
+.restrictedTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.restrictedDesc {
+  color: #94a3b8;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.restrictedActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.backBtnGold {
+  color: #f5c563;
+  border-color: rgba(245, 197, 99, 0.4);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.statTotalIcon {
+  background: rgba(245, 197, 99, 0.15) !important;
+  color: #f5c563 !important;
+}
+
+.statScheduled {
+  color: #93c5fd !important;
+}
+
+.statScheduledIcon {
+  background: rgba(59, 130, 246, 0.15) !important;
+  color: #93c5fd !important;
+}
+
+.statCompleted {
+  color: #6ee7b7 !important;
+}
+
+.statCompletedIcon {
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #6ee7b7 !important;
+}
+
+.statCancelled {
+  color: #fca5a5 !important;
+}
+
+.statCancelledIcon {
+  background: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+}
+
+.emptyStateTitle {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  margin: 0 0 0.5rem;
+}
+
+.emptyStateSub {
+  font-size: 0.88rem;
+  margin: 0;
+}
+
+.dateCell {
+  font-size: 0.8rem;
+  color: #64748b;
+  white-space: nowrap;
+}

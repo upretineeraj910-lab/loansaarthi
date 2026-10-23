@@ -146,40 +146,6 @@
 
 
 /* =========================================
-   DARK MODE
-   Same system as global CSS
-========================================= */
-
-@media (prefers-color-scheme: dark) {
-
-  .why-choose-section {
-    background: var(--color-paper);
-    color: var(--color-ink);
-  }
-
-  .why-choose-label {
-    color: var(--color-ink);
-  }
-
-  .why-choose-content h2 {
-    color: var(--color-brass);
-  }
-
-  .why-choose-description {
-    color: var(--color-text-muted);
-  }
-
-  .why-feature-content h3 {
-    color: var(--color-brass);
-  }
-
-  .why-feature-content p {
-    color: var(--color-text-muted);
-  }
-}
-
-
-/* =========================================
    LARGE DESKTOP
 ========================================= */
 

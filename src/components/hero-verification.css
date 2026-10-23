@@ -25,32 +25,6 @@
   --hvc-success: #10b981;
 }
 
-/* Dark Mode - System Preference */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --hvc-bg: #0e3524;
-    --hvc-border: rgba(245, 197, 99, 0.25);
-    --hvc-shadow: rgba(0, 0, 0, 0.45);
-    --hvc-header-bg: #061a11;
-    --hvc-title: #ffffff;
-    --hvc-badge: #f5c563;
-    --hvc-desc: #cbd5e1;
-    --hvc-input-bg: #082317;
-    --hvc-input-border: rgba(245, 197, 99, 0.3);
-    --hvc-input-text: #ffffff;
-    --hvc-input-focus: #f5c563;
-    --hvc-prefix-bg: #082317;
-    --hvc-btn-bg: #f5c563;
-    --hvc-btn-hover: #e0b04c;
-    --hvc-btn-text: #081a12;
-    --hvc-link-color: #f5c563;
-    --hvc-error-bg: rgba(239, 68, 68, 0.15);
-    --hvc-error-border: rgba(239, 68, 68, 0.4);
-    --hvc-error-text: #fca5a5;
-    --hvc-success: #10b981;
-  }
-}
-
 /* Manual Dark Theme */
 [data-theme="dark"],
 .dark {

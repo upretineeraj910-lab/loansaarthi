@@ -10,12 +10,6 @@
   --brand-border: rgba(245, 197, 99, 0.2);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #082317;
-    --foreground: #ffffff;
-  }
-}
 
 * {
   margin: 0;

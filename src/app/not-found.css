@@ -150,15 +150,3 @@
   text-decoration: underline;
 }
 
-@media (prefers-color-scheme: dark) {
-  .nf-wrapper {
-    background-color: #1a1a1a;
-  }
-  .nf-title {
-    color: #e8e8e8;
-  }
-  .nf-btn-secondary {
-    color: #e8e8e8;
-    border-color: rgba(255, 255, 255, 0.15);
-  }
-}

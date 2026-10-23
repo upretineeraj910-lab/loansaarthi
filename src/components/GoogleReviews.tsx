@@ -7,7 +7,7 @@ export default function GoogleReviews() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // 1. Viewport Intersection: Reviews section paas aane par hi script load karega
+  // 1. Viewport Intersection: Lazy-load widget script only when scrolled within proximity
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {

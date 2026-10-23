@@ -1,9 +1,13 @@
 import type { MetadataRoute } from "next";
 
+/**
+ * Robots.txt configuration
+ * Directs search engine indexers while protecting private and administrative endpoints.
+ */
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      // 1. Aggressive scrapers aur commercial SEO bots ko completely block karein
+      // 1. Block aggressive commercial crawlers and AI scraping bots
       {
         userAgent: [
           "AhrefsBot",
@@ -19,7 +23,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
         disallow: "/",
       },
-      // 2. Legitimate search engines (Google, Bing, etc.) ke liye rules
+      // 2. Indexing rules for search engines (Google, Bing, etc.)
       {
         userAgent: "*",
         allow: "/",
@@ -30,9 +34,9 @@ export default function robots(): MetadataRoute.Robots {
           "/lead/",
           "/dashboard/",
           "/shared-form/",
-          "/*?*",               // Query parameters crawl karne se roke (reduces 50%+ duplicate hits)
+          "/*?*",               // Prevent crawling URL query parameters to avoid duplicate hits
         ],
-        crawlDelay: 5,         // Aggressive requests par throttle lagaye
+        crawlDelay: 5,         // Throttle rapid crawl requests
       },
     ],
     sitemap: "https://www.loansaarthi.com/sitemap.xml",
