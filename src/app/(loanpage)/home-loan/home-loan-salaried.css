@@ -507,7 +507,7 @@
   letter-spacing: 1.2px;
   text-transform: uppercase;
 
-  color: #081a12;
+  color: whitesmoke;
 
   opacity: 0.9;
 }
@@ -554,7 +554,7 @@
   border:
     1px solid rgba(111, 174, 69, 0.16);
 
-  color: #081a12;
+  color: whitesmoke;
 
   font-size: 11px;
   font-weight: 650;
@@ -691,7 +691,7 @@
 
   background: #f5c563;
 
-  color: #f5c563;
+  color: black;
 
   font-size: 11px;
   font-weight: 800;
@@ -1027,12 +1027,12 @@
 .verification-address {
   padding: 21px;
 
-  background:
+  /* background:
     linear-gradient(
       135deg,
       var(--hls-green-soft),
       #ffffff
-    );
+    ); */
 
   border:
     1px solid rgba(111, 174, 69, 0.15);

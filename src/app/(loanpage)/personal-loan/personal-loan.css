@@ -791,12 +791,12 @@
   padding: 16px 18px;
 
   /* Updated: Multi-stop fintech glow */
-  background:
+  /* background:
     linear-gradient(
       135deg,
       #eaf6e6 0%,
       #f4fbf1 100%
-    );
+    ); */
 
   border: 1px solid rgba(111, 174, 69, 0.25);
 
@@ -2261,7 +2261,7 @@
 
 .requirements-note {
   padding: 16px 18px;
-  background: linear-gradient(135deg, #eaf6e6 0%, #f4fbf1 100%);
+  /* background: linear-gradient(135deg, #eaf6e6 0%, #f4fbf1 100%); */
   border: 1px solid rgba(111, 174, 69, 0.25);
   border-radius: var(--ls-radius-sm);
 }
