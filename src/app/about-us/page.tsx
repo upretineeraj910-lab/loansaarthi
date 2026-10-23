@@ -145,7 +145,7 @@ export default function AboutUs() {
 
               {/* Main Headline */}
               <h1 className={styles.mainTitle}>
-                Started in Delhi, built for borrowers everywhere in India.
+                Started in Delhi, built for borrowers every where in India.
               </h1>
 
               {/* Company Story */}

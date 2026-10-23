@@ -40,7 +40,12 @@ export default function ContactForm() {
     const newErrors: Record<string, string> = {};
     if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
     if (!formData.email.trim()) newErrors.email = "Email is required";
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!formData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (formData.phone.length < 10) {
+      newErrors.phone = "Phone number must be 10 digits";
+    }
+
     if (!formData.service) newErrors.service = "Please select a service";
     if (!formData.message.trim()) newErrors.message = "Message is required";
 
@@ -67,7 +72,7 @@ export default function ContactForm() {
       }
 
       setSuccessMsg('Thank you! We\'ll get back to you soon.');
-      
+
       // Reset form
       setFormData({
         fullName: "",
@@ -176,8 +181,8 @@ export default function ContactForm() {
           )}
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="contact-form-submit"
           disabled={loading}
         >
