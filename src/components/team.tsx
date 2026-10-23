@@ -39,7 +39,7 @@ const expertTeam: Expert[] = [
     name: "Meenakshi Bisht",
     title: "Vertical Head",
     image: "/team/MeenakshiVerticalHead.jpeg",
-    alt: "Meenakshi Bisht - Vertical Head",
+    alt: "Meenakshi Bisht - Personal Loan & Cards Vertical Head",
   },
   {
     name: "Naina Singh",
@@ -51,25 +51,25 @@ const expertTeam: Expert[] = [
     name: "Priyanka",
     title: "Vertical Head - Inbound",
     image: "/team/Priyanka_Singh_verticalHeadInBound.jpeg",
-    alt: "Priyanka - Vertical Head, Inbound",
+    alt: "Priyanka -  Inbound & Digital Team",
   },
   {
     name: "Rajeev Kaushal",
     title: "Vertical Head",
     image: "/team/RajeevKaushalVerticalHead.jpeg",
-    alt: "Rajeev Kaushal - Vertical Head",
+    alt: "Rajeev Kaushal - Vertical Head-Outbound Process",
   },
   {
     name: "Rambha",
     title: "Vertical Head - Channel Business",
     image: "/team/Rambha-vertical-head- channel business.png",
-    alt: "Rambha - Vertical Head, Channel Business",
+    alt: "Rambha - Zone Head-Distribution",
   },
   {
     name: "Ranjeet Jaishwal",
     title: "Vertical Head",
     image: "/team/RanjeetJaishwalVerticalHead.png",
-    alt: "Ranjeet Jaishwal - Vertical Head,Channel Business ",
+    alt: "Ranjeet Jaishwal - Head Marketing ",
   },
 ];
 
