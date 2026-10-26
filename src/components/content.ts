@@ -89,7 +89,7 @@ export type Faq = {
 export const FAQS: Faq[] = [
   {
     q: "Is there a fee to consult with Loansaarthi?",
-    a: "No Consultation Fee At LoanSaarthi, we are committed to complete transparency. We do not charge any consultation fee for our loan advisory services.All loan processes, including interest rates, processing fees, and other applicable charges, are strictly as per the policies and guidelines of the respective Bank / NBFC you choose to apply with.For complete clarity and peace of mind, if any charges are applicable, they will be clearly explained and clarified to you before the disbursal of the loan. No hidden charges.Your trust is our biggest asset."
+    a: "Our Fee Policy No Consultation Fee At LoanSaarthi, we are committed to complete transparency. We do not charge any consultation fee for our loan advisory services. All loan processes, including interest rates, processing fees, and other applicable charges, are strictly as per the policies and guidelines of the respective Bank / NBFC you choose to apply with. For complete clarity and peace of mind, if any charges are applicable, they will be clearly explained and clarified to you before the disbursal of the loan. No hidden charges. Your trust is our biggest asset."
   },
   {
     q: "What documents do I need to start?",

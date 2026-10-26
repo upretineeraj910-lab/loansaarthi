@@ -66,6 +66,12 @@ const expertTeam: Expert[] = [
     alt: "Rambha - Zonal Head-Distribution",
   },
   {
+    name: "Manoj ",
+    title: "Head Of Operations",
+    image: "/team/Manoj.jpeg",
+    alt: "Manoj operations head",
+  },
+  {
     name: "Meenakshi Bisht",
     title: "Vertical Head- Personal Loan & Cards",
     image: "/team/MeenakshiVerticalHead.jpeg",
