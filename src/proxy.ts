@@ -174,7 +174,7 @@ export async function proxy(request: NextRequest) {
       const role = payload.role as string;
 
       // Allowed CRM dashboard roles: crm_editor, crm_entry (view only), admin, superadmin, crm
-      const allowedCrmRoles = ['crm_editor', 'crm_entry', 'admin', 'superadmin', 'crm'];
+      const allowedCrmRoles = ['crm_editor', 'crm_entry', 'superadmin'];
       if (!allowedCrmRoles.includes(role)) {
         return NextResponse.redirect(
           new URL('/dashboard', request.url)
