@@ -17,7 +17,7 @@ export default function Faq() {
               className="faq-button"
               aria-expanded={isOpen}
             >
-              <span className="faq-question">{f.q}</span>
+              <span className="faq-question" style={{ color: "#f5c563" }}>{f.q}</span>
               <ChevronDown
                 size={18}
                 className={`faq-chevron ${isOpen ? "open" : ""}`}
