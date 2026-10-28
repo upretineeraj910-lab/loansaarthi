@@ -60,8 +60,8 @@ const expertTeam: Expert[] = [
     alt: "Ranjeet Jaishwal - Head Marketing ",
   },
    {
-    name: "Rambha",
-    title: "Zonal Head-Distribution",
+    name: "Rambha Singh",
+    title: "Business Development Manager",
     image: "/team/Rambha-vertical-head- channel business.png",
     alt: "Rambha - Zonal Head-Distribution",
   },
