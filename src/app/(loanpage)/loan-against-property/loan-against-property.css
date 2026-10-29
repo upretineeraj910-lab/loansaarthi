@@ -218,7 +218,7 @@
   width: min(100%, 700px);
 
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 10px;
 }
@@ -443,7 +443,7 @@
 .lap-page .apply_grid {
   display: grid;
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 14px;
 }
@@ -1217,9 +1217,9 @@
 @media (max-width: 800px) {
 
   .lap-page section,
-  .lap-page .loan-page-calculator-section,
-  .lap-page .ls-seo-benefits-section,
-  .lap-page .ls-faq-section {
+.lap-page .loan-page-calculator-section,
+.lap-page .ls-seo-benefits-section,
+.lap-page .ls-faq-section {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -1242,8 +1242,8 @@
   }
 
   .lap-page .hero-points,
-  .lap-page .verification-section,
-  .lap-page .ls-seo-benefits-grid {
+.lap-page .verification-section,
+.lap-page .ls-seo-benefits-grid {
     grid-template-columns: 1fr;
 
     gap: 16px;
@@ -1262,9 +1262,9 @@
 @media (max-width: 600px) {
 
   .lap-page section,
-  .lap-page .loan-page-calculator-section,
-  .lap-page .ls-seo-benefits-section,
-  .lap-page .ls-faq-section {
+.lap-page .loan-page-calculator-section,
+.lap-page .ls-seo-benefits-section,
+.lap-page .ls-faq-section {
     padding-left: 16px;
     padding-right: 16px;
   }
@@ -1297,8 +1297,8 @@
 @media (prefers-reduced-motion: reduce) {
 
   .lap-page *,
-  .lap-page *::before,
-  .lap-page *::after {
+.lap-page *::before,
+.lap-page *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
@@ -1306,7 +1306,7 @@
 
 
 
-.loan-back-button {
+.lap-page .loan-back-button {
   position: fixed;
   top: 92px;
   left: 24px;
@@ -1330,21 +1330,54 @@
   transition: all 0.2s ease;
 }
 
-.loan-back-button:hover {
+.lap-page .loan-back-button:hover {
   background: #5f9f39;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(17, 21, 19, 0.16);
 }
 
-.loan-back-button:active {
+.lap-page .loan-back-button:active {
   transform: translateY(0);
 }
 
 /* Phone par hide */
 @media (max-width: 767px) {
-  .loan-back-button {
+  .lap-page .loan-back-button {
     display: none;
   }
 }
 
 /* Dark mode */
+
+
+/* =========================================================
+   HERO POINT BUTTON (04 - Connect CTA)
+   ========================================================= */
+.lap-page .hero-point-btn {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.lap-page .hero-point-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 197, 99, 0.45);
+  background: rgba(14, 53, 36, 0.95);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.lap-page .hero-point-btn b {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f5c563;
+  margin-left: auto;
+  align-self: center;
+  transition: transform 0.2s ease;
+}
+
+.lap-page .hero-point-btn:hover b {
+  transform: translateX(4px);
+}

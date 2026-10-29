@@ -1,8 +1,8 @@
 
-.bl-page,
-.bl-page *,
-.bl-page *::before,
-.bl-page *::after {
+.business-page,
+.business-page *,
+.business-page *::before,
+.business-page *::after {
   box-sizing: border-box;
 }
 
@@ -11,7 +11,7 @@
    BUSINESS LOAN THEME VARIABLES
    ========================================================= */
 
-.bl-page {
+.business-page {
   /* ---------- LIGHT THEME ---------- */
 
   --bl-page-bg:
@@ -71,19 +71,19 @@
    GLOBAL ELEMENTS
    ========================================================= */
 
-.bl-page img {
+.business-page img {
   max-width: 100%;
   height: auto;
 }
 
-.bl-page button,
-.bl-page input,
-.bl-page textarea,
-.bl-page select {
+.business-page button,
+.business-page input,
+.business-page textarea,
+.business-page select {
   font: inherit;
 }
 
-.bl-page section {
+.business-page section {
   width: min(100%, var(--ls-maxw));
   margin: 0 auto;
   padding: 40px 24px;
@@ -94,7 +94,7 @@
    HERO
    ========================================================= */
 
-.bl-page .personal-loan-hero {
+.business-page .personal-loan-hero {
   position: relative;
 
   width: 100%;
@@ -115,7 +115,7 @@
   overflow: hidden;
 }
 
-.bl-page .personal-loan-hero::before {
+.business-page .personal-loan-hero::before {
   content: "";
 
   position: absolute;
@@ -132,7 +132,7 @@
   pointer-events: none;
 }
 
-.bl-page .personal-loan-hero > * {
+.business-page .personal-loan-hero > * {
   position: relative;
   z-index: 1;
   max-width: 700px;
@@ -143,7 +143,7 @@
    HERO BADGE
    ========================================================= */
 
-.bl-page .hero-badge {
+.business-page .hero-badge {
   width: fit-content;
 
   display: inline-flex;
@@ -175,7 +175,7 @@
    HERO HEADING
    ========================================================= */
 
-.bl-page .personal-loan-hero h1 {
+.business-page .personal-loan-hero h1 {
   max-width: 680px;
 
   margin: 0 0 14px;
@@ -193,7 +193,7 @@
    HERO DESCRIPTION
    ========================================================= */
 
-.bl-page .hero-description {
+.business-page .hero-description {
   max-width: 650px;
 
   margin: 0 0 24px;
@@ -209,16 +209,16 @@
    HERO POINTS
    ========================================================= */
 
-.bl-page .hero-points {
+.business-page .hero-points {
   width: min(100%, 700px);
 
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 10px;
 }
 
-.bl-page .hero-point {
+.business-page .hero-point {
   min-width: 0;
 
   display: flex;
@@ -238,7 +238,7 @@
   backdrop-filter: blur(8px);
 }
 
-.bl-page .hero-point span {
+.business-page .hero-point span {
   flex: 0 0 28px;
 
   width: 28px;
@@ -258,7 +258,7 @@
   font-weight: 800;
 }
 
-.bl-page .hero-point p {
+.business-page .hero-point p {
   margin: 0;
 
   color: var(--bl-text-muted);
@@ -272,7 +272,7 @@
    INTRO + CALCULATOR
    ========================================================= */
 
-.bl-page .loan-page-calculator-section {
+.business-page .loan-page-calculator-section {
   width: 100%;
   max-width: var(--ls-maxw);
 
@@ -281,7 +281,7 @@
   padding: 36px 24px;
 }
 
-.bl-page .loan-page-row {
+.business-page .loan-page-row {
   width: 100%;
 
   display: grid;
@@ -298,7 +298,7 @@
    LOAN INFO
    ========================================================= */
 
-.bl-page .loan-info-text {
+.business-page .loan-info-text {
   width: 100%;
 
   padding: 28px;
@@ -314,7 +314,7 @@
   height: fit-content;
 }
 
-.bl-page .loan-info-text h2 {
+.business-page .loan-info-text h2 {
   margin: 24px 0 10px;
 
   color: var(--bl-heading);
@@ -327,11 +327,11 @@
   letter-spacing: -0.02em;
 }
 
-.bl-page .loan-info-text h2:first-of-type {
+.business-page .loan-info-text h2:first-of-type {
   margin-top: 0;
 }
 
-.bl-page .loan-info-text p {
+.business-page .loan-info-text p {
   margin: 0 0 12px;
 
   color: var(--bl-text-muted);
@@ -340,11 +340,11 @@
   line-height: 1.65;
 }
 
-.bl-page .loan-info-text p:last-child {
+.business-page .loan-info-text p:last-child {
   margin-bottom: 0;
 }
 
-.bl-page .loan-info-text strong {
+.business-page .loan-info-text strong {
   color: var(--bl-heading);
 }
 
@@ -353,7 +353,7 @@
    CALCULATOR
    ========================================================= */
 
-.bl-page .loan-page-calculator-wrapper {
+.business-page .loan-page-calculator-wrapper {
   display: flex;
 
   flex-direction: column;
@@ -364,7 +364,7 @@
   min-width: 0;
 }
 
-.bl-page .loan-page-calculator {
+.business-page .loan-page-calculator {
   width: 100%;
   min-width: 0;
 
@@ -372,7 +372,7 @@
   top: 24px;
 }
 
-.bl-page .loan-page-calculator > * {
+.business-page .loan-page-calculator > * {
   width: 100% !important;
   max-width: 100% !important;
 
@@ -384,7 +384,7 @@
    CALCULATOR SEO BOX
    ========================================================= */
 
-.bl-page .ls-calc-seo-box {
+.business-page .ls-calc-seo-box {
   padding: 18px 20px;
 
   background: var(--bl-surface);
@@ -396,7 +396,7 @@
   box-shadow: var(--ls-shadow-xs);
 }
 
-.bl-page .ls-calc-seo-box h3 {
+.business-page .ls-calc-seo-box h3 {
   margin: 0 0 6px;
 
   font-size: 16px;
@@ -406,7 +406,7 @@
   font-weight: 750;
 }
 
-.bl-page .ls-calc-seo-box p {
+.business-page .ls-calc-seo-box p {
   margin: 0;
 
   font-size: 13px;
@@ -420,11 +420,11 @@
    APPLY
    ========================================================= */
 
-.bl-page .apply-section {
+.business-page .apply-section {
   padding-top: 30px;
 }
 
-.bl-page .section-heading {
+.business-page .section-heading {
   max-width: 680px;
 
   margin: 0 auto 24px;
@@ -432,7 +432,7 @@
   text-align: center;
 }
 
-.bl-page .section-heading h2 {
+.business-page .section-heading h2 {
   margin: 0 0 7px;
 
   color: var(--bl-heading);
@@ -445,7 +445,7 @@
   letter-spacing: -0.03em;
 }
 
-.bl-page .section-heading p {
+.business-page .section-heading p {
   margin: 0;
 
   color: var(--bl-text-soft);
@@ -459,18 +459,18 @@
    APPLY CATEGORY
    ========================================================= */
 
-.bl-page .apply_categary {
+.business-page .apply_categary {
   width: 100%;
 }
 
-.bl-page .apply_categary.category-hidden {
+.business-page .apply_categary.category-hidden {
   display: none;
 }
 
-.bl-page .apply_grid {
+.business-page .apply_grid {
   display: grid;
 
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 14px;
 }
@@ -480,7 +480,7 @@
    APPLY BOX
    ========================================================= */
 
-.bl-page .apply_box {
+.business-page .apply_box {
   position: relative;
 
   min-height: 132px;
@@ -509,7 +509,7 @@
     background 0.2s ease;
 }
 
-.bl-page .apply_box:hover {
+.business-page .apply_box:hover {
   transform: translateY(-3px);
 
   background: var(--bl-surface-green);
@@ -519,7 +519,7 @@
   box-shadow: var(--ls-shadow-md);
 }
 
-.bl-page .apply_box_number {
+.business-page .apply_box_number {
   flex: 0 0 auto;
 
   display: inline-flex;
@@ -544,12 +544,12 @@
   font-weight: 800;
 }
 
-.bl-page .apply_box_content {
+.business-page .apply_box_content {
   min-width: 0;
   flex: 1;
 }
 
-.bl-page .apply_box_content h3 {
+.business-page .apply_box_content h3 {
   margin: 1px 0 5px;
 
   color: var(--bl-heading);
@@ -560,7 +560,7 @@
   font-weight: 750;
 }
 
-.bl-page .apply_box_content p {
+.business-page .apply_box_content p {
   margin: 0;
 
   color: var(--bl-text-soft);
@@ -569,7 +569,7 @@
   line-height: 1.5;
 }
 
-.bl-page .apply_box_arrow {
+.business-page .apply_box_arrow {
   flex: 0 0 auto;
 
   align-self: center;
@@ -583,7 +583,7 @@
     transform 0.2s ease;
 }
 
-.bl-page .apply_box:hover .apply_box_arrow {
+.business-page .apply_box:hover .apply_box_arrow {
   color: var(--bl-green);
 
   transform: translateX(3px);
@@ -594,7 +594,7 @@
    CATEGORY DETAILS
    ========================================================= */
 
-.bl-page .category-details {
+.business-page .category-details {
   display: none;
 
   opacity: 0;
@@ -602,7 +602,7 @@
   transform: translateY(8px);
 }
 
-.bl-page .category-details.category-details-visible {
+.business-page .category-details.category-details-visible {
   display: block;
 
   animation: bl-fade-in 0.28s ease forwards;
@@ -625,7 +625,7 @@
    REQUIREMENTS CARD
    ========================================================= */
 
-.bl-page .requirements-card {
+.business-page .requirements-card {
   width: 100%;
 
   padding: 28px;
@@ -644,7 +644,7 @@
    BACK BUTTON
    ========================================================= */
 
-.bl-page .back-button {
+.business-page .back-button {
   display: inline-flex;
 
   align-items: center;
@@ -671,7 +671,7 @@
     transform 0.2s ease;
 }
 
-.bl-page .back-button:hover {
+.business-page .back-button:hover {
   opacity: 0.75;
 
   transform: translateX(-2px);
@@ -682,7 +682,7 @@
    REQUIREMENTS HEADER
    ========================================================= */
 
-.bl-page .requirements-header h2 {
+.business-page .requirements-header h2 {
   margin: 0 0 7px;
 
   color: var(--bl-heading);
@@ -695,7 +695,7 @@
   letter-spacing: -0.025em;
 }
 
-.bl-page .requirements-header p {
+.business-page .requirements-header p {
   margin: 0 0 20px;
 
   color: var(--bl-text-soft);
@@ -709,7 +709,7 @@
    REQUIREMENTS LIST
    ========================================================= */
 
-.bl-page .requirements-list {
+.business-page .requirements-list {
   display: grid;
 
   gap: 9px;
@@ -717,7 +717,7 @@
   margin: 0 0 20px;
 }
 
-.bl-page .requirement-item {
+.business-page .requirement-item {
   display: flex;
 
   align-items: flex-start;
@@ -733,7 +733,7 @@
   border-radius: var(--ls-radius-sm);
 }
 
-.bl-page .requirement-number {
+.business-page .requirement-number {
   flex: 0 0 27px;
 
   width: 27px;
@@ -758,7 +758,7 @@
   font-weight: 800;
 }
 
-.bl-page .requirement-item p {
+.business-page .requirement-item p {
   margin: 0;
 
   color: var(--bl-text-muted);
@@ -772,7 +772,7 @@
    REQUIREMENTS NOTE
    ========================================================= */
 
-.bl-page .requirements-note {
+.business-page .requirements-note {
   padding: 16px 18px;
 
   background: linear-gradient(
@@ -786,7 +786,7 @@
   border-radius: var(--ls-radius-sm);
 }
 
-.bl-page .requirements-note strong {
+.business-page .requirements-note strong {
   display: block;
 
   margin-bottom: 5px;
@@ -797,7 +797,7 @@
   font-weight: 800;
 }
 
-.bl-page .requirements-note p {
+.business-page .requirements-note p {
   margin: 0 0 8px;
 
   color: var(--bl-text-muted);
@@ -806,7 +806,7 @@
   line-height: 1.55;
 }
 
-.bl-page .requirements-note p:last-child {
+.business-page .requirements-note p:last-child {
   margin-bottom: 0;
 }
 
@@ -815,7 +815,7 @@
    CONNECT BUTTON
    ========================================================= */
 
-.bl-page .ls-connect-text {
+.business-page .ls-connect-text {
   display: flex;
 
   align-items: center;
@@ -827,7 +827,7 @@
   margin-top: 14px;
 }
 
-.bl-page .ls-connect-text button {
+.business-page .ls-connect-text button {
   border: 0;
 
   padding: 7px 16px;
@@ -855,7 +855,7 @@
     box-shadow 0.18s ease;
 }
 
-.bl-page .ls-connect-text button:hover {
+.business-page .ls-connect-text button:hover {
   background: linear-gradient(
     135deg,
     #6fae45 0%,
@@ -870,7 +870,7 @@
    VERIFICATION
    ========================================================= */
 
-.bl-page .verification-section {
+.business-page .verification-section {
   width: 100%;
 
   display: grid;
@@ -886,7 +886,7 @@
   margin-top: 22px;
 }
 
-.bl-page .verification-address {
+.business-page .verification-address {
   width: 100%;
 
   padding: 20px;
@@ -900,7 +900,7 @@
   box-shadow: var(--ls-shadow-xs);
 }
 
-.bl-page .verification-address h4 {
+.business-page .verification-address h4 {
   margin: 0 0 8px;
 
   color: var(--bl-heading);
@@ -909,7 +909,7 @@
   font-weight: 750;
 }
 
-.bl-page .verification-address p {
+.business-page .verification-address p {
   margin: 0;
 
   color: var(--bl-text-muted);
@@ -918,7 +918,7 @@
   line-height: 1.65;
 }
 
-.bl-page .verification-form {
+.business-page .verification-form {
   width: 100%;
   min-width: 0;
 }
@@ -928,7 +928,7 @@
    SEO LABEL
    ========================================================= */
 
-.bl-page .ls-seo-label {
+.business-page .ls-seo-label {
   display: inline-block;
 
   margin-bottom: 8px;
@@ -948,7 +948,7 @@
    SEO BENEFITS
    ========================================================= */
 
-.bl-page .ls-seo-benefits-section {
+.business-page .ls-seo-benefits-section {
   width: min(100%, var(--ls-maxw));
 
   margin: 42px auto;
@@ -956,17 +956,17 @@
   padding: 0 24px;
 }
 
-.bl-page .ls-seo-benefits-container {
+.business-page .ls-seo-benefits-container {
   width: 100%;
 }
 
-.bl-page .ls-seo-benefits-heading {
+.business-page .ls-seo-benefits-heading {
   max-width: 780px;
 
   margin-bottom: 22px;
 }
 
-.bl-page .ls-seo-benefits-heading h2 {
+.business-page .ls-seo-benefits-heading h2 {
   margin: 0 0 10px;
 
   color: var(--bl-heading);
@@ -978,7 +978,7 @@
   font-weight: 800;
 }
 
-.bl-page .ls-seo-benefits-heading p {
+.business-page .ls-seo-benefits-heading p {
   margin: 0;
 
   color: var(--bl-text-muted);
@@ -993,7 +993,7 @@
    SEO BENEFITS GRID
    ========================================================= */
 
-.bl-page .ls-seo-benefits-grid {
+.business-page .ls-seo-benefits-grid {
   display: grid;
 
   grid-template-columns:
@@ -1007,7 +1007,7 @@
    SEO BENEFIT CARD
    ========================================================= */
 
-.bl-page .ls-seo-benefit-card {
+.business-page .ls-seo-benefit-card {
   position: relative;
 
   padding: 22px;
@@ -1023,13 +1023,13 @@
     box-shadow 0.2s ease;
 }
 
-.bl-page .ls-seo-benefit-card:hover {
+.business-page .ls-seo-benefit-card:hover {
   transform: translateY(-3px);
 
   box-shadow: var(--ls-shadow-md);
 }
 
-.bl-page .ls-seo-benefit-number {
+.business-page .ls-seo-benefit-number {
   display: inline-flex;
 
   margin-bottom: 12px;
@@ -1042,7 +1042,7 @@
   color: var(--bl-green-dark);
 }
 
-.bl-page .ls-seo-benefit-card h3 {
+.business-page .ls-seo-benefit-card h3 {
   margin: 0 0 8px;
 
   color: var(--bl-heading);
@@ -1053,7 +1053,7 @@
   font-weight: 750;
 }
 
-.bl-page .ls-seo-benefit-card p {
+.business-page .ls-seo-benefit-card p {
   margin: 0;
 
   color: var(--bl-text-muted);
@@ -1068,7 +1068,7 @@
    FAQ
    ========================================================= */
 
-.bl-page .ls-faq-section {
+.business-page .ls-faq-section {
   width: min(100%, var(--ls-maxw));
 
   margin: 42px auto;
@@ -1076,17 +1076,17 @@
   padding: 0 24px;
 }
 
-.bl-page .ls-faq-container {
+.business-page .ls-faq-container {
   width: min(1000px, 100%);
 
   margin: 0 auto;
 }
 
-.bl-page .ls-faq-heading {
+.business-page .ls-faq-heading {
   margin-bottom: 20px;
 }
 
-.bl-page .ls-faq-heading h2 {
+.business-page .ls-faq-heading h2 {
   margin: 0;
 
   color: var(--bl-heading);
@@ -1098,7 +1098,7 @@
   font-weight: 800;
 }
 
-.bl-page .ls-faq-list {
+.business-page .ls-faq-list {
   display: flex;
 
   flex-direction: column;
@@ -1106,7 +1106,7 @@
   gap: 9px;
 }
 
-.bl-page .ls-faq-item {
+.business-page .ls-faq-item {
   border: 1px solid var(--ls-gray-200);
 
   border-radius: var(--ls-radius-sm);
@@ -1116,7 +1116,7 @@
   overflow: hidden;
 }
 
-.bl-page .ls-faq-item summary {
+.business-page .ls-faq-item summary {
   position: relative;
 
   padding: 17px 48px 17px 18px;
@@ -1133,11 +1133,11 @@
   user-select: none;
 }
 
-.bl-page .ls-faq-item summary::-webkit-details-marker {
+.business-page .ls-faq-item summary::-webkit-details-marker {
   display: none;
 }
 
-.bl-page .ls-faq-item summary::after {
+.business-page .ls-faq-item summary::after {
   content: "+";
 
   position: absolute;
@@ -1154,11 +1154,11 @@
   color: var(--bl-green-dark);
 }
 
-.bl-page .ls-faq-item[open] summary::after {
+.business-page .ls-faq-item[open] summary::after {
   content: "−";
 }
 
-.bl-page .ls-faq-item p {
+.business-page .ls-faq-item p {
   margin: 0;
 
   padding: 0 18px 18px;
@@ -1175,7 +1175,7 @@
    SEO KEYWORDS
    ========================================================= */
 
-.bl-page .ls-seo-keyword-row {
+.business-page .ls-seo-keyword-row {
   display: flex;
 
   flex-wrap: wrap;
@@ -1185,7 +1185,7 @@
   margin-top: 18px;
 }
 
-.bl-page .ls-seo-keyword-row span {
+.business-page .ls-seo-keyword-row span {
   display: inline-flex;
 
   align-items: center;
@@ -1209,7 +1209,7 @@
    DISCLAIMER
    ========================================================= */
 
-.bl-page .loan-disclaimer {
+.business-page .loan-disclaimer {
   width: min(100%, var(--ls-maxw));
 
   display: flex;
@@ -1235,7 +1235,7 @@
   box-shadow: var(--ls-shadow-md);
 }
 
-.bl-page .disclaimer-icon {
+.business-page .disclaimer-icon {
   flex: 0 0 34px;
 
   width: 34px;
@@ -1260,7 +1260,7 @@
   font-weight: 800;
 }
 
-.bl-page .loan-disclaimer h3 {
+.business-page .loan-disclaimer h3 {
   margin: 0 0 5px;
 
   color: var(--ls-white);
@@ -1271,7 +1271,7 @@
   font-weight: 750;
 }
 
-.bl-page .loan-disclaimer p {
+.business-page .loan-disclaimer p {
   max-width: 850px;
 
   margin: 0;
@@ -1296,19 +1296,19 @@
 
 @media (max-width: 1000px) {
 
-  .bl-page .personal-loan-hero {
+  .business-page .personal-loan-hero {
     min-height: 400px;
 
     background-size: auto 90%;
   }
 
-  .bl-page .loan-page-row {
+  .business-page .loan-page-row {
     grid-template-columns:
       minmax(0, 1fr)
       minmax(320px, 0.9fr);
   }
 
-  .bl-page .apply_grid {
+  .business-page .apply_grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
@@ -1321,13 +1321,13 @@
 
 @media (max-width: 980px) {
 
-  .bl-page .loan-page-row {
+  .business-page .loan-page-row {
     grid-template-columns: 1fr;
 
     gap: 24px;
   }
 
-  .bl-page .loan-page-calculator {
+  .business-page .loan-page-calculator {
     position: static;
   }
 }
@@ -1339,15 +1339,15 @@
 
 @media (max-width: 800px) {
 
-  .bl-page section,
-  .bl-page .loan-page-calculator-section,
-  .bl-page .ls-seo-benefits-section,
-  .bl-page .ls-faq-section {
+  .business-page section,
+.business-page .loan-page-calculator-section,
+.business-page .ls-seo-benefits-section,
+.business-page .ls-faq-section {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  .bl-page .personal-loan-hero {
+  .business-page .personal-loan-hero {
     min-height: auto;
 
     padding: 42px 20px 32px;
@@ -1355,7 +1355,7 @@
     background-image: none;
   }
 
-  .bl-page .personal-loan-hero::before {
+  .business-page .personal-loan-hero::before {
     background: linear-gradient(
       180deg,
       #f0f7ec 0%,
@@ -1363,15 +1363,15 @@
     );
   }
 
-  .bl-page .hero-points,
-  .bl-page .verification-section,
-  .bl-page .ls-seo-benefits-grid {
+  .business-page .hero-points,
+.business-page .verification-section,
+.business-page .ls-seo-benefits-grid {
     grid-template-columns: 1fr;
 
     gap: 16px;
   }
 
-  .bl-page .loan-info-text {
+  .business-page .loan-info-text {
     padding: 21px;
   }
 }
@@ -1387,31 +1387,31 @@
 
 @media (max-width: 600px) {
 
-  .bl-page section,
-  .bl-page .loan-page-calculator-section,
-  .bl-page .ls-seo-benefits-section,
-  .bl-page .ls-faq-section {
+  .business-page section,
+.business-page .loan-page-calculator-section,
+.business-page .ls-seo-benefits-section,
+.business-page .ls-faq-section {
     padding-left: 16px;
     padding-right: 16px;
   }
 
-  .bl-page .apply_grid {
+  .business-page .apply_grid {
     grid-template-columns: 1fr;
   }
 
-  .bl-page .loan-disclaimer {
+  .business-page .loan-disclaimer {
     margin: 16px;
 
     padding: 17px;
   }
 
-  .bl-page .ls-faq-item summary {
+  .business-page .ls-faq-item summary {
     padding: 15px 42px 15px 15px;
 
     font-size: 14px;
   }
 
-  .bl-page .ls-faq-item p {
+  .business-page .ls-faq-item p {
     padding: 0 15px 15px;
 
     font-size: 13px;
@@ -1425,9 +1425,9 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-  .bl-page *,
-  .bl-page *::before,
-  .bl-page *::after {
+  .business-page *,
+.business-page *::before,
+.business-page *::after {
     animation-duration: 0.01ms !important;
 
     transition-duration: 0.01ms !important;
@@ -1436,7 +1436,7 @@
 
 
 
-.loan-back-button {
+.business-page .loan-back-button {
   position: fixed;
   top: 92px;
   left: 24px;
@@ -1460,21 +1460,54 @@
   transition: all 0.2s ease;
 }
 
-.loan-back-button:hover {
+.business-page .loan-back-button:hover {
   background: #5f9f39;
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(17, 21, 19, 0.16);
 }
 
-.loan-back-button:active {
+.business-page .loan-back-button:active {
   transform: translateY(0);
 }
 
 /* Phone par hide */
 @media (max-width: 767px) {
-  .loan-back-button {
+  .business-page .loan-back-button {
     display: none;
   }
 }
 
 /* Dark mode */
+
+
+/* =========================================================
+   HERO POINT BUTTON (04 - Connect CTA)
+   ========================================================= */
+.business-page .hero-point-btn {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.business-page .hero-point-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 197, 99, 0.45);
+  background: rgba(14, 53, 36, 0.95);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.business-page .hero-point-btn b {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f5c563;
+  margin-left: auto;
+  align-self: center;
+  transition: transform 0.2s ease;
+}
+
+.business-page .hero-point-btn:hover b {
+  transform: translateX(4px);
+}

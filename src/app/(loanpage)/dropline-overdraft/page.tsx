@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { useState } from "react";
 import "./dropline-overdraft.css";
@@ -97,7 +98,7 @@ const Page = () => {
   );
 
   return (
-    <main className="dlo-page">
+    <main className="dlo-page overdraft-page">
       {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -150,6 +151,12 @@ const Page = () => {
             <span>03</span>
             <p>Get assistance based on your business profile</p>
           </div>
+        
+          <Link href="/#HeroVerification" className="hero-point hero-point-btn">
+            <span>04</span>
+            <p>Click here to get connected</p>
+            <b aria-hidden="true">→</b>
+          </Link>
         </div>
       </section>
 

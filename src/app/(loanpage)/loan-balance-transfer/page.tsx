@@ -7,7 +7,7 @@ import "../loan-page.css";
 
 export default function LoanBalanceTransferPage() {
   return (
-    <main className="lp-page">
+    <main className="lp-page bt-page">
       <div className="lp-container">
         <div className="lp-hero">
           <div className="lp-hero-main">

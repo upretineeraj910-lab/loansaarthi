@@ -6,6 +6,7 @@ import HeroVerificationCard from "@/components/HeroVerificationCard";
 import LoanEmiCalculator from "@/components/loan/LoanEmiCalculator";
 import "@/app/(loanpage)/loan-page.css"
 import { useRouter } from "next/navigation";
+import  Link  from "next/link";
 
 const categories = [
   {
@@ -76,7 +77,7 @@ const categories = [
 const Page = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [showForm, setShowForm] = useState(false);
-  
+
   const router = useRouter();
 
   const handleClick = (category: string) => {
@@ -94,7 +95,7 @@ const Page = () => {
   );
 
   return (
-    <main className="hls-page">
+    <main className="hls-page homeloan-page">
       {/* SEO STRUCTURED DATA */}
       {/* <script
         type="application/ld+json"
@@ -148,6 +149,11 @@ const Page = () => {
             <span>03</span>
             <p>Get assistance based on your salary profile</p>
           </div>
+          <Link href="/#HeroVerification" className="hero-point hero-point-btn">
+  <span>04</span>
+  <p>Click here to get connected</p>
+  <b aria-hidden="true">→</b>
+</Link>
         </div>
       </section>
 
@@ -245,9 +251,8 @@ const Page = () => {
         </div>
 
         <div
-          className={`apply_categary ${
-            selectedCategory ? "category-hidden" : ""
-          }`}
+          className={`apply_categary ${selectedCategory ? "category-hidden" : ""
+            }`}
         >
           <div className="apply_grid">
             {categories.map((category) => (
@@ -274,9 +279,8 @@ const Page = () => {
         </div>
 
         <div
-          className={`category-details ${
-            selectedCategory ? "category-details-visible" : ""
-          }`}
+          className={`category-details ${selectedCategory ? "category-details-visible" : ""
+            }`}
         >
           {selectedData && (
             <div className="requirements-card">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import "./personal-loan.css";
@@ -95,7 +96,7 @@ const Page = () => {
   return (
 
 
-    <main className="personal-loan-page">
+    <main className="personal-loan-page personal-page">
 
       {/* <button
       type="button"
@@ -137,6 +138,12 @@ const Page = () => {
             <span>03</span>
             <p>Get assistance based on your profile</p>
           </div>
+        
+          <Link href="/#HeroVerification" className="hero-point hero-point-btn">
+            <span>04</span>
+            <p>Click here to get connected</p>
+            <b aria-hidden="true">→</b>
+          </Link>
         </div>
       </section>
 

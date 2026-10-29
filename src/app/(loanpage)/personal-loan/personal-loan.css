@@ -49,14 +49,14 @@
    GLOBAL RESET
    ========================= */
 
-.personal-loan-page,
-.personal-loan-page *,
-.personal-loan-page *::before,
-.personal-loan-page *::after {
+.personal-page,
+.personal-page *,
+.personal-page *::before,
+.personal-page *::after {
   box-sizing: border-box;
 }
 
-.personal-loan-page {
+.personal-page {
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -75,15 +75,15 @@
   text-rendering: optimizeLegibility;
 }
 
-.personal-loan-page img {
+.personal-page img {
   max-width: 100%;
   height: auto;
 }
 
-.personal-loan-page button,
-.personal-loan-page input,
-.personal-loan-page textarea,
-.personal-loan-page select {
+.personal-page button,
+.personal-page input,
+.personal-page textarea,
+.personal-page select {
   font: inherit;
 }
 
@@ -92,7 +92,7 @@
    SECTION SYSTEM
    ========================= */
 
-.personal-loan-page section {
+.personal-page section {
   width: min(100%, var(--ls-maxw));
   margin: 0 auto;
   padding: 40px 24px;
@@ -103,7 +103,7 @@
    HERO
    ========================================================= */
 
-.personal-loan-hero {
+.personal-page .personal-loan-hero {
   position: relative;
 
   width: 100%;
@@ -126,7 +126,7 @@
 }
 
 /* subtle readability layer */
-.personal-loan-hero::before {
+.personal-page .personal-loan-hero::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -144,12 +144,12 @@
   pointer-events: none;
 }
 
-.personal-loan-hero > * {
+.personal-page .personal-loan-hero > * {
   position: relative;
   z-index: 1;
 }
 
-.personal-loan-hero > * {
+.personal-page .personal-loan-hero > * {
   max-width: 700px;
 }
 
@@ -158,7 +158,7 @@
    HERO BADGE
    ========================= */
 
-.hero-badge {
+.personal-page .hero-badge {
   width: fit-content;
 
   display: inline-flex;
@@ -191,7 +191,7 @@
    HERO HEADING
    ========================= */
 
-.personal-loan-hero h1 {
+.personal-page .personal-loan-hero h1 {
   max-width: 680px;
 
   margin: 0 0 14px;
@@ -211,7 +211,7 @@
    HERO DESCRIPTION
    ========================= */
 
-.hero-description {
+.personal-page .hero-description {
   max-width: 650px;
 
   margin: 0 0 24px;
@@ -227,16 +227,16 @@
    HERO POINTS
    ========================= */
 
-.hero-points {
+.personal-page .hero-points {
   width: min(100%, 700px);
 
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 10px;
 }
 
-.hero-point {
+.personal-page .hero-point {
   min-width: 0;
 
   display: flex;
@@ -258,7 +258,7 @@
   backdrop-filter: blur(8px);
 }
 
-.hero-point span {
+.personal-page .hero-point span {
   flex: 0 0 28px;
 
   width: 28px;
@@ -279,7 +279,7 @@
   font-weight: 800;
 }
 
-.hero-point p {
+.personal-page .hero-point p {
   margin: 0;
 
   color: var(--ls-gray-700);
@@ -293,7 +293,7 @@
    INTRO + EMI CALCULATOR
    ========================================================= */
 
-.loan-page-row {
+.personal-page .loan-page-row {
   width: 100%;
 
   display: grid;
@@ -309,7 +309,7 @@
    INFORMATION CARD
    ========================= */
 
-.loan-info-text {
+.personal-page .loan-info-text {
   width: 100%;
   max-width: none;
 
@@ -330,7 +330,7 @@
   overflow: visible;
 }
 
-.loan-info-text h2 {
+.personal-page .loan-info-text h2 {
   margin: 24px 0 9px;
 
   color: var(--ls-black);
@@ -343,11 +343,11 @@
   letter-spacing: -0.025em;
 }
 
-.loan-info-text h2:first-of-type {
+.personal-page .loan-info-text h2:first-of-type {
   margin-top: 0;
 }
 
-.loan-info-text p {
+.personal-page .loan-info-text p {
   margin: 0 0 11px;
 
   color: var(--ls-gray-700);
@@ -356,7 +356,7 @@
   line-height: 1.7;
 }
 
-.loan-info-text strong {
+.personal-page .loan-info-text strong {
   color: var(--ls-black);
 }
 
@@ -365,7 +365,7 @@
    CONTENT HIGHLIGHT
    ========================= */
 
-.content-highlight {
+.personal-page .content-highlight {
   margin-top: 18px;
 
   padding: 15px 18px;
@@ -386,7 +386,7 @@
   box-shadow: var(--ls-shadow-xs);
 }
 
-.content-highlight strong {
+.personal-page .content-highlight strong {
   display: block;
 
   margin-bottom: 3px;
@@ -401,7 +401,7 @@
    CALCULATOR
    ========================= */
 
-.loan-page-calculator {
+.personal-page .loan-page-calculator {
   width: 100%;
   max-width: none;
 
@@ -413,7 +413,7 @@
    WHO CAN APPLY
    ========================================================= */
 
-.apply-section {
+.personal-page .apply-section {
   padding-top: 30px;
 }
 
@@ -422,7 +422,7 @@
    SECTION HEADING
    ========================= */
 
-.section-heading {
+.personal-page .section-heading {
   max-width: 680px;
 
   margin: 0 auto 24px;
@@ -430,7 +430,7 @@
   text-align: center;
 }
 
-.section-heading h2 {
+.personal-page .section-heading h2 {
   margin: 0 0 7px;
 
   color: var(--ls-black);
@@ -443,7 +443,7 @@
   letter-spacing: -0.03em;
 }
 
-.section-heading p {
+.personal-page .section-heading p {
   margin: 0;
 
   color: var(--ls-gray-500);
@@ -457,7 +457,7 @@
    CATEGORY GRID
    ========================= */
 
-.apply_categary {
+.personal-page .apply_categary {
   width: 100%;
 
   opacity: 1;
@@ -467,15 +467,14 @@
     transform 0.25s ease;
 }
 
-.apply_categary.category-hidden {
+.personal-page .apply_categary.category-hidden {
   display: none;
 }
 
-.apply_grid {
+.personal-page .apply_grid {
   display: grid;
 
-  grid-template-columns:
-    repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
   gap: 14px;
 }
@@ -485,7 +484,7 @@
    CATEGORY CARD
    ========================= */
 
-.apply_box {
+.personal-page .apply_box {
   position: relative;
 
   min-height: 132px;
@@ -514,7 +513,7 @@
     background 0.2s ease;
 }
 
-.apply_box:hover {
+.personal-page .apply_box:hover {
   transform: translateY(-3px);
 
   /* Updated: Soft warm highlight */
@@ -525,7 +524,7 @@
   box-shadow: var(--ls-shadow-md);
 }
 
-.apply_box:active {
+.personal-page .apply_box:active {
   transform: translateY(-1px);
 }
 
@@ -534,7 +533,7 @@
    CARD NUMBER
    ========================= */
 
-.apply_box_number {
+.personal-page .apply_box_number {
   flex: 0 0 auto;
 
   display: inline-flex;
@@ -564,12 +563,12 @@
    CARD CONTENT
    ========================= */
 
-.apply_box_content {
+.personal-page .apply_box_content {
   min-width: 0;
   flex: 1;
 }
 
-.apply_box_content h3 {
+.personal-page .apply_box_content h3 {
   margin: 1px 0 5px;
 
   color: var(--ls-black);
@@ -580,7 +579,7 @@
   font-weight: 750;
 }
 
-.apply_box_content p {
+.personal-page .apply_box_content p {
   margin: 0;
 
   color: var(--ls-gray-500);
@@ -594,7 +593,7 @@
    CARD ARROW
    ========================= */
 
-.apply_box_arrow {
+.personal-page .apply_box_arrow {
   flex: 0 0 auto;
 
   align-self: center;
@@ -608,7 +607,7 @@
     transform 0.2s ease;
 }
 
-.apply_box:hover .apply_box_arrow {
+.personal-page .apply_box:hover .apply_box_arrow {
   color: var(--ls-green);
 
   transform: translateX(3px);
@@ -619,14 +618,14 @@
    SELECTED CATEGORY
    ========================================================= */
 
-.category-details {
+.personal-page .category-details {
   display: none;
 
   opacity: 0;
   transform: translateY(8px);
 }
 
-.category-details.category-details-visible {
+.personal-page .category-details.category-details-visible {
   display: block;
 
   animation:
@@ -650,7 +649,7 @@
    REQUIREMENTS
    ========================================================= */
 
-.requirements-card {
+.personal-page .requirements-card {
   width: 100%;
 
   padding: 28px;
@@ -669,7 +668,7 @@
    BACK BUTTON
    ========================= */
 
-.back-button {
+.personal-page .back-button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -692,7 +691,7 @@
     transform 0.2s ease;
 }
 
-.back-button:hover {
+.personal-page .back-button:hover {
   opacity: 0.75;
   transform: translateX(-2px);
 }
@@ -702,7 +701,7 @@
    REQUIREMENT HEADER
    ========================= */
 
-.requirements-header h2 {
+.personal-page .requirements-header h2 {
   margin: 0 0 7px;
 
   color: var(--ls-black);
@@ -715,7 +714,7 @@
   letter-spacing: -0.025em;
 }
 
-.requirements-header p {
+.personal-page .requirements-header p {
   margin: 0 0 20px;
 
   color: var(--ls-gray-500);
@@ -729,7 +728,7 @@
    REQUIREMENTS LIST
    ========================= */
 
-.requirements-list {
+.personal-page .requirements-list {
   display: grid;
 
   gap: 9px;
@@ -737,7 +736,7 @@
   margin: 0 0 20px;
 }
 
-.requirement-item {
+.personal-page .requirement-item {
   display: flex;
   align-items: flex-start;
 
@@ -753,7 +752,7 @@
   border-radius: var(--ls-radius-sm);
 }
 
-.requirement-number {
+.personal-page .requirement-number {
   flex: 0 0 27px;
 
   width: 27px;
@@ -773,7 +772,7 @@
   font-weight: 800;
 }
 
-.requirement-item p {
+.personal-page .requirement-item p {
   margin: 0;
 
   color: var(--ls-gray-700);
@@ -787,7 +786,7 @@
    REQUIREMENT NOTE
    ========================= */
 
-.requirements-note {
+.personal-page .requirements-note {
   padding: 16px 18px;
 
   /* Updated: Multi-stop fintech glow */
@@ -803,7 +802,7 @@
   border-radius: var(--ls-radius-sm);
 }
 
-.requirements-note strong {
+.personal-page .requirements-note strong {
   display: block;
 
   margin-bottom: 5px;
@@ -814,7 +813,7 @@
   font-weight: 800;
 }
 
-.requirements-note p {
+.personal-page .requirements-note p {
   margin: 0 0 8px;
 
   color: var(--ls-gray-700);
@@ -823,7 +822,7 @@
   line-height: 1.55;
 }
 
-.requirements-note p:last-child {
+.personal-page .requirements-note p:last-child {
   margin-bottom: 0;
 }
 
@@ -832,7 +831,7 @@
    CTA BUTTON
    ========================= */
 
-.requirements-note button {
+.personal-page .requirements-note button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -864,7 +863,7 @@
     box-shadow 0.18s ease;
 }
 
-.requirements-note button:hover {
+.personal-page .requirements-note button:hover {
   background: linear-gradient(135deg, #6fae45 0%, #478426 100%);
 
   transform: translateY(-1px);
@@ -878,7 +877,7 @@
    VERIFICATION SECTION
    ========================================================= */
 
-.verification-section {
+.personal-page .verification-section {
   width: 100%;
 
   display: grid;
@@ -899,7 +898,7 @@
    ADDRESS CARD
    ========================= */
 
-.verification-address {
+.personal-page .verification-address {
   width: 100%;
   max-width: none;
 
@@ -914,7 +913,7 @@
   box-shadow: var(--ls-shadow-xs);
 }
 
-.verification-address h4 {
+.personal-page .verification-address h4 {
   margin: 0 0 8px;
 
   color: var(--ls-black);
@@ -923,7 +922,7 @@
   font-weight: 750;
 }
 
-.verification-address p {
+.personal-page .verification-address p {
   margin: 0;
 
   color: var(--ls-gray-700);
@@ -937,7 +936,7 @@
    FORM
    ========================= */
 
-.verification-form {
+.personal-page .verification-form {
   width: 100%;
   max-width: none;
 
@@ -949,7 +948,7 @@
    DISCLAIMER
    ========================================================= */
 
-.loan-disclaimer {
+.personal-page .loan-disclaimer {
   width: min(100%, var(--ls-maxw));
 
   display: flex;
@@ -981,7 +980,7 @@
    DISCLAIMER ICON
    ========================= */
 
-.disclaimer-icon {
+.personal-page .disclaimer-icon {
   flex: 0 0 34px;
 
   width: 34px;
@@ -1006,7 +1005,7 @@
    DISCLAIMER CONTENT
    ========================= */
 
-.loan-disclaimer h3 {
+.personal-page .loan-disclaimer h3 {
   margin: 0 0 5px;
 
   color: var(--ls-white);
@@ -1017,7 +1016,7 @@
   font-weight: 750;
 }
 
-.loan-disclaimer p {
+.personal-page .loan-disclaimer p {
   max-width: 850px;
 
   margin: 0;
@@ -1035,19 +1034,19 @@
 
 @media (max-width: 1000px) {
 
-  .personal-loan-hero {
+  .personal-page .personal-loan-hero {
     min-height: 400px;
 
     background-size: auto 90%;
   }
 
-  .loan-page-row {
+  .personal-page .loan-page-row {
     grid-template-columns:
       minmax(0, 1fr)
       minmax(320px, 0.9fr);
   }
 
-  .apply_grid {
+  .personal-page .apply_grid {
     grid-template-columns:
       repeat(2, minmax(0, 1fr));
   }
@@ -1061,11 +1060,11 @@
 
 @media (max-width: 800px) {
 
-  .personal-loan-page section {
+  .personal-page section {
     padding: 32px 20px;
   }
 
-  .personal-loan-hero {
+  .personal-page .personal-loan-hero {
     min-height: auto;
 
     padding:
@@ -1076,7 +1075,7 @@
     background-image: none;
   }
 
-  .personal-loan-hero::before {
+  .personal-page .personal-loan-hero::before {
     /* Updated: Matching soft responsive mobile gradient */
     background:
       linear-gradient(
@@ -1086,35 +1085,35 @@
       );
   }
 
-  .personal-loan-hero h1 {
+  .personal-page .personal-loan-hero h1 {
     max-width: 650px;
 
     font-size: clamp(28px, 6vw, 38px);
   }
 
-  .hero-points {
+  .personal-page .hero-points {
     grid-template-columns: 1fr;
     max-width: 600px;
   }
 
-  .hero-point {
+  .personal-page .hero-point {
     padding: 12px 14px;
   }
 
-  .loan-page-row {
+  .personal-page .loan-page-row {
     grid-template-columns: 1fr;
     gap: 18px;
   }
 
-  .loan-info-text {
+  .personal-page .loan-info-text {
     padding: 21px;
   }
 
-  .loan-page-calculator {
+  .personal-page .loan-page-calculator {
     width: 100%;
   }
 
-  .verification-section {
+  .personal-page .verification-section {
     grid-template-columns: 1fr;
     gap: 16px;
   }
@@ -1128,18 +1127,18 @@
 
 @media (max-width: 600px) {
 
-  .personal-loan-page section {
+  .personal-page section {
     padding: 28px 16px;
   }
 
-  .personal-loan-hero {
+  .personal-page .personal-loan-hero {
     padding:
       32px
       16px
       28px;
   }
 
-  .hero-badge {
+  .personal-page .hero-badge {
     margin-bottom: 13px;
 
     padding: 6px 11px;
@@ -1147,118 +1146,118 @@
     font-size: 10px;
   }
 
-  .personal-loan-hero h1 {
+  .personal-page .personal-loan-hero h1 {
     margin-bottom: 12px;
 
     font-size: 29px;
     line-height: 1.1;
   }
 
-  .hero-description {
+  .personal-page .hero-description {
     margin-bottom: 18px;
 
     font-size: 13.5px;
     line-height: 1.6;
   }
 
-  .hero-point {
+  .personal-page .hero-point {
     padding: 11px 12px;
   }
 
-  .hero-point p {
+  .personal-page .hero-point p {
     font-size: 12px;
   }
 
-  .loan-info-text {
+  .personal-page .loan-info-text {
     padding: 18px;
   }
 
-  .loan-info-text h2 {
+  .personal-page .loan-info-text h2 {
     font-size: 20px;
   }
 
-  .loan-info-text p {
+  .personal-page .loan-info-text p {
     font-size: 13.5px;
   }
 
-  .content-highlight {
+  .personal-page .content-highlight {
     padding: 13px 15px;
   }
 
-  .apply-section {
+  .personal-page .apply-section {
     padding-top: 26px;
   }
 
-  .section-heading {
+  .personal-page .section-heading {
     margin-bottom: 20px;
   }
 
-  .section-heading h2 {
+  .personal-page .section-heading h2 {
     font-size: 24px;
   }
 
-  .section-heading p {
+  .personal-page .section-heading p {
     font-size: 13px;
   }
 
-  .apply_grid {
+  .personal-page .apply_grid {
     grid-template-columns: 1fr;
 
     gap: 10px;
   }
 
-  .apply_box {
+  .personal-page .apply_box {
     min-height: 0;
 
     padding: 16px;
   }
 
-  .apply_box_content h3 {
+  .personal-page .apply_box_content h3 {
     font-size: 15px;
   }
 
-  .apply_box_content p {
+  .personal-page .apply_box_content p {
     font-size: 12px;
   }
 
-  .requirements-card {
+  .personal-page .requirements-card {
     padding: 20px;
   }
 
-  .requirements-header h2 {
+  .personal-page .requirements-header h2 {
     font-size: 21px;
   }
 
-  .requirements-header p {
+  .personal-page .requirements-header p {
     font-size: 13px;
   }
 
-  .requirement-item {
+  .personal-page .requirement-item {
     padding: 12px;
   }
 
-  .requirement-item p {
+  .personal-page .requirement-item p {
     font-size: 12.5px;
   }
 
-  .requirements-note {
+  .personal-page .requirements-note {
     padding: 14px;
   }
 
-  .requirements-note p {
+  .personal-page .requirements-note p {
     font-size: 12.5px;
   }
 
-  .requirements-note button {
+  .personal-page .requirements-note button {
     margin-top: 7px;
     margin-left: 0;
   }
 
-  .verification-address {
+  .personal-page .verification-address {
     padding: 17px;
   }
 
-  .loan-disclaimer {
+  .personal-page .loan-disclaimer {
     flex-direction: row;
 
     gap: 10px;
@@ -1270,7 +1269,7 @@
     padding: 17px;
   }
 
-  .disclaimer-icon {
+  .personal-page .disclaimer-icon {
     flex-basis: 30px;
 
     width: 30px;
@@ -1279,11 +1278,11 @@
     font-size: 12px;
   }
 
-  .loan-disclaimer h3 {
+  .personal-page .loan-disclaimer h3 {
     font-size: 13px;
   }
 
-  .loan-disclaimer p {
+  .personal-page .loan-disclaimer p {
     font-size: 11.5px;
   }
 
@@ -1296,19 +1295,19 @@
 
 @media (max-width: 400px) {
 
-  .personal-loan-hero h1 {
+  .personal-page .personal-loan-hero h1 {
     font-size: 26px;
   }
 
-  .personal-loan-hero {
+  .personal-page .personal-loan-hero {
     padding-top: 27px;
   }
 
-  .requirements-card {
+  .personal-page .requirements-card {
     padding: 17px;
   }
 
-  .loan-disclaimer {
+  .personal-page .loan-disclaimer {
     align-items: flex-start;
   }
 
@@ -1321,9 +1320,9 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-  .personal-loan-page *,
-  .personal-loan-page *::before,
-  .personal-loan-page *::after {
+  .personal-page *,
+.personal-page *::before,
+.personal-page *::after {
     scroll-behavior: auto !important;
 
     animation-duration: 0.01ms !important;
@@ -1347,14 +1346,14 @@
    SEO CONTENT SECTION
    ========================================================= */
 
-.ls-seo-content-section {
+.personal-page .ls-seo-content-section {
     width: 100%;
     margin: 28px 0;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-.ls-seo-content-inner {
+.personal-page .ls-seo-content-inner {
     width: min(1100px, 100%);
     margin: 0 auto;
     padding: 28px 32px;
@@ -1367,7 +1366,7 @@
     border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-.ls-seo-label {
+.personal-page .ls-seo-label {
     display: inline-block;
     margin-bottom: 8px;
 
@@ -1379,14 +1378,14 @@
     opacity: 0.7;
 }
 
-.ls-seo-content-inner h2 {
+.personal-page .ls-seo-content-inner h2 {
     margin: 0 0 10px;
 
     font-size: clamp(22px, 3vw, 30px);
     line-height: 1.2;
 }
 
-.ls-seo-content-inner p {
+.personal-page .ls-seo-content-inner p {
     max-width: 900px;
     margin: 0;
 
@@ -1394,7 +1393,7 @@
     line-height: 1.75;
 }
 
-.ls-seo-keyword-row {
+.personal-page .ls-seo-keyword-row {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -1402,7 +1401,7 @@
     margin-top: 18px;
 }
 
-.ls-seo-keyword-row span {
+.personal-page .ls-seo-keyword-row span {
     display: inline-flex;
     align-items: center;
 
@@ -1421,44 +1420,44 @@
    BENEFITS SECTION
    ========================================================= */
 
-.ls-seo-benefits-section {
+.personal-page .ls-seo-benefits-section {
     width: 100%;
     margin: 42px 0;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-.ls-seo-benefits-container {
+.personal-page .ls-seo-benefits-container {
     width: min(1100px, 100%);
     margin: 0 auto;
 }
 
-.ls-seo-benefits-heading {
+.personal-page .ls-seo-benefits-heading {
     max-width: 780px;
     margin-bottom: 22px;
 }
 
-.ls-seo-benefits-heading h2 {
+.personal-page .ls-seo-benefits-heading h2 {
     margin: 0 0 10px;
 
     font-size: clamp(23px, 3vw, 32px);
     line-height: 1.2;
 }
 
-.ls-seo-benefits-heading p {
+.personal-page .ls-seo-benefits-heading p {
     margin: 0;
 
     font-size: 15px;
     line-height: 1.7;
 }
 
-.ls-seo-benefits-grid {
+.personal-page .ls-seo-benefits-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
 }
 
-.ls-seo-benefit-card {
+.personal-page .ls-seo-benefit-card {
     position: relative;
 
     padding: 22px;
@@ -1472,14 +1471,14 @@
         box-shadow 0.2s ease;
 }
 
-.ls-seo-benefit-card:hover {
+.personal-page .ls-seo-benefit-card:hover {
     transform: translateY(-3px);
 
     box-shadow:
         0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.ls-seo-benefit-number {
+.personal-page .ls-seo-benefit-number {
     display: inline-flex;
 
     margin-bottom: 12px;
@@ -1491,14 +1490,14 @@
     opacity: 0.6;
 }
 
-.ls-seo-benefit-card h3 {
+.personal-page .ls-seo-benefit-card h3 {
     margin: 0 0 8px;
 
     font-size: 17px;
     line-height: 1.3;
 }
 
-.ls-seo-benefit-card p {
+.personal-page .ls-seo-benefit-card p {
     margin: 0;
 
     font-size: 14px;
@@ -1510,43 +1509,43 @@
    FAQ
    ========================================================= */
 
-.ls-faq-section {
+.personal-page .ls-faq-section {
     width: 100%;
     margin: 42px 0;
     padding: 0 20px;
     box-sizing: border-box;
 }
 
-.ls-faq-container {
+.personal-page .ls-faq-container {
     width: min(1000px, 100%);
     margin: 0 auto;
 }
 
-.ls-faq-heading {
+.personal-page .ls-faq-heading {
     margin-bottom: 20px;
 }
 
-.ls-faq-heading h2 {
+.personal-page .ls-faq-heading h2 {
     margin: 0;
 
     font-size: clamp(23px, 3vw, 32px);
     line-height: 1.25;
 }
 
-.ls-faq-list {
+.personal-page .ls-faq-list {
     display: flex;
     flex-direction: column;
     gap: 9px;
 }
 
-.ls-faq-item {
+.personal-page .ls-faq-item {
     border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 13px;
 
     overflow: hidden;
 }
 
-.ls-faq-item summary {
+.personal-page .ls-faq-item summary {
     position: relative;
 
     padding: 17px 48px 17px 18px;
@@ -1561,11 +1560,11 @@
     user-select: none;
 }
 
-.ls-faq-item summary::-webkit-details-marker {
+.personal-page .ls-faq-item summary::-webkit-details-marker {
     display: none;
 }
 
-.ls-faq-item summary::after {
+.personal-page .ls-faq-item summary::after {
     content: "+";
 
     position: absolute;
@@ -1578,11 +1577,11 @@
     font-weight: 400;
 }
 
-.ls-faq-item[open] summary::after {
+.personal-page .ls-faq-item[open] summary::after {
     content: "−";
 }
 
-.ls-faq-item p {
+.personal-page .ls-faq-item p {
     margin: 0;
 
     padding: 0 18px 18px;
@@ -1599,7 +1598,7 @@
    Scoped only to our new class
    ========================================================= */
 
-.ls-connect-text {
+.personal-page .ls-connect-text {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
@@ -1608,7 +1607,7 @@
     margin-top: 16px !important;
 }
 
-.ls-connect-text button {
+.personal-page .ls-connect-text button {
     border: 0;
 
     padding: 7px 13px;
@@ -1628,7 +1627,7 @@
         opacity 0.2s ease;
 }
 
-.ls-connect-text button:hover {
+.personal-page .ls-connect-text button:hover {
     transform: translateY(-1px);
     opacity: 0.9;
 }
@@ -1640,41 +1639,41 @@
 
 @media (max-width: 768px) {
 
-    .ls-seo-content-section,
-    .ls-seo-benefits-section,
-    .ls-faq-section {
+    .personal-page .ls-seo-content-section,
+.personal-page .ls-seo-benefits-section,
+.personal-page .ls-faq-section {
         padding: 0 14px;
         margin: 30px 0;
     }
 
-    .ls-seo-content-inner {
+    .personal-page .ls-seo-content-inner {
         padding: 22px 18px;
     }
 
-    .ls-seo-benefits-grid {
+    .personal-page .ls-seo-benefits-grid {
         grid-template-columns: 1fr;
         gap: 11px;
     }
 
-    .ls-seo-benefit-card {
+    .personal-page .ls-seo-benefit-card {
         padding: 18px;
     }
 
-    .ls-faq-item summary {
+    .personal-page .ls-faq-item summary {
         padding: 15px 42px 15px 15px;
         font-size: 14px;
     }
 
-    .ls-faq-item p {
+    .personal-page .ls-faq-item p {
         padding: 0 15px 15px;
         font-size: 13px;
     }
 
-    .ls-seo-keyword-row {
+    .personal-page .ls-seo-keyword-row {
         gap: 6px;
     }
 
-    .ls-seo-keyword-row span {
+    .personal-page .ls-seo-keyword-row span {
         font-size: 11px;
         padding: 6px 9px;
     }
@@ -1687,29 +1686,29 @@
 
 @media (max-width: 480px) {
 
-    .ls-seo-content-inner {
+    .personal-page .ls-seo-content-inner {
         padding: 19px 15px;
         border-radius: 14px;
     }
 
-    .ls-seo-benefit-card {
+    .personal-page .ls-seo-benefit-card {
         padding: 16px;
         border-radius: 13px;
     }
 
-    .ls-seo-benefit-card h3 {
+    .personal-page .ls-seo-benefit-card h3 {
         font-size: 16px;
     }
 
-    .ls-seo-benefit-card p {
+    .personal-page .ls-seo-benefit-card p {
         font-size: 13px;
     }
 
-    .ls-faq-item {
+    .personal-page .ls-faq-item {
         border-radius: 11px;
     }
 
-    .ls-connect-text {
+    .personal-page .ls-connect-text {
         align-items: flex-start;
         flex-direction: column;
     }
@@ -1756,14 +1755,14 @@
    GLOBAL RESET
    ========================= */
 
-.personal-loan-page,
-.personal-loan-page *,
-.personal-loan-page *::before,
-.personal-loan-page *::after {
+.personal-page,
+.personal-page *,
+.personal-page *::before,
+.personal-page *::after {
   box-sizing: border-box;
 }
 
-.personal-loan-page {
+.personal-page {
   width: 100%;
   max-width: 100%;
   margin: 0;
@@ -1779,15 +1778,15 @@
   overflow-x: hidden;
 }
 
-.personal-loan-page img {
+.personal-page img {
   max-width: 100%;
   height: auto;
 }
 
-.personal-loan-page button,
-.personal-loan-page input,
-.personal-loan-page textarea,
-.personal-loan-page select {
+.personal-page button,
+.personal-page input,
+.personal-page textarea,
+.personal-page select {
   font: inherit;
 }
 
@@ -1795,7 +1794,7 @@
    SECTION SYSTEM
    ========================= */
 
-.personal-loan-page section {
+.personal-page section {
   width: min(100%, var(--ls-maxw));
   margin: 0 auto;
   padding: 40px 24px;
@@ -1805,7 +1804,7 @@
    HERO
    ========================= */
 
-.personal-loan-hero {
+.personal-page .personal-loan-hero {
   position: relative;
   width: 100%;
   max-width: 100% !important;
@@ -1821,7 +1820,7 @@
   overflow: hidden;
 }
 
-.personal-loan-hero::before {
+.personal-page .personal-loan-hero::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1835,13 +1834,13 @@
   pointer-events: none;
 }
 
-.personal-loan-hero > * {
+.personal-page .personal-loan-hero > * {
   position: relative;
   z-index: 1;
   max-width: 700px;
 }
 
-.hero-badge {
+.personal-page .hero-badge {
   width: fit-content;
   display: inline-flex;
   align-items: center;
@@ -1859,7 +1858,7 @@
   margin-bottom: 16px;
 }
 
-.personal-loan-hero h1 {
+.personal-page .personal-loan-hero h1 {
   max-width: 680px;
   margin: 0 0 14px;
   color: var(--ls-black);
@@ -1869,7 +1868,7 @@
   letter-spacing: -0.035em;
 }
 
-.hero-description {
+.personal-page .hero-description {
   max-width: 650px;
   margin: 0 0 24px;
   color: var(--ls-gray-700);
@@ -1877,14 +1876,14 @@
   line-height: 1.65;
 }
 
-.hero-points {
+.personal-page .hero-points {
   width: min(100%, 700px);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
-.hero-point {
+.personal-page .hero-point {
   min-width: 0;
   display: flex;
   align-items: flex-start;
@@ -1897,7 +1896,7 @@
   backdrop-filter: blur(8px);
 }
 
-.hero-point span {
+.personal-page .hero-point span {
   flex: 0 0 28px;
   width: 28px;
   height: 28px;
@@ -1911,7 +1910,7 @@
   font-weight: 800;
 }
 
-.hero-point p {
+.personal-page .hero-point p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 12.5px;
@@ -1922,7 +1921,7 @@
    INTRO + EMI ROW
    ========================= */
 
-.loan-page-row {
+.personal-page .loan-page-row {
   width: min(100%, var(--ls-maxw));
   margin: 0 auto;
   padding: 0 24px;
@@ -1932,7 +1931,7 @@
   gap: 22px;
 }
 
-.loan-info-text {
+.personal-page .loan-info-text {
   width: 100%;
   padding: 24px;
   background: var(--ls-white);
@@ -1943,7 +1942,7 @@
   overflow: visible;
 }
 
-.loan-info-text h2 {
+.personal-page .loan-info-text h2 {
   margin: 24px 0 9px;
   color: var(--ls-black);
   font-size: clamp(20px, 2vw, 26px);
@@ -1952,22 +1951,22 @@
   letter-spacing: -0.025em;
 }
 
-.loan-info-text h2:first-of-type {
+.personal-page .loan-info-text h2:first-of-type {
   margin-top: 0;
 }
 
-.loan-info-text p {
+.personal-page .loan-info-text p {
   margin: 0 0 11px;
   color: var(--ls-gray-700);
   font-size: 14px;
   line-height: 1.7;
 }
 
-.loan-info-text strong {
+.personal-page .loan-info-text strong {
   color: var(--ls-black);
 }
 
-.loan-page-calculator {
+.personal-page .loan-page-calculator {
   width: 100%;
   min-width: 0;
 }
@@ -1976,13 +1975,13 @@
    SEO CALCULATOR CONTENT
    ========================= */
 
-.ls-seo-content-section {
+.personal-page .ls-seo-content-section {
   width: min(100%, var(--ls-maxw));
   margin: 28px auto;
   padding: 0 24px;
 }
 
-.ls-seo-content-inner {
+.personal-page .ls-seo-content-inner {
   width: 100%;
   margin: 0 auto;
   padding: 28px 32px;
@@ -1991,7 +1990,7 @@
   border: 1px solid var(--ls-gray-200);
 }
 
-.ls-seo-label {
+.personal-page .ls-seo-label {
   display: inline-block;
   margin-bottom: 8px;
   font-size: 11px;
@@ -2001,7 +2000,7 @@
   color: var(--ls-gray-500);
 }
 
-.ls-seo-content-inner h2 {
+.personal-page .ls-seo-content-inner h2 {
   margin: 0 0 10px;
   color: var(--ls-black);
   font-size: clamp(22px, 3vw, 30px);
@@ -2009,7 +2008,7 @@
   font-weight: 780;
 }
 
-.ls-seo-content-inner p {
+.personal-page .ls-seo-content-inner p {
   max-width: 900px;
   margin: 0;
   color: var(--ls-gray-700);
@@ -2017,14 +2016,14 @@
   line-height: 1.75;
 }
 
-.ls-seo-keyword-row {
+.personal-page .ls-seo-keyword-row {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 18px;
 }
 
-.ls-seo-keyword-row span {
+.personal-page .ls-seo-keyword-row span {
   display: inline-flex;
   align-items: center;
   padding: 7px 11px;
@@ -2040,17 +2039,17 @@
    APPLY / CATEGORIES
    ========================= */
 
-.apply-section {
+.personal-page .apply-section {
   padding-top: 30px;
 }
 
-.section-heading {
+.personal-page .section-heading {
   max-width: 680px;
   margin: 0 auto 24px;
   text-align: center;
 }
 
-.section-heading h2 {
+.personal-page .section-heading h2 {
   margin: 0 0 7px;
   color: var(--ls-black);
   font-size: clamp(24px, 2.8vw, 32px);
@@ -2059,24 +2058,24 @@
   letter-spacing: -0.03em;
 }
 
-.section-heading p {
+.personal-page .section-heading p {
   margin: 0;
   color: var(--ls-gray-500);
   font-size: 14px;
   line-height: 1.6;
 }
 
-.apply_categary.category-hidden {
+.personal-page .apply_categary.category-hidden {
   display: none;
 }
 
-.apply_grid {
+.personal-page .apply_grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
-.apply_box {
+.personal-page .apply_box {
   position: relative;
   min-height: 132px;
   display: flex;
@@ -2091,18 +2090,18 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
-.apply_box:hover {
+.personal-page .apply_box:hover {
   transform: translateY(-3px);
   background: #134630;
   border-color: rgba(111, 174, 69, 0.55);
   box-shadow: var(--ls-shadow-md);
 }
 
-.apply_box:active {
+.personal-page .apply_box:active {
   transform: translateY(-1px);
 }
 
-.apply_box_number {
+.personal-page .apply_box_number {
   flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
@@ -2118,12 +2117,12 @@
   font-weight: 800;
 }
 
-.apply_box_content {
+.personal-page .apply_box_content {
   min-width: 0;
   flex: 1;
 }
 
-.apply_box_content h3 {
+.personal-page .apply_box_content h3 {
   margin: 1px 0 5px;
   color: var(--ls-black);
   font-size: 16px;
@@ -2131,14 +2130,14 @@
   font-weight: 750;
 }
 
-.apply_box_content p {
+.personal-page .apply_box_content p {
   margin: 0;
   color: var(--ls-gray-500);
   font-size: 12.5px;
   line-height: 1.5;
 }
 
-.apply_box_arrow {
+.personal-page .apply_box_arrow {
   flex: 0 0 auto;
   align-self: center;
   color: var(--ls-gray-300);
@@ -2146,7 +2145,7 @@
   transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.apply_box:hover .apply_box_arrow {
+.personal-page .apply_box:hover .apply_box_arrow {
   color: var(--ls-green);
   transform: translateX(3px);
 }
@@ -2155,13 +2154,13 @@
    CATEGORY DETAILS / REQS
    ========================= */
 
-.category-details {
+.personal-page .category-details {
   display: none;
   opacity: 0;
   transform: translateY(8px);
 }
 
-.category-details.category-details-visible {
+.personal-page .category-details.category-details-visible {
   display: block;
   animation: ls-fade-in 0.28s ease forwards;
 }
@@ -2177,7 +2176,7 @@
   }
 }
 
-.requirements-card {
+.personal-page .requirements-card {
   width: 100%;
   padding: 28px;
   background: var(--ls-white);
@@ -2186,7 +2185,7 @@
   box-shadow: var(--ls-shadow-md);
 }
 
-.back-button {
+.personal-page .back-button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -2201,12 +2200,12 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.back-button:hover {
+.personal-page .back-button:hover {
   opacity: 0.75;
   transform: translateX(-2px);
 }
 
-.requirements-header h2 {
+.personal-page .requirements-header h2 {
   margin: 0 0 7px;
   color: var(--ls-black);
   font-size: 24px;
@@ -2215,20 +2214,20 @@
   letter-spacing: -0.025em;
 }
 
-.requirements-header p {
+.personal-page .requirements-header p {
   margin: 0 0 20px;
   color: var(--ls-gray-500);
   font-size: 14px;
   line-height: 1.55;
 }
 
-.requirements-list {
+.personal-page .requirements-list {
   display: grid;
   gap: 9px;
   margin: 0 0 20px;
 }
 
-.requirement-item {
+.personal-page .requirement-item {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -2238,7 +2237,7 @@
   border-radius: var(--ls-radius-sm);
 }
 
-.requirement-number {
+.personal-page .requirement-number {
   flex: 0 0 27px;
   width: 27px;
   height: 27px;
@@ -2252,21 +2251,21 @@
   font-weight: 800;
 }
 
-.requirement-item p {
+.personal-page .requirement-item p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 13.5px;
   line-height: 1.55;
 }
 
-.requirements-note {
+.personal-page .requirements-note {
   padding: 16px 18px;
   /* background: linear-gradient(135deg, #eaf6e6 0%, #f4fbf1 100%); */
   border: 1px solid rgba(111, 174, 69, 0.25);
   border-radius: var(--ls-radius-sm);
 }
 
-.requirements-note strong {
+.personal-page .requirements-note strong {
   display: block;
   margin-bottom: 5px;
   color: var(--ls-green-dark);
@@ -2274,14 +2273,14 @@
   font-weight: 800;
 }
 
-.requirements-note p {
+.personal-page .requirements-note p {
   margin: 0 0 8px;
   color: var(--ls-gray-700);
   font-size: 13px;
   line-height: 1.55;
 }
 
-.requirements-note p:last-child {
+.personal-page .requirements-note p:last-child {
   margin-bottom: 0;
 }
 
@@ -2289,7 +2288,7 @@
    CONNECT CTA
    ========================= */
 
-.ls-connect-text {
+.personal-page .ls-connect-text {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -2297,7 +2296,7 @@
   margin-top: 14px;
 }
 
-.ls-connect-text button {
+.personal-page .ls-connect-text button {
   border: 0;
   padding: 7px 16px;
   border-radius: 999px;
@@ -2310,7 +2309,7 @@
   transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
 }
 
-.ls-connect-text button:hover {
+.personal-page .ls-connect-text button:hover {
   background: linear-gradient(135deg, #6fae45 0%, #478426 100%);
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(111, 174, 69, 0.38);
@@ -2320,7 +2319,7 @@
    VERIFICATION SECTION
    ========================= */
 
-.verification-section {
+.personal-page .verification-section {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1.28fr);
@@ -2329,7 +2328,7 @@
   margin-top: 22px;
 }
 
-.verification-address {
+.personal-page .verification-address {
   width: 100%;
   padding: 20px;
   background: var(--ls-white);
@@ -2338,21 +2337,21 @@
   box-shadow: var(--ls-shadow-xs);
 }
 
-.verification-address h4 {
+.personal-page .verification-address h4 {
   margin: 0 0 8px;
   color: var(--ls-black);
   font-size: 14px;
   font-weight: 750;
 }
 
-.verification-address p {
+.personal-page .verification-address p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 13px;
   line-height: 1.65;
 }
 
-.verification-form {
+.personal-page .verification-form {
   width: 100%;
   min-width: 0;
 }
@@ -2361,18 +2360,18 @@
    SEO BENEFITS SECTION
    ========================= */
 
-.ls-seo-benefits-section {
+.personal-page .ls-seo-benefits-section {
   width: min(100%, var(--ls-maxw));
   margin: 42px auto;
   padding: 0 24px;
 }
 
-.ls-seo-benefits-heading {
+.personal-page .ls-seo-benefits-heading {
   max-width: 780px;
   margin-bottom: 22px;
 }
 
-.ls-seo-benefits-heading h2 {
+.personal-page .ls-seo-benefits-heading h2 {
   margin: 0 0 10px;
   color: var(--ls-black);
   font-size: clamp(23px, 3vw, 32px);
@@ -2380,20 +2379,20 @@
   font-weight: 800;
 }
 
-.ls-seo-benefits-heading p {
+.personal-page .ls-seo-benefits-heading p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 15px;
   line-height: 1.7;
 }
 
-.ls-seo-benefits-grid {
+.personal-page .ls-seo-benefits-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
-.ls-seo-benefit-card {
+.personal-page .ls-seo-benefit-card {
   position: relative;
   padding: 22px;
   border-radius: var(--ls-radius-md);
@@ -2402,12 +2401,12 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.ls-seo-benefit-card:hover {
+.personal-page .ls-seo-benefit-card:hover {
   transform: translateY(-3px);
   box-shadow: var(--ls-shadow-md);
 }
 
-.ls-seo-benefit-number {
+.personal-page .ls-seo-benefit-number {
   display: inline-flex;
   margin-bottom: 12px;
   font-size: 11px;
@@ -2416,7 +2415,7 @@
   color: var(--ls-green-dark);
 }
 
-.ls-seo-benefit-card h3 {
+.personal-page .ls-seo-benefit-card h3 {
   margin: 0 0 8px;
   color: var(--ls-black);
   font-size: 17px;
@@ -2424,7 +2423,7 @@
   font-weight: 750;
 }
 
-.ls-seo-benefit-card p {
+.personal-page .ls-seo-benefit-card p {
   margin: 0;
   color: var(--ls-gray-700);
   font-size: 14px;
@@ -2435,22 +2434,22 @@
    FAQ SECTION
    ========================= */
 
-.ls-faq-section {
+.personal-page .ls-faq-section {
   width: min(100%, var(--ls-maxw));
   margin: 42px auto;
   padding: 0 24px;
 }
 
-.ls-faq-container {
+.personal-page .ls-faq-container {
   width: min(1000px, 100%);
   margin: 0 auto;
 }
 
-.ls-faq-heading {
+.personal-page .ls-faq-heading {
   margin-bottom: 20px;
 }
 
-.ls-faq-heading h2 {
+.personal-page .ls-faq-heading h2 {
   margin: 0;
   color: var(--ls-black);
   font-size: clamp(23px, 3vw, 32px);
@@ -2458,20 +2457,20 @@
   font-weight: 800;
 }
 
-.ls-faq-list {
+.personal-page .ls-faq-list {
   display: flex;
   flex-direction: column;
   gap: 9px;
 }
 
-.ls-faq-item {
+.personal-page .ls-faq-item {
   border: 1px solid var(--ls-gray-200);
   border-radius: var(--ls-radius-sm);
   background: var(--ls-white);
   overflow: hidden;
 }
 
-.ls-faq-item summary {
+.personal-page .ls-faq-item summary {
   position: relative;
   padding: 17px 48px 17px 18px;
   cursor: pointer;
@@ -2482,11 +2481,11 @@
   user-select: none;
 }
 
-.ls-faq-item summary::-webkit-details-marker {
+.personal-page .ls-faq-item summary::-webkit-details-marker {
   display: none;
 }
 
-.ls-faq-item summary::after {
+.personal-page .ls-faq-item summary::after {
   content: "+";
   position: absolute;
   right: 18px;
@@ -2497,11 +2496,11 @@
   color: var(--ls-green-dark);
 }
 
-.ls-faq-item[open] summary::after {
+.personal-page .ls-faq-item[open] summary::after {
   content: "−";
 }
 
-.ls-faq-item p {
+.personal-page .ls-faq-item p {
   margin: 0;
   padding: 0 18px 18px;
   font-size: 14px;
@@ -2513,7 +2512,7 @@
    DISCLAIMER
    ========================= */
 
-.loan-disclaimer {
+.personal-page .loan-disclaimer {
   width: min(100%, var(--ls-maxw));
   display: flex;
   align-items: flex-start;
@@ -2526,7 +2525,7 @@
   box-shadow: var(--ls-shadow-md);
 }
 
-.disclaimer-icon {
+.personal-page .disclaimer-icon {
   flex: 0 0 34px;
   width: 34px;
   height: 34px;
@@ -2540,7 +2539,7 @@
   font-weight: 800;
 }
 
-.loan-disclaimer h3 {
+.personal-page .loan-disclaimer h3 {
   margin: 0 0 5px;
   color: var(--ls-white);
   font-size: 14px;
@@ -2548,7 +2547,7 @@
   font-weight: 750;
 }
 
-.loan-disclaimer p {
+.personal-page .loan-disclaimer p {
   max-width: 850px;
   margin: 0;
   color: #c8cfca;
@@ -2561,77 +2560,77 @@
    ========================= */
 
 @media (max-width: 1000px) {
-  .personal-loan-hero {
+  .personal-page .personal-loan-hero {
     min-height: 400px;
     background-size: auto 90%;
   }
 
-  .loan-page-row {
+  .personal-page .loan-page-row {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
   }
 
-  .apply_grid {
+  .personal-page .apply_grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 800px) {
-  .personal-loan-page section,
-  .loan-page-row,
-  .ls-seo-content-section,
-  .ls-seo-benefits-section,
-  .ls-faq-section {
+  .personal-page section,
+.personal-page .loan-page-row,
+.personal-page .ls-seo-content-section,
+.personal-page .ls-seo-benefits-section,
+.personal-page .ls-faq-section {
     padding-left: 20px;
     padding-right: 20px;
   }
 
-  .personal-loan-hero {
+  .personal-page .personal-loan-hero {
     min-height: auto;
     padding: 42px 20px 32px;
     background-image: none;
   }
 
-  .personal-loan-hero::before {
+  .personal-page .personal-loan-hero::before {
     background: linear-gradient(180deg, #f0f7ec 0%, #f4f8f3 100%);
   }
 
-  .hero-points,
-  .loan-page-row,
-  .verification-section,
-  .ls-seo-benefits-grid {
+  .personal-page .hero-points,
+.personal-page .loan-page-row,
+.personal-page .verification-section,
+.personal-page .ls-seo-benefits-grid {
     grid-template-columns: 1fr;
     gap: 16px;
   }
 
-  .loan-info-text {
+  .personal-page .loan-info-text {
     padding: 21px;
   }
 }
 
 @media (max-width: 600px) {
-  .personal-loan-page section,
-  .loan-page-row,
-  .ls-seo-content-section,
-  .ls-seo-benefits-section,
-  .ls-faq-section {
+  .personal-page section,
+.personal-page .loan-page-row,
+.personal-page .ls-seo-content-section,
+.personal-page .ls-seo-benefits-section,
+.personal-page .ls-faq-section {
     padding-left: 16px;
     padding-right: 16px;
   }
 
-  .apply_grid {
+  .personal-page .apply_grid {
     grid-template-columns: 1fr;
   }
 
-  .loan-disclaimer {
+  .personal-page .loan-disclaimer {
     margin: 16px;
     padding: 17px;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .personal-loan-page *,
-  .personal-loan-page *::before,
-  .personal-loan-page *::after {
+  .personal-page *,
+.personal-page *::before,
+.personal-page *::after {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -2645,14 +2644,14 @@
    INTRO + EMI CALCULATOR (SIDE BY SIDE FIX)
    ========================================================= */
 
-.loan-page-calculator-section {
+.personal-page .loan-page-calculator-section {
   width: 100% !important;
   max-width: var(--ls-maxw) !important;
   margin: 0 auto;
   padding: 36px 24px !important;
 }
 
-.loan-page-row {
+.personal-page .loan-page-row {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -2664,7 +2663,7 @@
 }
 
 /* Left text box */
-.loan-info-text {
+.personal-page .loan-info-text {
   width: 100%;
   padding: 28px;
   background: var(--ls-white);
@@ -2674,7 +2673,7 @@
   height: fit-content;
 }
 
-.loan-info-text h2 {
+.personal-page .loan-info-text h2 {
   margin: 24px 0 10px;
   color: var(--ls-black);
   font-size: clamp(20px, 2vw, 25px);
@@ -2683,23 +2682,23 @@
   letter-spacing: -0.02em;
 }
 
-.loan-info-text h2:first-of-type {
+.personal-page .loan-info-text h2:first-of-type {
   margin-top: 0;
 }
 
-.loan-info-text p {
+.personal-page .loan-info-text p {
   margin: 0 0 12px;
   color: var(--ls-gray-700);
   font-size: 14.5px;
   line-height: 1.65;
 }
 
-.loan-info-text p:last-child {
+.personal-page .loan-info-text p:last-child {
   margin-bottom: 0;
 }
 
 /* Right Calculator Container */
-.loan-page-calculator {
+.personal-page .loan-page-calculator {
   width: 100%;
   min-width: 0; /* Prevents child blowout */
   position: sticky;
@@ -2707,7 +2706,7 @@
 }
 
 /* Force inner calculator card to fill properly without overflowing */
-.loan-page-calculator > * {
+.personal-page .loan-page-calculator > * {
   width: 100% !important;
   max-width: 100% !important;
   margin: 0 !important;
@@ -2718,20 +2717,20 @@
    ========================= */
 
 @media (max-width: 980px) {
-  .loan-page-row {
+  .personal-page .loan-page-row {
     /* Tablet/Mobile pe stack hoga natural flow me */
     grid-template-columns: 1fr;
     gap: 24px;
   }
 
-  .loan-page-calculator {
+  .personal-page .loan-page-calculator {
     position: static;
   }
 }
 
 
 /* Right Side Column Wrapper for Calculator + SEO Card */
-.loan-page-calculator-wrapper {
+.personal-page .loan-page-calculator-wrapper {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -2739,7 +2738,7 @@
   min-width: 0;
 }
 
-.ls-calc-seo-box {
+.personal-page .ls-calc-seo-box {
   padding: 18px 20px;
   background: var(--ls-white);
   border: 1px solid rgba(111, 174, 69, 0.14);
@@ -2747,14 +2746,14 @@
   box-shadow: var(--ls-shadow-xs);
 }
 
-.ls-calc-seo-box h3 {
+.personal-page .ls-calc-seo-box h3 {
   margin: 0 0 6px;
   font-size: 16px;
   color: var(--ls-black);
   font-weight: 750;
 }
 
-.ls-calc-seo-box p {
+.personal-page .ls-calc-seo-box p {
   margin: 0;
   font-size: 13px;
   line-height: 1.5;
@@ -2767,10 +2766,43 @@
    PERMANENT BRAND THEME - LUXURY EMERALD & GOLD
    ========================================================= */
 
-.personal-loan-page {
+.personal-page {
   color: #cbd5e1;
   background:
     radial-gradient(circle at 10% 15%, rgba(245, 197, 99, 0.08) 0%, transparent 45%),
     radial-gradient(circle at 90% 65%, rgba(245, 197, 99, 0.06) 0%, transparent 45%),
     #082317;
+}
+
+
+/* =========================================================
+   HERO POINT BUTTON (04 - Connect CTA)
+   ========================================================= */
+.personal-page .hero-point-btn {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.personal-page .hero-point-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(245, 197, 99, 0.45);
+  background: rgba(14, 53, 36, 0.95);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.personal-page .hero-point-btn b {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f5c563;
+  margin-left: auto;
+  align-self: center;
+  transition: transform 0.2s ease;
+}
+
+.personal-page .hero-point-btn:hover b {
+  transform: translateX(4px);
 }

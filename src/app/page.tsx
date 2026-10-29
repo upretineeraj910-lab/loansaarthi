@@ -162,7 +162,7 @@ export default function Home() {
           </Reveal>
 
           <Reveal delay={150}>
-            <div className="hero-card-wrapper">
+            <div id="HeroVerification" className="hero-card-wrapper">
               <HeroVerificationCard />
             </div>
           </Reveal>

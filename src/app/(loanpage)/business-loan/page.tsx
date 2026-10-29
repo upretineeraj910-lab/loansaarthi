@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { useState } from "react";
 import "./business-loan.css";
@@ -100,7 +101,7 @@ const Page = () => {
   );
 
   return (
-    <main className="bl-page">
+    <main className="bl-page business-page">
       {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -153,6 +154,12 @@ const Page = () => {
             <span>03</span>
             <p>Get assistance based on your business profile</p>
           </div>
+        
+          <Link href="/#HeroVerification" className="hero-point hero-point-btn">
+            <span>04</span>
+            <p>Click here to get connected</p>
+            <b aria-hidden="true">→</b>
+          </Link>
         </div>
       </section>
 
