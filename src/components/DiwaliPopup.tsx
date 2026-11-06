@@ -17,11 +17,11 @@ function getGreeting(istDate: string) {
   if (istDate < "2026-11-06")
     return { title: "Diwali Is Almost Here!", sub: "Light up your festival with a great loan offer" };
   if (istDate === "2026-11-06")
-    return { title: "Happy Dhanteras! 🪙", sub: "Wishing you wealth and prosperity today" };
+    return { title: "Happy Dhanteras!", sub: "Wishing you wealth and prosperity today" };
   if (istDate === "2026-11-07")
     return { title: "Happy Choti Diwali!", sub: "Wishing you a bright and joyful festival" };
   if (istDate === "2026-11-08")
-    return { title: "Happy Diwali! ✨", sub: "May your home be filled with light and prosperity" };
+    return { title: "Happy Diwali!", sub: "May your home be filled with light and prosperity" };
   return { title: "Happy Diwali Week! ", sub: "Our festive offer is still on" };
 }
 
