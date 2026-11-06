@@ -14,6 +14,7 @@ import GoogleReviews from "@/components/GoogleReviews";
 import WhyChooseUs from "@/components/Experience";
 import LuxuryHero from "@/components/LuxuryHero";
 import { WHY, BANKS, FAQS } from "@/components/content";
+import DiwaliPopup from "@/components/DiwaliPopup";
 
 import "./main.css";
 
@@ -103,6 +104,9 @@ export default function Home() {
       <div id="Loan">
         <LoanTypes />
       </div>
+
+            <DiwaliPopup />
+
 
       {/* ---------------- OUR OFFERINGS & POLICIES ---------------- */}
       <OurOfferings />
