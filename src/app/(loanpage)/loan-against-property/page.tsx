@@ -98,7 +98,7 @@ const Page = () => {
   );
 
   return (
-    <main className="lap-page">
+    <main className="lap-page loan-product-page">
       {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

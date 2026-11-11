@@ -1,41 +1,1209 @@
+/* =========================================================
+   LoanSaarthi — Master Design System for All Loan Pages
+   Applies to:
+     - /personal-loan
+     - /home-loan
+     - /loan-against-property
+     - /business-loan
+     - /dropline-overdraft
+     - /loan-balance-transfer
+   Theme: Luxury Emerald & Gold Fintech Theme (100% Dark)
+   ========================================================= */
+
 :root {
   --lp-bg: #082317;
   --lp-card: #0e3524;
-  --lp-border: rgba(245, 197, 99, 0.2);
+  --lp-card-hover: #12422d;
+  --lp-box: #061a11;
+  --lp-border: rgba(245, 197, 99, 0.22);
+  --lp-border-hover: rgba(245, 197, 99, 0.5);
   --lp-title: #ffffff;
   --lp-desc: #94a3b8;
   --lp-text: #cbd5e1;
-  --lp-green: #f5c563;
-  --lp-box: #061a11;
+  --lp-gold: #f5c563;
+  --lp-gold-hover: #e0b04c;
+  --lp-gold-subtle: rgba(245, 197, 99, 0.14);
   --lp-btn: #f5c563;
   --lp-btn-text: #081a12;
   --lp-thumb: #f5c563;
   --lp-track: rgba(245, 197, 99, 0.2);
+  --lp-maxw: 1200px;
 }
 
-.bt-page [data-theme="dark"],
-.bt-page .dark {
-  --lp-bg: #082317;
-  --lp-card: #0e3524;
-  --lp-border: rgba(245, 197, 99, 0.2);
-  --lp-title: #ffffff;
-  --lp-desc: #94a3b8;
-  --lp-text: #cbd5e1;
-  --lp-green: #f5c563;
-  --lp-box: #061a11;
-  --lp-btn: #f5c563;
-  --lp-btn-text: #081a12;
-  --lp-thumb: #f5c563;
-  --lp-track: rgba(245, 197, 99, 0.2);
+/* =========================================================
+   GLOBAL RESET & CONTAINER
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #082317 !important;
+  background:
+    radial-gradient(circle at 12% 15%, rgba(245, 197, 99, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 88% 65%, rgba(245, 197, 99, 0.06) 0%, transparent 45%),
+    #082317 !important;
+  color: #cbd5e1 !important;
+  font-family: inherit;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) *,
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) *::before,
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) *::after {
+  box-sizing: border-box;
+}
+
+/* Common Section Wrapper */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) section {
+  width: 100%;
+  max-width: var(--lp-maxw);
+  margin: 0 auto;
+  padding: 44px 24px;
+}
+
+@media (max-width: 768px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) section {
+    padding: 32px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) section {
+    padding: 24px 14px;
+  }
+}
+
+/* =========================================================
+   HERO SECTION
+   - 100% Dark Theme across all devices (Desktop, Tablet, Mobile)
+   - Background image completely removed as requested
+   - Clean luxury typography & high-contrast cards
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .personal-loan-hero {
+  position: relative;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 56px max(24px, calc((100% - 1180px) / 2));
+  background-image: none !important;
+  background:
+    radial-gradient(ellipse at 85% 20%, rgba(245, 197, 99, 0.10) 0%, transparent 45%),
+    radial-gradient(ellipse at 15% 85%, rgba(14, 53, 36, 0.75) 0%, transparent 55%),
+    linear-gradient(135deg, #061a11 0%, #082317 50%, #0a2d1d 100%) !important;
+  border-bottom: 1px solid rgba(245, 197, 99, 0.18);
+  overflow: hidden;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .personal-loan-hero::before {
+  display: none !important;
+  background: transparent !important;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .personal-loan-hero > * {
+  position: relative;
+  z-index: 1;
+  max-width: 100%;
+}
+
+/* Hero Badge */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 197, 99, 0.12);
+  border: 1px solid rgba(245, 197, 99, 0.35);
+  color: #f5c563 !important;
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Hero Title */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .personal-loan-hero h1 {
+  font-size: clamp(26px, 3.8vw, 44px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff !important;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.025em;
+  max-width: 950px;
+}
+
+/* Hero Description */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-description {
+  font-size: clamp(14.5px, 1.4vw, 16px);
+  color: #cbd5e1 !important;
+  line-height: 1.7;
+  margin: 0 0 32px 0;
+  max-width: 860px;
+}
+
+/* Hero Points Grid */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-points {
+  width: 100%;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.22);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point:hover {
+  transform: translateY(-2px);
+  background: #12422d;
+  border-color: rgba(245, 197, 99, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point span {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f5c563;
+  color: #082317;
+  font-size: 12px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point p {
+  margin: 0;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  transition: color 0.2s ease;
+}
+
+/* Card 04 Button */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point-btn {
+  text-decoration: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(245, 197, 99, 0.25) 0%, rgba(14, 53, 36, 0.95) 100%);
+  border: 1px solid rgba(245, 197, 99, 0.45);
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point-btn b {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f5c563;
+  margin-left: auto;
+  align-self: center;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point-btn:hover {
+  background: #f5c563;
+  border-color: #f5c563;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point-btn:hover span {
+  background: #082317;
+  color: #f5c563;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point-btn:hover p {
+  color: #081a12 !important;
+  font-weight: 700;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-point-btn:hover b {
+  color: #081a12;
+  transform: translateX(4px);
+}
+
+/* Responsive Breakpoints for Hero */
+@media (max-width: 992px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .personal-loan-hero {
+    padding: 44px 20px 36px;
+  }
+
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-points {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 580px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .personal-loan-hero {
+    padding: 34px 16px 28px;
+  }
+
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .hero-points {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* =========================================================
+   CALCULATOR & LOAN INFO ROW (SIDE-BY-SIDE ON DESKTOP)
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-page-calculator-section {
+  width: 100% !important;
+  max-width: var(--lp-maxw) !important;
+  margin: 0 auto;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-page-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: start;
+  gap: 32px;
+}
+
+@media (max-width: 980px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-page-row {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Left info card */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-info-text {
+  width: 100%;
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 16px;
+  padding: 30px 32px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+@media (max-width: 560px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-info-text {
+    padding: 22px 18px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-info-text h2 {
+  font-size: clamp(20px, 2.2vw, 25px);
+  font-weight: 780;
+  color: #ffffff !important;
+  margin: 24px 0 10px;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-info-text h2:first-of-type {
+  margin-top: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-info-text p {
+  font-size: 14.5px;
+  color: #cbd5e1 !important;
+  line-height: 1.7;
+  margin: 0 0 14px 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-info-text p:last-child {
+  margin-bottom: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-info-text strong {
+  color: #f5c563;
+  font-weight: 600;
+}
+
+/* Right side wrapper */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-page-calculator-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-page-calculator {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Calculator SEO context card */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-calc-seo-box {
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #f5c563 !important;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-calc-seo-box h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 750;
+  color: #ffffff !important;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-calc-seo-box p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #cbd5e1 !important;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-keyword-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-keyword-row span {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  background: #082317;
+  color: #f5c563;
+  border: 1px solid rgba(245, 197, 99, 0.25);
+}
+
+/* =========================================================
+   ELIGIBILITY SECTION & CATEGORY CARDS
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply-section {
+  padding-top: 24px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .section-heading {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  text-align: center;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .section-heading h2 {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.025em;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .section-heading p {
+  font-size: 14.5px;
+  color: #cbd5e1 !important;
+  line-height: 1.65;
+  margin: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_categary {
+  width: 100%;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_categary.category-hidden {
+  display: none;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 680px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box {
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 22px;
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box:hover {
+  transform: translateY(-2px);
+  background: #12422d;
+  border-color: rgba(245, 197, 99, 0.5);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box_number {
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 197, 99, 0.15);
+  border: 1px solid rgba(245, 197, 99, 0.35);
+  border-radius: 50%;
+  color: #f5c563;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box_content {
+  flex: 1;
+  min-width: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box_content h3 {
+  margin: 0 0 4px;
+  color: #ffffff !important;
+  font-size: 16px;
+  font-weight: 750;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box_content p {
+  margin: 0;
+  color: #cbd5e1 !important;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box_arrow {
+  flex: 0 0 auto;
+  color: #f5c563;
+  font-size: 20px;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .apply_box:hover .apply_box_arrow {
+  transform: translateX(4px);
+}
+
+/* Category Details / Requirements Card */
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .category-details {
+  display: none;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .category-details.category-details-visible {
+  display: block;
+  animation: lp-fade-in 0.25s ease forwards;
+}
+
+@keyframes lp-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-card {
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.25);
+  border-radius: 18px;
+  padding: 30px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+@media (max-width: 560px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-card {
+    padding: 20px 16px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .back-button {
+  background: #082317;
+  color: #f5c563;
+  border: 1px solid rgba(245, 197, 99, 0.35);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .back-button:hover {
+  background: #f5c563;
+  color: #082317;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-header .section-label {
+  color: #f5c563;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-header h2 {
+  color: #ffffff !important;
+  font-size: clamp(20px, 2.5vw, 26px);
+  font-weight: 800;
+  margin: 0 0 6px 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-header p {
+  color: #cbd5e1 !important;
+  font-size: 14px;
+  margin: 0 0 20px 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirement-item {
+  background: #082317;
+  border: 1px solid rgba(245, 197, 99, 0.15);
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirement-number {
+  color: #f5c563;
+  font-weight: 800;
+  font-size: 12px;
+  min-width: 24px;
+  padding-top: 2px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirement-item p {
+  color: #ffffff !important;
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-note {
+  background: #061a11;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-left: 4px solid #f5c563;
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-note strong {
+  color: #f5c563;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .requirements-note p {
+  color: #cbd5e1 !important;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0 0 10px 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-connect-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: #ffffff !important;
+  font-size: 13.5px;
+  margin-top: 10px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-connect-text button {
+  background: #f5c563;
+  color: #081a12 !important;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12.5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-connect-text button:hover {
+  background: #e0b04c;
+  transform: translateY(-1px);
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .verification-section {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  margin-top: 24px;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .verification-section {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .verification-address {
+  background: #082317;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 14px;
+  padding: 20px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .verification-address h4 {
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .verification-address p {
+  color: #cbd5e1 !important;
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   SEO BENEFITS SECTION
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefits-section {
+  width: 100%;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefits-heading {
+  max-width: 780px;
+  margin-bottom: 24px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefits-heading h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefits-heading p {
+  font-size: 14.5px;
+  color: #cbd5e1 !important;
+  line-height: 1.65;
+  margin: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 680px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefit-card {
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefit-card:hover {
+  transform: translateY(-3px);
+  background: #12422d;
+  border-color: rgba(245, 197, 99, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefit-number {
+  color: #f5c563;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefit-card h3 {
+  color: #ffffff !important;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-seo-benefit-card p {
+  color: #cbd5e1 !important;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* =========================================================
+   FAQ SECTION
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-section {
+  width: 100%;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-heading {
+  margin-bottom: 24px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-heading h2 {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 800;
+  color: #ffffff !important;
+  margin: 0;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item {
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item:hover {
+  border-color: rgba(245, 197, 99, 0.45);
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item[open] {
+  border-color: rgba(245, 197, 99, 0.45);
+  background: #103b29;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item summary {
+  position: relative;
+  padding: 18px 48px 18px 20px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff !important;
+  user-select: none;
+  transition: color 0.2s ease;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item summary:hover {
+  color: #f5c563 !important;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  font-weight: 400;
+  color: #f5c563;
+  line-height: 1;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item[open] summary::after {
+  content: "−";
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .ls-faq-item p {
+  margin: 0;
+  padding: 0 20px 18px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #cbd5e1 !important;
+}
+
+/* =========================================================
+   DISCLAIMER SECTION
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-disclaimer {
+  width: min(100%, var(--lp-maxw));
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin: 10px auto 36px;
+  padding: 22px 26px;
+  background: #061a11;
+  border: 1px solid rgba(245, 197, 99, 0.25);
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+}
+
+@media (max-width: 560px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-disclaimer {
+    padding: 16px 16px;
+    gap: 12px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .disclaimer-icon {
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5c563;
+  color: #081a12 !important;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-disclaimer h3 {
+  margin: 0 0 6px;
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 750;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page) .loan-disclaimer p {
+  margin: 0;
+  color: #94a3b8 !important;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   LOAN EMI CALCULATOR STYLES (MATCHES BRAND THEME)
+   ========================================================= */
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-card-box,
+.lp-card-box {
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.22);
+  border-radius: 16px;
+  padding: 26px 28px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-card-box,
+  .lp-card-box {
+    padding: 20px 16px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-card-box h3,
+.lp-card-box h3 {
+  font-size: 18px;
+  font-weight: 750;
+  color: #ffffff !important;
+  margin: 0 0 20px 0;
+  letter-spacing: -0.01em;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-input-row,
+.lp-input-row {
+  margin-bottom: 20px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-input-label,
+.lp-input-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff !important;
+  margin-bottom: 8px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-number-input,
+.lp-number-input {
+  width: 140px;
+  height: 38px;
+  padding: 6px 12px;
+  background: #082317;
+  border: 1px solid rgba(245, 197, 99, 0.3);
+  border-radius: 8px;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+@media (max-width: 480px) {
+  :is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-number-input,
+  .lp-number-input {
+    width: 115px;
+    height: 36px;
+    font-size: 13px;
+    padding: 4px 8px;
+  }
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-number-input:focus,
+.lp-number-input:focus {
+  border-color: #f5c563;
+  box-shadow: 0 0 0 2px rgba(245, 197, 99, 0.25);
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-range,
+.lp-range {
+  width: 100%;
+  height: 6px;
+  background: rgba(245, 197, 99, 0.2);
+  border-radius: 4px;
+  accent-color: #f5c563;
+  cursor: pointer;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-calc-res,
+.lp-calc-res {
+  background: #082317;
+  border: 1px solid rgba(245, 197, 99, 0.2);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-res-row,
+.lp-res-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #94a3b8 !important;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-res-row.highlight,
+.lp-res-row.highlight {
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff !important;
+  border-bottom: 1px dashed rgba(245, 197, 99, 0.25);
+  padding-bottom: 10px;
+  margin-bottom: 4px;
+}
+
+:is(.loan-product-page, .personal-page, .homeloan-page, .business-page, .overdraft-page, .lap-page, .bt-page) .lp-res-row.highlight strong,
+.lp-res-row.highlight strong {
+  color: #f5c563 !important;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Home variant calculator classes */
+.calculator-wrapper {
+  background: #0e3524;
+  border: 1px solid rgba(245, 197, 99, 0.22);
+  border-radius: 16px;
+  padding: 26px 28px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  color: #cbd5e1;
+}
+
+@media (max-width: 560px) {
+  .calculator-wrapper {
+    padding: 20px 16px;
+  }
+}
+
+.calc-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.calc-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.calc-slider-value {
+  color: #f5c563;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.calc-number-input {
+  width: 140px;
+  height: 38px;
+  padding: 6px 12px;
+  background: #082317;
+  border: 1px solid rgba(245, 197, 99, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: right;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+@media (max-width: 480px) {
+  .calc-number-input {
+    width: 115px;
+    height: 36px;
+    font-size: 13px;
+  }
+}
+
+.calc-number-input:focus {
+  border-color: #f5c563;
+  box-shadow: 0 0 0 2px rgba(245, 197, 99, 0.25);
+}
+
+.calc-slider {
+  width: 100%;
+  height: 6px;
+  background: rgba(245, 197, 99, 0.2);
+  border-radius: 4px;
+  accent-color: #f5c563;
+  cursor: pointer;
+}
+
+.calc-divider {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(245, 197, 99, 0.25);
+}
+
+.calc-emi-label {
+  font-size: 13px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.calc-emi-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: #f5c563;
+  margin-bottom: 14px;
+}
+
+.calc-breakdown {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  background: rgba(245, 197, 99, 0.2);
+}
+
+.calc-breakdown-principal {
+  background: #f5c563;
+}
+
+.calc-breakdown-interest {
+  background: rgba(245, 197, 99, 0.4);
+}
+
+/* Ledger Row */
+.ledger-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 13px;
+  color: #94a3b8;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.ledger-row:last-child {
+  border-bottom: none;
+}
+
+.ledger-row .label {
+  color: #cbd5e1;
+}
+
+.ledger-row .value {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* =========================================================
+   BALANCE TRANSFER PAGE SPECIFICS (.bt-page)
+   ========================================================= */
 
 .bt-page {
-  min-height: 100vh;
-  background-color: var(--lp-bg);
-  color: var(--lp-text);
   padding: 40px 20px 80px;
 }
-.bt-page .lp-container { max-width: 1200px; margin: 0 auto; }
+.bt-page .lp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
 .bt-page .lp-hero {
   background: var(--lp-card);
   border: 1px solid var(--lp-border);
@@ -46,7 +1214,7 @@
   margin-bottom: 26px;
 }
 .bt-page .lp-hero-main { flex: 1.7; }
-.bt-page .lp-tag { font-size: 11px; font-weight: 700; color: var(--lp-green); letter-spacing: 1px; }
+.bt-page .lp-tag { font-size: 11px; font-weight: 700; color: var(--lp-gold); letter-spacing: 1px; }
 .bt-page .lp-hero-main h1 { font-size: 32px; font-weight: 800; color: var(--lp-title); margin: 6px 0 10px; }
 .bt-page .lp-desc-txt { font-size: 14.5px; line-height: 1.6; color: var(--lp-text); margin-bottom: 18px; }
 .bt-page .lp-specs { display: flex; gap: 14px; }
@@ -60,7 +1228,7 @@
 }
 .bt-page .lp-spec-item span { font-size: 11px; color: var(--lp-desc); text-transform: uppercase; font-weight: 600; }
 .bt-page .lp-spec-item strong { font-size: 15px; color: var(--lp-title); }
-.bt-page .lp-color-green { color: var(--lp-green) !important; }
+.bt-page .lp-color-green { color: var(--lp-gold) !important; }
 
 .bt-page .lp-hero-side {
   flex: 1;
@@ -96,42 +1264,17 @@
   gap: 24px;
   margin-bottom: 24px;
 }
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-card-box {
-  background: var(--lp-card);
-  border: 1px solid var(--lp-border);
-  border-radius: 14px;
-  padding: 24px;
-}
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-card-box h3 { font-size: 18px; font-weight: 700; color: var(--lp-title); margin: 0 0 18px; }
-
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-input-row { margin-bottom: 14px; }
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-input-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; color: var(--lp-title); margin-bottom: 5px; }
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-range { width: 100%; height: 6px; background: var(--lp-track); border-radius: 4px; accent-color: var(--lp-thumb); cursor: pointer; }
-
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-calc-res {
-  background: var(--lp-box);
-  border: 1px solid var(--lp-border);
-  border-radius: 10px;
-  padding: 12px;
-  margin-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-res-row { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--lp-desc); }
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-res-row.highlight { font-size: 15px; font-weight: 700; color: var(--lp-title); border-bottom: 1px dashed var(--lp-border); padding-bottom: 6px; }
-:is(.bt-page, .personal-page, .homeloan-page, .lap-page, .business-page, .overdraft-page) .lp-res-row.highlight strong { color: var(--lp-green); font-size: 17px; }
 
 .bt-page .lp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .bt-page .lp-table th { text-align: left; padding: 8px; background: var(--lp-box); color: var(--lp-title); border-bottom: 1px solid var(--lp-border); }
-.bt-page .lp-table td { padding: 10px 8px; border-bottom: 1px solid var(--lp-border); }
+.bt-page .lp-table td { padding: 10px 8px; border-bottom: 1px solid var(--lp-border); color: var(--lp-text); }
 
 .bt-page .lp-ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; }
 .bt-page .lp-ul li { font-size: 13.5px; line-height: 1.5; color: var(--lp-text); }
 
 @media (max-width: 900px) {
   .bt-page .lp-hero,
-.bt-page .lp-grid-2 { flex-direction: column; grid-template-columns: 1fr; }
+  .bt-page .lp-grid-2 { flex-direction: column; grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .bt-page { padding: 25px 12px; }

@@ -101,7 +101,7 @@ const Page = () => {
   );
 
   return (
-    <main className="bl-page business-page">
+    <main className="bl-page business-page loan-product-page">
       {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

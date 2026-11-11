@@ -96,7 +96,7 @@ const Page = () => {
   return (
 
 
-    <main className="personal-loan-page personal-page">
+    <main className="personal-loan-page personal-page loan-product-page">
 
       {/* <button
       type="button"

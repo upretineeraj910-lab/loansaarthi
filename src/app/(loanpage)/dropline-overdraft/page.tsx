@@ -98,7 +98,7 @@ const Page = () => {
   );
 
   return (
-    <main className="dlo-page overdraft-page">
+    <main className="dlo-page overdraft-page loan-product-page">
       {/* <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

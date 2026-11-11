@@ -95,7 +95,7 @@ const Page = () => {
   );
 
   return (
-    <main className="hls-page homeloan-page">
+    <main className="hls-page homeloan-page loan-product-page">
       {/* SEO STRUCTURED DATA */}
       {/* <script
         type="application/ld+json"
