@@ -109,7 +109,7 @@ const Page = () => {
           HERO SECTION
       ===================================================== */}
       <section className="personal-loan-hero">
-        <div className="hero-badge">⚡ Interest Rates Starting @ 9.99%* p.a.</div>
+        <div className="hero-badge">⚡ Interest Rates Starting @ 10.25%* p.a.</div>
 
         <h1>
           Personal Loan Online – Compare Low-Interest Personal Loans in India
@@ -208,7 +208,7 @@ const Page = () => {
                 tenureMin={1}
                 tenureMax={5}
                 rateLabel="Interest Rate (% p.a.)"
-                rateDefault={9.99}
+                rateDefault={10.25}
                 rateMin={9.5}
                 rateMax={18.0}
                 rateStep={0.1}

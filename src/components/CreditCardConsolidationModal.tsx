@@ -63,7 +63,7 @@ export default function CreditCardConsolidationModal() {
           <strong className={styles.highlightRate}>up to ₹75 Lakh</strong> into a single
           affordable EMI starting at{" "}
           <strong className={styles.highlightRate}>
-            9.99
+            10.25
             <sup className={styles.rateAsterisk}>*</sup>
             {" "}reducing rate
           </strong>.
