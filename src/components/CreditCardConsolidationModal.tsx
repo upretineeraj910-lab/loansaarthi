@@ -83,7 +83,7 @@ export default function CreditCardConsolidationModal() {
           <div className={styles.metricItem}>
             <span className={styles.metricLabel}>Reducing Rate</span>
             <span className={styles.metricValueDark}>
-              9.99%
+              10.25%
               {/* Tooltip trigger wrapper */}
               <span
                 className={styles.tooltipTrigger}
@@ -122,7 +122,7 @@ export default function CreditCardConsolidationModal() {
 
         {/* Bottom micro disclaimer */}
         <p className={styles.microDisclaimer}>
-          *9.99% rate valid on CIBIL 750+, salary ₹50k+ &amp; loans ₹15L–₹75L. Subject to bank policies.
+          *10.25% rate valid on CIBIL 750+, salary ₹50k+ &amp; loans ₹15L–₹75L. Subject to bank policies.
         </p>
       </div>
     </div>
