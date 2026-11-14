@@ -160,7 +160,7 @@ type Props = {
 };
 
 export default function EligibilityChecker({
-  endpoint = "/api/lead",
+  endpoint = "/api/eligibility",
   className = "",
 }: Props) {
   const [loanType, setLoanType] = useState<LoanType>("personal");
@@ -238,11 +238,16 @@ export default function EligibilityChecker({
           name: name.trim(),
           phone: `+91${phone}`,
           number: phone,
-          income: String(incomeNum),
+          monthlyIncome: incomeNum,
+          income: incomeNum,
           salary: incomeNum,
+          existingEmi: emiNum,
+          cibil: cibil,
           loanType: LOAN_CONFIG[loanType].label,
           occupation: employment === "salaried" ? "Salaried" : "Self-Employed",
           loanAmount: result.maxLoan,
+          maxLoan: result.maxLoan,
+          emi: result.emi,
         }),
       });
 
