@@ -18,6 +18,10 @@ import DiwaliPopup from "@/components/DiwaliPopup";
 
 import "./main.css";
 
+
+import EligibilityChecker from "@/components/EligibilityChecker";
+
+
 /**
  * LoanSaarthi Home Page
  * Central portal featuring luxury hero, lender network, loan comparison engine,
@@ -45,6 +49,21 @@ export default function Home() {
         },
         description:
           "Compare and apply for Personal, Business, and Home loans across 42+ banks and NBFCs with instant sanction and lowest interest rates.",
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://www.loansaarthi.com/#eligibility-checker",
+        name: "LoanSaarthi Loan Eligibility Checker",
+        url: "https://www.loansaarthi.com/#eligibility",
+        applicationCategory: "FinanceApplication",
+        operatingSystem: "All",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "INR",
+        },
+        description:
+          "Free online loan eligibility calculator to estimate maximum borrowing capacity and EMIs across 42+ partner banks.",
       },
       {
         "@type": "FAQPage",
@@ -178,6 +197,19 @@ export default function Home() {
 
       {/* ---------------- CLIENT EXPERIENCE & TESTIMONIALS ---------------- */}
       <WhyChooseUs />
+
+      {/* ---------------- LOAN ELIGIBILITY CHECKER ---------------- */}
+      <section id="eligibility" className="container section-spacing">
+        <Reveal>
+          <Eyebrow>Pre-qualification</Eyebrow>
+          <h2 className="section-header" style={{ maxWidth: "none" }}>
+            Know your borrowing limit before you apply.
+          </h2>
+        </Reveal>
+        <Reveal delay={100}>
+          <EligibilityChecker />
+        </Reveal>
+      </section>
 
       {/* ---------------- INTERACTIVE EMI CALCULATOR ---------------- */}
       <section id="calculator" className="container section-spacing">

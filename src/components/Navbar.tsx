@@ -81,6 +81,7 @@ export default function Navbar() {
               <Link href="/dropline-overdraft" prefetch={false}>Dropline Overdraft</Link>
             </div>
           </div>
+          <Link href="/check-eligibility" prefetch={false}>Check Eligibility</Link>
           <Link href="/#calculator" prefetch={false}>EMI Calculator</Link>
           <Link href="/about-us" prefetch={false}>About Us</Link>
           <Link href="/Contact-Us" prefetch={false}>Contact Us</Link>
@@ -156,6 +157,9 @@ export default function Navbar() {
             </div>
           </div>
 
+          <Link href="/check-eligibility" prefetch={false} onClick={closeMenu}>
+            Check Eligibility
+          </Link>
           <Link href="/#calculator" prefetch={false} onClick={closeMenu}>
             EMI Calculator
           </Link>

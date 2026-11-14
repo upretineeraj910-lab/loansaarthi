@@ -100,6 +100,10 @@ export default function Footer() {
             </li>
 
             <li>
+              <Link href="/check-eligibility" prefetch={false}>Check Loan Eligibility</Link>
+            </li>
+
+            <li>
               <Link href="/blog" prefetch={false}>Blogs</Link>
             </li>
 

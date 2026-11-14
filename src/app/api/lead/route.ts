@@ -128,43 +128,78 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    const {
-      phone,
-      fullName,
-      email,
-      occupation,
-      loanType,
-      income,
-    } = body;
+    const rawPhone = (body.phone || body.number || "").toString().trim();
+    // Extract last 10 digits
+    const digitsOnly = rawPhone.replace(/\D/g, "");
+    const cleanPhone = digitsOnly.length >= 10 ? digitsOnly.slice(-10) : digitsOnly;
+    const formattedPhone = cleanPhone.length === 10 ? `+91${cleanPhone}` : rawPhone;
 
-    const leadName = fullName || body.name;
-    const leadIncome = income || (body.loanAmount ? String(body.loanAmount) : "");
+    const leadName = (body.fullName || body.name || "").toString().trim();
+    const leadEmail = (body.email || "").toString().trim();
+    const leadIncome = String(
+      body.income || body.salary || body.loanAmount || ""
+    ).trim();
+    const leadLoanType = body.loanType || "Personal Loan";
+    const leadOccupation = body.occupation || "Salaried";
+    const leadLoanAmount = body.loanAmount || body.maxLoan;
 
-    if (!phone || !leadName || !email || !leadIncome) {
+    if (!cleanPhone || cleanPhone.length < 10) {
       return NextResponse.json(
         {
           success: false,
-          message: "Phone, full name, email and income are required",
+          message: "A valid 10-digit mobile number is required",
         },
         { status: 400 }
       );
     }
 
-    const newLead = await Lead.create({
-      phone,
+    if (!leadName) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Full name is required",
+        },
+        { status: 400 }
+      );
+    }
+
+    const updatePayload: Record<string, any> = {
+      phone: formattedPhone,
       fullName: leadName,
-      email,
-      occupation: occupation || "Salaried",
-      loanType: loanType || "Home Loan",
-      income: leadIncome,
+      name: leadName,
+      occupation: leadOccupation,
+      loanType: leadLoanType,
       isVerified: true,
-    });
+    };
+
+    if (leadEmail) updatePayload.email = leadEmail;
+    if (leadIncome) updatePayload.income = leadIncome;
+    if (leadLoanAmount) updatePayload.loanAmount = leadLoanAmount;
+
+    // Use findOneAndUpdate with upsert to prevent duplicate key error if user submits again
+    const lead = await Lead.findOneAndUpdate(
+      {
+        $or: [
+          { phone: formattedPhone },
+          { phone: cleanPhone },
+          ...(digitsOnly ? [{ phone: digitsOnly }] : []),
+        ],
+      },
+      {
+        $set: updatePayload,
+      },
+      {
+        upsert: true,
+        new: true,
+        setDefaultsOnInsert: true,
+      }
+    );
 
     return NextResponse.json(
       {
         success: true,
         message: "Lead saved successfully",
-        lead: newLead,
+        lead,
       },
       { status: 201 }
     );
