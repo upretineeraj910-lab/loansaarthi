@@ -19,7 +19,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Access Denied: Only Data Entry Operators (crm_entry) can upload leads. CRM Editors are not permitted to upload data.',
+          message:
+            'Access Denied: Only Data Entry Operators (crm_entry) and Super Admin can bulk upload leads. Admins and CRM Editors are not permitted to upload data.',
         },
         { status: 403 }
       );

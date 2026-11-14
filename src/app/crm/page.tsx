@@ -223,14 +223,23 @@ export default function CrmDashboardPage() {
     fetchUserAuth();
   }, [fetchUserAuth]);
 
-  const isSuperAdmin = currentUser?.role === 'superadmin';
-  const isAdmin = currentUser?.role === 'superadmin' || currentUser?.role === 'admin';
-  const canEdit = currentUser?.role === 'crm_editor' || isAdmin;
-  const canEnter = currentUser?.role === 'crm_entry' || isAdmin;
+  const isSuperAdmin = currentUser?.role?.toLowerCase() === 'superadmin';
+  const isAdmin = currentUser?.role?.toLowerCase() === 'admin';
+  const isEntry = currentUser?.role?.toLowerCase() === 'crm_entry';
+  const isEditor = currentUser?.role?.toLowerCase() === 'crm_editor';
 
-  // Fetch Agents (crm_editor) list for Admin / Super Admin
+  // Strict RBAC Rules:
+  // - Super Admin: Full master access across CRM pipeline (view, edit, assign, delete).
+  // - CRM Entry: View-only access on pipeline (cannot edit status, cannot assign, cannot delete).
+  // - CRM Editor: Edit assigned leads.
+  // - Admin: Blocked from pipeline (restricted strictly to OTP Customer Leads on /lead).
+  const canEdit = isSuperAdmin || isEditor;
+  const canManage = isSuperAdmin;
+  const canEnter = isSuperAdmin || isEntry;
+
+  // Fetch Agents (crm_editor) list ONLY for Super Admin
   const fetchAgents = useCallback(async () => {
-    if (!isAdmin) return;
+    if (!isSuperAdmin) return;
     try {
       const res = await fetch('/api/crm/agents');
       if (res.ok) {
@@ -242,7 +251,7 @@ export default function CrmDashboardPage() {
     } catch (err) {
       console.warn('Could not fetch agents directly, fallback can be handled:', err);
     }
-  }, [isAdmin]);
+  }, [isSuperAdmin]);
 
   useEffect(() => {
     fetchAgents();
@@ -295,7 +304,7 @@ export default function CrmDashboardPage() {
 
   // Filter leads based on active assignment tab & superadmin agent filter
   const filteredLeads = useMemo(() => {
-    if (!isAdmin) return leads;
+    if (!isSuperAdmin) return leads;
     return leads.filter((lead) => {
       const isLeadAssigned = Boolean(lead.assignedTo && lead.assignedTo.trim() !== '' && lead.assignedTo !== 'Unassigned');
 
@@ -313,7 +322,7 @@ export default function CrmDashboardPage() {
       }
       return true;
     });
-  }, [leads, isAdmin, assignmentTab, assignedAgentFilter]);
+  }, [leads, isSuperAdmin, assignmentTab, assignedAgentFilter]);
 
   // Paginated leads calculation
   const totalPages = Math.max(1, Math.ceil(filteredLeads.length / pageSize));
@@ -492,6 +501,114 @@ export default function CrmDashboardPage() {
   const metricClass = (filterVal: string, cssKey: string) =>
     `crm-metric crm-metric--${cssKey}${statusFilter === filterVal ? ' is-active' : ''}`;
 
+  if (authLoading) {
+    return (
+      <div className="crm-page">
+        <div className="crm-shell crm-shell--narrow" style={{ marginTop: '4rem', textAlign: 'center' }}>
+          <div className="crm-panel" style={{ padding: '3rem' }}>
+            <RefreshCw size={32} className="animate-spin text-green" style={{ margin: '0 auto 1rem auto' }} />
+            <p style={{ color: '#94a3b8', fontSize: '15px' }}>Verifying permissions...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!currentUser) {
+    return (
+      <div className="crm-page">
+        <div className="crm-shell crm-shell--narrow" style={{ marginTop: '4rem' }}>
+          <div className="crm-panel" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
+            <div style={{
+              width: '60px',
+              height: '60px',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(245, 197, 99, 0.15)',
+              color: '#f5c563',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 1.5rem auto'
+            }}>
+              <Lock size={28} />
+            </div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.75rem' }}>
+              Sign In Required
+            </h2>
+            <p style={{ color: '#94a3b8', maxWidth: '440px', margin: '0 auto 1.5rem auto', lineHeight: 1.5, fontSize: '14px' }}>
+              Please sign in with your staff credentials to access the CRM portal.
+            </p>
+            <Link href="/login" className="crm-btn crm-btn-primary">
+              Sign In to Continue
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Admin role is strictly restricted to /lead (OTP Customer Leads)
+  if (isAdmin) {
+    return (
+      <div className="crm-page">
+        <div className="crm-shell crm-shell--narrow" style={{ marginTop: '4rem' }}>
+          <div className="crm-panel" style={{ textAlign: 'center', padding: '3.5rem 2rem' }}>
+            <div
+              style={{
+                width: '64px',
+                height: '64px',
+                borderRadius: '50%',
+                backgroundColor: 'rgba(245, 197, 99, 0.15)',
+                color: '#f5c563',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 1.5rem auto',
+                border: '1px solid rgba(245, 197, 99, 0.35)',
+              }}
+            >
+              <Shield size={32} />
+            </div>
+            <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#ffffff', marginBottom: '0.75rem' }}>
+              Admin Workspace: Leads Vault Access
+            </h2>
+            <p style={{ color: '#94a3b8', maxWidth: '500px', margin: '0 auto 1.75rem auto', lineHeight: 1.6, fontSize: '0.92rem' }}>
+              Your account has the <strong>Admin</strong> role, which is configured specifically for viewing the <strong>Customer Leads Vault</strong> (all OTP-verified submissions from the website). The visual CRM pipeline and underwriting workflows are reserved for Super Admin and calling teams.
+            </p>
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <Link
+                href="/lead"
+                className="crm-btn crm-btn-primary"
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  padding: '12px 24px',
+                  fontWeight: 700,
+                  fontSize: '0.95rem',
+                }}
+              >
+                <Users size={16} />
+                <span>Go to Customer Leads (/lead)</span>
+              </Link>
+              <button
+                type="button"
+                onClick={async () => {
+                  await fetch('/api/logout', { method: 'POST' });
+                  localStorage.clear();
+                  window.location.href = '/login';
+                }}
+                className="crm-btn crm-btn-ghost"
+              >
+                Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="crm-page">
       <div className="crm-shell">
@@ -506,6 +623,31 @@ export default function CrmDashboardPage() {
         <Link href="/dashboard" className="crm-back-btn">
           <ArrowLeft size={14} /> Back to Dashboard
         </Link>
+
+        {/* View-Only Notification for Data Entry */}
+        {isEntry && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              padding: '14px 20px',
+              marginBottom: '1.25rem',
+              borderRadius: '10px',
+              backgroundColor: 'rgba(245, 197, 99, 0.1)',
+              border: '1px solid rgba(245, 197, 99, 0.3)',
+              color: '#f5c563',
+            }}
+          >
+            <Eye size={20} style={{ flexShrink: 0 }} />
+            <div style={{ fontSize: '0.86rem', lineHeight: 1.5 }}>
+              <strong>View-Only Pipeline Mode:</strong> You are logged in as a <strong>Data Entry Operator</strong> (crm_entry). You can view pipeline velocity and lead records, but status updates, case reassignments, and deletions are disabled. To submit new customer files, use{' '}
+              <Link href="/crm/entry" style={{ color: '#ffffff', textDecoration: 'underline', fontWeight: 700 }}>
+                Fast Lead Entry &rarr;
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* Header */}
         <div className="crm-header-card">
@@ -768,8 +910,8 @@ export default function CrmDashboardPage() {
           </div>
         </div>
 
-        {/* ADMIN & SUPER ADMIN: Assignment View Tabs & Filter */}
-        {isAdmin && (
+        {/* SUPER ADMIN ONLY: Assignment View Tabs & Filter */}
+        {isSuperAdmin && (
           <div
             style={{
               display: 'flex',
@@ -933,8 +1075,8 @@ export default function CrmDashboardPage() {
           </div>
         )}
 
-        {/* ADMIN & SUPER ADMIN: Batch Assignment Action Toolbar */}
-        {isAdmin && (
+        {/* SUPER ADMIN ONLY: Batch Assignment Action Toolbar */}
+        {isSuperAdmin && (
           <div
             style={{
               display: 'flex',
@@ -1148,7 +1290,7 @@ export default function CrmDashboardPage() {
             <table className="crm-table">
               <thead>
                 <tr>
-                  {isAdmin && (
+                  {isSuperAdmin && (
                     <th style={{ width: '40px', textAlign: 'center' }}>
                       <input
                         type="checkbox"
@@ -1173,24 +1315,24 @@ export default function CrmDashboardPage() {
               <tbody>
                 {leadError ? (
                   <tr>
-                    <td colSpan={isAdmin ? 10 : 9} className="crm-table-empty" style={{ color: '#dc2626' }}>
+                    <td colSpan={isSuperAdmin ? 10 : 9} className="crm-table-empty" style={{ color: '#dc2626' }}>
                       <AlertTriangle size={26} style={{ margin: '0 auto 0.5rem', color: '#dc2626' }} />
                       {leadError}
                     </td>
                   </tr>
                 ) : loading ? (
                   <tr>
-                    <td colSpan={isAdmin ? 10 : 9} className="crm-table-loading">
+                    <td colSpan={isSuperAdmin ? 10 : 9} className="crm-table-loading">
                       <RefreshCw size={22} className="animate-spin" style={{ margin: '0 auto 0.5rem', color: 'var(--brand-green)' }} />
                       Loading leads from database...
                     </td>
                   </tr>
                 ) : filteredLeads.length === 0 ? (
                   <tr>
-                    <td colSpan={isAdmin ? 10 : 9} className="crm-table-empty">
+                    <td colSpan={isSuperAdmin ? 10 : 9} className="crm-table-empty">
                       <Filter size={26} style={{ margin: '0 auto 0.5rem' }} />
-                      {!isAdmin && currentUser?.role === 'crm_editor'
-                        ? 'No leads currently assigned to you. Once an admin assigns cases, they will appear here.'
+                      {isEditor
+                        ? 'No leads currently assigned to you. Once an administrator assigns cases, they will appear here.'
                         : 'No leads found matching your criteria.'}
                     </td>
                   </tr>
@@ -1201,8 +1343,8 @@ export default function CrmDashboardPage() {
                       onClick={() => setSelectedLead(lead)}
                       className={selectedLeadIds.includes(lead._id) ? 'is-selected' : ''}
                     >
-                      {/* Checkbox for Admin / Super Admin */}
-                      {isAdmin && (
+                      {/* Checkbox for Super Admin */}
+                      {isSuperAdmin && (
                         <td
                           style={{ textAlign: 'center', cursor: 'pointer' }}
                           onClick={(e) => {
@@ -1244,7 +1386,7 @@ export default function CrmDashboardPage() {
 
                       {/* Assigned To Column */}
                       <td onClick={(e) => e.stopPropagation()}>
-                        {isAdmin ? (
+                        {isSuperAdmin ? (
                           <div className="crm-assign-wrap">
                             <select
                               value={lead.assignedTo || ''}
@@ -1813,7 +1955,7 @@ export default function CrmDashboardPage() {
 
                 {/* <div className="crm-detail-box">
                   <div className="crm-detail-box-label">Assigned Agent</div>
-                  {isAdmin ? (
+                  {isSuperAdmin ? (
                     <select
                       value={selectedLead.assignedTo || ''}
                       onChange={(e) => {

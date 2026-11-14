@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Lead from '@/models/Lead';
-import { getAuthUser, canEditLeads } from '@/lib/crmAuth';
+import { getAuthUser, canEditLeads, canDeleteLeads, isSuperAdmin } from '@/lib/crmAuth';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,11 +20,16 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       );
     }
 
+    // Role verification:
+    // Only 'superadmin' and 'crm_editor' can modify leads.
+    // 'crm_entry' is strictly VIEW-ONLY on CRM Pipeline.
+    // 'admin' is restricted exclusively to OTP Leads on /lead.
     if (!canEditLeads(authUser.role)) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Access Denied: Data Entry Operators cannot modify lead statuses or details. Only CRM Editors and Admins can edit leads.',
+          message:
+            'Access Denied: You do not have permission to modify leads. Data Entry Operators have view-only pipeline access, and Admins are restricted to the OTP Customer Leads Vault.',
         },
         { status: 403 }
       );
@@ -43,8 +48,13 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       'rejectionReason',
       'approvedBank',
       'approvedAmount',
-      'assignedTo',
     ];
+
+    // Only Super Admin can reassign leads to another agent
+    if (isSuperAdmin(authUser.role) && body.assignedTo !== undefined) {
+      allowedUpdates.push('assignedTo');
+    }
+
     const updateData: Record<string, any> = {};
 
     for (const key of allowedUpdates) {
@@ -79,7 +89,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-// DELETE: Delete lead (Admin and SuperAdmin only)
+// DELETE: Delete lead (Super Admin ONLY)
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const authUser = await getAuthUser(request);
@@ -90,12 +100,11 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    const role = authUser.role?.toLowerCase();
-    if (role !== 'superadmin' && role !== 'admin') {
+    if (!canDeleteLeads(authUser.role)) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Access Denied: Only Admins can delete leads.',
+          message: 'Access Denied: Only Super Admin has permission to delete leads permanently.',
         },
         { status: 403 }
       );

@@ -33,7 +33,6 @@ export default function robots(): MetadataRoute.Robots {
           "/crm/",
           "/lead/",
           "/dashboard/",
-          "/shared-form/",
           "/*?*",               // Prevent crawling URL query parameters to avoid duplicate hits
         ],
         crawlDelay: 5,         // Throttle rapid crawl requests

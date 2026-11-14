@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectToDatabase from '@/lib/mongodb';
 import Lead from '@/models/Lead';
-import { getAuthUser, canViewLeads, canEnterLeads, canEditLeads } from '@/lib/crmAuth';
+import {
+  getAuthUser,
+  canViewLeads,
+  canEnterLeads,
+  canEditLeads,
+  canAssignLeads,
+} from '@/lib/crmAuth';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,9 +22,22 @@ export async function GET(request: NextRequest) {
       );
     }
 
+    // Explicit check: Admin role is restricted strictly to OTP Customer Leads on /lead
+    const userRole = authUser.role?.toLowerCase() || '';
+    if (userRole === 'admin') {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            'Access Restricted: The Admin role is configured strictly for the OTP Customer Leads Vault (/lead). CRM Pipeline access is reserved for Super Admin, CRM Editors, and Data Entry Operators.',
+        },
+        { status: 403 }
+      );
+    }
+
     if (!canViewLeads(authUser.role)) {
       return NextResponse.json(
-        { success: false, message: 'Access Denied: You do not have permission to view CRM leads.' },
+        { success: false, message: 'Access Denied: You do not have permission to view CRM pipeline leads.' },
         { status: 403 }
       );
     }
@@ -35,12 +54,9 @@ export async function GET(request: NextRequest) {
     const query: Record<string, any> = {};
 
     // Role-based Access Control:
-    // Admin, Superadmin, Manager, and Data Entry (crm_entry) have access to view all pipeline leads.
+    // Superadmin, Manager, and Data Entry (crm_entry) have access to view all pipeline leads.
     // CRM Editors (calling agents) are strictly scoped to leads assigned to them.
-    const userRole = authUser.role?.toLowerCase();
-    const isFullAccessRole = ['admin', 'superadmin', 'manager', 'crm', 'crm_entry'].includes(
-      userRole
-    );
+    const isFullAccessRole = ['superadmin', 'manager', 'crm', 'crm_entry'].includes(userRole);
 
     if (!isFullAccessRole) {
       if (authUser.name) {
@@ -258,11 +274,11 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    if (!canEditLeads(authUser.role)) {
+    if (!canAssignLeads(authUser.role)) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Access Denied: Only Admins and Editors can assign leads.',
+          message: 'Access Denied: Only Super Admin can assign or reassign leads to telecalling agents.',
         },
         { status: 403 }
       );

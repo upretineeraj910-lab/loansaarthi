@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
+import Link from "next/link";
 import {
   Search,
   RefreshCw,
@@ -269,6 +270,51 @@ export default function LeadPage() {
 
   return (
     <main className="lead-page">
+      {/* TOP NAVIGATION / SESSION BAR */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', flexWrap: 'wrap', gap: '10px' }}>
+        {currentUser?.role !== 'admin' ? (
+          <Link
+            href="/dashboard"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              color: '#94a3b8',
+              textDecoration: 'none',
+              fontSize: '0.84rem',
+              fontWeight: 600,
+            }}
+          >
+            &larr; Back to Dashboard
+          </Link>
+        ) : (
+          <span style={{ fontSize: '0.86rem', color: '#f5c563', fontWeight: 700 }}>
+            🛡️ Admin Portal: OTP Customer Leads Vault
+          </span>
+        )}
+
+        <button
+          type="button"
+          onClick={async () => {
+            await fetch('/api/logout', { method: 'POST' });
+            localStorage.clear();
+            window.location.href = '/login';
+          }}
+          style={{
+            background: 'transparent',
+            border: '1px solid rgba(239, 68, 68, 0.35)',
+            color: '#fca5a5',
+            padding: '5px 14px',
+            borderRadius: '6px',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+        >
+          Sign Out
+        </button>
+      </div>
+
       {/* HEADER SECTION */}
       <header className="lead-header">
         <div className="lead-header-info">
@@ -283,27 +329,27 @@ export default function LeadPage() {
                     currentUser.role === "superadmin"
                       ? "#dcfce7"
                       : currentUser.role === "admin"
-                      ? "#f1f5f9"
+                      ? "#fef3c7"
                       : "#e0e7ff",
                   color:
                     currentUser.role === "superadmin"
                       ? "#166534"
                       : currentUser.role === "admin"
-                      ? "#334155"
+                      ? "#92400e"
                       : "#3730a3",
                   borderColor:
                     currentUser.role === "superadmin"
                       ? "#bbf7d0"
                       : currentUser.role === "admin"
-                      ? "#cbd5e1"
+                      ? "#fde68a"
                       : "#c7d2fe",
                 }}
               >
                 👤 {currentUser.name || currentUser.email?.split("@")[0]} (
                 {currentUser.role === "superadmin"
-                  ? "Role: Super Admin"
+                  ? "Role: Super Admin (Master Access)"
                   : currentUser.role === "admin"
-                  ? "Role: Admin"
+                  ? "Role: Admin (OTP Customer Leads Vault)"
                   : currentUser.role === "crm_editor"
                   ? "Role: CRM Editor"
                   : "Role: Data Entry Operator"}

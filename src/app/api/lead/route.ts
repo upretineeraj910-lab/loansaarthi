@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import connectDB from "@/lib/mongodb";
+import { getAuthUser, canViewLeadVault, isSuperAdmin } from "@/lib/crmAuth";
 
 export const dynamic = "force-dynamic";
 
@@ -60,6 +61,21 @@ const escapeRegex = (str: string) =>
 // =========================
 export async function GET(req: Request) {
   try {
+    const authUser = await getAuthUser(req);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: "Authentication required. Please sign in to view customer leads." },
+        { status: 401 }
+      );
+    }
+
+    if (!canViewLeadVault(authUser.role)) {
+      return NextResponse.json(
+        { success: false, message: "Access Denied: You do not have permission to view customer leads." },
+        { status: 403 }
+      );
+    }
+
     const { searchParams } = new URL(req.url);
     const page = Math.max(1, parseInt(searchParams.get("page") || "1", 10) || 1);
     const limit = Math.min(100, Math.max(1, parseInt(searchParams.get("limit") || "10", 10) || 10));
@@ -211,6 +227,54 @@ export async function POST(req: Request) {
         success: false,
         message: error?.message || "Failed to save lead",
       },
+      { status: 500 }
+    );
+  }
+}
+
+// =========================
+// DELETE LEAD (SUPER ADMIN ONLY)
+// =========================
+export async function DELETE(req: Request) {
+  try {
+    const authUser = await getAuthUser(req);
+    if (!authUser) {
+      return NextResponse.json(
+        { success: false, message: "Authentication required" },
+        { status: 401 }
+      );
+    }
+
+    if (!isSuperAdmin(authUser.role)) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Access Denied: Only Super Admin can delete customer leads.",
+        },
+        { status: 403 }
+      );
+    }
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    if (!id) {
+      return NextResponse.json(
+        { success: false, message: "Lead ID is required" },
+        { status: 400 }
+      );
+    }
+
+    await connectDB();
+    await Lead.findByIdAndDelete(id);
+
+    return NextResponse.json({
+      success: true,
+      message: "Lead permanently removed from vault.",
+    });
+  } catch (error: any) {
+    console.error("DELETE LEAD ERROR:", error);
+    return NextResponse.json(
+      { success: false, message: error?.message || "Failed to delete lead" },
       { status: 500 }
     );
   }

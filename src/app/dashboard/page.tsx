@@ -1,204 +1,287 @@
+/**
+ * LoanSaarthi Executive Partner Dashboard
+ * Central command center for loan pipelines, verified lead vaults,
+ * pre-qualification inquiries, and partner performance metrics.
+ */
 'use client';
 
-import { useEffect, useState } from 'react';
-import styles from './Dashboard.module.css';
-// import { Link } from 'lucide-react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {
+  Users,
+  TrendingUp,
+  CheckCircle2,
+  Calculator,
+  Calendar,
+  Search,
+  RefreshCw,
+  PlusCircle,
+  ArrowRight,
+  LogOut,
+  ShieldCheck,
+  Layers,
+  Building2,
+  FileText,
+} from 'lucide-react';
+import styles from './Dashboard.module.css';
 
-interface DocumentUrl {
-  fileName: string;
-  mimeType: string;
-  size: number;
-  uploadedAt: string;
-  url: string;
+interface DashboardStats {
+  totalLeads: number;
+  fresh: number;
+  inPipeline: number;
+  approved: number;
+  disbursed: number;
+  disbursedVolume: number;
+  eligibilityChecks: number;
+  appointments: number;
 }
 
-interface CaseDocuments {
-  pan?: DocumentUrl;
-  aadhaar?: DocumentUrl;
-  bankStatement?: DocumentUrl;
-  itr?: DocumentUrl;
-  form16?: DocumentUrl;
-  businessProof?: DocumentUrl;
-  salarySlips?: DocumentUrl[];
-}
-
-interface CaseData {
-  _id: string;
-  applicantName: string;
+interface LeadItem {
+  id: string;
+  name: string;
+  phone: string;
   loanType: string;
   loanAmount: number;
+  status: string;
+  assignedTo: string;
   createdAt: string;
 }
 
-interface DocumentsResponse {
-  success: boolean;
-  caseId: string;
-  documents: CaseDocuments;
+interface EligibilityItem {
+  id: string;
+  fullName: string;
+  phone: string;
+  loanType: string;
+  monthlyIncome: number;
+  maxLoanEligible: number;
+  createdAt: string;
 }
 
+interface UserProfile {
+  id: string;
+  email: string;
+  role: string;
+  name?: string;
+}
+
+const formatINR = (val?: number | string): string => {
+  if (val === undefined || val === null || val === '') return '₹0';
+  const num = Number(val);
+  if (isNaN(num)) return `₹${val}`;
+  return '₹' + Math.round(num).toLocaleString('en-IN');
+};
+
+const formatVolumeCr = (val: number): string => {
+  if (!val || val === 0) return '₹0';
+  if (val >= 10000000) {
+    return `₹${(val / 10000000).toFixed(2)} Cr`;
+  }
+  if (val >= 100000) {
+    return `₹${(val / 100000).toFixed(1)} Lakh`;
+  }
+  return formatINR(val);
+};
+
+const formatDate = (dateStr?: string): string => {
+  if (!dateStr) return '--';
+  try {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '--';
+    return d.toLocaleDateString('en-IN', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  } catch {
+    return '--';
+  }
+};
+
 export default function Dashboard() {
-  const [shareUrl, setShareUrl] = useState('');
-  const [copied, setCopied] = useState(false);
+  const router = useRouter();
 
-  const [cases, setCases] = useState<CaseData[]>([]);
+  const [user, setUser] = useState<UserProfile | null>(null);
+  const [stats, setStats] = useState<DashboardStats>({
+    totalLeads: 0,
+    fresh: 0,
+    inPipeline: 0,
+    approved: 0,
+    disbursed: 0,
+    disbursedVolume: 0,
+    eligibilityChecks: 0,
+    appointments: 0,
+  });
+
+  const [recentLeads, setRecentLeads] = useState<LeadItem[]>([]);
+  const [recentEligibility, setRecentEligibility] = useState<EligibilityItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [refreshing, setRefreshing] = useState(false);
 
-  const [selectedCase, setSelectedCase] = useState<CaseData | null>(null);
-  const [documents, setDocuments] = useState<CaseDocuments | null>(null);
-  const [documentsLoading, setDocumentsLoading] = useState(false);
-  const [documentsError, setDocumentsError] = useState('');
+  // Active view tab in the data table
+  const [activeTab, setActiveTab] = useState<'pipeline' | 'eligibility'>('pipeline');
+  const [searchQuery, setSearchQuery] = useState('');
 
-  const [isSuperAdmin, setIsSuperAdmin] = useState(false);
-
-  useEffect(() => {
-    const userString = localStorage.getItem('user');
-
-    if (userString) {
-      try {
-        const user = JSON.parse(userString);
-        if (user?.role === 'superadmin') {
-          setIsSuperAdmin(true);
-        }
-        if (user?.id) {
-          const origin = window.location.origin;
-          setShareUrl(`${origin}/shared-form?ref=${user.id}`);
-        }
-      } catch (err) {
-        console.error('Error parsing user data:', err);
-      }
-    }
-
-    fetch('/api/auth/me')
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data?.authenticated && data?.role === 'superadmin') {
-          setIsSuperAdmin(true);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  useEffect(() => {
-    const fetchCases = async () => {
-      try {
-        setLoading(true);
-        setError('');
-
-        const response = await fetch('/api/dashboard/cases');
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch cases');
-        }
-
-        const result = await response.json();
-
-        setCases(result.data || []);
-      } catch (err) {
-        console.error('Failed to load cases:', err);
-        setError('Unable to load applications.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCases();
-  }, []);
-
-  const handleCopy = async () => {
-    if (!shareUrl) return;
+  const fetchDashboardData = useCallback(async (isRefresh = false) => {
+    if (isRefresh) setRefreshing(true);
+    else setLoading(true);
 
     try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-
-      setTimeout(() => {
-        setCopied(false);
-      }, 2500);
-    } catch (err) {
-      console.error('Copy failed:', err);
-    }
-  };
-
-  const handleViewDocuments = async (caseItem: CaseData) => {
-    try {
-      setSelectedCase(caseItem);
-      setDocuments(null);
-      setDocumentsError('');
-      setDocumentsLoading(true);
-
-      const response = await fetch(
-        `/api/dashboard/cases/${caseItem._id}/documents`
-      );
-
-      const result: DocumentsResponse | { error: string } =
-        await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          'error' in result
-            ? result.error
-            : 'Failed to fetch documents'
-        );
+      const res = await fetch('/api/dashboard/overview');
+      if (res.status === 401) {
+        router.push('/login');
+        return;
       }
-
-      setDocuments((result as DocumentsResponse).documents);
+      if (res.status === 403) {
+        const errData = await res.json();
+        if (errData.redirectTo) {
+          router.push(errData.redirectTo);
+          return;
+        }
+      }
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success) {
+          if (data.user) {
+            setUser(data.user);
+            if (data.user.role?.toLowerCase() === 'admin') {
+              router.push('/lead');
+              return;
+            }
+          }
+          if (data.stats) setStats(data.stats);
+          if (data.recentLeads) setRecentLeads(data.recentLeads);
+          if (data.recentEligibility) setRecentEligibility(data.recentEligibility);
+        }
+      }
     } catch (err) {
-      console.error('Failed to load documents:', err);
-
-      setDocumentsError(
-        err instanceof Error
-          ? err.message
-          : 'Unable to load documents.'
-      );
+      console.error('Failed to load dashboard data:', err);
     } finally {
-      setDocumentsLoading(false);
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, [router]);
+
+  useEffect(() => {
+    // Read cached user info from localStorage if available
+    try {
+      const stored = localStorage.getItem('user');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        setUser(parsed);
+        if (parsed?.role?.toLowerCase() === 'admin') {
+          router.push('/lead');
+          return;
+        }
+      }
+    } catch {
+      // Ignore parse errors
+    }
+
+    fetchDashboardData();
+  }, [fetchDashboardData, router]);
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/logout', { method: 'POST' });
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      router.push('/login');
+      router.refresh();
+    } catch (err) {
+      console.error('Logout error:', err);
     }
   };
 
-  const closeDocumentsModal = () => {
-    setSelectedCase(null);
-    setDocuments(null);
-    setDocumentsError('');
-  };
+  const userRole = user?.role?.toLowerCase() || '';
+  const isSuperAdmin = userRole === 'superadmin';
+  const isAdmin = userRole === 'admin';
+  const isEntry = userRole === 'crm_entry';
+  const isEditor = userRole === 'crm_editor';
+  const canEnter = isSuperAdmin || isEntry;
+  const canEdit = isSuperAdmin || isEditor;
 
-  const documentItems: {
-    key: keyof Omit<CaseDocuments, 'salarySlips'>;
-    label: string;
-  }[] = [
-    { key: 'pan', label: 'PAN Card' },
-    { key: 'aadhaar', label: 'Aadhaar Card' },
-    { key: 'bankStatement', label: 'Bank Statement' },
-    { key: 'itr', label: 'ITR' },
-    { key: 'form16', label: 'Form 16' },
-    { key: 'businessProof', label: 'Business Proof' },
-  ];
+  // Filtered lists for the active tab
+  const filteredLeads = useMemo(() => {
+    if (!searchQuery.trim()) return recentLeads;
+    const q = searchQuery.toLowerCase().trim();
+    return recentLeads.filter(
+      (l) =>
+        l.name?.toLowerCase().includes(q) ||
+        l.phone?.includes(q) ||
+        l.loanType?.toLowerCase().includes(q) ||
+        l.status?.toLowerCase().includes(q)
+    );
+  }, [recentLeads, searchQuery]);
+
+  const filteredEligibility = useMemo(() => {
+    if (!searchQuery.trim()) return recentEligibility;
+    const q = searchQuery.toLowerCase().trim();
+    return recentEligibility.filter(
+      (e) =>
+        e.fullName?.toLowerCase().includes(q) ||
+        e.phone?.includes(q) ||
+        e.loanType?.toLowerCase().includes(q)
+    );
+  }, [recentEligibility, searchQuery]);
+
+  const getStatusBadgeClass = (status: string) => {
+    switch (status?.toLowerCase()) {
+      case 'fresh':
+        return styles.badgeFresh;
+      case 'approved':
+        return styles.badgeApproved;
+      case 'disbursed':
+        return styles.badgeDisbursed;
+      case 'rejected':
+      case 'not eligible':
+        return styles.badgeRejected;
+      default:
+        return styles.badgePipeline;
+    }
+  };
 
   return (
     <div className={styles.dashboardLayout}>
-      {/* Sidebar */}
+      {/* ---------------- SIDEBAR ---------------- */}
       <aside className={styles.sidebar}>
-        <div className={styles.logo}>LoanSaarthi</div>
+        <Link href="/" className={styles.logoArea}>
+          <div className={styles.logoText}>
+            Loan<span>Saarthi</span>
+          </div>
+        </Link>
 
         <nav className={styles.nav}>
+          <span className={styles.navSectionLabel}>Core Modules</span>
           <Link
             href="/dashboard"
             className={`${styles.navItem} ${styles.navItemActive}`}
           >
-            Dashboard
-          </Link>
-
-          <Link href="/lead" className={styles.navItem}>
-            Lead
+            <Layers size={17} />
+            <span>Dashboard</span>
           </Link>
 
           <Link href="/crm" className={styles.navItem}>
-            CRM
+            <TrendingUp size={17} />
+            <span>{isEntry ? 'CRM Pipeline (View Only)' : isEditor ? 'My Calling Queue' : 'CRM Pipeline'}</span>
           </Link>
 
-          <Link href="/crm/entry" className={styles.navItem}>
-            CRM Entries
+          <Link href="/lead" className={styles.navItem}>
+            <Users size={17} />
+            <span>Leads Vault (OTP)</span>
+          </Link>
+
+          {canEnter && (
+            <Link href="/crm/entry" className={styles.navItem}>
+              <PlusCircle size={17} />
+              <span>Fast Lead Entry</span>
+            </Link>
+          )}
+
+          <span className={styles.navSectionLabel}>Client Tools</span>
+          <Link href="/check-eligibility" className={styles.navItem}>
+            <Calculator size={17} />
+            <span>Eligibility Engine</span>
           </Link>
 
           {isSuperAdmin && (
@@ -206,322 +289,362 @@ export default function Dashboard() {
               href="/dashboard/appointments"
               className={`${styles.navItem} ${styles.navItemGold}`}
             >
-             Expert Appointments 
+              <Calendar size={17} />
+              <span>Consultations</span>
             </Link>
           )}
-
-          {/* <a href="#" className={styles.navItem}>
-            Settings
-          </a> */}
         </nav>
+
+        {/* Sidebar Footer with User Card */}
+        <div className={styles.sidebarFooter}>
+          <div className={styles.userCard}>
+            <div className={styles.userAvatar}>
+              {(user?.name || user?.email || 'A').charAt(0).toUpperCase()}
+            </div>
+            <div className={styles.userInfo}>
+              <span className={styles.userName}>
+                {user?.name || user?.email || 'Partner Account'}
+              </span>
+              <span className={styles.userRole}>
+                {user?.role || 'Partner'}
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleLogout}
+            className={styles.logoutBtn}
+          >
+            <LogOut size={15} />
+            <span>Sign Out</span>
+          </button>
+        </div>
       </aside>
 
-      {/* Main Content */}
+      {/* ---------------- MAIN CONTENT ---------------- */}
       <main className={styles.mainContent}>
+        {/* Executive Header */}
         <header className={styles.header}>
-          <div>
-            <h1 className={styles.title}>Partner Dashboard</h1>
-
-            <p className={styles.welcomeEmail}>
-              Overview of your leads and referral links
+          <div className={styles.headerLeft}>
+            <span className={styles.roleBadge}>
+              <ShieldCheck size={12} />
+              <span>{user?.role || 'Partner'} Workspace</span>
+            </span>
+            <h1 className={styles.title}>
+              Executive Command Hub
+            </h1>
+            <p className={styles.subtitle}>
+              Real-time portfolio management, CRM pipeline velocity, and customer loan requests.
             </p>
+          </div>
+
+          <div className={styles.headerActions}>
+            <button
+              type="button"
+              onClick={() => fetchDashboardData(true)}
+              className={styles.actionBtnSecondary}
+              disabled={refreshing}
+            >
+              <RefreshCw size={15} className={refreshing ? 'animate-spin' : ''} />
+              <span>{refreshing ? 'Updating...' : 'Sync Data'}</span>
+            </button>
+
+            {canEnter ? (
+              <Link href="/crm/entry" className={styles.actionBtnPrimary}>
+                <PlusCircle size={15} />
+                <span>New Lead Intake</span>
+              </Link>
+            ) : isEditor ? (
+              <Link href="/crm" className={styles.actionBtnPrimary}>
+                <TrendingUp size={15} />
+                <span>Open Calling Queue</span>
+              </Link>
+            ) : null}
           </div>
         </header>
 
-        {/* Stats */}
-        <div className={styles.statsGrid}>
+        {/* ---------------- KPI STATS GRID ---------------- */}
+        <section className={styles.statsGrid} aria-label="Key Performance Indicators">
+          {/* Card 1: Total Leads */}
           <div className={styles.statCard}>
-            <div className={styles.statTitle}>
-              Total Referrals
-            </div>
-
-            <div className={styles.statValue}>
-              {loading ? '...' : cases.length}
-            </div>
-          </div>
-
-          <div className={styles.statCard}>
-            <div className={styles.statTitle}>
-              Approved Loans
-            </div>
-
-            <div className={styles.statValue}>—</div>
-          </div>
-
-          <div className={styles.statCard}>
-            <div className={styles.statTitle}>
-              Pending Process
-            </div>
-
-            <div className={styles.statValue}>—</div>
-          </div>
-
-          <div className={styles.statCard}>
-            <div className={styles.statTitle}>
-              Total Earnings
-            </div>
-
-            <div className={styles.statValue}>—</div>
-          </div>
-        </div>
-
-        {/* Referral Link */}
-        <div className={styles.shareCard}>
-          <h3 className={styles.sectionCardTitle}>
-            Your Referral Link
-          </h3>
-
-          <p className={styles.sectionCardMuted}>
-            Share this link with customers. Form entries will
-            automatically be tagged to your partner ID.
-          </p>
-
-          <div className={styles.shareInputGroup}>
-            <input
-              type="text"
-              readOnly
-              value={shareUrl || 'Generating link...'}
-              className={styles.shareInput}
-            />
-
-            <button
-              onClick={handleCopy}
-              className={styles.copyBtn}
-            >
-              {copied ? 'Copied! ✓' : 'Copy Share Link'}
-            </button>
-          </div>
-        </div>
-
-        {/* Cases Table */}
-        <div className={styles.tableCard}>
-          <h3 className={styles.sectionCardTitle}>
-            Recent Lead Applications
-          </h3>
-
-          {error && (
-            <p className={styles.errorMuted}>
-              {error}
-            </p>
-          )}
-
-          <div className={styles.tableWrapper}>
-            <table className={styles.table}>
-              <thead>
-                <tr>
-                  <th>Applicant Name</th>
-                  <th>Loan Type</th>
-                  <th>Amount</th>
-                  <th>Date</th>
-                  <th>Documents</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {loading ? (
-                  <tr>
-                    <td colSpan={5}>
-                      Loading applications...
-                    </td>
-                  </tr>
-                ) : cases.length === 0 ? (
-                  <tr>
-                    <td colSpan={5}>
-                      No applications found.
-                    </td>
-                  </tr>
-                ) : (
-                  cases.map((item) => (
-                    <tr key={item._id}>
-                      <td>{item.applicantName}</td>
-
-                      <td>{item.loanType}</td>
-
-                      <td>
-                        ₹
-                        {Number(item.loanAmount).toLocaleString(
-                          'en-IN'
-                        )}
-                      </td>
-
-                      <td>
-                        {new Date(
-                          item.createdAt
-                        ).toLocaleDateString('en-IN')}
-                      </td>
-
-                      <td>
-                        <button
-                          type="button"
-                          className={styles.documentBtn}
-                          onClick={() =>
-                            handleViewDocuments(item)
-                          }
-                        >
-                          View Documents
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
-
-      {/* Documents Modal */}
-      {selectedCase && (
-        <div
-          className={styles.modalOverlay}
-          onClick={closeDocumentsModal}
-        >
-          <div
-            className={styles.modal}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className={styles.modalHeader}>
-              <div>
-                <h2 className={styles.modalTitle}>
-                  Documents
-                </h2>
-
-                <p className={styles.modalSubtitle}>
-                  {selectedCase.applicantName} •{' '}
-                  {selectedCase.loanType}
-                </p>
+            <div className={styles.statHeader}>
+              <span className={styles.statTitle}>Total Pipeline Leads</span>
+              <div className={styles.statIconBox}>
+                <Users size={18} />
               </div>
+            </div>
+            <div className={styles.statValue}>
+              {loading ? '...' : stats.totalLeads}
+            </div>
+            <p className={styles.statSubtitle}>
+              <span className={styles.statHighlight}>{stats.fresh}</span> Fresh •{' '}
+              <span className={styles.statHighlight}>{stats.inPipeline}</span> in Underwriting
+            </p>
+          </div>
+
+          {/* Card 2: Sanction Volume */}
+          <div className={styles.statCard}>
+            <div className={styles.statHeader}>
+              <span className={styles.statTitle}>Sanctioned Portfolio</span>
+              <div className={styles.statIconBox}>
+                <CheckCircle2 size={18} />
+              </div>
+            </div>
+            <div className={styles.statValue}>
+              {loading ? '...' : formatVolumeCr(stats.disbursedVolume)}
+            </div>
+            <p className={styles.statSubtitle}>
+              <span className={styles.statHighlight}>{stats.approved + stats.disbursed}</span> Approved / Disbursed Files
+            </p>
+          </div>
+
+          {/* Card 3: Pre-Qualification Calculations */}
+          <div className={styles.statCard}>
+            <div className={styles.statHeader}>
+              <span className={styles.statTitle}>Eligibility Inquiries</span>
+              <div className={styles.statIconBox}>
+                <Calculator size={18} />
+              </div>
+            </div>
+            <div className={styles.statValue}>
+              {loading ? '...' : stats.eligibilityChecks}
+            </div>
+            <p className={styles.statSubtitle}>
+              <span className={styles.statHighlight}>Dedicated</span> Eligibility Leads
+            </p>
+          </div>
+
+          {/* Card 4: Appointments / Active Pipeline */}
+          <div className={styles.statCard}>
+            <div className={styles.statHeader}>
+              <span className={styles.statTitle}>Expert Consultations</span>
+              <div className={styles.statIconBox}>
+                <Calendar size={18} />
+              </div>
+            </div>
+            <div className={styles.statValue}>
+              {loading ? '...' : stats.appointments}
+            </div>
+            <p className={styles.statSubtitle}>
+              Scheduled client consultations
+            </p>
+          </div>
+        </section>
+
+        {/* ---------------- SHORTCUT MODULES ---------------- */}
+        <section className={styles.shortcutsSection}>
+          <div className={styles.sectionHeaderRow}>
+            <h2 className={styles.sectionHeading}>Fast Access Workspaces</h2>
+          </div>
+
+          <div className={styles.shortcutsGrid}>
+            <Link href="/crm" className={styles.shortcutCard}>
+              <div className={styles.shortcutIcon}>
+                <TrendingUp size={20} />
+              </div>
+              <div className={styles.shortcutContent}>
+                <h3 className={styles.shortcutTitle}>CRM Pipeline</h3>
+                <p className={styles.shortcutDesc}>Visual underwriting & disbursal tracking</p>
+              </div>
+              <ArrowRight size={16} className={styles.shortcutArrow} />
+            </Link>
+
+            <Link href="/lead" className={styles.shortcutCard}>
+              <div className={styles.shortcutIcon}>
+                <Users size={20} />
+              </div>
+              <div className={styles.shortcutContent}>
+                <h3 className={styles.shortcutTitle}>Leads Vault</h3>
+                <p className={styles.shortcutDesc}>Full database search & Excel download</p>
+              </div>
+              <ArrowRight size={16} className={styles.shortcutArrow} />
+            </Link>
+
+            {canEnter && (
+              <Link href="/crm/entry" className={styles.shortcutCard}>
+                <div className={styles.shortcutIcon}>
+                  <PlusCircle size={20} />
+                </div>
+                <div className={styles.shortcutContent}>
+                  <h3 className={styles.shortcutTitle}>Instant Intake</h3>
+                  <p className={styles.shortcutDesc}>Single entry and bulk Excel uploads</p>
+                </div>
+                <ArrowRight size={16} className={styles.shortcutArrow} />
+              </Link>
+            )}
+
+            {isEditor && (
+              <Link href="/crm" className={styles.shortcutCard}>
+                <div className={styles.shortcutIcon}>
+                  <TrendingUp size={20} />
+                </div>
+                <div className={styles.shortcutContent}>
+                  <h3 className={styles.shortcutTitle}>My Calling Queue</h3>
+                  <p className={styles.shortcutDesc}>Work assigned leads & update stage</p>
+                </div>
+                <ArrowRight size={16} className={styles.shortcutArrow} />
+              </Link>
+            )}
+
+            <Link href="/check-eligibility" className={styles.shortcutCard}>
+              <div className={styles.shortcutIcon}>
+                <Calculator size={20} />
+              </div>
+              <div className={styles.shortcutContent}>
+                <h3 className={styles.shortcutTitle}>Eligibility Engine</h3>
+                <p className={styles.shortcutDesc}>Instant pre-qualification check tool</p>
+              </div>
+              <ArrowRight size={16} className={styles.shortcutArrow} />
+            </Link>
+          </div>
+        </section>
+
+        {/* ---------------- DATA TABLE SECTION ---------------- */}
+        <section className={styles.tableCard}>
+          <div className={styles.tableToolbar}>
+            <div className={styles.tabButtons}>
+              <button
+                type="button"
+                className={`${styles.tabBtn} ${activeTab === 'pipeline' ? styles.tabBtnActive : ''}`}
+                onClick={() => setActiveTab('pipeline')}
+              >
+                Recent Pipeline Leads ({filteredLeads.length})
+              </button>
 
               <button
                 type="button"
-                className={styles.modalClose}
-                onClick={closeDocumentsModal}
-                aria-label="Close"
+                className={`${styles.tabBtn} ${activeTab === 'eligibility' ? styles.tabBtnActive : ''}`}
+                onClick={() => setActiveTab('eligibility')}
               >
-                ×
+                Eligibility Engine Leads ({filteredEligibility.length})
               </button>
             </div>
 
-            <div className={styles.modalContent}>
-              {documentsLoading && (
-                <div className={styles.documentsLoading}>
-                  Loading documents...
-                </div>
-              )}
-
-              {documentsError && (
-                <div className={styles.documentsError}>
-                  {documentsError}
-                </div>
-              )}
-
-              {!documentsLoading &&
-                !documentsError &&
-                documents && (
-                  <div className={styles.documentsGrid}>
-                    {documentItems.map(({ key, label }) => {
-                      const document = documents[key];
-
-                      if (!document) {
-                        return null;
-                      }
-
-                      return (
-                        <div
-                          key={key}
-                          className={styles.documentCard}
-                        >
-                          <div>
-                            <div
-                              className={
-                                styles.documentName
-                              }
-                            >
-                              {label}
-                            </div>
-
-                            <div
-                              className={
-                                styles.documentFileName
-                              }
-                            >
-                              {document.fileName}
-                            </div>
-                          </div>
-
-                          <a
-                            href={document.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={styles.viewDocumentBtn}
-                          >
-                            View
-                          </a>
-                        </div>
-                      );
-                    })}
-
-                    {documents.salarySlips &&
-                      documents.salarySlips.length > 0 && (
-                        <div
-                          className={styles.documentCard}
-                        >
-                          <div>
-                            <div
-                              className={
-                                styles.documentName
-                              }
-                            >
-                              Salary Slips
-                            </div>
-
-                            <div
-                              className={
-                                styles.documentFileName
-                              }
-                            >
-                              {documents.salarySlips.length}{' '}
-                              file(s)
-                            </div>
-                          </div>
-
-                          <div
-                            className={
-                              styles.salarySlipButtons
-                            }
-                          >
-                            {documents.salarySlips.map(
-                              (slip, index) => (
-                                <a
-                                  key={index}
-                                  href={slip.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className={
-                                    styles.viewDocumentBtn
-                                  }
-                                >
-                                  View {index + 1}
-                                </a>
-                              )
-                            )}
-                          </div>
-                        </div>
-                      )}
-
-                    {!Object.keys(documents).length && (
-                      <div
-                        className={styles.noDocuments}
-                      >
-                        No documents available for this case.
-                      </div>
-                    )}
-                  </div>
-                )}
+            <div className={styles.searchBox}>
+              <Search size={15} className={styles.searchIcon} />
+              <input
+                type="text"
+                placeholder="Search by name, phone or loan type..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className={styles.searchInput}
+              />
             </div>
           </div>
-        </div>
-      )}
+
+          <div className={styles.tableWrapper}>
+            {activeTab === 'pipeline' ? (
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Applicant Name</th>
+                    <th>Contact</th>
+                    <th>Loan Type</th>
+                    <th>Requested Limit</th>
+                    <th>Pipeline Status</th>
+                    <th>Assigned Agent</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading ? (
+                    <tr>
+                      <td colSpan={8} style={{ textAlign: 'center', padding: '2rem' }}>
+                        Loading real-time pipeline records...
+                      </td>
+                    </tr>
+                  ) : filteredLeads.length === 0 ? (
+                    <tr>
+                      <td colSpan={8} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>
+                        No leads matching your search criteria.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredLeads.map((item) => (
+                      <tr key={item.id}>
+                        <td>
+                          <strong>{item.name}</strong>
+                        </td>
+                        <td>{item.phone}</td>
+                        <td>{item.loanType || 'Personal Loan'}</td>
+                        <td>
+                          <strong>{formatINR(item.loanAmount)}</strong>
+                        </td>
+                        <td>
+                          <span className={`${styles.badge} ${getStatusBadgeClass(item.status)}`}>
+                            {item.status || 'Fresh'}
+                          </span>
+                        </td>
+                        <td>{item.assignedTo}</td>
+                        <td>{formatDate(item.createdAt)}</td>
+                        <td>
+                          <Link href="/crm" className={styles.openLink}>
+                            <span>View</span>
+                            <ArrowRight size={13} />
+                          </Link>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            ) : (
+              <table className={styles.table}>
+                <thead>
+                  <tr>
+                    <th>Applicant Name</th>
+                    <th>Contact</th>
+                    <th>Loan Category</th>
+                    <th>Monthly Income</th>
+                    <th>Max Calculated Limit</th>
+                    <th>Date</th>
+                    <th>Source</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading ? (
+                    <tr>
+                      <td colSpan={7} style={{ textAlign: 'center', padding: '2rem' }}>
+                        Loading eligibility records...
+                      </td>
+                    </tr>
+                  ) : filteredEligibility.length === 0 ? (
+                    <tr>
+                      <td colSpan={7} style={{ textAlign: 'center', padding: '2rem', color: '#94a3b8' }}>
+                        No eligibility records found.
+                      </td>
+                    </tr>
+                  ) : (
+                    filteredEligibility.map((item) => (
+                      <tr key={item.id}>
+                        <td>
+                          <strong>{item.fullName}</strong>
+                        </td>
+                        <td>{item.phone}</td>
+                        <td>{item.loanType}</td>
+                        <td>{formatINR(item.monthlyIncome)} / mo</td>
+                        <td>
+                          <strong style={{ color: '#f5c563' }}>
+                            {formatINR(item.maxLoanEligible)}
+                          </strong>
+                        </td>
+                        <td>{formatDate(item.createdAt)}</td>
+                        <td>
+                          <span className={`${styles.badge} ${styles.badgeApproved}`}>
+                            Pre-Qualified
+                          </span>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

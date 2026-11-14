@@ -40,13 +40,19 @@ export default function LoginPage() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        const role = data.user?.role;
-        if (role === 'crm_editor') {
+        const role = data.user?.role?.toLowerCase();
+        if (role === 'admin') {
+          // Admin role is strictly restricted to viewing Customer OTP Leads (/lead)
+          window.location.href = '/lead';
+        } else if (role === 'crm_editor') {
+          // CRM Editors / Calling Agents go directly to active pipeline queue
           window.location.href = '/crm';
         } else if (role === 'crm_entry') {
+          // Data Entry Operators go directly to Fast Lead Entry intake
           window.location.href = '/crm/entry';
-        } else if (role === 'admin' || role === 'superadmin' || role === 'crm') {
-          window.location.href = '/crm';
+        } else if (role === 'superadmin') {
+          // Super Admin has full master access to the Executive Dashboard
+          window.location.href = '/dashboard';
         } else {
           window.location.href = '/dashboard';
         }

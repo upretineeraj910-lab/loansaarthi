@@ -333,11 +333,15 @@ export default function LeadEntryPage() {
     );
   }
 
-  // 3. Block roles other than crm_entry, superadmin, and admin
-  if (currentUser.role !== 'crm_entry' && currentUser.role !== 'superadmin' && currentUser.role !== 'admin') {
+  // 3. Block roles other than crm_entry and superadmin
+  if (currentUser.role !== 'crm_entry' && currentUser.role !== 'superadmin') {
+    const isAdmin = currentUser.role === 'admin';
+    const isEditor = currentUser.role === 'crm_editor';
     const roleLabel =
-      currentUser.role === 'crm_editor'
-        ? 'CRM Editor'
+      isEditor
+        ? 'CRM Editor (Calling Agent)'
+        : isAdmin
+        ? 'Admin (Customer Leads Vault Only)'
         : currentUser.role;
 
     return (
@@ -358,18 +362,28 @@ export default function LeadEntryPage() {
               <ShieldAlert size={34} />
             </div>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: '#ffffff', marginBottom: '0.75rem' }}>
-              Access Denied: Data Entry Portal
+              Access Denied: Lead Entry Portal
             </h2>
             <p style={{ color: '#94a3b8', maxWidth: '520px', margin: '0 auto 1.75rem auto', lineHeight: 1.6, fontSize: '14px' }}>
-              You are currently logged in as <strong>{currentUser.name || currentUser.email?.split('@')[0]} (Role: {roleLabel})</strong>. Only Data Entry Operators and Super Admins can submit or upload leads to the system.
+              You are currently logged in as <strong>{currentUser.name || currentUser.email?.split('@')[0]} ({roleLabel})</strong>.
+              {isAdmin
+                ? ' The Admin role is configured strictly for viewing Customer Leads (/lead) generated via OTP verification. Lead entry is reserved for Data Entry Operators and Super Admins.'
+                : ' CRM Editors (calling agents) are not permitted to submit new leads. Please manage your active cases in the CRM Pipeline.'}
             </p>
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-              <Link href="/crm" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <LayoutDashboard size={16} />
-                Go to CRM Dashboard
-              </Link>
+              {isAdmin ? (
+                <Link href="/lead" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <Users size={16} />
+                  Go to Customer Leads (/lead)
+                </Link>
+              ) : (
+                <Link href="/crm" className="crm-btn crm-btn-primary" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                  <LayoutDashboard size={16} />
+                  Go to CRM Pipeline
+                </Link>
+              )}
               <Link href="/login" className="crm-btn crm-btn-ghost">
-                Switch to Data Entry Account
+                Switch Account
               </Link>
             </div>
           </div>
